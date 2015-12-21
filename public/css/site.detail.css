@@ -1,0 +1,109 @@
+.site-content{
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    padding-left: 310px;
+    z-index: 1;
+    transition: padding-left .4s;
+    -moz-transition: padding-left .4s; /* Firefox 4 */
+    -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
+}
+.site-content .container{
+    width: 100%;
+    padding: 90px 15%;
+    text-align: center;
+}
+.site-content .container .summary{
+    display: inline-block;
+    width: 100%;
+    max-width: 900px;
+}
+.site-content .container .summary h1{
+    font-size: 32px;
+    font-weight: 100;
+    font-family: fantasy,Tahoma,Verdana,STHeiTi,simsun,sans-serif;
+    line-height: 40px;
+    color: #2b2f37;
+}
+.site-content .container .summary h6{
+    font-size: 14px;
+    color: #999;
+    text-align: justify;
+    margin-top: 20px;
+}
+.site-content .container .social{
+    display: inline-block;
+    max-width: 850px;
+    width: 100%;
+    height: 50px;
+    padding: 12px 5%;
+    margin-top: 25px;
+    overflow: hidden;
+}
+.site-content .container .social .author{
+    display: inline-block;
+    height: 100%;
+    float: left;
+}
+.site-content .container .social .author img{
+    width: 26px;
+    height: 26px;
+}
+.site-content .container .social .author span{
+    display: inline-block;
+    height: 100%;
+    line-height: 36px;
+    vertical-align: top;
+    font-size: 12px;
+    color: #999;
+    margin-left: 5px;
+}
+.site-content .container .social .author:hover span{
+    color: #000;
+}
+.site-content .container .social .time{
+    display: inline-block;
+    height: 100%;
+    line-height: 36px;
+    vertical-align: top;
+    font-size: 12px;
+    color: #999;
+    margin-left: 5px;
+    float: left;
+}
+.site-content .container .social .inter{
+    display: inline-block;
+    height: 100%;
+    margin-right: 10px;
+    float: right;
+}
+.site-content .container .social .inter em{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-top: 6px;
+}
+.site-content .container .social .inter span{
+    display: inline-block;
+    height: 100%;
+    line-height: 36px;
+    vertical-align: top;
+    font-size: 12px;
+    color: #999;
+    margin-left: 5px;
+}
+.site-content .container .social .like em{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/like-4.png) no-repeat center;
+    background-size: 24px;
+}
+.site-content .container .social .collect em{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/stars-2.png) no-repeat center;
+    background-size: 16px;
+}
+.site-content .container .content{
+    display: inline-block;
+    max-width: 850px;
+    text-align: left;
+    margin-top: 30px;
+    padding: 0 5%;
+}

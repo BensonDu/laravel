@@ -1,0 +1,202 @@
+/*左边全局导航*/
+.nav-left{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 60px;
+    height: 100%;
+    z-index: 10;
+    border-right: 1px solid #f6f6f6;
+    transition: width .4s;
+    -moz-transition: width .4s; /* Firefox 4 */
+    -webkit-transition: width .4s; /* Safari 和 Chrome */
+    -o-transition: width .4s; /* Opera */
+}
+.nav-left div{
+    width: 100%;
+}
+/*登录部分开始*/
+.nav-left .login-sta{
+    margin-top: 20px;
+}
+.nav-left .login-sta a{
+    display: block;
+    padding: 10px 0 10px 10px;
+    line-height: 25px;
+    text-align: left;
+    white-space: nowrap;
+}
+.nav-left .login-sta i{
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    line-height: 25px;
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/question-mark.png) no-repeat center;
+    background-size: 40px 40px;
+}
+.nav-left .login-sta img{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: none;
+}
+.nav-left .login-sta em{
+    vertical-align: top;
+    display: none;
+}
+.nav-left .login-sta span{
+    display: none;
+    line-height: 20px;
+    vertical-align: top;
+    margin: 15px 0 0 15px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+.nav-left .login-sta span.login-regist{
+    display: inline-block;
+    text-decoration: underline;
+}
+.nav-left .login-sta .name{
+    display: none;
+}
+/*登录后样式*/
+.nav-left .login-sta.login span.login-regist{
+    display: none;
+}
+.nav-left .login-sta.login .name{
+    display: inline-block;
+}
+.nav-left .login-sta.login i{
+    display: none;
+}
+.nav-left .login-sta.login img{
+    display: inline-block;
+}
+/*登录部分结束*/
+
+/*菜单部分开始*/
+.nav-left .menu{
+    margin-top: 80px;
+}
+.nav-left .entry a{
+    display: block;
+    padding: 10px 0 10px 20px;
+    line-height: 25px;
+    margin-top: 10px;
+    text-align: left;
+    white-space: nowrap;
+}
+.nav-left .entry i{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    text-align: center;
+    line-height: 25px;
+    transition: transform .2s;
+    -moz-transition: -moz-transform .2s; /* Firefox 4 */
+    -webkit-transition: -webkit-transform .2s; /* Safari 和 Chrome */
+}
+.nav-left .entry i.home{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/home.png) no-repeat center;
+    background-size: 20px 20px;
+}
+.nav-left .entry i.add{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/new_dark.png) no-repeat center;
+    background-size: 21px 20px;
+}
+.nav-left .entry i.article{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/paper.png) no-repeat center;
+    background-size: 20px 20px;
+}
+.nav-left .entry i.folder{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/folder.png) no-repeat center;
+    background-size: 20px 20px;
+}
+.nav-left .entry i.people{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/people_dark.png) no-repeat center;
+    background-size: 20px 20px;
+}
+.nav-left .entry i.setting{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/setting.png) no-repeat center;
+    background-size: 20px 20px;
+}
+.nav-left .entry i.web{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/website.png) no-repeat center;
+    background-size: 20px 20px;
+}
+.nav-left .entry i.exit{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/exit.png) no-repeat center;
+    background-size: 20px 20px;
+    background-position: 1px;
+}
+.nav-left .entry span{
+    display: none;
+    line-height: 23px;
+    vertical-align: top;
+    margin-left: 15px;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: transform .2s;
+    -moz-transition: -moz-transform .2s; /* Firefox 4 */
+    -webkit-transition: -webkit-transform .2s; /* Safari 和 Chrome */
+}
+.nav-left .entry a:hover i{
+    transform:scale(1.2);
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+}
+.nav-left .entry a:hover span{
+    transform:translate(5px,0);
+    -webkit-transform:translate(5px,0);
+    -moz-transform:translate(5px,0);
+}
+/*菜单部分结束*/
+/*底部操作栏目*/
+.nav-left .bottom{
+    position: absolute;
+    bottom: 0;
+}
+.nav-left .bottom .entry{
+    margin-bottom: 10px;
+}
+.nav-left .bottom .switch{
+    height: 40px;
+    background: #ddd;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
+.nav-left .bottom .switch i{
+    display: inline-block;
+    line-height: 40px;
+    width: 20px;
+    height: 20px;
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-right.png) no-repeat center;
+    background-size: 20px 20px;
+    background-position: 1px;
+    transition: transform .2s;
+    -moz-transition: -moz-transform .2s; /* Firefox 4 */
+    -webkit-transition: -webkit-transform .2s; /* Safari 和 Chrome */
+    transform:rotateY(0deg);
+    -webkit-transform:rotateY(0deg);
+    -moz-transform:rotateY(0deg);
+}
+/*展开样式*/
+.nav-left.unfold{
+    width: 140px;
+}
+.nav-left.unfold .login-sta em{
+    display: inline-block;
+}
+.nav-left.unfold .entry span{
+    display: inline-block;
+}
+.nav-left.unfold .bottom .switch i{
+    transform:rotateY(180deg);
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+}

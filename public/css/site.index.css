@@ -1,0 +1,399 @@
+/*内容部分start*/
+.site-content{
+    position: relative;
+    width: 100%;
+    padding-left: 310px;
+    transition: padding-left .4s;
+    -moz-transition: padding-left .4s; /* Firefox 4 */
+    -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
+}
+.site-content .star{
+    height: 325px;
+    width: 100%;
+}
+.site-content .star .album{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: -4px;
+}
+.site-content .star .album .nav{
+    display: none;
+    position: absolute;
+    z-index: 1;
+    height:50px;
+    width: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    top: 115px;
+    opacity: .6;
+    cursor: pointer;
+    transition: transform .2s;
+    -moz-transition: -moz-transform .2s; /* Firefox 4 */
+    -webkit-transition: -webkit-transform .2s; /* Safari 和 Chrome */
+}
+.site-content .star .album .nav em{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.site-content .star .album .prev{
+    left: 0;
+}
+.site-content .star .album .prev em{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-white-left.png) no-repeat center;
+    background-size: 30px;
+}
+.site-content .star .album .next{
+    right: 0;
+}
+.site-content .star .album .next em{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-white-right.png) no-repeat center;
+    background-size: 30px;
+}
+.site-content .star .album:hover .nav{
+    display: block;
+}
+.site-content .star .album .nav:hover{
+    opacity: 1;
+}
+.site-content .star .album .nav:active{
+    transform:scale(1.2);
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+}
+.site-content .star .album .item-container{
+    width: 100%;
+    height: 100%;
+    transition: margin-left .5s ease-out;
+    -moz-transition: margin-left .5s ease-out; /* Firefox 4 */
+    -webkit-transition: margin-left .5s ease-out; /* Safari 和 Chrome */
+}
+.site-content .star .album a{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 440px;
+    letter-spacing: normal;
+    background: #fafafa;
+    border-left: 1px solid #fff;
+}
+.site-content .star .album a .image{
+    height: 270px;
+    width: 100%;
+    overflow: hidden;
+}
+.site-content .star .album a .image img{
+    width: 100%;
+    height: auto;
+}
+.site-content .star .album a .summary{
+    position: absolute;
+    width: 410px;
+    height: 75px;
+    bottom: 30px;
+    left: 15px;
+    padding: 5px 14px;
+    background: rgba(250,250,250,.95);
+}
+.site-content .star .album a .summary h5{
+    font-size: 12px;
+    letter-spacing: 2px;
+    line-height: 26px;
+    color: #bdbdbd;
+}
+.site-content .star .album a .summary h2{
+    line-height: 22px;
+    font-size: 16px;
+    white-space: normal;
+    font-weight: 600;
+    min-height: 44px;
+}
+.site-content .star .album a .summary h6{
+    font-size: 12px;
+    line-height: 26px;
+    color: #bdbdbd;
+}
+/*内容部分end*/
+/*筛选搜索start*/
+.site-content .filter{
+    width: 100%;
+    height: 60px;
+    margin-top: 1px;
+}
+.site-content .filter .filter-container{
+    width: 100%;
+    height: 60px;;
+    transition: top .2s;
+    overflow: hidden;
+    background: #fff;
+}
+.site-content .filter .parent{
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #eee;
+}
+.site-content .filter .cate{
+    height: 100%;
+    float: left;
+    padding: 15px 0 15px 30px;
+    white-space: nowrap;
+}
+.site-content .filter .cate a{
+    display: inline-block;
+    margin-right: 5px;
+    line-height: 30px;
+}
+.site-content .filter .cate a span{
+    display: inline-block;
+    padding: 3px 8px;
+    font-weight: 700;
+    line-height: 20px;
+    border-radius: 3px;
+}
+.site-content .filter .cate a:hover span,
+.site-content .filter .cate a.active span{
+    background: #eee;
+    color: #6e8cfb;
+}
+.site-content .filter .search{
+    height: 100%;
+    max-width: 310px;
+    min-width: 250px;
+    width: 30%;
+    padding: 10px 30px 10px 0;
+    float: right;
+
+}
+.site-content .filter .search div{
+    height: 100%;
+    width: 100%;
+    background: #eee;
+    border-radius: 3px;
+    padding: 5px 0 5px 15px;
+}
+.site-content .filter .search div i{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/search.png) no-repeat center;
+    background-size: 20px;
+    margin-top: 2px;
+}
+.site-content .filter .search div input{
+    display: inline-block;
+    line-height: 28px;
+    height: 30px;
+    vertical-align: top;
+    font-size: 16px;
+    font-weight: 200;
+    margin-left: 10px;
+    width: 80%;
+    background: rgba(0,0,0,0);
+    border: none;
+}
+.site-content .filter .search div input:focus{
+    outline: none;
+}
+.site-content .filter .filter-container.fixed{
+    position: fixed;
+    padding-left: 310px;
+    background: rgba(255,255,255,.95);
+    z-index: 0;
+    right: 0;
+    top: 0;
+}
+.site-content .filter .filter-container.fixed .search div{
+    background: rgba(238,238,238,.8);
+}
+/*筛选搜索end*/
+/*新闻列表start*/
+.site-content .news{
+    width: 100%;
+    min-width: 790px;
+    overflow: hidden;
+}
+.site-content .news .list-container{
+    width: 70%;
+    float: left;
+}
+.site-content .news .list-container .list{
+    width: 100%;
+    padding: 18px 10px 10px 30px;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
+.site-content .news .list-container .list .info{
+    float: left;
+    width: 65%;
+    max-width: 500px;
+    padding-right: 20px;
+}
+.site-content .news .list-container .list .info .tags{
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+}
+.site-content .news .list-container .list .info .tags a{
+    display: inline-block;
+    font-size: 13px;
+    height: 100%;
+    margin-right: 5px;
+}
+.site-content .news .list-container .list .info .title{
+    line-height: 28px;
+    font-size: 16px;
+    white-space: normal;
+    font-weight: 600;
+    color: #424242;
+}
+.site-content .news .list-container .list .info .summary{
+    line-height: 24px;
+    margin-top: 10px;
+    font-size: 13px;
+    white-space: normal;
+    color: #666;
+}
+.site-content .news .list-container .list .info .social{
+    width: 100%;
+    height: 50px;
+    padding: 12px 0;
+}
+.site-content .news .list-container .list .info .social .author{
+    display: inline-block;
+    height: 100%;
+}
+.site-content .news .list-container .list .info .social .author img{
+    width: 26px;
+    height: 26px;
+}
+.site-content .news .list-container .list .info .social .author span{
+    display: inline-block;
+    height: 100%;
+    line-height: 36px;
+    vertical-align: top;
+    font-size: 12px;
+    color: #999;
+    margin-left: 5px;
+}
+.site-content .news .list-container .list .info .social .author:hover span{
+    color: #000;
+}
+.site-content .news .list-container .list .info .social .time{
+    display: inline-block;
+    height: 100%;
+    line-height: 36px;
+    vertical-align: top;
+    font-size: 12px;
+    color: #999;
+    margin-left: 5px;
+}
+.site-content .news .list-container .list .info .social .inter{
+    display: inline-block;
+    height: 100%;
+    margin-left: 5px;
+}
+.site-content .news .list-container .list .info .social .inter em{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-top: 6px;
+}
+.site-content .news .list-container .list .info .social .inter span{
+    display: inline-block;
+    height: 100%;
+    line-height: 36px;
+    vertical-align: top;
+    font-size: 12px;
+    color: #999;
+    margin-left: 5px;
+}
+.site-content .news .list-container .list .info .social .like em{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/like-4.png) no-repeat center;
+    background-size: 24px;
+}
+.site-content .news .list-container .list .info .social .collect em{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/stars-2.png) no-repeat center;
+    background-size: 16px;
+}
+.site-content .news .list-container .list .image{
+    float: right;
+    width:35%;
+    height: 150px;
+    text-align: right;
+    overflow: hidden;
+}
+.site-content .news .list-container .list .image img{
+    display: inline-block;
+    margin-top: 30px;
+    width: 200px;
+    max-width: 210px;
+    height: auto;
+}
+.site-content .news .rank-container{
+    width: 25%;
+    padding: 30px 30px 20px 0;
+    float: right;
+}
+.site-content .news .rank-container .parent{
+    padding: 0 15px 30px;
+    width: 100%;
+    background: #fafafa;
+}
+.site-content .news .rank-container .title{
+    width: 100%;
+    text-align: center;
+}
+.site-content .news .rank-container .title h3{
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+.site-content .news .rank-container .title span{
+    display: inline-block;
+    width: 30px;
+    line-height: 0;
+    vertical-align: top;
+    margin-top: 4px;
+    border-bottom: 2px solid #999;
+}
+.site-content .news .rank-container .item{
+    margin: 10px 0 20px;
+}
+.site-content .news .rank-container .item .rank{
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+.site-content .news .rank-container .item .rank b{
+    font-weight: 900;
+    font-size: 18px;
+    border-bottom: 2px solid #000;
+}
+.site-content .news .rank-container .item h6{
+    line-height: 22px;
+    margin-top: 5px;
+}
+.site-content .news .rank-container .item h6 .author{
+    color: #999;
+    font-size: 12px;
+}
+.site-content .news .rank-container .item h6 .author:hover{
+    border-bottom: 1px dotted #999;
+}
+.site-content .news .rank-container .item h6 .time{
+    color: #999;
+    font-size: 12px;
+}
+.site-content .news .rank-container .item .summary{
+    font-size: 13px;
+    line-height: 20px;
+    color: #666;
+}
+
+/*新闻列表end*/

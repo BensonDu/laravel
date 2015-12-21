@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Be right back.</title>
-
+        <title>Not Found.</title>
         <style>
             @font-face {
                 font-family: 'Lato';
@@ -19,6 +18,7 @@
                 src: local('Lato Hairline'), local('Lato-Hairline'), url(http://dn-acac.qbox.me/mobile/public/lato-lattin.woff2) format('woff2');
                 unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
             }
+
             html, body {
                 height: 100%;
             }
@@ -53,7 +53,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="title">404 Not Found</div>
             </div>
         </div>
     </body>
