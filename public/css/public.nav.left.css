@@ -6,6 +6,7 @@
     width: 60px;
     height: 100%;
     z-index: 10;
+    background: #fff;
     border-right: 1px solid #f6f6f6;
     transition: width .4s;
     -moz-transition: width .4s; /* Firefox 4 */
@@ -45,8 +46,8 @@
     display: none;
 }
 .nav-left .login-sta em{
+    display: inline-block;
     vertical-align: top;
-    display: none;
 }
 .nav-left .login-sta span{
     display: none;
@@ -134,10 +135,10 @@
     background-position: 1px;
 }
 .nav-left .entry span{
-    display: none;
+    display: inline-block;
     line-height: 23px;
     vertical-align: top;
-    margin-left: 15px;
+    margin-left: 19px;
     font-size: 14px;
     white-space: nowrap;
     transition: transform .2s;
@@ -188,12 +189,6 @@
 /*展开样式*/
 .nav-left.unfold{
     width: 140px;
-}
-.nav-left.unfold .login-sta em{
-    display: inline-block;
-}
-.nav-left.unfold .entry span{
-    display: inline-block;
 }
 .nav-left.unfold .bottom .switch i{
     transform:rotateY(180deg);

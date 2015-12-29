@@ -18,17 +18,17 @@
     this.filter_fixed = function(){
         var top = dom.filter.offset().top;
         return function(){
-            return dom.d.scrollTop()>top ? dom.filter.addClass('fixed') : dom.filter.removeClass('fixed');
+            return dom.d.scrollTop()>top ? dom.filter.addClass('fixed').removeClass('trans') : dom.filter.removeClass('fixed');
         };
     };
 
     //重写Nav.left fold,unfold 方法
     window.view_nav_left.fold = function(){
-        return dom.mid.css('left',60), dom.content.css('padding-left',310);
+        return dom.mid.css('left',60), dom.content.css('padding-left',310),dom.filter.addClass('trans').removeClass('unfold');
     };
 
     window.view_nav_left.unfold = function(){
-        return dom.mid.css('left',140),dom.content.css('padding-left',390);
+        return dom.mid.css('left',140),dom.content.css('padding-left',390), dom.filter.addClass('trans').addClass('unfold');
     };
 
     this.resize_event = dom.w.resize(function(){});
@@ -57,8 +57,8 @@
         };
 
     this.btn_display_syn = function(){
-        (already_hide == 0 ? prev.addClass('default-hide') : prev.removeClass('default-hide'));
-        last_one ? next.addClass('default-hide') : next.removeClass('default-hide');
+        //(already_hide == 0 ? prev.addClass('default-hide') : prev.removeClass('default-hide'));
+        //last_one ? next.addClass('default-hide') : next.removeClass('default-hide');
     };
 
     this.win_contain_count = function(){

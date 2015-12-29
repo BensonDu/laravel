@@ -1,4 +1,4 @@
-.site-mid{
+.user-mid{
     position: fixed;
     width: 250px;
     height: 100%;
@@ -10,70 +10,80 @@
     -moz-transition: left .4s; /* Firefox 4 */
     -webkit-transition: left .4s; /* Safari 和 Chrome */
 }
-.site-mid div{
+.user-mid div{
     width: 100%;
 }
 /*中栏头部start*/
-.site-mid .top{
+.user-mid .top{
     margin-top: 50px;
 }
-.site-mid .top .logo{
+.user-mid .top .avatar{
     display: inline-block;
     text-align: center;
 }
-.site-mid .top .logo img{
+.user-mid .top .avatar img{
     display: inline-block;
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    background: #fff;
 }
-.site-mid .top h2{
+.user-mid .top h4{
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 35px;
+    letter-spacing: 3px;
+    color: #bdbdbd;
+}
+.user-mid .top h2{
     margin-top: 10px;
     font-size: 16px;
     font-weight: 500;
     text-align: center;
     line-height: 35px;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
 }
-.site-mid .top h3{
-    font-size: 14px;
+.user-mid .top h3{
+    font-size: 12px;
     font-weight: 900;
     text-align: center;
     line-height: 20px;
     letter-spacing: 3px;
     padding: 0 8%;
 }
-.site-mid .top .social{
+.user-mid .top .social{
     height: 30px;
     text-align: center;
     margin-top: 20px;
     letter-spacing: 5px;
 }
-.site-mid .top .social a{
+.user-mid .top .social a{
     display: inline-block;
     height: 20px;
     width: 20px;
     border-radius: 50%;
 }
-.site-mid .top .social a.weibo{
+.user-mid .top .social a.weibo{
     background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/weibo.png) no-repeat center;
     background-size: 20px 20px
 }
-.site-mid .top .social a.email{
+.user-mid .top .social a.email{
     background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/email-1.png) no-repeat center;
     background-size: 20px 20px
 }
-.site-mid .top .social a.twitter{
+.user-mid .top .social a.twitter{
     background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/twitter.png) no-repeat center;
     background-size: 20px 20px
 }
-.site-mid .top .social a.weixin{
+.user-mid .top .social a.weixin{
     position: relative;
     overflow: visible;
     background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/weixin.png) no-repeat center;
     background-size: 20px 20px
 }
-.site-mid .top .social a.weixin img{
+.user-mid .top .social a.weixin img{
     display: none;
     position: absolute;
     width: 100px;
@@ -83,44 +93,23 @@
     box-shadow: 0 0 5px 0 #000;
     background: #fff;
 }
-.site-mid .top .social a.weixin:hover img{
+.user-mid .top .social a.weixin:hover img{
     display: inline-block;
-}
-.site-mid .top .post{
-    margin-top: 20px;
-    text-align: center;
-}
-.site-mid .top .post a{
-    display: inline-block;
-    width: 60%;
-    background: #ff4081;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 2px;
-    line-height: 14px;
-    padding: 8px;
-    transition: background-color .4s;
-    -moz-transition: background-color .4s; /* Firefox 4 */
-    -webkit-transition: background-color .4s; /* Safari 和 Chrome */
-}
-.site-mid .top .post a:hover{
-    background: #CC1C58;
 }
 /*中栏头部end*/
 /*中栏中部导航start*/
-.site-mid .mid{
+.user-mid .mid{
     margin-top: 40px;
     padding: 0 70px;
 }
-.site-mid .mid .container{
+.user-mid .mid .container{
     width: 100%;
     border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #f0f0f0;
     padding: 20px 0;
     overflow: visible;
 }
-.site-mid .mid .container a{
+.user-mid .mid .container a{
     position: relative;
     display: inline-block;
     width: 100%;
@@ -131,18 +120,18 @@
     font-weight: 800;
     overflow: visible;
 }
-.site-mid .mid .container a span{
+.user-mid .mid .container a span{
     display: inline-block;
     line-height: 22px;
     padding: 0 5px;
 }
-.site-mid .mid .container a.active span{
+.user-mid .mid .container a.active span{
     border-bottom: 1px dotted #999;
 }
-.site-mid .mid .container a:hover span{
+.user-mid .mid .container a:hover span{
     border-bottom: 1px dotted #999;
 }
-.site-mid .mid .container a em{
+.user-mid .mid .container a em{
     position: absolute;
     display: inline-block;
     padding: 3px 5px;
@@ -153,19 +142,3 @@
     box-shadow: 0 0 1px 0;
 }
 /*中栏中部导航end*/
-/*中栏底部导航start*/
-.site-mid .bottom{
-    position: absolute;
-    bottom: 0;
-    height: 50px;
-    padding: 15px;
-}
-.site-mid .bottom a{
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    color: #999;
-    font-size: 12px;
-    line-height: 20px;
-}
-/*中栏底部导航end*/

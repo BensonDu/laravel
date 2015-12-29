@@ -1,104 +1,104 @@
-.post_read {
+.medium {
     font-size: 16px;
     line-height: 1.875
 }
 
-.post_read h1,
-.post_read h1 span {
+.medium h1,
+.medium h1 span {
     font-size: 34px
 }
 
-.post_read h2 {
+.medium h2 {
     font-size: 24px
 }
 
-.post_read h2 span {
+.medium h2 span {
     font-size: 24px
 }
 
-.post_read h3,
-.post_read h3 span {
-    font-size: 18px
+.medium h3,
+.medium h3 span {
+    font-size: 20px
 }
 
-.post_read embed {
+.medium embed {
     display: block;
     width: 100%;
     min-height: 503px
 }
-
-.post_read blockquote {
+.medium i{
+    font-style: italic;
+}
+.medium blockquote {
     top: 6px;
     position: relative;
     margin: 0;
     margin-bottom: 30px;
     padding-left: 16px;
-    color: #040
+    color: #666
 }
-
-.post_read blockquote p.L a span {
-    color: #465D99
-}
-
-.post_read blockquote p {
+.medium blockquote p {
     margin-bottom: 14px
 }
 
-.post_read blockquote:after {
+.medium blockquote:after {
     content: '';
     position: absolute;
     top: 9px;
     bottom: 4px;
     left: 0;
-    width: 2px;
-    background-color: #040
+    width: 5px;
+    background-color: #EAEEF1
 }
 
-.post_read blockquote:before {
-    font-family: Arial;
-    content: '“';
-    position: absolute;
-    top: -34px;
-    left: -3px;
-    font-size: 42px
+.medium a {
+    text-decoration: underline;
 }
 
-.post_read a {
-    color: #139;
-    text-decoration: none
+.medium a:hover {
+    color: #304ffe;
 }
 
-.post_read a:hover {
-    color: #f40;
-    border-bottom-color: #f40;
-}
-
-.post_read img {
+.medium img {
     display: block;
     max-width: 100%;
     margin: 20px auto
 }
-
-.post_read p,
-.post_read p a,
-.post_read ul,
-.post_read pre,
-.post_read blockquote,
-.post_read span {
+.medium li{
+    float: none;
+    display: list-item;
+    list-style-position: inside;
+}
+.medium ol,
+.medium ul{
+    display: list-item;
+    list-style-type: none;
+}
+.medium ol li{
+    list-style-type:  decimal;
+}
+.medium ul li{
+    list-style-type: square;
+}
+.medium p,
+.medium p a,
+.medium ul,
+.medium pre,
+.medium blockquote,
+.medium span {
     font-size: 18px;
-    color: #2b2f37;
 }
 
-.post_read p,
-.post_read ul {
+.medium p,
+.medium ul {
     margin-bottom: 15px;
 }
 
-.post_read .author .name {
+.medium .author .name {
     float: right;
 }
 
-.post_read .author .name u {
+.medium .author .name u {
     display: inline-block;
     width: 28px;
     border-bottom: 1px solid #000;
@@ -107,6 +107,23 @@
     margin-right: 12px
 }
 
-.post_read .author .name i {
+.medium .author .name i {
     font-style: normal;
+}
+/*重定义编辑器自带样式 "输入文章内容非斜体"*/
+.medium-editor-placeholder:after{
+    font-style: normal !important;
+}
+/*重定义编辑器插入图片标注样式*/
+.medium-insert-images figure figcaption,
+.mediumInsert figure figcaption,
+.medium-insert-embeds figure figcaption,
+.mediumInsert-embeds figure figcaption {
+    position: relative;
+    z-index: 1;
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+    outline: 0 solid transparent;
 }

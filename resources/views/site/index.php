@@ -73,7 +73,7 @@
 <!--站点中栏start-->
 <div id="site-mid" class="site-mid">
     <div class="top">
-        <div class="logo"><img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/Tech2ipo-logo.png"></div>
+        <div class="logo"><img src="http://dn-t2ipo.qbox.me/v3/public/Tech2ipo-logo.png"></div>
         <h2>TECH2IPO</h2>
         <h3>「 等待新的科技故事 」</h3>
         <div class="social">
@@ -90,7 +90,7 @@
     </div>
     <div class="mid">
         <div class="container">
-            <a href="#"><span>最近更新</span><em>15</em></a>
+            <a href="#" class="active"><span>最近更新</span><em>15</em></a>
             <a href="/special"><span>专题聚光</span></a>
             <a href="#"><span>精选热点</span></a>
         </div>
@@ -105,11 +105,11 @@
 
     <div class="star">
         <div id="star-album" class="album">
-            <div class="nav prev default-hide"><em></em></div>
+            <div class="nav prev"><em></em></div>
             <div class="item-container">
                 <a href="#">
                     <div class="image">
-                        <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-demo-2.png">
+                        <img src="http://dn-t2ipo.qbox.me/v3/public/news-demo-2.png">
                     </div>
                     <div class="summary">
                         <h5>人物特写</h5>
@@ -119,7 +119,7 @@
                 </a>
                 <a href="#">
                     <div class="image">
-                        <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-demo-1.png">
+                        <img src="http://dn-t2ipo.qbox.me/v3/public/news-demo-1.png">
                     </div>
                     <div class="summary">
                         <h5>深度观点</h5>
@@ -129,7 +129,7 @@
                 </a>
                 <a href="#">
                     <div class="image">
-                        <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-demo-3.png">
+                        <img src="http://dn-t2ipo.qbox.me/v3/public/news-demo-3.png">
                     </div>
                     <div class="summary">
                         <h5>任务特写</h5>
@@ -139,7 +139,7 @@
                 </a>
                 <a href="#">
                     <div class="image">
-                        <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-demo-2.png">
+                        <img src="http://dn-t2ipo.qbox.me/v3/public/news-demo-2.png">
                     </div>
                     <div class="summary">
                         <h5>人物特写</h5>
@@ -149,7 +149,7 @@
                 </a>
                 <a href="#">
                     <div class="image">
-                        <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-demo-1.png">
+                        <img src="http://dn-t2ipo.qbox.me/v3/public/news-demo-1.png">
                     </div>
                     <div class="summary">
                         <h5>深度观点</h5>
@@ -159,7 +159,7 @@
                 </a>
                 <a href="#">
                     <div class="image">
-                        <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-demo-3.png">
+                        <img src="http://dn-t2ipo.qbox.me/v3/public/news-demo-3.png">
                     </div>
                     <div class="summary">
                         <h5>任务特写</h5>
@@ -199,17 +199,17 @@
                         <a href="#" style="color: #81c683">美食</a>
                         <a href="#" style="color: #f57e16">创业大街</a>
                     </div>
-                    <h3 class="title">天价众筹项目神秘夭折,支持者或赔夫又折兵</h3>
+                    <a class="title" href="#">天价众筹项目神秘夭折,支持者或赔夫又折兵</a>
                     <h5 class="summary">美基因检测公司为个体提供丰富的基因检测服务，1000人民币即可量身制定减肥计划。美 FDA 指出这些公司未获得许可证，对安全和有效性表示担忧.</h5>
                     <div class="social">
-                        <a href="#" class="author"><img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/unknown-user.png"><span>李啸天</span></a>
+                        <a href="#" class="author"><img src="http://dn-t2ipo.qbox.me/v3/public/unknown-user.png"><span>李啸天</span></a>
                         <p class="time">发布于 23分钟前</p>
                         <a class="inter like"><em></em><span>赞 51</span></a>
                         <a class="inter collect"><em></em><span>收藏 36</span></a>
                     </div>
                 </div>
                 <div class="image">
-                    <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-list-2.png">
+                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-2.png">
                 </div>
             </div>
 
@@ -221,17 +221,17 @@
                         <a href="#" style="color: #b39ddb">创业大街</a>
                         <a href="#" style="color: #80cbc4">互联网社交</a>
                     </div>
-                    <h3 class="title">Google+大改版，专注于热度最高的「社区」和「专辑」功能</h3>
+                    <a class="title" href="#">Google+大改版，专注于热度最高的「社区」和「专辑」功能</a>
                     <h5 class="summary">Google+ 昨晚开始更新全新的 Google+，不仅在设计上重新设计，在产品上也更加简洁，专注于社区 (Communities) 和专辑 (Collections) ，因为这两个功能是 Google+ 忠实用户最喜欢和最频繁使用的两个功能。</h5>
                     <div class="social">
-                        <a href="#" class="author"><img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/unknown-user.png"><span>李啸天</span></a>
+                        <a href="#" class="author"><img src="http://dn-t2ipo.qbox.me/v3/public/unknown-user.png"><span>李啸天</span></a>
                         <p class="time">发布于 23分钟前</p>
                         <a class="inter like"><em></em><span>赞 51</span></a>
                         <a class="inter collect"><em></em><span>收藏 36</span></a>
                     </div>
                 </div>
                 <div class="image">
-                    <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-list-1.png">
+                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-1.png">
                 </div>
             </div>
 
@@ -243,17 +243,17 @@
                         <a href="#" style="color: #b39ddb">创业大街</a>
                         <a href="#" style="color: #80cbc4">互联网社交</a>
                     </div>
-                    <h3 class="title">Google+大改版，专注于热度最高的「社区」和「专 辑」功能</h3>
+                    <a class="title" href="#">Google+大改版，专注于热度最高的「社区」和「专 辑」功能</a>
                     <h5 class="summary">Google+ 昨晚开始更新全新的 Google+，不仅在设计上重新设计，在产品上也更加简洁，专注于社区 (Communities) 和专辑 (Collections) ，因为这两个功能是 Google+ 忠实用户最喜欢和最频繁使用的两个功能。</h5>
                     <div class="social">
-                        <a href="#" class="author"><img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/unknown-user.png"><span>李啸天</span></a>
+                        <a href="#" class="author"><img src="http://dn-t2ipo.qbox.me/v3/public/unknown-user.png"><span>李啸天</span></a>
                         <p class="time">发布于 23分钟前</p>
                         <a class="inter like"><em></em><span>赞 51</span></a>
                         <a class="inter collect"><em></em><span>收藏 36</span></a>
                     </div>
                 </div>
                 <div class="image">
-                    <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-list-1.png">
+                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-1.png">
                 </div>
             </div>
 
@@ -264,17 +264,17 @@
                         <a href="#" style="color: #81c683">美食</a>
                         <a href="#" style="color: #f57e16">创业大街</a>
                     </div>
-                    <h3 class="title">天价众筹项目神秘夭折,支持者或赔夫又折兵</h3>
+                    <a class="title" href="#">天价众筹项目神秘夭折,支持者或赔夫又折兵</a>
                     <h5 class="summary">美基因检测公司为个体提供丰富的基因检测服务，1000人民币即可量身制定减肥计划。美 FDA 指出这些公司未获得许可证，对安全和有效性表示担忧.</h5>
                     <div class="social">
-                        <a href="#" class="author"><img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/unknown-user.png"><span>李啸天</span></a>
+                        <a href="#" class="author"><img src="http://dn-t2ipo.qbox.me/v3/public/unknown-user.png"><span>李啸天</span></a>
                         <p class="time">发布于 23分钟前</p>
                         <a class="inter like"><em></em><span>赞 51</span></a>
                         <a class="inter collect"><em></em><span>收藏 36</span></a>
                     </div>
                 </div>
                 <div class="image">
-                    <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-list-2.png">
+                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-2.png">
                 </div>
             </div>
 
@@ -285,17 +285,17 @@
                         <a href="#" style="color: #81c683">美食</a>
                         <a href="#" style="color: #f57e16">创业大街</a>
                     </div>
-                    <h3 class="title">天价众筹项目神秘夭折,支持者或赔夫又折兵</h3>
+                    <a class="title" href="#">天价众筹项目神秘夭折,支持者或赔夫又折兵</a>
                     <h5 class="summary">美基因检测公司为个体提供丰富的基因检测服务，1000人民币即可量身制定减肥计划。美 FDA 指出这些公司未获得许可证，对安全和有效性表示担忧.</h5>
                     <div class="social">
-                        <a href="#" class="author"><img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/unknown-user.png"><span>李啸天</span></a>
+                        <a href="#" class="author"><img src="http://dn-t2ipo.qbox.me/v3/public/unknown-user.png"><span>李啸天</span></a>
                         <p class="time">发布于 23分钟前</p>
                         <a class="inter like"><em></em><span>赞 51</span></a>
                         <a class="inter collect"><em></em><span>收藏 36</span></a>
                     </div>
                 </div>
                 <div class="image">
-                    <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-list-2.png">
+                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-2.png">
                 </div>
             </div>
 
@@ -307,19 +307,25 @@
                         <a href="#" style="color: #b39ddb">创业大街</a>
                         <a href="#" style="color: #80cbc4">互联网社交</a>
                     </div>
-                    <h3 class="title">Google+大改版，专注于热度最高的「社区」和「专 辑」功能</h3>
+                    <a class="title" href="#">Google+大改版，专注于热度最高的「社区」和「专 辑」功能</a>
                     <h5 class="summary">Google+ 昨晚开始更新全新的 Google+，不仅在设计上重新设计，在产品上也更加简洁，专注于社区 (Communities) 和专辑 (Collections) ，因为这两个功能是 Google+ 忠实用户最喜欢和最频繁使用的两个功能。</h5>
                     <div class="social">
-                        <a href="#" class="author"><img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/unknown-user.png"><span>李啸天</span></a>
+                        <a href="#" class="author"><img src="http://dn-t2ipo.qbox.me/v3/public/unknown-user.png"><span>李啸天</span></a>
                         <p class="time">发布于 23分钟前</p>
                         <a class="inter like"><em></em><span>赞 51</span></a>
                         <a class="inter collect"><em></em><span>收藏 36</span></a>
                     </div>
                 </div>
                 <div class="image">
-                    <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/news-list-1.png">
+                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-1.png">
                 </div>
             </div>
+
+            <a class="load-more">
+                <p>
+                    <span>MORE</span><em></em>
+                </p>
+            </a>
         </div>
         <!--新闻列表end-->
         <!--热榜start-->

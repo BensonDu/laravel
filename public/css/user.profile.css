@@ -1,0 +1,207 @@
+/*顶部导航栏start*/
+.user-nav{
+    position: fixed;
+    left: 0;
+    top: 10px;
+    width: 100%;
+    height: 60px;
+    background: rgba(255,255,255,.8);
+    padding-left: 310px;
+    min-width: 550px;
+    overflow: hidden;
+    z-index: 3;
+    transition: padding-left .4s;
+    -moz-transition: padding-left .4s; /* Firefox 4 */
+    -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
+}
+.user-nav .user-nav-container{
+    width: 100%;
+    height: 100%;
+}
+.user-nav .user-nav-container .left{
+    float: left;
+    height: 100%;
+    padding: 0 70px;
+}
+.user-nav .user-nav-container .left a{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 700;
+    height: 88%;
+    line-height: 65px;
+    color: #333;
+    margin-right: 20px;
+}
+.user-nav .user-nav-container .left a:hover{
+    color: #666;
+    border-color: #666;
+}
+.user-nav .user-nav-container .left a.active{
+    border-bottom: 2px solid #999;
+}
+/*顶部导航栏end*/
+/*主内容start*/
+.user-content{
+    position: relative;
+    width: 100%;
+    padding-left: 310px;
+    z-index: 1;
+    overflow: hidden;
+    transition: padding-left .4s;
+    -moz-transition: padding-left .4s; /* Firefox 4 */
+    -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
+}
+.user-content .container{
+    width: 100%;
+    min-width: 500px;
+    min-height: 500px;
+    max-width: 1000px;
+    margin:0 auto 0 40px;
+    padding: 70px 0 60px 30px;
+}
+.user-content .container .item-small{
+    width: 100%;
+    height: 40px;
+    margin-top: 30px;
+    overflow: hidden;
+}
+.user-content .container .item-small p{
+    display: inline-block;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 40px;
+    float: left;
+}
+.user-content .container .item-small span{
+    display: inline-block;
+    height: 30px;
+    font-size: 16px;
+    margin-top: 5px;
+    line-height: 30px;
+    color: #999;
+    border-radius: 3px;
+    padding: 0 20px;
+    cursor: default;
+    float: left;
+}
+.user-content .container .avatar{
+    width: 100%;
+    margin-top: 30px;
+}
+.user-content .container .avatar .name{
+    height: 40px;
+    width: 100%;
+}
+.user-content .container .avatar .name p{
+    display: inline-block;
+    font-size: 16px;
+    line-height: 40px;
+    font-weight: 700;
+}
+.user-content .container .avatar .img{
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
+}
+.user-content .container .avatar .img .wrap{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #f5f5f5;
+    cursor: pointer;
+    overflow: hidden;
+}
+.user-content .container .avatar .img .wrap img{
+    width: 100%;
+    height: 100%;
+}
+.user-content .container .avatar .img .wrap:hover{
+    box-shadow: 0 0 2px 0 #999;
+}
+.user-content .container .item-normal{
+    width: 100%;
+    margin-top: 30px;
+    overflow: hidden;
+}
+.user-content .container .item-normal p{
+    display: inline-block;
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 40px;
+    float: left;
+}
+.user-content .container .item-normal input{
+    display: inline-block;
+    background: #f5f5f5;
+    color: #666;
+    height: 40px;
+    width: 400px;
+    padding: 0 20px;
+    font-size: 16px;
+    line-height: 40px;
+    border: none;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+.user-content .container .item-normal input:focus{
+    outline: none;
+}
+.user-content .container .item-textarea{
+    width: 100%;
+    margin-top: 30px;
+}
+.user-content .container .item-textarea p{
+    display: inline-block;
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 40px;
+    float: left;
+}
+.user-content .container .item-textarea textarea{
+    display: inline-block;
+    color: #666;
+    padding: 10px 20px;
+    margin-top: 10px;
+    width: 400px;
+    font-size: 16px;
+    line-height: 28px;
+    height: 100px;
+    background: #f5f5f5;
+    border-radius: 3px;
+    overflow: hidden;
+    resize: none;
+    border: none;
+}
+.user-content .container .item-textarea textarea:focus{
+    outline: none;
+}
+.user-content .container .save{
+    width: 100%;
+    height: 40px;
+    margin-top: 50px;
+}
+.user-content .container .save a{
+    display: inline-block;
+    font-size: 16px;
+    line-height: 40px;
+    border-radius: 3px;
+    letter-spacing: 3px;
+    background: #444;
+    color: #f5f5f5;
+    width: 200px;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: background .6s;
+    -moz-transition: background .6s; /* Firefox 4 */
+    -webkit-transition: background .6s; /* Safari 和 Chrome */
+}
+.user-content .container .save a:hover{
+    background: #999;
+}
+/*主内容end*/

@@ -19,8 +19,26 @@ Route::get('/special', function(){
 Route::get('/{id}', function(){
     return view('site/detail');
 });
-Route::get('/user/{id}/admin', function(){
-    return view('user/admin');
+Route::get('/user/{id}', function(){
+    return view('user/index');
+});
+Route::get('/user/edit', function(){
+    return view('user/edit');
+});
+Route::get('/user/profile', function(){
+    return view('user/profile');
+});
+Route::get('/user/password', function(){
+    return view('user/password');
+});
+Route::get('/account/login', function(){
+    return view('account/login');
+});
+Route::get('/account/regist', function(){
+    return view('account/regist');
+});
+Route::get('/account/find', function(){
+    return view('account/find');
 });
 //数据导入
 Route::get('/import/auto', 'DataImport@auto');

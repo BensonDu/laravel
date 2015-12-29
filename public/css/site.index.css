@@ -45,6 +45,7 @@
 .site-content .star .album .prev em{
     background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-white-left.png) no-repeat center;
     background-size: 30px;
+    background-position: -2px;
 }
 .site-content .star .album .next{
     right: 0;
@@ -52,9 +53,13 @@
 .site-content .star .album .next em{
     background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-white-right.png) no-repeat center;
     background-size: 30px;
+    background-position: 2px;
 }
 .site-content .star .album:hover .nav{
     display: block;
+    background: rgba(153,153,153,.8);
+    border-radius: 50%;
+
 }
 .site-content .star .album .nav:hover{
     opacity: 1;
@@ -205,6 +210,14 @@
     right: 0;
     top: 0;
 }
+.site-content .filter .filter-container.fixed.trans{
+    transition: padding-left .4s;
+    -moz-transition: padding-left .4s; /* Firefox 4 */
+    -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
+}
+.site-content .filter .filter-container.fixed.unfold{
+    padding-left: 390px;
+}
 .site-content .filter .filter-container.fixed .search div{
     background: rgba(238,238,238,.8);
 }
@@ -238,16 +251,19 @@
 }
 .site-content .news .list-container .list .info .tags a{
     display: inline-block;
-    font-size: 13px;
+    font-size: 12px;
     height: 100%;
     margin-right: 5px;
 }
 .site-content .news .list-container .list .info .title{
-    line-height: 28px;
+    line-height: 24px;
     font-size: 16px;
     white-space: normal;
     font-weight: 600;
     color: #424242;
+}
+.site-content .news .list-container .list .info .title:hover{
+    color: #999;
 }
 .site-content .news .list-container .list .info .summary{
     line-height: 24px;
@@ -351,7 +367,7 @@
     width: 100%;
     font-size: 14px;
     font-weight: 600;
-    margin-top: 20px;
+    margin-top: 24px;
     letter-spacing: 2px;
 }
 .site-content .news .rank-container .title span{

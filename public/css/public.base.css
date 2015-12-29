@@ -12,7 +12,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     padding: 0;
     color: #333;
     font-size: 14px;
-    font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif";
+    font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif","Microsoft YaHei";
     font-style: inherit;
     font-weight: inherit;
     -webkit-tap-highlight-color: rgba(255,255,255,0);
@@ -64,3 +64,59 @@ body{
 .default-hide{
     display: none !important;
 }
+.pub-background-transition{
+    transition: background .4s;
+    -moz-transition: background .4s; /* Firefox 4 */
+    -webkit-transition: background .4s; /* Safari 和 Chrome */
+}
+/*加载更多按钮start*/
+.load-more{
+    display: inline-block;
+    width: 100%;
+    margin: 60px;
+    text-align: center;
+    overflow: visible;
+}
+.load-more p{
+    display: inline-block;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    cursor: pointer;
+    border: 1px solid #999;
+    transition: background-color .9s;
+    -moz-transition: background-color .9s;
+    -webkit-transition: background-color .9s;
+}
+.load-more p span{
+    color: #999;
+    line-height: 50px;
+    font-size: 12px;
+    transition: color .9s;
+    -moz-transition: color .9s;
+    -webkit-transition: color .9s;
+}
+.load-more p em{
+    display: none;
+    height: 48px;
+    width: 48px;
+    background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Floading-three-dots.gif) no-repeat center;
+    background-size: 28px;
+}
+.load-more p:hover{
+    background: #999;
+}
+.load-more p:hover span{
+    color: #fff;
+}
+.load-more.loading p span{
+    display: none;
+}
+.load-more.loading p em{
+    display: inline-block;
+}
+.load-more.loading p:hover{
+    background: #fff;
+}
+/*加载更多按钮end*/

@@ -1,0 +1,151 @@
+/*顶部导航栏start*/
+.user-nav{
+    position: fixed;
+    left: 0;
+    top: 10px;
+    width: 100%;
+    height: 60px;
+    background: rgba(255,255,255,.8);
+    padding-left: 310px;
+    min-width: 550px;
+    overflow: hidden;
+    z-index: 3;
+    transition: padding-left .4s;
+    -moz-transition: padding-left .4s; /* Firefox 4 */
+    -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
+}
+.user-nav .user-nav-container{
+    width: 100%;
+    height: 100%;
+}
+.user-nav .user-nav-container .left{
+    float: left;
+    height: 100%;
+    padding: 0 70px;
+}
+.user-nav .user-nav-container .left a{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 700;
+    height: 88%;
+    line-height: 65px;
+    color: #333;
+    margin-right: 20px;
+}
+.user-nav .user-nav-container .left a:hover{
+    color: #666;
+    border-color: #666;
+}
+.user-nav .user-nav-container .left a.active{
+    border-bottom: 2px solid #999;
+}
+/*顶部导航栏end*/
+/*主内容start*/
+.user-content{
+    position: relative;
+    width: 100%;
+    padding-left: 310px;
+    z-index: 1;
+    overflow: hidden;
+    transition: padding-left .4s;
+    -moz-transition: padding-left .4s; /* Firefox 4 */
+    -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
+}
+.user-content .container{
+    width: 100%;
+    min-width: 500px;
+    min-height: 500px;
+    max-width: 1000px;
+    margin:0 auto 0 40px;
+    padding: 60px 0;
+}
+.user-content .container .list-container{
+    width: 70%;
+    margin-top: 15px;
+}
+.user-content .container .list-container .list{
+    width: 100%;
+    padding: 18px 10px 10px 30px;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
+.user-content .container .list-container .list .info{
+    float: left;
+    width: 65%;
+    max-width: 500px;
+    padding-right: 20px;
+}
+.user-content .container .list-container .list .info .tags{
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+}
+.user-content .container .list-container .list .info .tags a{
+    display: inline-block;
+    font-size: 12px;
+    height: 100%;
+    margin-right: 5px;
+}
+.user-content .container .list-container .list .info .tags a:hover{
+    opacity: .7;
+}
+.user-content .container .list-container .list .info .title{
+    line-height: 24px;
+    font-size: 16px;
+    white-space: normal;
+    font-weight: 600;
+    color: #424242;
+}
+.user-content .container .list-container .list .info .title:hover{
+    color: #999;
+}
+.user-content .container .list-container .list .info .summary{
+    line-height: 24px;
+    margin-top: 10px;
+    font-size: 13px;
+    white-space: normal;
+    color: #666;
+}
+.user-content .container .list-container .list .info .social{
+    width: 100%;
+    height: 50px;
+    padding: 12px 0;
+}
+.user-content .container .list-container .list .info .social .time{
+    display: inline-block;
+    height: 100%;
+    line-height: 36px;
+    vertical-align: top;
+    font-size: 12px;
+    color: #999;
+    margin-left: 5px;
+}
+.user-content .container .list-container .list .info .social .inter{
+    display: inline-block;
+    height: 100%;
+    margin-left: 5px;
+}
+.user-content .container .list-container .list .info .social .inter span{
+    display: inline-block;
+    height: 100%;
+    line-height: 36px;
+    vertical-align: top;
+    font-size: 12px;
+    color: #999;
+    margin-left: 5px;
+}
+.user-content .container .list-container .list .image{
+    float: right;
+    width:35%;
+    height: 150px;
+    text-align: right;
+    overflow: hidden;
+}
+.user-content .container .list-container .list .image img{
+    display: inline-block;
+    margin-top: 30px;
+    width: 200px;
+    max-width: 210px;
+    height: auto;
+}
+/*主内容end*/

@@ -19,7 +19,8 @@
     <link rel="shortcut icon" href="http://dn-css7.qbox.me/tc.ico" type="image/ico" />
     <link href="/css/public.base.css" rel="stylesheet">
     <link href="/css/public.nav.left.css" rel="stylesheet">
-    <link href="/css/user.admin.css" rel="stylesheet">
+    <link href="/css/user.mid.css" rel="stylesheet">
+    <link href="/css/user.profile.css" rel="stylesheet">
 </head>
 <body>
 <!--左栏全局导航start-->
@@ -69,13 +70,76 @@
     </div>
 </div>
 <!--左栏全局导航end-->
-<!--站点中栏start-->
-<!--站点中栏end-->
-<!--新闻内容部分start-->
-<!--新闻内容end-->
+<!--用户中栏start-->
+<div id="mid" class="user-mid">
+    <div class="top">
+        <div class="avatar"><img src="http://dn-acac.qbox.me/mobile/public/New_avatar.png"></div>
+        <h4>GOOD MORNING</h4>
+        <h2>凉凉钳</h2>
+        <h3>一句话介绍一下自己吧,让别人了解你有多撒逼</h3>
+        <div class="social">
+            <a class="weibo" href="#" title="微博"></a>
+            <a class="email" href="#" title="E-mail"></a>
+            <a class="twitter" href="#" title="twitter"></a>
+            <a class="weixin" href="#" title="微信">
+                <img src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2FFullSizeRender.jpg">
+            </a>
+        </div>
+    </div>
+    <div class="mid">
+        <div class="container">
+            <a href="/user/132132" class="active"><span>个人主页</span></a>
+            <a href="#"><span>资料修改</span></a>
+            <a href="#"><span>基本设置</span></a>
+        </div>
+    </div>
+</div>
+<!--用户中栏end-->
+<!--主页内容start-->
+<div id="user-nav" class="user-nav">
+    <div class="user-nav-container">
+        <div class="left">
+            <a class="active" href="/user/profile">个人资料</a>
+            <a href="/user/password">修改密码</a>
+        </div>
+    </div>
+</div>
+<div id="user-content" class="user-content">
+    <div class="container">
+        <div class="item-small">
+            <p>用户名:</p><span>dubaoxing</span>
+        </div>
+        <div class="avatar">
+            <div class="name">
+                <p>头像:</p>
+            </div>
+            <div class="img">
+                <div class="wrap">
+                    <img src="http://dn-acac.qbox.me/mobile/public/New_avatar.png">
+                </div>
+            </div>
+        </div>
+        <div class="item-normal">
+            <p>昵称:</p>
+            <input type="text">
+        </div>
+        <div class="item-normal">
+            <p>Slogan:</p>
+            <input type="text">
+        </div>
+        <div class="item-textarea">
+            <p>简介:</p>
+            <textarea maxlength="100"></textarea>
+        </div>
+        <div class="save pub-background-transition">
+            <a href="#">保存</a>
+        </div>
+    </div>
+</div>
+<!--主页内容end-->
 </body>
 <script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/js/public.base.js"></script>
 <script src="/js/public.nav.left.js"></script>
-<script src="/js/user.admin.js"></script>
+<script src="/js/user.profile.js"></script>
 </html>

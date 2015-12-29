@@ -73,7 +73,7 @@
 <!--站点中栏start-->
 <div id="site-mid" class="site-mid">
     <div class="top">
-        <div class="logo"><img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/Tech2ipo-logo.png"></div>
+        <div class="logo"><img src="http://dn-t2ipo.qbox.me/v3/public/Tech2ipo-logo.png"></div>
         <h2>TECH2IPO</h2>
         <h3>「 等待新的科技故事 」</h3>
         <div class="social">
@@ -91,7 +91,7 @@
     <div class="mid">
         <div class="container">
             <a href="/"><span>最近更新</span><em>15</em></a>
-            <a href="#"><span>专题聚光</span></a>
+            <a href="#" class="active"><span>专题聚光</span></a>
             <a href="#"><span>精选热点</span></a>
         </div>
     </div>
@@ -101,7 +101,7 @@
 </div>
 <!--站点中栏end-->
 <!--专题内容start-->
-<div id="background" class="background" style=" background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/Max.png) no-repeat center; background-size: cover">
+<div id="background" class="background" style=" background: url(http://dn-t2ipo.qbox.me/v3/public/Max.png) no-repeat center; background-size: cover">
     <div class="filter"></div>
 </div>
 <div id="site-content" class="site-content">
@@ -112,31 +112,31 @@
         </a>
         <div class="list-container">
             <a href="#" class="list">
-                <h5>2015.03.19</h5>
-                <p>特斯拉如何改变世界</p>
+                <h5>特斯拉如何改变世界</h5>
+                <p>2015年12月13日</p>
             </a>
             <a href="#" class="list">
-                <h5>2014.03.19</h5>
-                <p>小米为何惨败于华为</p>
+                <h5>小米为何惨败于华为</h5>
+                <p>2015年12月13日</p>
             </a>
             <a href="#" class="list">
-                <h5>2013.03.19</h5>
-                <p>为何智能家居遭受市场如此冷落</p>
+                <h5>为何智能家居遭受市场如此冷落</h5>
+                <p>2015年12月13日</p>
             </a>
             <a href="#" class="list">
-                <h5>2012.03.19</h5>
-                <p>新媒体时代的自媒体</p>
+                <h5>新媒体时代的自媒体</h5>
+                <p>2015年12月13日</p>
             </a>
             <a href="#" class="list">
-                <h5>2011.03.19</h5>
-                <p>那些微博段子手</p>
+                <h5>那些微博段子手</h5>
+                <p>2015年12月13日</p>
             </a>
 
         </div>
     </div>
     <div class="container">
         <div class="image">
-            <img src="http://7rflu9.com1.z0.glb.clouddn.com/v3/public/Tesla-logo-1.png">
+            <img src="http://dn-t2ipo.qbox.me/v3/public/Tesla-logo-1.png">
         </div>
         <div class="title">
             <h1>特斯拉是如何改变世界的</h1>
