@@ -16,17 +16,17 @@
     <meta name="revisit-after"  content="1 days" />
     <meta name="format-detection" content="email=no" />
     <meta name="format-detection" content="telephone=yes" />
-    <link rel="shortcut icon" href="http://dn-css7.qbox.me/tc.ico" type="image/ico" />
+    @section('style')<link rel="shortcut icon" href="http://dn-css7.qbox.me/tc.ico" type="image/ico" />
     <link href="/css/public.base.css" rel="stylesheet">
     <link href="/css/public.nav.left.css" rel="stylesheet">
-    <link href="/css/user.mid.css" rel="stylesheet">
-    <link href="/css/user.profile.css" rel="stylesheet">
+    @show
 </head>
 <body>
+@section('nav')
 <!--左栏全局导航start-->
 <div id="nav-left" class="nav-left">
     <div class="login-sta login">
-        <a href="#">
+        <a href="/user/13213">
             <i></i>
             <img src="http://dn-acac.qbox.me/mobile/public/New_avatar.png">
             <em>
@@ -36,22 +36,22 @@
         </a>
     </div>
     <div class="menu entry">
-        <a href="#">
+        <a href="/">
             <i class="home"></i><span>站点首页</span>
         </a>
-        <a href="#">
+        <a href="/user/edit">
             <i class="add"></i><span>新建文章</span>
         </a>
-        <a href="#">
+        <a href="/user/edit">
             <i class="article"></i><span>文章管理</span>
         </a>
         <a href="#">
             <i class="folder"></i><span>我的收藏</span>
         </a>
-        <a href="#">
+        <a href="/user/profile">
             <i class="setting"></i><span>个人设置</span>
         </a>
-        <a href="#">
+        <a href="/user/123123">
             <i class="people"></i><span>个人主页</span>
         </a>
     </div>
@@ -70,63 +70,13 @@
     </div>
 </div>
 <!--左栏全局导航end-->
-<!--用户中栏start-->
-<div id="mid" class="user-mid">
-    <div class="top">
-        <div class="avatar"><img src="http://dn-acac.qbox.me/mobile/public/New_avatar.png"></div>
-        <h4>GOOD MORNING</h4>
-        <h2>凉凉钳</h2>
-        <h3>一句话介绍一下自己吧,让别人了解你有多撒逼</h3>
-        <div class="social">
-            <a class="weibo" href="#" title="微博"></a>
-            <a class="email" href="#" title="E-mail"></a>
-            <a class="twitter" href="#" title="twitter"></a>
-            <a class="weixin" href="#" title="微信">
-                <img src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2FFullSizeRender.jpg">
-            </a>
-        </div>
-    </div>
-    <div class="mid">
-        <div class="container">
-            <a href="/user/132132" class="active"><span>个人主页</span></a>
-            <a href="#"><span>资料修改</span></a>
-            <a href="#"><span>基本设置</span></a>
-        </div>
-    </div>
-</div>
-<!--用户中栏end-->
-<!--主页内容start-->
-<div id="user-nav" class="user-nav">
-    <div class="user-nav-container">
-        <div class="left">
-            <a href="/user/profile">个人资料</a>
-            <a class="active" href="/user/password">修改密码</a>
-        </div>
-    </div>
-</div>
-<div id="user-content" class="user-content">
-    <div class="container">
-        <div class="item-normal">
-            <p>旧密码:</p>
-            <input type="password">
-        </div>
-        <div class="item-normal">
-            <p>新密码:</p>
-            <input type="password">
-        </div>
-        <div class="item-normal">
-            <p>重复新密码:</p>
-            <input type="password">
-        </div>
-        <div class="save pub-background-transition">
-            <a href="#">保存</a>
-        </div>
-    </div>
-</div>
-<!--主页内容end-->
+@show
+@section('body')
+@show
 </body>
+@section('script')
 <script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/js/public.base.js"></script>
 <script src="/js/public.nav.left.js"></script>
-<script src="/js/user.profile.js"></script>
+@show
 </html>
