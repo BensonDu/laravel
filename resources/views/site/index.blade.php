@@ -261,5 +261,5 @@
     </div>
     <!--站点内容end-->
 @stop
-@section('script')@parent<script src="js/site.index.js"></script>
+@section('script')@parent<script src="/js/site.index.js"></script>
 @stop

@@ -25,8 +25,8 @@
 @section('nav')
 <!--左栏全局导航start-->
 <div id="nav-left" class="nav-left">
-    <div class="login-sta login">
-        <a href="/user/13213">
+    <div class="login-sta">
+        <a href="/user/{{isset($uid) ? $uid : 0}}">
             <i></i>
             <img src="http://dn-acac.qbox.me/mobile/public/New_avatar.png">
             <em>
@@ -60,7 +60,7 @@
             <a href="#">
                 <i class="web"></i><span>站点管理</span>
             </a>
-            <a href="#">
+            <a href="/account/logout">
                 <i class="exit"></i><span>退出</span>
             </a>
         </div>
@@ -73,6 +73,20 @@
 @show
 @section('body')
 @show
+<div id="global-pop" class="global-pop">
+    <div class="box">
+        <div class="img">
+            <em></em>
+        </div>
+        <div class="title">
+            <h5></h5>
+        </div>
+        <div class="btn-group">
+            <a href="/">返回首页</a>
+            <a class="call"></a>
+        </div>
+    </div>
+</div>
 </body>
 @section('script')
 <script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>

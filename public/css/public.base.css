@@ -61,15 +61,23 @@ body{
     color: #555;
     font-size: 14px;
 }
+/*默认隐藏*/
 .default-hide{
     display: none !important;
 }
+/*背景过渡动画*/
 .pub-background-transition{
     transition: background .4s;
     -moz-transition: background .4s; /* Firefox 4 */
     -webkit-transition: background .4s; /* Safari 和 Chrome */
 }
-/*加载更多按钮start*/
+/*Fade 动画*/
+.pub-fade-transition{
+    transition: opacity .4s;
+    -moz-transition: opacity .4s; /* Firefox 4 */
+    -webkit-transition: opacity .4s; /* Safari 和 Chrome */
+}
+/*加载更多按钮*/
 .load-more{
     display: inline-block;
     width: 100%;
@@ -119,4 +127,110 @@ body{
 .load-more.loading p:hover{
     background: #fff;
 }
-/*加载更多按钮end*/
+/*弹窗*/
+/*弹窗start*/
+.global-pop{
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background: rgba(243,243,243,.95);
+    transition: opacity .4s;
+    -moz-transition: opacity .4s; /* Firefox 4 */
+    -webkit-transition: opacity .4s; /* Safari 和 Chrome */
+}
+.global-pop .box{
+    position: fixed;
+    width: 400px;
+    height: 260px;
+    border-radius: 5px;
+    border: 1px solid #f3f3f3;
+    background: #fff;
+    margin:auto;
+    left:0;
+    right:0;
+    top:25%;
+    overflow: hidden;
+}
+.global-pop .box .title{
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+.global-pop .box h5{
+    display: inline-block;
+    width: 100%;
+    line-height: 90px;
+    font-size: 28px;
+    text-align: center;
+    letter-spacing: 4px;
+    float: left;
+}
+.global-pop .box .img{
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+    overflow: hidden;
+}
+.global-pop.error .box .img em{
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ferror-mark.png) no-repeat center;
+    background-size: 70px;
+}
+.global-pop.warning .box .img em{
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fwarning-mark.png) no-repeat center;
+    background-size: 70px;
+}
+.global-pop.success .box .img em{
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fsucces-outline.png) no-repeat center;
+    background-size: 70px;
+}
+.global-pop .box .btn-group{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    overflow: hidden;
+}
+.global-pop .box .btn-group a{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: 50%;
+    text-align: center;
+    color: #fff;
+    background: #666;
+    font-size: 14px;
+    float: left;
+    cursor: pointer;
+    transition: background .4s;
+    -moz-transition: background .4s; /* Firefox 4 */
+    -webkit-transition: background .4s; /* Safari 和 Chrome */
+}
+.global-pop .box .btn-group a:nth-child(1){
+    border-right: 1px solid #fff;
+}
+.global-pop .box .btn-group a:nth-child(2){
+    border-left: 1px solid #fff;
+}
+.global-pop .box .btn-group a:hover{
+    background: #999;
+}
+.global-pop.active {
+    visibility: visible;
+    opacity: 1;
+}
+/*弹窗end*/

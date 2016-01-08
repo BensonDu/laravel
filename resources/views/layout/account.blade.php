@@ -9,5 +9,5 @@
 </div>
 <!--背景end-->
 @stop
-@section('script')@parent<script src="/js/public.account.js"></script>
+@section('script')@parent<script src="/js/account/base.js"></script>
 @stop

@@ -83,7 +83,7 @@
     color: #999;
     border-radius: 3px;
     padding: 0 20px;
-    cursor: default;
+    cursor: not-allowed;
     float: left;
 }
 .user-content .container .avatar{
@@ -106,6 +106,7 @@
     margin-top: 20px;
 }
 .user-content .container .avatar .img .wrap{
+    position: relative;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -116,11 +117,57 @@
 .user-content .container .avatar .img .wrap img{
     width: 100%;
     height: 100%;
+    border-radius: 50%;
+}
+.user-content .container .avatar .img .wrap input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.001;
+    z-index: 5;
+}
+.user-content .container .avatar .img .wrap .error,
+.user-content .container .avatar .img .wrap .progress{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(248,248,248,.9);
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.user-content .container .avatar .img .wrap .error{
+    z-index: 3;
+}
+.user-content .container .avatar .img .wrap .progress{
+    z-index: 4;
+}
+.user-content .container .avatar .img .wrap .error.active,
+.user-content .container .avatar .img .wrap .progress.active{
+    opacity: 1;
+}
+.user-content .container .avatar .img .wrap .error p,
+.user-content .container .avatar .img .wrap .progress p{
+    line-height: 100px;
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    margin-right: 27%;
+}
+.user-content .container .avatar .img .wrap .error p{
+    color: #f00;
+    margin-right: 22%;
 }
 .user-content .container .avatar .img .wrap:hover{
     box-shadow: 0 0 2px 0 #999;
 }
 .user-content .container .item-normal{
+    position: relative;
     width: 100%;
     margin-top: 30px;
     overflow: hidden;
@@ -149,6 +196,35 @@
 }
 .user-content .container .item-normal input:focus{
     outline: none;
+}
+.user-content .container .item-normal .error{
+    position: absolute;
+    height: 40px;
+    width: 120px;
+    left: 280px;
+    top: 50px;
+    z-index: 1;
+    background: rgba(255,64,129,1);
+    padding: 0 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .6s;
+    -moz-transition: opacity .6s; /* Firefox 4 */
+    -webkit-transition: opacity .6s; /* Safari 和 Chrome */
+}
+.user-content .container .item-normal .error.active{
+    visibility: visible;
+    opacity: 1;
+}
+.user-content .container .item-normal .error p{
+    display: inline-block;
+    float: left;
+    font-size: 12px;
+    color: #fff;
+    height: 100%;
+    line-height: 40px;
+    width: 100%;
+    text-align: center;
 }
 .user-content .container .item-textarea{
     width: 100%;
@@ -186,23 +262,68 @@
     height: 40px;
     margin-top: 50px;
 }
-.user-content .container .save a{
-    display: inline-block;
-    font-size: 16px;
-    line-height: 40px;
-    border-radius: 3px;
-    letter-spacing: 3px;
-    background: #444;
-    color: #f5f5f5;
+.user-content .container .save .btn-wrap{
     width: 200px;
     height: 100%;
-    text-align: center;
-    cursor: pointer;
-    transition: background .6s;
-    -moz-transition: background .6s; /* Firefox 4 */
-    -webkit-transition: background .6s; /* Safari 和 Chrome */
-}
-.user-content .container .save a:hover{
-    background: #999;
 }
 /*主内容end*/
+/*提交成功按钮start*/
+.save-btn{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+.save-btn{
+    background: #444;
+}
+.save-btn:hover{
+    background: #666;
+}
+.save-btn em{
+    display: none;
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+}
+.save-btn span{
+    display: inline-block;
+    line-height: 40px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: #fff;
+}
+.save-btn.done em,
+.save-btn.loading em{
+    display: inline-block;
+}
+.save-btn.loading em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fslim-circle.png) no-repeat center;
+    background-size: 20px;
+    animation: rotating 2s infinite linear;
+    -webkit-animation: rotating 2s infinite linear;
+    -moz-animation: rotating 2s infinite linear;
+}
+.save-btn.done em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fmark-white.png) no-repeat center;
+    background-size: 20px;
+}
+.save-btn.done span,
+.save-btn.loading span{
+    display: none;
+}
+@-webkit-keyframes rotating {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+@keyframes rotating {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes rotating {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+/*提交成功按钮end*/

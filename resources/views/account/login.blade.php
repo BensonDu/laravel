@@ -5,21 +5,27 @@
         <div class="container">
             <div class="wrap">
                 <h2>登录</h2>
-                <div class="account">
+                <div id="login-username" class="account">
                     <em class="username"></em>
                     <div class="input">
                         <span></span>
                         <input type="text" placeholder="用户名/手机号">
                     </div>
+                    <div class="error">
+                        <p>用户名不存在</p>
+                    </div>
                 </div>
-                <div class="account">
+                <div id="login-password" class="account">
                     <em class="password"></em>
                     <div class="input">
                         <span></span>
                         <input type="password" placeholder="密码">
                     </div>
+                    <div class="error">
+                        <p>用户名不存在</p>
+                    </div>
                 </div>
-                <div class="confirm">
+                <div id="login-confirm" class="confirm">
                     <a class="pub-background-transition">登录</a>
                 </div>
                 <div class="entry">
@@ -35,4 +41,6 @@
             </div>
         </div>
     </div>
+@stop
+@section('script')@parent<script src="/js/account/login.js"></script>
 @stop

@@ -13,25 +13,38 @@
     </div>
 </div>
 <div id="user-content" class="user-content">
-    <div class="container">
+    <div id="password" class="container">
         <div class="item-normal">
             <p>旧密码:</p>
-            <input type="password">
+            <input type="password" v-model="password.val">
+            <div class="error" v-bind:class="password.error ? 'active' : ''">
+                <p v-text="password.error"></p>
+            </div>
         </div>
         <div class="item-normal">
             <p>新密码:</p>
-            <input type="password">
+            <input type="password" v-model="newpassword.val">
+            <div class="error" v-bind:class="newpassword.error ? 'active' : ''">
+                <p v-text="newpassword.error"></p>
+            </div>
         </div>
         <div class="item-normal">
             <p>重复新密码:</p>
-            <input type="password">
+            <input type="password" v-model="newpassword_re.val">
+            <div class="error" v-bind:class="newpassword_re.error ? 'active' : ''">
+                <p v-text="newpassword_re.error"></p>
+            </div>
         </div>
-        <div class="save pub-background-transition">
-            <a href="#">保存</a>
+        <div class="save">
+            <div class="btn-wrap">
+                <a class="save-btn black pub-background-transition" v-on:click="submit" v-bind:class="save"><em></em><span>保存</span></a>
+            </div>
         </div>
     </div>
 </div>
 <!--主页内容end-->
 @stop
-@section('script')@parent<script src="/js/user.profile.js"></script>
+@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.js"></script>
+<script src="/js/user/base.js"></script>
+<script src="/js/user/password.js"></script>
 @stop
