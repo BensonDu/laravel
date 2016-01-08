@@ -10,25 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/', function(){
-    return view('site/index');
-});
-Route::get('/special', function(){
-    return view('site/special');
-});
-Route::get('/{id}', function(){
-    return view('site/detail');
-});
-Route::get('/user/{id}', function(){
-    return view('user/index');
-});
-Route::get('/user/edit', function(){
-    return view('user/edit');
-});
-Route::get('/test', function(){
-    return date('Y-m-d H:i:s',1450684471);//json_encode(session('uid'));
-});
-
+//站点首页
+Route::get('/', 'Site\IndexController@index');
+//站点专题页
+Route::get('/special', 'Site\SpecialController@index');
+//文章详情
+Route::get('/{id}', 'Site\DetailController@index');
 
 //登录页面
 Route::get('/account/login', 'Account\LoginController@index');
@@ -54,7 +41,10 @@ Route::get('/user/test', 'User\ProfileController@test');
 //密码重置
 Route::get('/user/password', 'User\PasswordController@index');
 Route::post('/user/password', 'User\PasswordController@post');
-
+//个人文章管理
+Route::get('/user/edit', 'User\EditController@index');
+//个人主页
+Route::get('/user/{id}', 'User\IndexController@index');
 
 //数据导入
 Route::get('/import/auto', 'DataImport@auto');

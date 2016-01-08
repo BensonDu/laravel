@@ -108,6 +108,20 @@ class AccountModel extends Model
         return isset($info[0]) ? $info[0] : NULL;
     }
     /*
+   |--------------------------------------------------------------------------
+   | 获取用户信息通过 UID
+   |--------------------------------------------------------------------------
+   |
+   | @param  string $uid
+   | @return string object user info
+   |
+   */
+    public static function get_user_info_by_uid($uid)
+    {
+        $info = AccountModel::where('id',$uid)->take(1)->get();
+        return isset($info[0]) ? $info[0] : NULL;
+    }
+    /*
     |--------------------------------------------------------------------------
     | 密码加密方法
     |--------------------------------------------------------------------------

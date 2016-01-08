@@ -1,11 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Model\UserModel;
 
-class UserController extends Controller
+/**
+ * Created by PhpStorm.
+ * User: Benson
+ * Date: 16/1/8
+ * Time: 下午7:45
+ */
+class SiteController extends Controller
 {
     public $request;
 
@@ -13,7 +18,6 @@ class UserController extends Controller
     {
         parent::__construct();
         $this->request = request();
-
     }
 
 }

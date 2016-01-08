@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Model\AccountModel;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -13,7 +14,17 @@ abstract class Controller extends BaseController
 
     public function __construct()
     {
-        view()->share('uid', $_ENV['uid']);
+        $uid = $_ENV['uid'];
+        
+        if(!empty($uid)){
+            $info = AccountModel::get_user_info_by_uid($uid);
+        }
+        $data = [
+            'uid'       => $uid,
+            'nickname'  => isset($info->nickname) ? $info->nickname : '',
+            'avatar'    => isset($info->avatar) ? avatar($info->avatar) : ''
+        ];
+        view()->share($data);
     }
 
     public static function ApiOut($code = 10001, $msg='', $data=[])

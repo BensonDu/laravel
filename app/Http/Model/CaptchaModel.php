@@ -106,7 +106,7 @@ class CaptchaModel{
     */
     private static function getRandomCaptcha()
     {
-        return 123456;//rand(100000,999999);
+        return rand(100000,999999);
     }
     /*
     |--------------------------------------------------------------------------
@@ -115,7 +115,6 @@ class CaptchaModel{
     */
     private static function sendCaptcha($to,$value)
     {
-        return 1;
         $sms = new \App\Libs\yuntongxun\sms();
         $ret = $sms->sendTemplateSMS($to,[ $value, 5 ]);
         return isset($ret->statusCode) && $ret->statusCode == '000000';

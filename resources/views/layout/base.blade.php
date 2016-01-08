@@ -25,13 +25,19 @@
 @section('nav')
 <!--左栏全局导航start-->
 <div id="nav-left" class="nav-left">
-    <div class="login-sta">
-        <a href="/user/{{isset($uid) ? $uid : 0}}">
+
+@if(!empty($uid))
+<div class="login-sta login">
+    <a href="/user/{{$uid}}">
+@else
+<div class="login-sta">
+    <a href="/account/login{{'?redirect='.urlencode(request()->url())}}">
+@endif
             <i></i>
-            <img src="http://dn-acac.qbox.me/mobile/public/New_avatar.png">
+            <img src="{{$avatar}}">
             <em>
                 <span class="login-regist">登录/注册</span>
-                <span class="name">凉凉钳</span>
+                <span class="name">{{$nickname}}</span>
             </em>
         </a>
     </div>

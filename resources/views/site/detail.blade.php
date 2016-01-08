@@ -25,4 +25,4 @@
 <!--新闻内容end-->
 @stop
 @section('script')@parent<script src="/js/site.detail.js"></script>
-@stopa
+@stop
