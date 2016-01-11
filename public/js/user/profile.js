@@ -54,7 +54,7 @@
                         setTimeout(function(){
                             data.save = '';
                             location.reload();
-                        },3000);
+                        },1000);
                     },700);
                 }
                 pop.error('网络错误','确定');
