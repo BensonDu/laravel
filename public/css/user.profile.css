@@ -26,7 +26,7 @@
 }
 .user-nav .user-nav-container .left a{
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     height: 88%;
     line-height: 65px;
@@ -60,149 +60,67 @@
     margin:0 auto 0 40px;
     padding: 80px 0 60px 30px;
 }
-.user-content .container .item-small{
+.user-content .container .item{
     width: 100%;
-    height: 40px;
     margin-top: 30px;
     overflow: hidden;
 }
-.user-content .container .item-small p{
+.user-content .container .item .wrap{
+    width: 450px;
+    overflow: hidden;
+}
+.user-content .container .item .wrap .name{
     display: inline-block;
-    height: 100%;
-    font-size: 16px;
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
     font-weight: 700;
     line-height: 40px;
     float: left;
 }
-.user-content .container .item-small span{
+.user-content .container .item .wrap .value{
     display: inline-block;
     height: 30px;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 5px;
     line-height: 30px;
-    color: #999;
     border-radius: 3px;
     padding: 0 20px;
-    cursor: not-allowed;
     float: left;
 }
-.user-content .container .avatar{
-    width: 100%;
-    margin-top: 30px;
+/*一行*/
+.user-content .container .item .wrap.one-line .name{
+    width: auto;
 }
-.user-content .container .avatar .name{
-    height: 40px;
-    width: 100%;
-}
-.user-content .container .avatar .name p{
-    display: inline-block;
-    font-size: 16px;
-    line-height: 40px;
-    font-weight: 700;
-}
-.user-content .container .avatar .img{
-    width: 100%;
-    height: 100px;
-    margin-top: 20px;
-}
-.user-content .container .avatar .img .wrap{
+/*常规表单*/
+.user-content .container .item .wrap .input{
     position: relative;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 1px solid #f5f5f5;
-    cursor: pointer;
-    overflow: hidden;
-}
-.user-content .container .avatar .img .wrap img{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-.user-content .container .avatar .img .wrap input{
-    position: absolute;
-    left: 0;
-    top: 0;
-    cursor: pointer;
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    opacity: 0.001;
-    z-index: 5;
-}
-.user-content .container .avatar .img .wrap .error,
-.user-content .container .avatar .img .wrap .progress{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: rgba(248,248,248,.9);
-    top: 0;
-    left: 0;
-    opacity: 0;
-}
-.user-content .container .avatar .img .wrap .error{
-    z-index: 3;
-}
-.user-content .container .avatar .img .wrap .progress{
-    z-index: 4;
-}
-.user-content .container .avatar .img .wrap .error.active,
-.user-content .container .avatar .img .wrap .progress.active{
-    opacity: 1;
-}
-.user-content .container .avatar .img .wrap .error p,
-.user-content .container .avatar .img .wrap .progress p{
-    line-height: 100px;
-    display: inline-block;
-    float: right;
-    font-size: 14px;
-    margin-right: 27%;
-}
-.user-content .container .avatar .img .wrap .error p{
-    color: #f00;
-    margin-right: 22%;
-}
-.user-content .container .avatar .img .wrap:hover{
-    box-shadow: 0 0 2px 0 #999;
-}
-.user-content .container .item-normal{
-    position: relative;
-    width: 100%;
-    margin-top: 30px;
-    overflow: hidden;
-}
-.user-content .container .item-normal p{
-    display: inline-block;
+    width: 400px;
     height: 40px;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 40px;
+    margin-top: 10px;
     float: left;
 }
-.user-content .container .item-normal input{
+.user-content .container .item .wrap .input input{
     display: inline-block;
     background: #f5f5f5;
     color: #666;
-    height: 40px;
-    width: 400px;
+    height: 100%;
+    width: 100%;
     padding: 0 20px;
     font-size: 16px;
     line-height: 40px;
     border: none;
     border-radius: 3px;
-    margin-top: 10px;
 }
-.user-content .container .item-normal input:focus{
+.user-content .container .item .wrap .input input:focus{
     outline: none;
 }
-.user-content .container .item-normal .error{
+.user-content .container .item .wrap .input .error{
     position: absolute;
-    height: 40px;
+    height: 100%;
     width: 120px;
-    left: 280px;
-    top: 50px;
+    top: 0;
+    right: 0;
     z-index: 1;
     background: rgba(255,64,129,1);
     padding: 0 20px;
@@ -212,11 +130,11 @@
     -moz-transition: opacity .6s; /* Firefox 4 */
     -webkit-transition: opacity .6s; /* Safari 和 Chrome */
 }
-.user-content .container .item-normal .error.active{
+.user-content .container .item .wrap .input .error.active{
     visibility: visible;
     opacity: 1;
 }
-.user-content .container .item-normal .error p{
+.user-content .container .item .wrap .input .error p{
     display: inline-block;
     float: left;
     font-size: 12px;
@@ -226,20 +144,8 @@
     width: 100%;
     text-align: center;
 }
-.user-content .container .item-textarea{
-    width: 100%;
-    margin-top: 30px;
-}
-.user-content .container .item-textarea p{
-    display: inline-block;
-    height: 40px;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 40px;
-    float: left;
-}
-.user-content .container .item-textarea textarea{
+/*textarea*/
+.user-content .container .item .wrap textarea{
     display: inline-block;
     color: #666;
     padding: 10px 20px;
@@ -254,8 +160,81 @@
     resize: none;
     border: none;
 }
-.user-content .container .item-textarea textarea:focus{
+.user-content .container .item .wrap textarea:focus{
     outline: none;
+}
+/*不可更改*/
+.user-content .container .item .wrap .value.unchangeable{
+    color: #999;
+    cursor: not-allowed;
+}
+/*图片上传*/
+.user-content .container .item .avatar{
+    padding: 2px;
+}
+.user-content .container .item .avatar .img{
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
+    float: left;
+}
+.user-content .container .item .avatar .img .box{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #f5f5f5;
+    cursor: pointer;
+    overflow: hidden;
+}
+.user-content .container .item .avatar .img .box img{
+    width: 100%;
+    height: 100%;
+}
+.user-content .container .item .avatar .img .box input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.001;
+    z-index: 5;
+}
+.user-content .container .item .avatar .img .box .error,
+.user-content .container .item .avatar .img .box .progress{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(248,248,248,.9);
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.user-content .container .item .avatar .img .box .error{
+    z-index: 3;
+}
+.user-content .container .avatar .img .box .progress{
+    z-index: 4;
+}
+.user-content .container .item .avatar .img .box .error.active,
+.user-content .container .item .avatar .img .box .progress.active{
+    opacity: 1;
+}
+.user-content .container .item .avatar .img .box .error p,
+.user-content .container .item .avatar .img .box .progress p{
+    line-height: 100px;
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    margin-right: 27%;
+}
+.user-content .container .item .avatar .img .box .error p{
+    color: #f00;
+    margin-right: 22%;
+}
+.user-content .container .item .avatar .img .box:hover{
+    box-shadow: 0 0 2px 0 #999;
 }
 .user-content .container .save{
     width: 100%;
@@ -265,6 +244,45 @@
 .user-content .container .save .btn-wrap{
     width: 200px;
     height: 100%;
+}
+/*两个按钮*/
+.user-content .container .save .double-btn{
+    width: 400px;
+    height: 100%;
+}
+.user-content .container .save .double-btn a{
+    width: 46%;
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+.user-content .container .save .double-btn a.empty{
+    border: 1px solid #444;
+    background: #fff;
+}
+.user-content .container .save .double-btn a.empty span{
+    color: #444;
+    transition: color .4s;
+    -moz-transition: color .4s; /* Firefox 4 */
+    -webkit-transition: color .4s; /* Safari 和 Chrome */
+}
+.user-content .container .save .double-btn a.empty:hover{
+    border: 1px solid #fff;
+    background: #999;
+}
+.user-content .container .save .double-btn a.empty:hover span{
+    color: #fff;
+}
+/*上传图片--圆*/
+.user-content .container .item .avatar.circle .box,
+.user-content .container .item .avatar.circle .box .img,
+.user-content .container .item .avatar.circle .img .box .error,
+.user-content .container .item .avatar.circle .img .box .progress{
+    border-radius: 50%;
+}
+.user-content .container .item .avatar .img .box img.qr{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fdefault-qr-1.png) no-repeat center;
+    background-size: 98px;
 }
 /*主内容end*/
 /*提交成功按钮start*/

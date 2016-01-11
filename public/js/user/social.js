@@ -2,11 +2,8 @@
     var self = this,
         uploader   = simple.uploader({});
     this.data = {
-        username : {
-            val : default_data.username
-        },
-        avatar : {
-            val : default_data.avatar,
+        wechat : {
+            val : default_data.wechat,
             file : '',
             progress : {
                 active : false,
@@ -14,21 +11,23 @@
             },
             error : ''
         },
-        nickname : {
-            val : default_data.nickname,
+        weibo : {
+            val : default_data.weibo,
             error : ''
         },
-        slogan : {
-            val : default_data.slogan
-        },
-        introduce : {
-            val : default_data.introduce
+        email : {
+            val : default_data.email
         },
         save : ''
     };
     this.methods = {};
+    this.methods.clear  = function(){
+        self.data.wechat.val='';
+        self.data.email.val = '';
+        self.data.weibo.val = '';
+    };
     this.methods.upload = function(){
-        var _this = this.$els.avatar,
+        var _this = this.$els.wechat,
             $this = $(_this),
             exist_file = $($this).attr('exist-file');
         if(exist_file){
@@ -40,14 +39,13 @@
     this.methods.submit = function(){
         var data = self.data,
             form = {
-                nickname :   data.nickname.val,
-                slogan  : data.slogan.val,
-                introduce : data.introduce.val,
-                avatar : data.avatar.val
+                wechat :   data.wechat.val,
+                weibo  : data.weibo.val,
+                email : data.email.val
             };
-        if(self.check_nickname()){
+        self.verify_all(function(){
             data.save = 'loading';
-            return request.post('/user/profile',function(ret){
+            return request.post('/user/social',function(ret){
                 if(ret.hasOwnProperty('code') && ret.code=='0'){
                     return setTimeout(function(){
                         data.save = 'done';
@@ -59,37 +57,37 @@
                 }
                 pop.error('网络错误','确定');
             },form);
-        }
+        });
+    };
+    this.verify_all = function(call){
+        if(self.data.weibo.val != '' && !constant.regex().weibo.test(self.data.weibo.val))return self.error(self.data.weibo,'格式错误');
+        call();
+    };
+    this.error = function(obj,text){
+        obj.error = text;
+        setTimeout(function(){obj.error = ''},2000);
     };
     this.vue = new Vue({
-        el: '#profile',
+        el: '#social',
         data: self.data,
         methods: self.methods
     });
-    this.check_nickname = function(){
-        if(self.data.nickname.val == ''){
-            self.data.nickname.error = '昵称为空';
-            setTimeout(function(){self.data.nickname.error = false},2000);
-            return false;
-        }
-        return true;
-    };
     //IMG ID 转化为 URL
     this.get_img_url=function(id, option){
         return 'http://dn-xswe.qbox.me/' + id + '?imageMogr2' + (option ? "/crop/!" + get_crop(option) : "") + "/auto-orient/thumbnail/480x";
     };
     //上传进度显示
     this.uploading = function(loaded, total){
-        return self.data.avatar.progress.percent = parseFloat(((loaded / total) * 100).toFixed(0))+' %';
+        return self.data.wechat.progress.percent = parseFloat(((loaded / total) * 100).toFixed(0))+' %';
     };
     //上传错误显示
     this.upload_error = function(text){
-        self.data.avatar.error = text;
-        setTimeout(function(){self.data.avatar.error = false;},3000);
+        self.data.wechat.error = text;
+        setTimeout(function(){self.data.wechat.error = false;},3000);
     };
     //初始化
     uploader.on("beforeupload", function (e, file, r) {
-        self.data.avatar.progress.active = true;
+        self.data.wechat.progress.active = true;
         self.uploading(5,100);
     });
     //进行中
@@ -100,9 +98,9 @@
     uploader.on("uploadsuccess", function (e, file, r) {
         if(r.hasOwnProperty('key')){
             self.uploading(100,100);
-            self.data.avatar.val = self.get_img_url(r.key,r);
+            self.data.wechat.val = self.get_img_url(r.key,r);
             setTimeout(function(){
-                self.data.avatar.progress.active = false;
+                self.data.wechat.progress.active = false;
             },1000);
         }
         else{
@@ -112,10 +110,11 @@
     //完成
     uploader.on('uploadcomplete', function (e, file, r) {
 
+
     });
     //错误
     uploader.on('uploaderror', function (e, file, xhr, status) {
         self.upload_error('上传失败');
     });
 
-}).call(define('profile'));
+}).call(define('social'));

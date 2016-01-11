@@ -15,14 +15,16 @@ abstract class Controller extends BaseController
     public function __construct()
     {
         $uid = $_ENV['uid'];
-        
+        /*SESSION中获取UID获得用户信息,传入VIEW*/
         if(!empty($uid)){
             $info = AccountModel::get_user_info_by_uid($uid);
         }
         $data = [
             'uid'       => $uid,
             'nickname'  => isset($info->nickname) ? $info->nickname : '',
-            'avatar'    => isset($info->avatar) ? avatar($info->avatar) : ''
+            'avatar'    => isset($info->avatar) ? avatar($info->avatar) : '',
+            //用户未登录,登录回调地址,过滤登录页;
+            'url' => !empty($uid) ? '/user/'.$uid : '/account/login'.((request()->path() != 'account/login' ? '?redirect='.urlencode(request()->url()) : ''))
         ];
         view()->share($data);
     }

@@ -9,30 +9,43 @@
         <div class="left">
             <a href="/user/profile">个人资料</a>
             <a class="active" href="/user/password">修改密码</a>
+            <a href="/user/social">社交资料</a>
         </div>
     </div>
 </div>
 <div id="user-content" class="user-content">
     <div id="password" class="container">
-        <div class="item-normal">
-            <p>旧密码:</p>
-            <input type="password" v-model="password.val">
-            <div class="error" v-bind:class="password.error ? 'active' : ''">
-                <p v-text="password.error"></p>
+        <div class="item">
+            <div class="wrap">
+                <p class="name">原密码:</p>
+                <div class="input">
+                    <input type="password" v-model="password.val">
+                    <div class="error" v-bind:class="password.error ? 'active' : ''">
+                        <p v-text="password.error"></p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="item-normal">
-            <p>新密码:</p>
-            <input type="password" v-model="newpassword.val">
-            <div class="error" v-bind:class="newpassword.error ? 'active' : ''">
-                <p v-text="newpassword.error"></p>
+        <div class="item">
+            <div class="wrap">
+                <p class="name">新密码:</p>
+                <div class="input">
+                    <input type="password" v-model="newpassword.val">
+                    <div class="error" v-bind:class="newpassword.error ? 'active' : ''">
+                        <p v-text="newpassword.error"></p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="item-normal">
-            <p>重复新密码:</p>
-            <input type="password" v-model="newpassword_re.val">
-            <div class="error" v-bind:class="newpassword_re.error ? 'active' : ''">
-                <p v-text="newpassword_re.error"></p>
+        <div class="item">
+            <div class="wrap">
+                <p class="name">重复新密码:</p>
+                <div class="input">
+                    <input type="password" v-model="newpassword_re.val">
+                    <div class="error" v-bind:class="newpassword_re.error ? 'active' : ''">
+                        <p v-text="newpassword_re.error"></p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="save">

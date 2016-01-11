@@ -33,17 +33,22 @@ Route::post('/account/captcha','Account\AccountController@captcha');
 Route::get('/account/find', 'Account\FindController@index');
 Route::post('/account/find', 'Account\FindController@post');
 
-//个人资料设置
-Route::get('/user/profile', 'User\ProfileController@index');
-Route::post('/user/profile', 'User\ProfileController@post');
+Route::group(['middleware' => 'User'], function () {
+    //个人资料设置
+    Route::get('/user/profile', 'User\ProfileController@index');
+    Route::post('/user/profile', 'User\ProfileController@post');
 //测试
-Route::get('/user/test', 'User\ProfileController@test');
+    Route::get('/user/test', 'User\ProfileController@test');
 //密码重置
-Route::get('/user/password', 'User\PasswordController@index');
-Route::post('/user/password', 'User\PasswordController@post');
+    Route::get('/user/password', 'User\PasswordController@index');
+    Route::post('/user/password', 'User\PasswordController@post');
+//社交资料
+    Route::get('/user/social', 'User\SocialController@index');
+    Route::post('/user/social', 'User\SocialController@post');
 //个人文章管理
-Route::get('/user/edit', 'User\EditController@index');
+    Route::get('/user/edit', 'User\EditController@index');
 //个人主页
+});
 Route::get('/user/{id}', 'User\IndexController@index');
 
 //数据导入

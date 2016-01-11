@@ -26,6 +26,16 @@ class UserModel extends Model
         $user->save();
         return true;
     }
+    public static function save_social($id, $wechat, $weibo, $email)
+    {
+        $user = UserModel::where('id',$id)->first();
+        $user->wechat = $wechat;
+        $user->weibo = $weibo;
+        $user->email = $email;
+        $user->update_time = date('Y-m-d H:i:s');
+        $user->save();
+        return true;
+    }
     public static function change_password($id, $password,$newpassword){
         $user = UserModel::where('id' ,$id)->first();
         if(AccountModel::encryption($user->salt,$password) != $user->password)return false;

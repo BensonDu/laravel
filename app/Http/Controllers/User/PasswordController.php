@@ -12,7 +12,6 @@ class PasswordController extends UserController
 
     public function index()
     {
-        if(empty($_ENV['uid'])) return redirect('/account/login?redirect='.urlencode($this->request->url()));
         return view('/user/password');
     }
     public function post()

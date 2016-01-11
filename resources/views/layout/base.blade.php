@@ -22,17 +22,10 @@
     @show
 </head>
 <body>
-@section('nav')
-<!--左栏全局导航start-->
+@section('nav')<!--左栏全局导航start-->
 <div id="nav-left" class="nav-left">
-
-@if(!empty($uid))
-<div class="login-sta login">
-    <a href="/user/{{$uid}}">
-@else
-<div class="login-sta">
-    <a href="/account/login{{'?redirect='.urlencode(request()->url())}}">
-@endif
+<div class="login-sta{{!empty($uid)?' login':''}}">
+    <a href="{{$url}}">
             <i></i>
             <img src="{{$avatar}}">
             <em>
@@ -57,7 +50,7 @@
         <a href="/user/profile">
             <i class="setting"></i><span>个人设置</span>
         </a>
-        <a href="/user/123123">
+        <a href="/user/10001716">
             <i class="people"></i><span>个人主页</span>
         </a>
     </div>

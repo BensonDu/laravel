@@ -9,16 +9,24 @@
 <div id="mid" class="user-mid">
     <div class="top">
         <div class="avatar"><img src="http://dn-acac.qbox.me/mobile/public/New_avatar.png"></div>
-        <h4>GOOD MORNING</h4>
-        <h2>凉凉钳</h2>
-        <h3>一句话介绍一下自己吧,让别人了解你有多撒逼</h3>
+        <h4>{{$profile['slogan']}}</h4>
+        <h2>{{$profile['nickname']}}</h2>
+        <h3>{{$profile['introduce']}}</h3>
         <div class="social">
-            <a class="weibo" href="#" title="微博"></a>
-            <a class="email" href="#" title="E-mail"></a>
+@if(!empty($profile['weibo']))
+            <a class="weibo" href="{{$profile['weibo']}}" target="_blank" title="微博"></a>
+@endif
+@if(!empty($profile['email']))
+            <a class="email" href="mailto:{{$profile['email']}}" title="E-mail"></a>
+@endif
+@if(!empty($profile['twitter']))
             <a class="twitter" href="#" title="twitter"></a>
-            <a class="weixin" href="#" title="微信">
-                <img src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2FFullSizeRender.jpg">
+@endif
+@if(!empty($profile['wechat']))
+            <a class="weixin" title="微信">
+                <img src="{{$profile['wechat']}}">
             </a>
+@endif
         </div>
     </div>
     <div class="mid">

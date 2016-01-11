@@ -13,7 +13,8 @@
             mail: /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/,
             qq: /^\d{5,10}$/,
             chinese_Unicode: /^[\u2E80-\u9FFF]+$/,
-            chinese_Name: /^[\u2E80-\u9FFF]{2,5}$/
+            chinese_Name: /^[\u2E80-\u9FFF]{2,5}$/,
+            weibo : /http:\/\/weibo.com\/\w.*/
         };
     }
 }).call(define('constant'));

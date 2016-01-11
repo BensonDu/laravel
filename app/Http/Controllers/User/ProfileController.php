@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Model\AccountModel;
 use App\Http\Model\UserModel;
 
 class ProfileController extends UserController
@@ -14,16 +13,13 @@ class ProfileController extends UserController
 
     public function index()
     {
-        $info = NULL;
-        if(!empty($_ENV['uid'])) $info = UserModel::get_user_info_by_id($_ENV['uid']);
-        if(is_null($info)) return redirect('/account/login?redirect='.urlencode($this->request->url()));
-        $data['profile'] = json_encode([
-                            'id'        => $info->id,
-                            'nickname'  => $info->nickname,
-                            'slogan'    => $info->slogan,
-                            'introduce' => $info->introduce,
-                            'avatar'    => avatar($info->avatar),
-                            'username'  => $info->username
+        $data['input'] = json_encode([
+                            'id'        => $this->info->id,
+                            'nickname'  => $this->info->nickname,
+                            'slogan'    => $this->info->slogan,
+                            'introduce' => $this->info->introduce,
+                            'avatar'    => avatar($this->info->avatar),
+                            'username'  => $this->info->username
                          ]);
         return view('/user/profile',$data);
     }
