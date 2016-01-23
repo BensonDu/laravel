@@ -14,7 +14,7 @@
         <a class="add" v-on:click="create"><em></em><span>撰写文章</span></a>
     </div>
     <div class="list">
-        <div class="wrap" v-for="(key,val) in list" track-by="$index">
+        <div class="wrap" v-for="(key,val) in list">
             <p class="range" v-text="key"></p>
             <div class="item article-list" v-for="article in val" v-bind:class="!!article.active ? 'active' : ''"  v-bind:data-id="article.id">
                 <div class="title" v-on:click="open(article.id)">
