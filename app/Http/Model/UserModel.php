@@ -22,7 +22,7 @@ class UserModel extends Model
         $user->nickname = $nickname;
         $user->slogan = $slogan;
         $user->introduce = $introduce;
-        $user->update_time = date('Y-m-d H:i:s');
+        $user->update_time = now();
         $user->save();
         return true;
     }
@@ -32,7 +32,7 @@ class UserModel extends Model
         $user->wechat = $wechat;
         $user->weibo = $weibo;
         $user->email = $email;
-        $user->update_time = date('Y-m-d H:i:s');
+        $user->update_time = now();
         $user->save();
         return true;
     }
@@ -43,7 +43,7 @@ class UserModel extends Model
         $new =AccountModel::encryption($salt,$newpassword);
         $user->salt = $salt;
         $user->password = $new;
-        $user->update_time = date('Y-m-d H:i:s');
+        $user->update_time = now();
         $user->save();
         return true;
     }

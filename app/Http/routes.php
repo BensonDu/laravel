@@ -37,18 +37,33 @@ Route::group(['middleware' => 'User'], function () {
     //个人资料设置
     Route::get('/user/profile', 'User\ProfileController@index');
     Route::post('/user/profile', 'User\ProfileController@post');
-//测试
+    //测试
     Route::get('/user/test', 'User\ProfileController@test');
-//密码重置
+    //密码重置
     Route::get('/user/password', 'User\PasswordController@index');
     Route::post('/user/password', 'User\PasswordController@post');
-//社交资料
+    //社交资料
     Route::get('/user/social', 'User\SocialController@index');
     Route::post('/user/social', 'User\SocialController@post');
-//个人文章管理
+    //个人文章管理
     Route::get('/user/edit', 'User\EditController@index');
-//个人主页
+    //保存文章
+    Route::post('/user/save', 'User\EditController@save');
+    //删除文章
+    Route::get('/user/article/delete', 'User\EditController@delete');
+    //获取文章信息
+    Route::get('/user/article', 'User\EditController@article');
+    //获取文章列表
+    Route::get('/user/article/list', 'User\EditController@article_list');
+    //发布个人主页
+    Route::post('/user/post', 'User\EditController@post');
+    Route::post('/user/post/cancel', 'User\EditController@cancel');
+    //投稿到站点
+    Route::post('/user/contribute', 'User\EditController@contribute');
+    //测试
+    Route::get('/user/test', 'User\EditController@test');
 });
+//个人主页
 Route::get('/user/{id}', 'User\IndexController@index');
 
 //数据导入

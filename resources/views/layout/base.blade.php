@@ -81,8 +81,8 @@
             <h5></h5>
         </div>
         <div class="btn-group">
-            <a href="/">返回首页</a>
-            <a class="call"></a>
+            <a class="vice">返回首页</a>
+            <a class="main"></a>
         </div>
     </div>
 </div>

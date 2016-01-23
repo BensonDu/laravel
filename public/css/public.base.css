@@ -164,7 +164,7 @@ body{
 .global-pop .box h5{
     display: inline-block;
     width: 100%;
-    line-height: 90px;
+    line-height: 50px;
     font-size: 28px;
     text-align: center;
     letter-spacing: 4px;
@@ -172,7 +172,7 @@ body{
 }
 .global-pop .box .img{
     width: 100%;
-    margin-top: 30px;
+    margin-top: 40px;
     text-align: center;
     overflow: hidden;
 }
@@ -180,7 +180,14 @@ body{
     display: inline-block;
     height: 80px;
     width: 80px;
-    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ferror-mark.png) no-repeat center;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fstop-hand.png) no-repeat center;
+    background-size: 70px;
+}
+.global-pop.confirm .box .img em{
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fquestion-red.png) no-repeat center;
     background-size: 70px;
 }
 .global-pop.warning .box .img em{
@@ -212,13 +219,18 @@ body{
     width: 50%;
     text-align: center;
     color: #fff;
-    background: #666;
     font-size: 14px;
     float: left;
     cursor: pointer;
     transition: background .4s;
     -moz-transition: background .4s; /* Firefox 4 */
     -webkit-transition: background .4s; /* Safari 和 Chrome */
+}
+.global-pop .box .btn-group .vice{
+    background: #999;
+}
+.global-pop .box .btn-group .main{
+    background: #666;
 }
 .global-pop .box .btn-group a:nth-child(1){
     border-right: 1px solid #fff;
@@ -227,10 +239,19 @@ body{
     border-left: 1px solid #fff;
 }
 .global-pop .box .btn-group a:hover{
-    background: #999;
+    background: #757575;
 }
 .global-pop.active {
     visibility: visible;
     opacity: 1;
+}
+.global-pop.one .box .btn-group a{
+    border: none;
+}
+.global-pop.one .box .btn-group .vice{
+    display: none;
+}
+.global-pop.one .box .btn-group .main{
+    width: 100%;
 }
 /*弹窗end*/

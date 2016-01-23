@@ -11,154 +11,77 @@
 <div id="mid" class="mid">
     <div class="top">
         <h3>全部文章</h3>
-        <a href="#" class="add"><em></em><span>撰写文章</span></a>
+        <a class="add" v-on:click="create"><em></em><span>撰写文章</span></a>
     </div>
     <div class="list">
-        <p class="range">今天</p>
-        <div class="item">
-            <div class="title">
-                <a href="#">黑色星期五网购狂欢,苹果用户最富安卓最穷</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta">未发布</span></p>
-                <a href="#">删除</a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="title">
-                <a href="#">黑色星期五网购狂欢,苹果用户最富安卓最穷</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta publish">已发布</span></p>
-                <a href="#">删除</a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="title">
-                <a href="#">黑色星期五网购狂欢,苹果用户最富安卓最穷</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta">未发布</span></p>
-                <a href="#">删除</a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="title">
-                <a href="#">黑色星期五网购狂欢,苹果用户最富安卓最穷</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta publish">已发布</span></p>
-                <a href="#">删除</a>
-            </div>
-        </div>
-        <p class="range">一周之内</p>
-        <div class="item">
-            <div class="title">
-                <a href="#">美感恩节黑色星期五网购额达 45 亿，移动端占 34%</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta">未发布</span></p>
-                <a href="#">删除</a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="title">
-                <a href="#">黑色星期五网购狂欢,苹果用户最富安卓最穷</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta">未发布</span></p>
-                <a href="#">删除</a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="title">
-                <a href="#">专访太库科技 CEO 黄海燕：中国孵化器如何迅速占领世界？</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta">未发布</span></p>
-                <a href="#">删除</a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="title">
-                <a href="#">黑色星期五网购狂欢,苹果用户最富安卓最穷</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta">未发布</span></p>
-                <a href="#">删除</a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="title">
-                <a href="#">专访太库科技 CEO 黄海燕：中国孵化器如何迅速占领世界？</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta">未发布</span></p>
-                <a href="#">删除</a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="title">
-                <a href="#">黑色星期五网购狂欢,苹果用户最富安卓最穷</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta">未发布</span></p>
-                <a href="#">删除</a>
-            </div>
-        </div>
-        <div class="item">
-            <div class="title">
-                <a href="#">专访太库科技 CEO 黄海燕：中国孵化器如何迅速占领世界？</a>
-            </div>
-            <div class="handle">
-                <p><span class="last">最后修改于: 12月21日</span> <span class="sta">未发布</span></p>
-                <a href="#">删除</a>
+        <div class="wrap" v-for="(key,val) in list" track-by="$index">
+            <p class="range" v-text="key"></p>
+            <div class="item article-list" v-for="article in val" v-bind:class="!!article.active ? 'active' : ''"  v-bind:data-id="article.id">
+                <div class="title" v-on:click="open(article.id)">
+                    <a v-text="article.title"></a>
+                </div>
+                <div class="handle">
+                    <p><span class="last" v-text="article.update_time"></span> <span class="sta" v-bind:class="article.post_status==2 ? 'publish' : ''"><em class="unpub">未发布</em><em class="pub">已发布</em></span></p>
+                    <a v-on:click="del(article.id)">删除</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <!--文章列表end-->
-<!--文章操作start-->
-<div id="article-handle" class="article-handle">
-    <div class="left">
-        <p>最后修改时间: 11月21日 21:23:31</p>
-    </div>
-    <div class="right">
-        <a class="save" href="#">保存</a>
-        <a class="personal" href="#">发布到个人主页</a>
-        <a class="contribute" href="#">投稿</a>
-    </div>
-</div>
-<div class="site-list">
-    <h3>投稿</h3>
-    <div class="list">
-        <a class="active" href="#"><em></em><span>TECH2IPO</span></a>
-        <a href="#"><em></em><span>虎嗅网</span></a>
-    </div>
-    <a class="confirm" href="#">确定投稿</a>
-    <a class="cancle" href="#">取消</a>
-</div>
-<!--文章操作end-->
+
 <!--主体部分start-->
 <div id="content" class="content">
-    <div class="container">
+
+    <div id="editor-sta" class="editor-sta" v-bind:class="sta">
+        <div class="btn-group">
+            <a class="create" v-on:click="create"><em></em><span>新建文章</span></a>
+            <a class="loading"><img src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fpreload-writing.gif"></a>
+        </div>
+    </div>
+
+    <!--文章操作start-->
+    <div id="article-handle" class="article-handle">
+        <div class="left">
+            <p><span>最后修改时间:</span> <span v-text="lastmodify"></span></p>
+        </div>
+        <div class="right">
+            <a class="save" v-bind:class="handle_sta.save" v-on:click="save"><em></em><p>保存</p></a>
+            <a class="personal" v-bind:class="handle_sta.post" v-on:click="post"><em></em><p v-text="ispost ? '取消发布到主页' :'发布到个人主页'"></p></a>
+            <a class="contribute" v-bind:class="handle_sta.contribute" v-on:click="contribute"><em></em><p>投稿</p></a>
+        </div>
+        <div class="site-list" v-bind:class="site_list.display ? 'active' : ''">
+            <h3>投稿</h3>
+            <div class="list">
+                <a v-for="site in site_list.items" v-bind:class="site.active ? 'active' : ''" v-on:click="select($index)" track-by="$index"><em></em><span v-text="site.name"></span></a>
+                <a></a>
+                <a></a>
+            </div>
+            <a class="confirm pub-background-transition" v-on:click="confirm_contribute" v-bind:class="site_list.confirm ? 'active' : ''">确定投稿</a>
+            <a class="cancle" v-on:click="select_cancle">取消</a>
+        </div>
+    </div>
+    <!--文章操作end-->
+
+    <!--内容部分start-->
+    <div id="article-content" class="container">
 
         <div id="summary-switch" class="summary-container">
             <div  class="switch">
-                <a href="#" class="summary active"><em></em></a>
-                <a href="#" class="image"><em></em></a>
-                <a href="#" class="tag"><em></em></a>
+                <a class="summary active"><em></em></a>
+                <a class="image"><em></em></a>
+                <a class="tag"><em></em></a>
             </div>
             <div class="modules">
                 <div class="summary">
-                    <textarea maxlength="100" placeholder="摘要"></textarea>
+                    <textarea v-model="summary" v-on:keydown.tab.prevent="default_keydown" maxlength="100" placeholder="摘要"></textarea>
                 </div>
                 <div class="image">
                     <div class="preview">
-                        <div class="img-container">
-                            <img src="http://dn-t2ipo.qbox.me/v3/public/img-click-upload-dark.png">
-                            <span><p>98%</p></span>
-                            <input type="file">
+                        <div class="img-container" v-bind:class="image.progress.active ? 'loading' : ''">
+                            <img v-bind:src="!image.val ? 'http://dn-t2ipo.qbox.me/v3/public/img-click-upload-dark.png' : image.val">
+                            <span><p v-text="image.progress.percent"></p></span>
+                            <input type="file" v-on:change="upload" accept="image/*" v-el:image>
                         </div>
                     </div>
                     <div class="desc">
@@ -166,33 +89,33 @@
                     </div>
                 </div>
                 <div class="tag">
-                    <span>互联网金融<em>×</em></span>
-                    <span>O2O<em>×</em></span>
-                    <input type="text" placeholder="输入标签">
+                    <span v-for="tag in tag.items" track-by="$index"><p v-text="tag"></p><em v-on:click = tag_del>×</em></span>
+                    <input v-model = "tag.input" v-on:keydown="tag_keydown($event)"  type="text" placeholder="输入标签(5个以内)">
                 </div>
             </div>
         </div>
 
         <div class="title">
-            <input type="text" maxlength="40" placeholder="标题">
+            <input type="text" v-model="title" maxlength="40" placeholder="标题" v-el:title>
         </div>
 
         <div id="content-editor" class="editor medium">
-
         </div>
 
     </div>
+    <!--内容部分end-->
 </div>
 <!--主体部分end-->
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.ui.widget.js"></script>
-<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.iframe-transport.js"></script>
-<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.fileupload.js"></script>
+@section('script')@parent<script src="http://dn-acac.qbox.me/mobile/public/image_upload.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fhandlebars.runtime.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery-sortable-min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.center.min.js"></script>
-<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fmedium-editor-insert-plugin.min.js"></script>
+<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fmedium-plugin-angelcrunch.js"></script>
+{{--<script src="/js/medium-plugin.js"></script>--}}
+<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.js"></script>
+<script>var default_data = {list : JSON.parse('{!! $list !!}')}</script>
 <script src="/js/user.edit.js"></script>
 @stop

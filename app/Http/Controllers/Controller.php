@@ -32,7 +32,7 @@ abstract class Controller extends BaseController
     public static function ApiOut($code = 10001, $msg='', $data=[])
     {
         $ret['code'] = $code;
-        if(is_array($msg)){
+        if(is_array($msg) || is_object($msg)){
             $ret['data'] = $msg;
             $ret['msg'] = '';
         }

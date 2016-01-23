@@ -24,6 +24,7 @@
     background: #f5f5f5;
     border: 1px solid #eeeeee;
     padding: 6px 10px;
+    z-index: 1;
 }
 .mid .top h3{
     display: inline-block;
@@ -41,6 +42,7 @@
     height: 100%;
     background: #424242;
     padding: 0 10px 0 5px;
+    cursor: pointer;
 }
 .mid .top a em{
     display: inline-block;
@@ -62,20 +64,24 @@
     background: #000;
 }
 .mid .list{
-    padding-top: 48px;
+    padding-top: 40px;
     height: 100%;
     overflow: auto;
 }
 .mid .list::-webkit-scrollbar-track-piece{background-color:#fff;}
 .mid .list::-webkit-scrollbar{width:3px;}
-.mid .list::-webkit-scrollbar-thumb{background:#fff;}
+.mid .list::-webkit-scrollbar-thumb{background:#ccc;}
 .mid .list:hover::-webkit-scrollbar-thumb{background:#999;}
 .mid .list .range{
-    height: 26px;
+    display: inline-block;
+    height: 22px;
     background: #fafafa;
     color: #7f7f7f;
-    padding: 5px 10px 3px;
+    padding: 4px 10px;
     font-size: 12px;
+}
+.mid .list .wrap{
+    margin-bottom: -8px;
 }
 .mid .list .item{
     height: 100px;
@@ -83,19 +89,23 @@
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
     margin-bottom: 8px;
+    animation: fadeIn 0.7s linear 0s normal forwards;
+    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
+    -moz-animation: fadeIn 0.7s linear 0s normal forwards;
+}
+.mid .list .item:hover,
+.mid .list .item.active{
+    background: #f5f5f5;
 }
 .mid .list .item .title{
     height: 70px;
     padding: 15px 10px;
+    cursor: pointer;
 }
 .mid .list .item .title a{
     display: inline-block;
     font-size: 15px;
     font-weight: 900;
-}
-.mid .list .item .title a.active,
-.mid .list .item .title a:hover{
-    color: #757575;
 }
 .mid .list .item .handle{
     height: 30px;
@@ -116,8 +126,24 @@
 .mid .list .item .handle p span.sta{
     margin-left: 5px;
 }
-.mid .list .item .handle p span.sta.publish{
+.mid .list .item .handle p span em{
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 100;
+    color: #bdbdbd;
+}
+.mid .list .item .handle p span em.unpub{
+    display: inline-block;
+}
+.mid .list .item .handle p span em.pub{
+    display: none;
     color: #81c683;
+}
+.mid .list .item .handle p span.publish em.unpub{
+    display: none;
+}
+.mid .list .item .handle p span.publish em.pub{
+    display: inline-block;
 }
 .mid .list .item .handle a{
     display: inline-block;
@@ -126,6 +152,7 @@
     font-size: 12px;
     font-weight: 100;
     color: #bdbdbd;
+    cursor: pointer;
 }
 .mid .list .item .handle a:hover{
     color: #000;
@@ -140,6 +167,7 @@
     height: 40px;
     background: #f5f5f5;
     padding-left: 340px;
+    padding-right: 10px;
     min-width: 550px;
     z-index: 3;
     transition: padding-left .4s;
@@ -154,9 +182,13 @@
 .article-handle .left p{
     display: inline-block;
     height: 100%;
-    line-height: 40px;
+}
+.article-handle .left p span{
+    display: inline-block;
+    vertical-align: top;
     font-size: 12px;
     color: #bdbdbd;
+    line-height: 40px;
 }
 .article-handle .right{
     float: right;
@@ -167,15 +199,43 @@
     display: inline-block;
     height: 100%;
     border-radius: 3px;
-    line-height: 26px;
     padding: 2px 20px;
+    vertical-align: top;
+    cursor: pointer;
+    transition: background-color .4s;
+    -moz-transition: background-color .4s;
+    -webkit-transition: background-color .4s;
+}
+.article-handle .right a p{
+    display: inline-block;
+    line-height: 25px;
     font-size: 12px;
     vertical-align: top;
     font-weight: 100;
     color: #fff;
-    transition: background-color .4s;
-    -moz-transition: background-color .4s;
-    -webkit-transition: background-color .4s;
+}
+.article-handle .right a.loading em{
+    display: inline-block;
+    height: 25px;
+    width: 100%;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fslim-circle.png) no-repeat;
+    background-size: 14px;
+    background-position: 50% 5px;
+    animation: rotating 2s infinite linear;
+    -webkit-animation: rotating 2s infinite linear;
+    -moz-animation: rotating 2s infinite linear;
+}
+.article-handle .right a.success em{
+    display: inline-block;
+    height: 25px;
+    width: 100%;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fmark-white.png) no-repeat;
+    background-size: 14px;
+    background-position: 50% 5px;
+}
+.article-handle .right a.success p,
+.article-handle .right a.loading p{
+    visibility: hidden;
 }
 .article-handle .right a.personal,
 .article-handle .right a.save{
@@ -193,14 +253,15 @@
 }
 .site-list{
     position: fixed;
-    width: 200px;
+    width: 170px;
     right: 5px;
     top: 55px;
     border-radius: 3px;
-    padding: 10px 15px 0;
+    padding: 8px 10px 0;
     background: #f5f5f5;
     z-index: 4;
     box-shadow: 0 0 1px 0 #999;
+    display: none;
 }
 .site-list.active{
     display: block;
@@ -222,8 +283,8 @@
     width: 100%;
     text-align: center;
     height: 30px;
-    line-height: 30px;
-    font-size: 16px;
+    line-height: 24px;
+    font-size: 14px;
     font-weight: 900;
 }
 .site-list .list{
@@ -241,17 +302,19 @@
     height: 35px;
     background: #fff;
     width: 100%;
-    padding: 10px;
+    padding: 10px 14px;
     font-size: 14px;
-    margin-bottom: 3px;
+    margin-bottom: 1px;
+    cursor: pointer;
 }
 .site-list .list a span{
     display: inline-block;
     height: 100%;
     line-height: 16px;
     vertical-align: top;
-    font-size: 14px;
-    margin-left: 6px;
+    font-size: 12px;
+    font-weight: 900;
+    margin-left: 10px;
 }
 .site-list .list a em{
     display: inline-block;
@@ -273,12 +336,17 @@
     width: 100%;
     height: 35px;
     font-size: 12px;
-    background: #ff4081;
+    background: #999;
     border-radius: 3px;
     line-height: 35px;
     margin-top: 10px;
+    cursor: not-allowed;
 }
-.site-list .confirm:hover{
+.site-list .confirm.active{
+    background: #ff4081;
+    cursor: pointer;
+}
+.site-list .confirm.active:hover{
     background: #CC1C58;
 }
 .site-list .cancle{
@@ -286,8 +354,9 @@
     display: inline-block;
     font-size: 12px;
     width: 100%;
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 32px;
+    cursor: pointer;
 }
 .site-list .cancle:hover{
     text-decoration: underline;
@@ -295,11 +364,15 @@
 /*文章操作end*/
 /*主体部分start*/
 .content{
-    position: relative;
+    position: absolute;
     width: 100%;
-    padding-left: 310px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-left: 340px;
     z-index: 1;
-    overflow: hidden;
+    overflow: auto;
+    overflow-y: scroll;
     transition: padding-left .4s;
     -moz-transition: padding-left .4s; /* Firefox 4 */
     -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
@@ -409,12 +482,15 @@
 .content .summary-container .modules .tag span{
     display: inline-block;
     float: left;
-    font-size: 14px;
-    line-height: 20px;
     border-radius: 2px;
     margin-right: 5px;
     padding: 4px 4px 3px 10px;
     background-color: #999;
+}
+.content .summary-container .modules .tag span p{
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
     color: #fff;
 }
 .content .summary-container .modules .tag span em{
@@ -435,7 +511,7 @@
     font-size: 15px;
     line-height: 20px;
     font-weight: 500;
-    width: 150px;
+    width: 500px;
     height: 27px;
     border: none;
     margin-left: 3px;
@@ -480,7 +556,6 @@
 }
 .content .summary-container .modules .image .preview .img-container span{
     position: absolute;
-    display: inline-block;
     width: 100%;
     height: 100%;
     z-index: 2;
@@ -495,7 +570,10 @@
     color: #000;
     font-weight: 700;
     text-align: right;
-    padding: 25px 30px 0 0;
+    padding: 23px 30px 0 0;
+}
+.content .summary-container .modules .image .preview .img-container.loading span{
+    display: inline-block;
 }
 .content .summary-container .modules .image .desc{
     width: 120px;
@@ -530,13 +608,126 @@
 .content .container .title input:focus{
     outline: none;
 }
-
-
-
-
-
 .content .editor{
     min-height: 200px;
     width: 100%;
 }
+.content .editor-sta{
+    display: none;
+    position: fixed;
+    padding: inherit;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    opacity: 1;
+    background: rgba(255,255,255,.98);
+}
+.content .editor-sta .btn-group{
+    width: 100%;
+    margin-top: 30%;
+    text-align: center;
+}
+.content .editor-sta .btn-group a.create{
+    display: none;
+    height: 40px;
+    border: 1px dashed #000;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 3px;
+    padding: 0 20px 0 7px;
+}
+.content .editor-sta .btn-group a.create em{
+    display: inline-block;
+    height: 38px;
+    width: 40px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fadd-new-333.png) no-repeat center;
+    background-size: 17px;
+    transition: transform .2s;
+    -moz-transition: -moz-transform .2s; /* Firefox 4 */
+    -webkit-transition: -webkit-transform .2s; /* Safari 和 Chrome */
+    -ms-transition: -webkit-transform .2s; /* IE9 */
+}
+.content .editor-sta .btn-group a.create span{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    font-weight: 100;
+    line-height: 40px;
+    color: #999;
+}
+.content .editor-sta .btn-group a.create:hover em{
+    transform:rotate(90deg);
+    -ms-transform:rotate(90deg); 	/* IE 9 */
+    -moz-transform:rotate(90deg); 	/* Firefox */
+    -webkit-transform:rotate(90deg); /* Safari 和 Chrome */
+}
+.content .editor-sta .btn-group a.loading{
+    display: none;
+    height: 60px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+    padding: 0 20px 0 7px;
+}
+.content .editor-sta .btn-group a.loading img{
+    display: inline-block;
+    height: 100%;
+    width: auto;
+}
+.content .editor-sta.create,
+.content .editor-sta.loading{
+    display: block;
+}
+.content .editor-sta.loading .btn-group .loading,
+.content .editor-sta.create .btn-group .create{
+    display: inline-block;
+}
 /*主体部分end*/
+@-webkit-keyframes rotating {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+@keyframes rotating {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes rotating {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+@-ms-keyframes rotating {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+/*列表fadein keyframes*/
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

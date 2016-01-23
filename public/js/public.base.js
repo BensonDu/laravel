@@ -21,10 +21,19 @@
 
 (function(){
     var self = this;
+
     this.post = function(url,call,data,error){
+        self.base(url,call,data,error,'post');
+    };
+
+    this.get = function(url,call,data,error){
+        self.base(url,call,data,error,'get');
+    };
+
+    this.base = function(url,call,data,error,type){
         $.ajax({
             url:url,
-            type:'post',
+            type:type,
             cache:false,
             data:data,
             dataType:'json',
@@ -47,9 +56,12 @@
                 if(typeof  error == 'function'){
                     error(e);
                 }
+                else{
+                    pop.error('服务器错误','确定').one();
+                }
             }
         });
-    };
+    }
 }).call(define('request'));
 
 (function(){
@@ -85,31 +97,81 @@
 }).call(define('input'));
 
 (function(){
+    var self = this;
+    this.now = function(){
+        var tt =new Date(),
+            full = function(t){
+                return t < 9 ? '0'+ t : t;
+            },
+            m = tt.getMonth()+ 1,
+            d = tt.getDate(),
+            h = tt.getHours(),
+            i = tt.getMinutes(),
+            s = tt.getSeconds(),
+            yy = tt.getFullYear(),
+            mm = full(m),
+            dd = full(d),
+            hh = full(h),
+            ii = full(i),
+            ss = full(s);
+        return yy+'-'+mm+'-'+dd+' '+hh+':'+ii+':'+ss;
+    };
+}).call(define('helper'));
+
+(function(){
     var self = this,
         $pop   = $('#global-pop'),
         $title = $pop.find('h5'),
-        $btn   = $pop.find('.call');
+        $vice = $pop.find('.vice'),
+        $btn   = $pop.find('.main');
 
+    this.one = function(){
+       $pop.addClass('one');
+        return this;
+    };
     this.error = function(msg,btn,call){
-        self.base('error',msg,btn,call);
+        return self.base('error',msg,btn,call);
     };
     this.success = function(msg,btn,call){
-        self.base('success',msg,btn,call);
+        return self.base('success',msg,btn,call);
     };
     this.warning = function(msg,btn,call){
-        self.base('warning',msg,btn,call);
+        return self.base('warning',msg,btn,call);
     };
-    this.base = function(type,msg,btn,call){
-        $pop.removeClass('error').removeClass('warning').removeClass('success').addClass('active').addClass(type);
+    this.confirm = function(msg,btn,call){
+        return self.base('confirm',msg,btn,call,'取消',function(){});
+    };
+    this.base = function(type,msg,btn,call,vice,vice_call){
+        $pop.removeClass('error warning success one confirm').addClass('active '+type);
         $title.html(msg);
         $btn.html(btn);
-        if(typeof call == 'function')self.click_hook = call;
+        if(typeof call == 'function'){
+            self.click_hook = call;
+        }
+        else{
+            self.click_hook = function(){}
+        }
+        $vice.html(!!vice ? vice : '返回首页');
+        if(typeof vice_call == 'function'){
+            self.vice_hook = vice_call;
+        }
+        else{
+            self.vice_hook = function(){
+                location.href = '/';
+            }
+        }
+        return this;
     };
     this.click_hook = function(){};
     this.btn = function(){
         $pop.removeClass('active');
         self.click_hook();
     };
+    this.vice = function(){
+        $pop.removeClass('active');
+        self.vice_hook();
+    };
+    this.vice_event  = $vice.click(self.vice);
     this.click_event = $btn.click(self.btn);
 
 }).call(define('pop'));
