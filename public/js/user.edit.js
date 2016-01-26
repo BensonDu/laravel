@@ -195,38 +195,31 @@
         if(info.hasOwnProperty("ispost"))self.vue.ispost = info.ispost;
         if(info.hasOwnProperty("id"))self.article_id = info.id;
     };
-    //新建文章
+    //新建文章 产生垃圾数据
     this.create_article = function(){
-        controller_sta.loading();
-        controller_handle.set_article({
-            title : '无标题',
-            summary : '',
-            image : '',
-            tags : [],
-            content : '',
-            lastmodify : helper.now(),
-            ispost : 0,
-            id : 0
-        });
-        request.post('/user/save',function(ret){
-            if(ret.hasOwnProperty('code') && ret.code == 0){
-                self.vue.lastmodify = ret.data.time;
-                self.article_id = ret.data.id;
-                controller_list.update_list(function(){
-                    controller_list.active_article(ret.data.id);
-                });
-            }
-            controller_sta.loading(1);
-        },self.get_editing_article());
-    };
-    //测试填充文章信息
-    this.test = function(){
-        self.set_article({
-            title : "测试文章",
-            summary : "还是测试摘要",
-            image : "http://dn-xswe.qbox.me/13309516?imageMogr2/crop/!1589x1589a0a0/auto-orient/thumbnail/480x",
-            content : "<p class=\\\"\\\">写内容</p><blockquote>写内容</blockquote>",
-            tags : ['拉美','这个呢']
+        controller_list.check_article(function(){
+            controller_sta.loading();
+            controller_handle.set_article({
+                title : '无标题',
+                summary : '',
+                image : '',
+                tags : [],
+                content : '',
+                lastmodify : helper.now(),
+                ispost : 0,
+                id : 0
+            });
+            controller_save.start();
+            request.post('/user/save',function(ret){
+                if(ret.hasOwnProperty('code') && ret.code == 0){
+                    self.vue.lastmodify = ret.data.time;
+                    self.article_id = ret.data.id;
+                    controller_list.update_list(function(){
+                        controller_list.active_article(ret.data.id);
+                    });
+                }
+                controller_sta.loading(1);
+            },self.get_editing_article());
         });
     };
     //检查文章
@@ -394,36 +387,38 @@
 (function(){
     var self = this;
 
-    //所有已保存,可以关闭
-    this.can_close = true;
+    this.cur_article = 0;
     //打开文章
     this.open_article = function(id){
-        controller_sta.loading();
-        self.active_article(id);
-        request.get('/user/article',function(ret){
-            var data;
-            if(ret.hasOwnProperty('code') && ret.code == 0){
-                data = ret.data;
-                controller_handle.set_article({
-                    title : data.title,
-                    summary : data.summary,
-                    image : data.image,
-                    tags : data.tags,
-                    id : data.id,
-                    ispost : data.post_status == 2,
-                    content : data.content,
-                    lastmodify : data.update_time
-                });
-            }
-            else{
-                pop.error('请求数据出错','确定').one();
-            }
-            controller_sta.loading(1);
-
-        },{id:id || ''})
+        self.check_article(function(){
+            controller_sta.loading();
+            self.active_article(id);
+            request.get('/user/article',function(ret){
+                var data;
+                if(ret.hasOwnProperty('code') && ret.code == 0){
+                    data = ret.data;
+                    controller_handle.set_article({
+                        title : data.title,
+                        summary : data.summary,
+                        image : data.image,
+                        tags : data.tags,
+                        id : data.id,
+                        ispost : data.post_status == 2,
+                        content : data.content,
+                        lastmodify : data.update_time
+                    });
+                }
+                else{
+                    pop.error('请求数据出错','确定').one();
+                }
+                controller_save.start();
+                controller_sta.loading(1);
+            },{id:id || ''});
+        });
     };
     //列表选中状态
     this.active_article = function(id){
+        self.cur_article = id;
         setTimeout(function(){
             $('.article-list').removeClass('active').each(function(){
                 if($(this).data('id')==id){
@@ -434,16 +429,31 @@
     };
     //删除文章
     this.del_article = function(id){
-        pop.confirm('确认删除 ?','确定',function(){
-            request.get('/user/article/delete', function(ret){
-                if(ret.hasOwnProperty('code') && ret.code == 0){
-                    self.update_list(self.open_first);
-                }
-                else{
-                    pop.error(ret.msg,'确定');
-                }
-            },{id : id});
-        });
+        var is_self = self.cur_article == id;
+        self.check_article(function(){
+            pop.confirm('确认删除 ?','确定',function(){
+                if(is_self)controller_save.end();
+                request.get('/user/article/delete', function(ret){
+                    if(ret.hasOwnProperty('code') && ret.code == 0){
+                        self.update_list(self.open_first);
+                    }
+                    else{
+                        pop.error(ret.msg,'确定');
+                    }
+                },{id : id});
+            });
+        },is_self);
+    };
+    //检查文章修改是否保存
+    this.check_article = function(fun,bypass){
+        var con = false;
+        if(typeof bypass != 'undefined')con = bypass;
+        if(controller_save.check() || con){
+            fun();
+        }
+        else{
+            pop.confirm('当前文章未保存','放弃修改', fun,'返回');
+        }
     };
     //打开第一个,列表为空,打开新建文章遮罩
     this.open_first = function(){
@@ -461,16 +471,20 @@
     this.update_list = function(call){
       request.get('/user/article/list', function(ret){
           if(ret.hasOwnProperty('code') && ret.code == 0 ){
-              self.vue.list = ret.data;
+              self.fill_list(ret.data);
               if(typeof call == 'function') call();
           }
       });
+    };
+    //填充列表,缓存
+    this.fill_list = function(list){
+        self.vue.list = list;
     };
     //VUE Model
     this.model = {
         el : '#mid',
         data : {
-            list : default_data.list
+            list : []
         },
         methods : {
             open : function(id){
@@ -485,6 +499,8 @@
         }
     };
     this.vue = new Vue(self.model);
+    //默认数据渲染列表
+    self.fill_list(default_data.list);
 }).call(define('controller_list'));
 //文章编辑器状态控制
 (function(){
@@ -518,17 +534,43 @@
         }
     }
 }).call(define('controller_sta'));
-
+//是否文章变动未保存
 (function(){
-    var self = this;
+    var self = this,
+        can = true,
+        cache = {};
 
-
-    controller_list.open_first();
+    this.get_cur = function(){
+        var start = controller_handle.get_editing_article(),tag;
+        return start.title+start.summary+start.image+start.tags+start.content;
+    };
+    //已打开文章,缓存起始状态
+    this.start = function(){
+        can = false;
+        cache = self.get_cur();
+    };
+    //终止检查,文章被删除
+    this.end = function(){
+        can = true;
+    };
+    //是否已经打开文章,且文章未变动
+    this.check = function(){
+        return can || cache == self.get_cur();
+    };
 
     // 关闭窗口时弹出确认提示
     dom.w.bind('beforeunload', function(){
-        if(!controller_list.can_close)
+        if(!self.check())
             return '当前文章未保存,确定关闭?';
     });
+
+}).call(define('controller_save'));
+//页面起始
+(function(){
+    var self = this;
+
+    (function(r){
+        return r == '' ? controller_list.open_first() : (r == 'create' ? controller_handle.create_article() : controller_list.open_article(r))
+    })(default_data.route);
 
 }).call(define('controller_route'));

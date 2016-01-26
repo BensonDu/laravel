@@ -47,6 +47,8 @@ Route::group(['middleware' => 'User'], function () {
     Route::post('/user/social', 'User\SocialController@post');
     //个人文章管理
     Route::get('/user/edit', 'User\EditController@index');
+    Route::get('/user/edit/{id}', 'User\EditController@open');
+    Route::get('/user/edit/create', 'User\EditController@create');
     //保存文章
     Route::post('/user/save', 'User\EditController@save');
     //删除文章

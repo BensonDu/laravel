@@ -13,15 +13,52 @@ use App\Http\Model\SiteModel;
 
 class EditController extends UserController
 {
+    private static $route_session_key = 'user_edit_route';
 
     public function __construct(){
         parent::__construct();
     }
-
+    /*
+    |--------------------------------------------------------------------------
+    | 用户文章管理中心首页
+    |--------------------------------------------------------------------------
+    |
+    */
     public function index(){
+        $route = session(self::$route_session_key);
+        session()->forget(self::$route_session_key);
         $list = $this->sort_article_list();
-        return view('/user/edit',['list'=>json_encode($list)]);
+        return view('/user/edit',['list'=>json_encode($list),'route'=>$route]);
     }
+    /*
+    |--------------------------------------------------------------------------
+    | 用户文章管理中心默认打开文章
+    |--------------------------------------------------------------------------
+    | 检查文章ID是否存在,存在写入route session 文章ID
+    | 并重定向到管理中心首页
+    */
+    public function open($id){
+        if(!empty($id) && ArticleUserModel::own_article($_ENV['uid'],$id))session([self::$route_session_key=>$id]);
+        return redirect('/user/edit');
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 用户文章管理中心默认创建文章
+    |--------------------------------------------------------------------------
+    | 写入route session  create
+    | 并重定向到管理中心首页
+    */
+    public function create(){
+        session([self::$route_session_key=>'create']);
+        return redirect('/user/edit');
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取文章信息 API
+    |--------------------------------------------------------------------------
+    | @param  string $article_id
+    |
+    */
     public function article(){
         $article_id = $this->request->input('id');
         $user_id = $_ENV['uid'];
@@ -40,10 +77,22 @@ class EditController extends UserController
         }
         return self::ApiOut(40004,'Not found');
     }
+    /*
+    |--------------------------------------------------------------------------
+    | 用户文章列表 API
+    |--------------------------------------------------------------------------
+    |
+    */
     public function article_list(){
         $list = $this->sort_article_list();
         return self::ApiOut(0,$list);
     }
+    /*
+    |--------------------------------------------------------------------------
+    | 删除文章 API
+    |--------------------------------------------------------------------------
+    | @param  string $article_id
+    */
     public function delete(){
         $article_id = $this->request->input('id');
         if(empty($article_id)){
@@ -57,10 +106,12 @@ class EditController extends UserController
             return self::ApiOut(10001,'删除失败');
         }
     }
-    public function test(){
-        $list = $this->sort_article_list();
-        return $list;
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取文章列表方法
+    |--------------------------------------------------------------------------
+    |
+    */
     private function sort_article_list(){
         $list = ArticleUserModel::get_article($_ENV['uid'],['id','title','post_status','update_time']);
         $data = [];
@@ -73,6 +124,17 @@ class EditController extends UserController
         }
         return $data;
     }
+    /*
+    |--------------------------------------------------------------------------
+    | 保存文章 API
+    |--------------------------------------------------------------------------
+    | @param  string $article_id
+    | @param  string $title
+    | @param  string $summary
+    | @param  string $content
+    | @param  string $image
+    | @param  json $tags
+    */
     public function save(){
         $article_id = $this->request->input('id');
         $title      = $this->request->input('title');
@@ -113,7 +175,17 @@ class EditController extends UserController
             }
         }
     }
-
+    /*
+    |--------------------------------------------------------------------------
+    | 保存并发布文章 API
+    |--------------------------------------------------------------------------
+    | @param  string $article_id
+    | @param  string $title
+    | @param  string $summary
+    | @param  string $content
+    | @param  string $image
+    | @param  json $tags
+    */
     public function post(){
         $article_id = $this->request->input('id');
         $title      = $this->request->input('title');
@@ -155,7 +227,12 @@ class EditController extends UserController
         }
 
     }
-
+    /*
+    |--------------------------------------------------------------------------
+    | 取消发布 API
+    |--------------------------------------------------------------------------
+    |
+    */
     public function cancel(){
         $article_id = $this->request->input('id');
         if(empty($article_id)){
@@ -173,7 +250,18 @@ class EditController extends UserController
         }
 
     }
-
+    /*
+    |--------------------------------------------------------------------------
+    | 保存并投稿文章 API
+    |--------------------------------------------------------------------------
+    | @param  string $article_id
+    | @param  string $title
+    | @param  string $summary
+    | @param  string $content
+    | @param  string $image
+    | @param  json $tags
+    | @param  json $sites 投稿到的站点列表
+    */
     public function contribute(){
         $article_id = $this->request->input('id');
         $title      = $this->request->input('title');

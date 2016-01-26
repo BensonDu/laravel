@@ -267,11 +267,7 @@
     -webkit-transition: color .4s; /* Safari 和 Chrome */
 }
 .user-content .container .save .double-btn a.empty:hover{
-    border: 1px solid #fff;
-    background: #999;
-}
-.user-content .container .save .double-btn a.empty:hover span{
-    color: #fff;
+    background: #f5f5f5;
 }
 /*上传图片--圆*/
 .user-content .container .item .avatar.circle .box,
