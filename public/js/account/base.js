@@ -4,7 +4,7 @@
     this.w = $(window);
     this.d = $(document);
     this.content = $('#content');
-    this.mid = $('#site-mid');
+    this.mid = $('#mid');
     this.backgound = $('#background');
 
 }).call(define('dom'));

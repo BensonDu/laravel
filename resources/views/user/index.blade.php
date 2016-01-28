@@ -13,132 +13,63 @@
 </div>
 <div id="user-content" class="user-content">
     <div class="container">
-        <div class="list-container">
-            <div class="list">
+        <div id="article-list" class="list-container">
+@foreach ($list as $article)
+            <div class="list visible">
                 <div class="info">
                     <div class="tags">
-                        <a href="#" style="color: #fad53e">独角兽</a>
-                        <a href="#" style="color: #81c683">美食</a>
-                        <a href="#" style="color: #f57e16">创业大街</a>
+@foreach ($article->tags as $tag)
+                        <a href="/tag/{{$tag['item']}}" style="color: {{$tag['color']}}">{{$tag['item']}}</a>
+@endforeach
                     </div>
-                    <a href="#" class="title">天价众筹项目神秘夭折,支持者或赔夫又折兵</a>
-                    <h5 class="summary">美基因检测公司为个体提供丰富的基因检测服务，1000人民币即可量身制定减肥计划。美 FDA 指出这些公司未获得许可证，对安全和有效性表示担忧.</h5>
+                    <div class="title">
+                        <a href="/user/{{$id}}/{{$article->id}}">{{$article->title}}</a>
+                    </div>
+                    <div class="summary">
+                        <h5>{{$article->summary}}</h5>
+                    </div>
                     <div class="social">
-                        <p class="time">发布于 23分钟前</p>
+                        <p class="time">发布于 {{$article->post_time}}</p>
                         <a class="inter like"><span>赞 51</span></a>
                         <a class="inter collect"><span>收藏 36</span></a>
                     </div>
                 </div>
+@if(!empty($article->image))
                 <div class="image">
-                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-2.png">
+                    <img src="{{$article->image}}">
                 </div>
+@endif
             </div>
-
-            <div class="list">
+@endforeach
+@if(empty($total))
+           <div class="none">
+               <h5>暂无内容</h5>
+           </div>
+@endif
+            <div class="list" v-bind:class="visible" v-for="article in list">
                 <div class="info">
                     <div class="tags">
-                        <a href="#" style="color: #f57e16">智能硬件</a>
-                        <a href="#" style="color: #81c683">美食</a>
-                        <a href="#" style="color: #b39ddb">创业大街</a>
-                        <a href="#" style="color: #80cbc4">互联网社交</a>
+                        <a v-for="tag in article.tags" v-bind:href="'tag/'+tag.item" v-bind:style="'color:'+tag.color" v-text="tag.item"></a>
                     </div>
-                    <a href="#" class="title">Google+大改版，专注于热度最高的「社区」和「专辑」功能</a>
-                    <h5 class="summary">Google+ 昨晚开始更新全新的 Google+，不仅在设计上重新设计，在产品上也更加简洁，专注于社区 (Communities) 和专辑 (Collections) ，因为这两个功能是 Google+ 忠实用户最喜欢和最频繁使用的两个功能。</h5>
+                    <div class="title">
+                        <a v-bind:href="'/user/{{$id}}/'+article.id" v-text="article.title"></a>
+                    </div>
+                    <div class="summary">
+                        <h5 v-text="article.summary"></h5>
+                    </div>
                     <div class="social">
-                        <p class="time">发布于 23分钟前</p>
+                        <p class="time" v-text="'发布于 '+article.post_time"></p>
                         <a class="inter like"><span>赞 51</span></a>
                         <a class="inter collect"><span>收藏 36</span></a>
                     </div>
                 </div>
-                <div class="image">
-                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-1.png">
+                <div class="image" v-if="!!article.image">
+                    <img v-bind:src="article.image">
                 </div>
             </div>
-
-            <div class="list">
-                <div class="info">
-                    <div class="tags">
-                        <a href="#" style="color: #f57e16">智能硬件</a>
-                        <a href="#" style="color: #81c683">美食</a>
-                        <a href="#" style="color: #b39ddb">创业大街</a>
-                        <a href="#" style="color: #80cbc4">互联网社交</a>
-                    </div>
-                    <a href="#" class="title">Google+大改版，专注于热度最高的「社区」和「专 辑」功能</a>
-                    <h5 class="summary">Google+ 昨晚开始更新全新的 Google+，不仅在设计上重新设计，在产品上也更加简洁，专注于社区 (Communities) 和专辑 (Collections) ，因为这两个功能是 Google+ 忠实用户最喜欢和最频繁使用的两个功能。</h5>
-                    <div class="social">
-                        <p class="time">发布于 23分钟前</p>
-                        <a class="inter like"><span>赞 51</span></a>
-                        <a class="inter collect"><span>收藏 36</span></a>
-                    </div>
-                </div>
-                <div class="image">
-                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-1.png">
-                </div>
-            </div>
-
-            <div class="list">
-                <div class="info">
-                    <div class="tags">
-                        <a href="#" style="color: #fad53e">独角兽</a>
-                        <a href="#" style="color: #81c683">美食</a>
-                        <a href="#" style="color: #f57e16">创业大街</a>
-                    </div>
-                    <a href="#" class="title">天价众筹项目神秘夭折,支持者或赔夫又折兵</a>
-                    <h5 class="summary">美基因检测公司为个体提供丰富的基因检测服务，1000人民币即可量身制定减肥计划。美 FDA 指出这些公司未获得许可证，对安全和有效性表示担忧.</h5>
-                    <div class="social">
-                        <p class="time">发布于 23分钟前</p>
-                        <a class="inter like"><span>赞 51</span></a>
-                        <a class="inter collect"><span>收藏 36</span></a>
-                    </div>
-                </div>
-                <div class="image">
-                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-2.png">
-                </div>
-            </div>
-
-            <div class="list">
-                <div class="info">
-                    <div class="tags">
-                        <a href="#" style="color: #fad53e">独角兽</a>
-                        <a href="#" style="color: #81c683">美食</a>
-                        <a href="#" style="color: #f57e16">创业大街</a>
-                    </div>
-                    <a href="#" class="title">天价众筹项目神秘夭折,支持者或赔夫又折兵</a>
-                    <h5 class="summary">美基因检测公司为个体提供丰富的基因检测服务，1000人民币即可量身制定减肥计划。美 FDA 指出这些公司未获得许可证，对安全和有效性表示担忧.</h5>
-                    <div class="social">
-                        <p class="time">发布于 23分钟前</p>
-                        <a class="inter like"><span>赞 51</span></a>
-                        <a class="inter collect"><span>收藏 36</span></a>
-                    </div>
-                </div>
-                <div class="image">
-                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-2.png">
-                </div>
-            </div>
-
-            <div class="list">
-                <div class="info">
-                    <div class="tags">
-                        <a href="#" style="color: #f57e16">智能硬件</a>
-                        <a href="#" style="color: #81c683">美食</a>
-                        <a href="#" style="color: #b39ddb">创业大街</a>
-                        <a href="#" style="color: #80cbc4">互联网社交</a>
-                    </div>
-                    <a href="#" class="title">Google+大改版，专注于热度最高的「社区」和「专 辑」功能</a>
-                    <h5 class="summary">Google+ 昨晚开始更新全新的 Google+，不仅在设计上重新设计，在产品上也更加简洁，专注于社区 (Communities) 和专辑 (Collections) ，因为这两个功能是 Google+ 忠实用户最喜欢和最频繁使用的两个功能。</h5>
-                    <div class="social">
-                        <p class="time">发布于 23分钟前</p>
-                        <a class="inter like"><span>赞 51</span></a>
-                        <a class="inter collect"><span>收藏 36</span></a>
-                    </div>
-                </div>
-                <div class="image">
-                    <img src="http://dn-t2ipo.qbox.me/v3/public/news-list-1.png">
-                </div>
-            </div>
-            <a class="load-more loading">
-                <p>
-                    <span>More</span><em></em>
+            <a class="load-more" v-bind:class="load">
+                <p v-on:click="get_list">
+                    <span v-text="load"></span><em></em>
                 </p>
             </a>
         </div>
@@ -146,5 +77,7 @@
 </div>
 <!--主页内容end-->
 @stop
-@section('script')@parent<script src="/js/user.index.js"></script>
+@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.js"></script>
+<script>var default_data = {id : '{{$id}}', article : {total : '{{$total}}'}}</script>
+<script src="/js/user.index.js"></script>
 @stop

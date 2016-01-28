@@ -8,7 +8,7 @@
 <!--用户中栏start-->
 <div id="mid" class="user-mid">
     <div class="top">
-        <div class="avatar"><img src="http://dn-acac.qbox.me/mobile/public/New_avatar.png"></div>
+        <div class="avatar"><a href="/user/{{$id}}"><img src="{{avatar($profile['avatar'])}}"></a></div>
         <h4>{{$profile['slogan']}}</h4>
         <h2>{{$profile['nickname']}}</h2>
         <h3>{{$profile['introduce']}}</h3>
@@ -29,13 +29,16 @@
 @endif
         </div>
     </div>
+@if(isset($self))
     <div class="mid">
         <div class="container">
-            <a href="/user/132132" class="active"><span>个人主页</span></a>
-            <a href="/user/profile"><span>资料修改</span></a>
-            <a href="/user/password"><span>基本设置</span></a>
+            <a href="/user/{{$id}}" class="{{isset($active) && $active =='home' ? 'active' : ''}}"><span>个人主页</span></a>
+            <a href="/user/profile" class="{{isset($active) && $active =='profile' ? 'active' : ''}}"><span>资料修改</span></a>
+            <a href="/user/password" class="{{isset($active) && $active =='password' ? 'active' : ''}}"><span>密码修改</span></a>
+            <a href="/user/social" class="{{isset($active) && $active =='social' ? 'active' : ''}}"><span>社交账户</span></a>
         </div>
     </div>
+@endif
 </div>
 <!--用户中栏end-->
 @stop

@@ -194,13 +194,14 @@ class EditController extends UserController
         $image      = $this->request->input('image');
         $tags       = json_decode($this->request->input('tags'),1);
         $post_status= 2;
+        $post_time = now();
         $user_id    = $_ENV['uid'];
         if(empty($title) || empty($summary)){
             return self::ApiOut(40001,'请求错误');
         }
         //新建文章
         if(empty($article_id)){
-            $id = ArticleUserModel::new_article($user_id,compact('title', 'summary', 'content', 'image', 'tags','post_status'));
+            $id = ArticleUserModel::new_article($user_id,compact('title', 'summary', 'content', 'image', 'tags','post_status','post_time'));
             if($id){
                 return self::ApiOut(0,[
                     'id'    => $id,
@@ -214,7 +215,7 @@ class EditController extends UserController
         }
         //更新文章
         else{
-            $ret = ArticleUserModel::update_article($user_id,$article_id,compact('title', 'summary', 'content', 'image', 'tags', 'post_status'));
+            $ret = ArticleUserModel::update_article($user_id,$article_id,compact('title', 'summary', 'content', 'image', 'tags', 'post_status','post_time'));
             if($ret){
                 return self::ApiOut(0,[
                     'id'    => $article_id,

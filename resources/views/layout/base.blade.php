@@ -38,7 +38,7 @@
         <a href="/">
             <i class="home"></i><span>站点首页</span>
         </a>
-        <a href="/user/edit">
+        <a href="/user/edit/create">
             <i class="add"></i><span>新建文章</span>
         </a>
         <a href="/user/edit">
@@ -50,7 +50,7 @@
         <a href="/user/profile">
             <i class="setting"></i><span>个人设置</span>
         </a>
-        <a href="/user/10001716">
+        <a href="/user/">
             <i class="people"></i><span>个人主页</span>
         </a>
     </div>

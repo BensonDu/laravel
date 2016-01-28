@@ -79,7 +79,7 @@ body{
 }
 /*加载更多按钮*/
 .load-more{
-    display: inline-block;
+    display: none;
     width: 100%;
     margin: 60px;
     text-align: center;
@@ -93,9 +93,9 @@ body{
     background: #fff;
     cursor: pointer;
     border: 1px solid #999;
-    transition: background-color .9s;
-    -moz-transition: background-color .9s;
-    -webkit-transition: background-color .9s;
+    transition: background-color .3s;
+    -moz-transition: background-color .3s;
+    -webkit-transition: background-color .3s;
 }
 .load-more p span{
     color: #999;
@@ -112,11 +112,19 @@ body{
     background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Floading-three-dots.gif) no-repeat center;
     background-size: 28px;
 }
-.load-more p:hover{
+.load-more.More p:hover{
     background: #999;
 }
-.load-more p:hover span{
+.load-more.More p:hover span{
     color: #fff;
+}
+.load-more.loading,
+.load-more.End,
+.load-more.More{
+    display: inline-block;
+}
+.load-more.End p{
+    cursor: default;
 }
 .load-more.loading p span{
     display: none;

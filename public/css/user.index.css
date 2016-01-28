@@ -64,11 +64,33 @@
     width: 70%;
     margin-top: 15px;
 }
-.user-content .container .list-container .list{
+.user-content .container .list-container .none{
+    position: relative;
     width: 100%;
+    padding: 80px 0;
+    text-align: center;
+}
+.user-content .container .list-container .none h5{
+    display: inline-block;
+    height: 100%;
+    text-align: center;
+    color: #ccc;
+    font-size: 30px;
+}
+.user-content .container .list-container .list{
+    position: relative;
+    width: 100%;
+    min-height: 220px;
     padding: 18px 10px 10px 30px;
     border-bottom: 1px solid #eee;
     overflow: hidden;
+    visibility: hidden;
+    animation: fadeIn 0.7s linear 0s normal forwards;
+    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
+    -moz-animation: fadeIn 0.7s linear 0s normal forwards;
+}
+.user-content .container .list-container .list.visible{
+    visibility: visible;
 }
 .user-content .container .list-container .list .info{
     float: left;
@@ -91,16 +113,27 @@
     opacity: .7;
 }
 .user-content .container .list-container .list .info .title{
+    display: inline-block;
+    width: 100%;
+    padding: 4px 0 0;
+    overflow: hidden;
+}
+.user-content .container .list-container .list .info .title a{
     line-height: 24px;
     font-size: 16px;
     white-space: normal;
     font-weight: 600;
     color: #424242;
 }
-.user-content .container .list-container .list .info .title:hover{
+.user-content .container .list-container .list .info .title a:hover{
     color: #999;
 }
 .user-content .container .list-container .list .info .summary{
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+}
+.user-content .container .list-container .list .info .summary h5{
     line-height: 24px;
     margin-top: 10px;
     font-size: 13px;
@@ -108,9 +141,12 @@
     color: #666;
 }
 .user-content .container .list-container .list .info .social{
+    position: absolute;
     width: 100%;
-    height: 50px;
-    padding: 12px 0;
+    height: 34px;
+    padding: 2px 0;
+    left: 30px;
+    bottom: 10px;
 }
 .user-content .container .list-container .list .info .social .time{
     display: inline-block;
@@ -119,7 +155,6 @@
     vertical-align: top;
     font-size: 12px;
     color: #999;
-    margin-left: 5px;
 }
 .user-content .container .list-container .list .info .social .inter{
     display: inline-block;
@@ -147,6 +182,37 @@
     margin-top: 30px;
     width: 200px;
     max-width: 210px;
-    height: auto;
+    height: 115px;
 }
 /*主内容end*/
+
+/*列表fadein keyframes*/
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

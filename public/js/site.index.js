@@ -5,7 +5,7 @@
     this.d = $(document);
     this.filter = $('#filter');
     this.content = $('#site-content');
-    this.mid = $('#site-mid');
+    this.mid = $('#mid');
     this.star = $('#star-album');
     this.star_contaner = self.star.children('.item-container');
 

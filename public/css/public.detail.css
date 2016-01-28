@@ -1,37 +1,39 @@
-.site-content{
+.page-content{
     position: relative;
     width: 100%;
     min-height: 500px;
     padding-left: 310px;
     z-index: 1;
+    background: #fdfdfd;
     transition: padding-left .4s;
     -moz-transition: padding-left .4s; /* Firefox 4 */
     -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
 }
-.site-content .container{
+.page-content .container{
     width: 100%;
     padding: 90px 15% 90px 10%;
     text-align: center;
 }
-.site-content .container .summary{
+.page-content .container .summary{
     display: inline-block;
     width: 100%;
-    max-width: 900px;
+    max-width: 850px;
+    padding: 0 5%;
 }
-.site-content .container .summary h1{
+.page-content .container .summary h1{
     font-size: 32px;
     font-weight: 100;
-    font-family: fantasy,Tahoma,Verdana,STHeiTi,simsun,sans-serif;
+    font-family: 'PT Serif','Hiragino Sans GB','Microsoft YaHei',sans-serif;
     line-height: 40px;
     color: #2b2f37;
 }
-.site-content .container .summary h6{
+.page-content .container .summary h6{
     font-size: 14px;
     color: #999;
     text-align: justify;
     margin-top: 20px;
 }
-.site-content .container .social{
+.page-content .container .social{
     display: inline-block;
     max-width: 850px;
     width: 100%;
@@ -40,16 +42,16 @@
     margin-top: 25px;
     overflow: hidden;
 }
-.site-content .container .social .author{
+.page-content .container .social .author{
     display: inline-block;
     height: 100%;
     float: left;
 }
-.site-content .container .social .author img{
+.page-content .container .social .author img{
     width: 26px;
     height: 26px;
 }
-.site-content .container .social .author span{
+.page-content .container .social .author span{
     display: inline-block;
     height: 100%;
     line-height: 36px;
@@ -58,10 +60,10 @@
     color: #999;
     margin-left: 5px;
 }
-.site-content .container .social .author:hover span{
+.page-content .container .social .author:hover span{
     color: #000;
 }
-.site-content .container .social .time{
+.page-content .container .social .time{
     display: inline-block;
     height: 100%;
     line-height: 36px;
@@ -71,19 +73,22 @@
     margin-left: 5px;
     float: left;
 }
-.site-content .container .social .inter{
+.page-content .container .social .tag{
     display: inline-block;
     height: 100%;
     margin-right: 10px;
     float: right;
 }
-.site-content .container .social .inter em{
+.page-content .container .social .tag b{
     display: inline-block;
-    width: 18px;
-    height: 18px;
-    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 900;
+    height: 100%;
+    line-height: 32px;
+    vertical-align: top;
+    color: #999;
 }
-.site-content .container .social .inter span{
+.page-content .container .social .tag a{
     display: inline-block;
     height: 100%;
     line-height: 36px;
@@ -92,15 +97,48 @@
     color: #999;
     margin-left: 5px;
 }
-.site-content .container .social .like em{
+.page-content .container .social .tag a:hover{
+    color: #000;
+}
+.page-content .container .social .tag em{
+    display: inline-block;
+    width: 22px;
+    height: 18px;
+    margin-top: 9px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ftag-fill.png) no-repeat center;
+    background-size: 20px;
+    background-position: 0 -2px;
+}
+.page-content .container .social .inter{
+    display: inline-block;
+    height: 100%;
+    margin-right: 10px;
+    float: right;
+}
+.page-content .container .social .inter em{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-top: 6px;
+}
+.page-content .container .social .inter span{
+    display: inline-block;
+    height: 100%;
+    line-height: 36px;
+    vertical-align: top;
+    font-size: 12px;
+    color: #999;
+    margin-left: 5px;
+}
+.page-content .container .social .like em{
     background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/like-4.png) no-repeat center;
     background-size: 24px;
 }
-.site-content .container .social .collect em{
+.page-content .container .social .collect em{
     background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/stars-2.png) no-repeat center;
     background-size: 16px;
 }
-.site-content .container .content{
+.page-content .container .content{
     display: inline-block;
     max-width: 850px;
     text-align: left;

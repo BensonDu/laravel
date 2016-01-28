@@ -8,30 +8,53 @@
 
 namespace App\Http\Controllers\User;
 
-
 use App\Http\Controllers\Controller;
-use App\Http\Model\UserModel;
+use App\Http\Model\ArticleUserModel;
 
 class IndexController extends Controller
 {
 
-    public function __construct(){
-        parent::__construct();
-    }
+    public function index($id = null){
 
-    public function index($id){
-        $info = UserModel::get_user_info_by_id(intval($id));
-        if(!$info)abort(404);
-        $data['profile'] = [
-            'avatar'    => avatar($info->avatar),
-            'nickname'  => $info->nickname,
-            'slogan'    => $info->slogan,
-            'introduce' => $info->introduce,
-            'email'     => $info->email,
-            'weibo'     => $info->weibo,
-            'wechat'    => $info->wechat
-        ];
+        if(is_null($id))abort(404);
+        $data = UserController::profile($id);
+        if(empty($data))abort(404);
+        if($id == $_ENV['uid'])$data['self']=true;
+        $data['active'] = 'home';
+        $data['list'] = $this->get_list($id);
+        $data['total'] = $this->get_list_count($id);
         return view('/user/index',$data);
+    }
+    public function self(){
+        return redirect('/user/'.$_ENV['uid']);
+    }
+    public function article_list(){
+        $id    = request()->input('id');
+        $index = request()->input('index');
+        if(empty($index) || empty($id)){
+            return self::ApiOut(40001,'请求错误');
+        }
+        $skip =intval($index)*10;
+        $list = $this->get_list($id,$skip);
+        return self::ApiOut(0,$list);
+    }
+    private function get_list($id, $skip=0){
+        $list = ArticleUserModel::get_home_article_list($id, $skip,['id','title','summary','tags','image','post_time']);
+        foreach($list as $k =>$v){
+            $tags = [];
+            foreach(explode(' ',$v->tags) as $vv){
+                $tags[] = [
+                    'item'  => $vv,
+                    'color' => rand_color()
+                ];
+            }
+            $list[$k]->tags = $tags;
+            $list[$k]->post_time = time_down(strtotime($v->post_time));
+        }
+        return $list;
+    }
+    private function get_list_count($id){
+        return ArticleUserModel::get_article_count($id);
     }
 
 }

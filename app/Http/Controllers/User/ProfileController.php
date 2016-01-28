@@ -13,13 +13,14 @@ class ProfileController extends UserController
 
     public function index()
     {
+        $data['active'] = 'profile';
         $data['input'] = json_encode([
-                            'id'        => $this->info->id,
-                            'nickname'  => $this->info->nickname,
-                            'slogan'    => $this->info->slogan,
-                            'introduce' => $this->info->introduce,
-                            'avatar'    => avatar($this->info->avatar),
-                            'username'  => $this->info->username
+                            'id'        => self::$info->id,
+                            'nickname'  => self::$info->nickname,
+                            'slogan'    => self::$info->slogan,
+                            'introduce' => self::$info->introduce,
+                            'avatar'    => avatar(self::$info->avatar),
+                            'username'  => self::$info->username
                          ]);
         return view('/user/profile',$data);
     }

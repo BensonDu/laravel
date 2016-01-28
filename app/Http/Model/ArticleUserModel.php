@@ -28,6 +28,33 @@ class ArticleUserModel extends Model
         return ArticleUserModel::where('user_id' ,$user_id)->where('deleted',0)->orderBy('update_time', 'desc')->get($select);
     }
     /*
+    |--------------------------------------------------------------------------
+    | 获取用户文章总数
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $user_id
+    | @return array  $article_list
+    |
+    */
+    public static function get_article_count($user_id){
+        return ArticleUserModel::where('user_id' ,$user_id)->where('deleted',0)->where('post_status',2)->count();
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取用户主页文章
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $user_id
+    | @param  string $skip
+    | @param  string $select
+    | @return array  $article_list
+    |
+    */
+    public static function get_home_article_list($user_id,$skip = 0,$select = ['*']){
+        $list = ArticleUserModel::where('user_id' ,$user_id)->where('deleted',0)->where('post_status',2)->orderBy('update_time', 'desc')->take(10)->skip($skip)->get($select);
+        return $list;
+    }
+    /*
    |--------------------------------------------------------------------------
    | 获取用户文章信息
    |--------------------------------------------------------------------------
@@ -61,6 +88,9 @@ class ArticleUserModel extends Model
         $article->image         = $info['image'];
         $article->tags          = implode(' ', $info['tags']);
         $article->post_status   = isset($info['post_status']) ? $info['post_status'] : 1;
+        if(isset($info['post_time'])){
+            $article->post_time     = $info['post_time'];
+        }
         $article->create_time   = now();
         $article->update_time   = now();
         $article->save();
@@ -89,6 +119,9 @@ class ArticleUserModel extends Model
         $article->tags          = implode(' ', $info['tags']);
         if(isset($info['post_status'])){
             $article->post_status   = $info['post_status'];
+        }
+        if(isset($info['post_time'])){
+            $article->post_time     = $info['post_time'];
         }
         $article->update_time   = now();
 

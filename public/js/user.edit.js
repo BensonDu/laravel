@@ -98,7 +98,7 @@
                     uploader   = simple.uploader({}),
                     //拼接实际URL地址
                     get_img_url = function(id, option){
-                        return 'http://dn-xswe.qbox.me/' + id + '?imageMogr2' + (option ? "/crop/!" + get_crop(option) : "") + "/auto-orient/thumbnail/480x";
+                        return 'http://dn-xswe.qbox.me/' + id + '?imageMogr2/thumbnail/!600x400r/gravity/Center/crop/600x400';
                     },
                     //上传进度显示
                     uploading = function(loaded, total){
@@ -242,6 +242,7 @@
             request.post('/user/save',function(ret){
 
                 if(ret.hasOwnProperty('code') && ret.code == 0){
+                    controller_save.end();
                     self.vue.lastmodify = ret.data.time;
                     self.article_id = ret.data.id;
                     controller_list.update_list();
@@ -266,6 +267,7 @@
             request.post('/user/post',function(ret){
 
                 if(ret.hasOwnProperty('code') && ret.code == 0){
+                    controller_save.end();
                     self.vue.lastmodify = ret.data.time;
                     self.article_id = ret.data.id;
                     self.vue.ispost = true;
@@ -314,6 +316,7 @@
                 request.post('/user/contribute',function(ret){
 
                     if(ret.hasOwnProperty('code') && ret.code == 0){
+                        controller_save.end();
                         self.vue.lastmodify = ret.data.time;
                         self.article_id = ret.data.id;
                         pop.success('投稿成功','确定').one();

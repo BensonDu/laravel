@@ -123,7 +123,6 @@
 .user-mid .mid .container a span{
     display: inline-block;
     line-height: 22px;
-    padding: 0 5px;
 }
 .user-mid .mid .container a.active span{
     border-bottom: 1px dotted #999;

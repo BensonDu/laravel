@@ -1,11 +1,11 @@
 @extends('layout.site')
-@section('style')@parent  <link href="css/public.content.css" rel="stylesheet">
-<link href="css/site.detail.css" rel="stylesheet">
+@section('style')@parent  <link href="/css/public.content.css" rel="stylesheet">
+<link href="/css/public.detail.css" rel="stylesheet">
 @stop
 @section('body')
 @parent
 <!--新闻内容部分start-->
-<div id="site-content" class="site-content">
+<div id="page-content" class="page-content">
     <div class="container">
         <div class="summary">
             <h1>像特斯拉创始人马斯克一样思考</h1>
@@ -24,5 +24,5 @@
 </div>
 <!--新闻内容end-->
 @stop
-@section('script')@parent<script src="/js/site.detail.js"></script>
+@section('script')@parent<script src="/js/public.detail.js"></script>
 @stop

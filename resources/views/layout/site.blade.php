@@ -7,7 +7,7 @@
 @stop
 @section('body')
 <!--站点中栏start-->
-<div id="site-mid" class="site-mid">
+<div id="mid" class="site-mid">
     <div class="top">
         <div class="logo"><img src="http://dn-t2ipo.qbox.me/v3/public/Tech2ipo-logo.png"></div>
         <h2>TECH2IPO</h2>

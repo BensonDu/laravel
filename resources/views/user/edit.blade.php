@@ -113,8 +113,7 @@
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery-sortable-min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.center.min.js"></script>
-<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fmedium-plugin-angelcrunch.js"></script>
-{{--<script src="/js/medium-plugin.js"></script>--}}
+<script src="/js/medium-plugin.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.js"></script>
 <script>var default_data = {list : JSON.parse('{!! $list !!}'),route : '{{isset($route)?$route:null}}'}</script>
 <script src="/js/user.edit.js"></script>

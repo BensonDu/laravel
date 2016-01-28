@@ -12,7 +12,8 @@ class PasswordController extends UserController
 
     public function index()
     {
-        return view('/user/password');
+        $data['active'] = 'password';
+        return view('/user/password',$data);
     }
     public function post()
     {

@@ -34,11 +34,11 @@ Route::get('/account/find', 'Account\FindController@index');
 Route::post('/account/find', 'Account\FindController@post');
 
 Route::group(['middleware' => 'User'], function () {
+    //个人主页
+    Route::get('/user', 'User\IndexController@self');
     //个人资料设置
     Route::get('/user/profile', 'User\ProfileController@index');
     Route::post('/user/profile', 'User\ProfileController@post');
-    //测试
-    Route::get('/user/test', 'User\ProfileController@test');
     //密码重置
     Route::get('/user/password', 'User\PasswordController@index');
     Route::post('/user/password', 'User\PasswordController@post');
@@ -62,11 +62,14 @@ Route::group(['middleware' => 'User'], function () {
     Route::post('/user/post/cancel', 'User\EditController@cancel');
     //投稿到站点
     Route::post('/user/contribute', 'User\EditController@contribute');
-    //测试
-    Route::get('/user/test', 'User\EditController@test');
 });
-//个人主页
+//用户主页
 Route::get('/user/{id}', 'User\IndexController@index');
+//用户首页文章列表
+Route::get('/user/index/list', 'User\IndexController@article_list');
+//用户文章详情
+Route::get('/user/{id}/{articleid}', 'User\DetailController@index');
+
 
 //数据导入
 Route::get('/import/auto', 'DataImport@auto');

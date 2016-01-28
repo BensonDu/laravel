@@ -3,8 +3,8 @@
 
     this.w = $(window);
     this.d = $(document);
-    this.content = $('#site-content');
-    this.mid = $('#site-mid');
+    this.content = $('#page-content');
+    this.mid = $('#mid');
 
 }).call(define('dom'));
 

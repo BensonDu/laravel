@@ -13,11 +13,12 @@ class SocialController extends UserController
 
     public function index()
     {
+        $data['active'] = 'social';
         $data['input'] = json_encode([
-            'id'        => $this->info->id,
-            'wechat'    => $this->info->wechat,
-            'email'     => $this->info->email,
-            'weibo'     => empty($this->info->weibo)? 'http://weibo.com/' : $this->info->weibo
+            'id'        => self::$info->id,
+            'wechat'    => self::$info->wechat,
+            'email'     => self::$info->email,
+            'weibo'     => empty(self::$info->weibo)? 'http://weibo.com/' : self::$info->weibo
         ]);
         return view('/user/social',$data);
     }
