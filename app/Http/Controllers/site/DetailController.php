@@ -9,13 +9,34 @@
 namespace App\Http\Controllers\Site;
 
 
+use App\Http\Model\ArticleSiteModel;
+
 class DetailController extends SiteController
 {
     public function __construct(){
         parent::__construct();
     }
 
-    public function index(){
-        return view('/site/detail');
+    public function index($id){
+        $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
+
+        if(empty($info))abort(404);
+
+        $data['user'] = [
+            'id'    => $info->user_id,
+            'name'  => $info->nickname,
+            'avatar'=>avatar($info->avatar)
+        ];
+
+        $data['article'] = [
+            'title'     => $info->title,
+            'summary'   => $info->summary,
+            'content'   => $info->content,
+            'tags'      => explode(' ',$info->tags),
+            'time'      => date('Y年m月d日',strtotime($info->create_time)),
+            'category'  => $info->category_name,
+            'image'     => $info->image,
+        ];
+        return view('/site/detail',$data);
     }
 }

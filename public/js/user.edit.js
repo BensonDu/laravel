@@ -214,9 +214,7 @@
                 if(ret.hasOwnProperty('code') && ret.code == 0){
                     self.vue.lastmodify = ret.data.time;
                     self.article_id = ret.data.id;
-                    controller_list.update_list(function(){
-                        controller_list.active_article(ret.data.id);
-                    });
+                    controller_list.update_list(self.article_id);
                 }
                 controller_sta.loading(1);
             },self.get_editing_article());
@@ -245,7 +243,7 @@
                     controller_save.end();
                     self.vue.lastmodify = ret.data.time;
                     self.article_id = ret.data.id;
-                    controller_list.update_list();
+                    controller_list.update_list(self.article_id);
                     setTimeout(function(){
                         self.vue.handle_sta.save = 'success';
                     },600);
@@ -274,7 +272,7 @@
                     setTimeout(function(){
                         self.vue.handle_sta.post = 'success';
                     },600);
-                    controller_list.update_list();
+                    controller_list.update_list(self.article_id);
                 }
                 else{
                     pop.error('发布失败','确定').one();
@@ -294,7 +292,7 @@
                 if(ret.hasOwnProperty('code') && ret.code == 0){
                     self.vue.lastmodify = ret.data.time;
                     self.vue.ispost = false;
-                    controller_list.update_list();
+                    controller_list.update_list(self.article_id);
                 }
                 else{
                     pop.error('操作失败','确定').one();
@@ -321,7 +319,7 @@
                         self.article_id = ret.data.id;
                         pop.success('投稿成功','确定').one();
                         self.vue.site_list.display = false;
-                        controller_list.update_list();
+                        controller_list.update_list(self.article_id);
                     }
                     else{
                         pop.error(ret.msg,'确定').one();
@@ -438,7 +436,7 @@
                 if(is_self)controller_save.end();
                 request.get('/user/article/delete', function(ret){
                     if(ret.hasOwnProperty('code') && ret.code == 0){
-                        self.update_list(self.open_first);
+                        self.update_list();
                     }
                     else{
                         pop.error(ret.msg,'确定');
@@ -471,13 +469,14 @@
         !find && controller_sta.create();
     };
     //刷新列表
-    this.update_list = function(call){
-      request.get('/user/article/list', function(ret){
-          if(ret.hasOwnProperty('code') && ret.code == 0 ){
-              self.fill_list(ret.data);
-              if(typeof call == 'function') call();
-          }
-      });
+    this.update_list = function(id){
+       request.get('/user/article/list', function(ret){
+           if(ret.hasOwnProperty('code') && ret.code == 0 ){
+               self.fill_list(ret.data);
+               //刷新列表之后,默认打开文章
+               return typeof id == 'undefined' ?  self.open_first() : self.open_article(id);
+           }
+       });
     };
     //填充列表,缓存
     this.fill_list = function(list){

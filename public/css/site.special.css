@@ -152,7 +152,7 @@
     color: rgba(255,255,255,0.75);
     font-weight: 100;
     text-align: center;
-    font-family: fantasy,Tahoma,Verdana,STHeiTi,simsun,sans-serif;
+    font-family: 'PT Serif','Hiragino Sans GB','Microsoft YaHei',sans-serif;
 }
 .site-content .container .summary{
     display: inline-block;

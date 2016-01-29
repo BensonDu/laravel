@@ -13,7 +13,8 @@
 //站点首页
 Route::get('/', 'Site\IndexController@index');
 //站点专题页
-Route::get('/special', 'Site\SpecialController@index');
+Route::get('/special', 'Site\SpecialController@home');
+Route::get('/special/{id}', 'Site\SpecialController@index');
 //文章详情
 Route::get('/{id}', 'Site\DetailController@index');
 

@@ -58,7 +58,7 @@ class SiteRouting extends Model
     //从数据库获取路由信息
     private static function GetAllDomainsFromDB()
     {
-        return SiteRouting::all(['custom_domain','platform_domain','mobile_domain']);
+        return SiteRouting::all(['site_id','custom_domain','platform_domain','mobile_domain']);
     }
     //创建平台路由表
     private static function CreatePlatformRules()
@@ -87,14 +87,14 @@ class SiteRouting extends Model
         if(count($all) > 0 ){
             foreach($all as $v){
                 if(!is_null($v['mobile_domain'])){
-                    $rules[] = self::CreateRouteRuleItem($v['mobile_domain'],$v['id'],TRUE);
+                    $rules[] = self::CreateRouteRuleItem($v['mobile_domain'],$v['site_id'],TRUE);
                 }
                 if(!is_null($v['custom_domain'])){
-                    $rules[] = self::CreateRouteRuleItem($v['custom_domain'],$v['id'],FALSE);
+                    $rules[] = self::CreateRouteRuleItem($v['custom_domain'],$v['site_id'],FALSE);
                 }
                 if(!is_null($v['platform_domain'])){
-                    $rules[] = self::CreateRouteRuleItem(self::CreatePlatformSubdomain($v['platform_domain']),$v['id'],FALSE);
-                    $rules[] = self::CreateRouteRuleItem(self::CreatePlatformSubdomain('m.'.$v['platform_domain']),$v['id'],TRUE);
+                    $rules[] = self::CreateRouteRuleItem(self::CreatePlatformSubdomain($v['platform_domain']),$v['site_id'],FALSE);
+                    $rules[] = self::CreateRouteRuleItem(self::CreatePlatformSubdomain('m.'.$v['platform_domain']),$v['site_id'],TRUE);
                 }
             }
         }

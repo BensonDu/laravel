@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Http\Controllers\Site\SiteController;
 use App\Http\Model\AccountModel;
 use App\Http\Model\CaptchaModel;
 use App\Http\Controllers\Controller;
@@ -14,6 +15,9 @@ class AccountController extends Controller
     {
         parent::__construct();
         $this->request = request();
+        //账户对应页面显示 站点信息
+        $site_info = SiteController::get_site_info();
+        view()->share($site_info);
     }
     /*
     |--------------------------------------------------------------------------

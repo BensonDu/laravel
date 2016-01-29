@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Model\SiteModel;
 
 /**
  * Created by PhpStorm.
@@ -18,6 +19,12 @@ class SiteController extends Controller
     {
         parent::__construct();
         $this->request = request();
+        $site_info = self::get_site_info();
+        view()->share($site_info);
+    }
+    public static function get_site_info(){
+        $info = SiteModel::get_site_info($_ENV['site_id']);
+        return ['site'=>$info];
     }
 
 }

@@ -9,16 +9,24 @@
 <!--站点中栏start-->
 <div id="mid" class="site-mid">
     <div class="top">
-        <div class="logo"><img src="http://dn-t2ipo.qbox.me/v3/public/Tech2ipo-logo.png"></div>
-        <h2>TECH2IPO</h2>
-        <h3>「 等待新的科技故事 」</h3>
+        <div class="logo"><img src="{{$site['logo']}}"></div>
+        <h2>{{$site['name']}}</h2>
+        <h3>{{$site['slogan']}}</h3>
         <div class="social">
-            <a class="weibo" href="#" title="微博"></a>
-            <a class="email" href="#" title="E-mail"></a>
-            <a class="twitter" href="#" title="twitter"></a>
-            <a class="weixin" href="#" title="微信">
-                <img src="http://dn-acac.qbox.me/tech2ipoqrcode.jpg">
+@if(!empty($site['weibo']))
+            <a class="weibo" href="{{$site['weibo']}}" target="_blank" title="微博"></a>
+@endif
+@if(!empty($site['email']))
+            <a class="email" href="mailto:{{$site['email']}}" title="E-mail"></a>
+@endif
+@if(!empty($site['twitter']))
+            <a class="twitter" href="{{$site['twitter']}}"  target="_blank" title="twitter"></a>
+@endif
+@if(!empty($site['weixin']))
+            <a class="weixin" title="微信">
+                <img src="{{$site['weixin']}}">
             </a>
+@endif
         </div>
         <div class="post">
             <a href="/user/edit">投稿</a>
@@ -26,13 +34,13 @@
     </div>
     <div class="mid">
         <div class="container">
-            <a href="/"><span>最近更新</span><em>15</em></a>
-            <a href="/special"><span>专题聚光</span></a>
-            <a href="#"><span>精选热点</span></a>
+            <a href="/" class="{{isset($active) && $active =='home' ? 'active' : ''}}"><span>最近更新</span><em>15</em></a>
+            <a href="/special" class="{{isset($active) && $active =='special' ? 'active' : ''}}"><span>专题聚光</span></a>
+            <a href="#" class="{{isset($active) && $active =='joinus' ? 'active' : ''}}"><span>加入我们</span></a>
         </div>
     </div>
     <div class="bottom">
-        <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备1404667</a>
+        <a href="http://www.miitbeian.gov.cn/" target="_blank">{{$site['icp']}}</a>
     </div>
 </div>
 <!--站点中栏end-->

@@ -17,6 +17,10 @@ class IndexController extends SiteController
     }
 
     public function index(){
-        return view('/site/index');
+        $data['active'] = 'home';
+        return view('/site/index',$data);
+    }
+    public function test(){
+
     }
 }
