@@ -39,7 +39,7 @@ class IndexController extends Controller
         return self::ApiOut(0,$list);
     }
     private function get_list($id, $skip=0){
-        $list = ArticleUserModel::get_home_article_list($id, $skip,['id','title','summary','tags','image','post_time']);
+        $list = ArticleUserModel::get_home_article_list($id, $skip,['id','title','summary','tags','image','create_time']);
         foreach($list as $k =>$v){
             $tags = [];
             foreach(explode(' ',$v->tags) as $vv){
@@ -49,7 +49,7 @@ class IndexController extends Controller
                 ];
             }
             $list[$k]->tags = $tags;
-            $list[$k]->post_time = time_down(strtotime($v->post_time));
+            $list[$k]->post_time = time_down(strtotime($v->create_time));
         }
         return $list;
     }

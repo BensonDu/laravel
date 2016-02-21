@@ -17,7 +17,7 @@
     <div id="profile" class="container">
         <div class="item">
             <div class="wrap one-line">
-                <p class="name">用户名:</p><span class="value unchangeable">dubaoxing</span>
+                <p class="name">用户名:</p><span class="value unchangeable">{{$input['username']}}</span>
             </div>
         </div>
         <div class="item">
@@ -73,7 +73,7 @@
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.js"></script>
 <script src="http://dn-acac.qbox.me/mobile/public/image_upload.min.js"></script>
-<script>var default_data = JSON.parse('{!! $input !!}');</script>
+<script>var default_data = JSON.parse('{!! json_encode($input) !!}');</script>
 <script src="/js/user/base.js"></script>
 <script src="/js/user/profile.js"></script>
 @stop

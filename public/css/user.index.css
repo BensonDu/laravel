@@ -81,6 +81,7 @@
     position: relative;
     width: 100%;
     min-height: 220px;
+    min-width: 620px;
     padding: 18px 10px 10px 30px;
     border-bottom: 1px solid #eee;
     overflow: hidden;
@@ -185,34 +186,3 @@
     height: 115px;
 }
 /*主内容end*/
-
-/*列表fadein keyframes*/
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@-webkit-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@-moz-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}

@@ -9,6 +9,7 @@
 namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class SiteModel extends Model
 {
@@ -41,4 +42,5 @@ class SiteModel extends Model
     public static function get_site_info($id){
         return SiteModel::where('id',$id)->first();
     }
+
 }

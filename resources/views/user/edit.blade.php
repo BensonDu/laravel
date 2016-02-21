@@ -43,7 +43,7 @@
     <!--文章操作start-->
     <div id="article-handle" class="article-handle">
         <div class="left">
-            <p><span>最后修改时间:</span> <span v-text="lastmodify"></span></p>
+            <p><span>最后保存时间:</span> <span v-text="lastmodify"></span></p>
         </div>
         <div class="right">
             <a class="save" v-bind:class="handle_sta.save" v-on:click="save"><em></em><p>保存</p></a>

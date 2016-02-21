@@ -26,6 +26,7 @@
     font-family: 'PT Serif','Hiragino Sans GB','Microsoft YaHei',sans-serif;
     line-height: 40px;
     color: #2b2f37;
+    text-align: left;
 }
 .page-content .container .summary h6{
     font-size: 14px;

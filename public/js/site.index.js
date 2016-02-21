@@ -139,3 +139,125 @@
     this.prev_event = prev.click(self.prev);
 
 }).call(define('view_star'));
+
+(function(){
+    var self = this;
+
+    this.model = {
+        el : '#filter',
+        data : {
+            category : {
+                active : 0
+            },
+            keyword : ''
+        },
+        methods : {
+            filter : function(id){
+                self.model.data.category.active = id;
+                controller_list.get_category_list(id);
+            },
+            search : function(){
+                console.log(self.model.data.keyword);
+                window.open('/search/'+self.model.data.keyword, '_blank');
+            }
+        }
+    };
+
+    this.vue = new Vue(self.model);
+
+}).call(define('controller_filter'));
+
+(function(){
+    var self = this,
+        total = default_data.article.total,
+        index = 0,
+        size = 15;
+
+    this.model = {
+        el : '#list-container',
+        data : {
+            visible:'visible',
+            none : 1,
+            load:'More',
+            list : []
+        },
+        methods : {
+            get_list : function(){
+                self.get_list();
+            }
+        }
+    };
+    //当前分类
+    this.category = 0;
+    //列表缓存
+    this.list = [];
+    //处于筛选模式下
+    this.filter_mode = function(){
+        var $dom = $('.default-list');
+        return !!$dom.length && $dom.remove();
+    };
+    //新增条目
+    this.insert_list = function(list){
+        self.list = self.list.concat(list);
+        self.model.data.list = $.extend([],self.list);
+    };
+    //切换分类
+    this.swith_list  = function (list) {
+        self.filter_mode();
+        self.list = self.model.data.list = list;
+    };
+    //是否有更多条目
+    this.has_more = function(){
+        return (index+1)*size<total;
+    };
+    //加载按钮应有状态,以及是否显示暂无内容
+    this.btn_sta = function(){
+        return self.list_is_empty(!total),total==0 ? self.vue.load = '' :((self.has_more() ? self.vue.load = 'More' : self.vue.load = 'End'));
+    };
+    //无内容
+    this.list_is_empty = function(i){
+        return self.model.data.none = i;
+    };
+    //按钮Loading态
+    this.btn_loading = function(){
+        return self.vue.load = 'loading';
+    };
+    //获取数据
+    this.get_data = function(i,call){
+        if(!self.has_more())return;
+        self.btn_loading();
+        request.get('/index/list',function(ret){
+                if(ret.hasOwnProperty('code') && ret.code ==0){
+                    total = ret.data.total;
+                    setTimeout(function(){
+                        self.btn_sta();
+                        call(ret.data.list);
+                    },0);
+                }
+            },
+            {
+                category: self.category,
+                index : i
+            });
+    };
+    //获取更多
+    this.get_list = function(){
+        index++;
+        self.get_data(index,function(list){
+            self.insert_list(list);
+        });
+    };
+    //获取分类
+    this.get_category_list = function(category_id){
+        index = 0;
+        self.category = category_id;
+        self.get_data(index,function(list){
+            self.swith_list(list);
+        });
+
+    };
+
+    this.vue = new Vue(self.model);
+
+    self.btn_sta();
+}).call(define('controller_list'));

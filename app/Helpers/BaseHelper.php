@@ -60,7 +60,7 @@ if (! function_exists('time_down')) {
         $f=array(
             '31536000'=>'年',
             '2592000'=>'个月',
-            '604800'=>'星期',
+            '604800'=>'周',
             '86400'=>'天',
             '3600'=>'小时',
             '60'=>'分钟',
@@ -71,5 +71,30 @@ if (! function_exists('time_down')) {
                 return $c.$v.'前';
             }
         }
+    }
+}
+if (! function_exists('user_url')) {
+    /**
+     * 获取 用户主页地址
+     * @param  string $user_id
+     * @return string $color
+     */
+    function user_url($user_id)
+    {
+        return '/user/'.$user_id;
+    }
+}
+if (! function_exists('json_encode_safe')) {
+    /**
+     * Encode json safe
+     * @param  string $json
+     * @return string $json
+     */
+    function json_encode_safe($json)
+    {
+        $escapers = array("\\", "/", "\"", "\n", "\r", "\t", "\x08", "\x0c","'");
+        $replacements = array("\\\\", "\\/", "\\\"", "\\n", "\\r", "\\t", "\\f", "\\b","\\'");
+        $result = str_replace($escapers, $replacements, json_encode($json));
+        return $result;
     }
 }

@@ -12,6 +12,13 @@
 */
 //站点首页
 Route::get('/', 'Site\IndexController@index');
+Route::get('/index/list', 'Site\IndexController@articles');
+Route::get('/test', 'Site\IndexController@test');
+//搜索
+Route::get('/search', 'Site\SearchController@index');
+Route::get('/search/{keyword}', 'Site\SearchController@index');
+Route::get('/search/{keyword}/list', 'Site\SearchController@results');
+//标签
 //站点专题页
 Route::get('/special', 'Site\SpecialController@home');
 Route::get('/special/{id}', 'Site\SpecialController@index');

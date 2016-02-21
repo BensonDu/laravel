@@ -80,7 +80,6 @@ body{
 /*加载更多按钮*/
 .load-more{
     display: none;
-    width: 100%;
     margin: 60px;
     text-align: center;
     overflow: visible;
@@ -121,7 +120,7 @@ body{
 .load-more.loading,
 .load-more.End,
 .load-more.More{
-    display: inline-block;
+    display: block;
 }
 .load-more.End p{
     cursor: default;
@@ -263,3 +262,34 @@ body{
     width: 100%;
 }
 /*弹窗end*/
+
+/*列表fadein keyframes*/
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

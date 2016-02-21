@@ -91,6 +91,7 @@
     overflow: hidden;
 }
 .site-content .star .album a .image img{
+    vertical-align: top;
     width: 100%;
     height: auto;
 }
@@ -138,6 +139,8 @@
 .site-content .filter .parent{
     width: 100%;
     height: 100%;
+    max-width: 1410px;
+    min-width: 750px;
     border-bottom: 1px solid #eee;
 }
 .site-content .filter .cate{
@@ -150,6 +153,7 @@
     display: inline-block;
     margin-right: 5px;
     line-height: 30px;
+    cursor: pointer;
 }
 .site-content .filter .cate a span{
     display: inline-block;
@@ -165,7 +169,7 @@
 }
 .site-content .filter .search{
     height: 100%;
-    max-width: 310px;
+    max-width: 350px;
     min-width: 250px;
     width: 30%;
     padding: 10px 30px 10px 0;
@@ -173,6 +177,7 @@
 
 }
 .site-content .filter .search div{
+    position: relative;
     height: 100%;
     width: 100%;
     background: #eee;
@@ -199,14 +204,28 @@
     background: rgba(0,0,0,0);
     border: none;
 }
+.site-content .filter .search div em{
+    position: absolute;
+    display: inline-block;
+    visibility: hidden;
+    right: 12px;
+    width: 25px;
+    height: 25px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fenter-key.png) no-repeat center;
+    background-size: 18px 20px;
+    margin-top: 2px;
+}
 .site-content .filter .search div input:focus{
     outline: none;
+}
+.site-content .filter .search div input:focus+em{
+    visibility: visible;
 }
 .site-content .filter .filter-container.fixed{
     position: fixed;
     padding-left: 310px;
     background: rgba(255,255,255,.95);
-    z-index: 0;
+    z-index: 1;
     right: 0;
     top: 0;
 }
@@ -230,18 +249,49 @@
 }
 .site-content .news .list-container{
     width: 70%;
+    max-width: 1000px;
     float: left;
+}
+.site-content .news .list-container .none{
+    position: relative;
+    width: 100%;
+    padding: 80px 0;
+    text-align: center;
+    display: none;
+}
+.site-content .news .list-container .none.active{
+    display: block;
+}
+.site-content .news .list-container .none h5{
+    display: inline-block;
+    height: 100%;
+    text-align: center;
+    color: #ccc;
+    font-size: 30px;
 }
 .site-content .news .list-container .list{
+    display: inline-block;
+    padding: 18px 0 10px 30px;
     width: 100%;
-    padding: 18px 10px 10px 30px;
-    border-bottom: 1px solid #eee;
+    white-space: nowrap;
     overflow: hidden;
+    visibility: hidden;
+    animation: fadeIn 0.7s linear 0s normal forwards;
+    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
+    -moz-animation: fadeIn 0.7s linear 0s normal forwards;
+}
+.site-content .news .list-container .list.visible{
+    visibility: visible;
+}
+.site-content .news .list-container .list .wrap{
+    display: inline;
+    padding: 0 0 18px;
+    border-bottom: 1px solid #eee;
 }
 .site-content .news .list-container .list .info{
-    float: left;
+    display: inline-block;
     width: 65%;
-    max-width: 500px;
+    vertical-align: baseline;
     padding-right: 20px;
 }
 .site-content .news .list-container .list .info .tags{
@@ -268,6 +318,7 @@
 .site-content .news .list-container .list .info .summary{
     line-height: 24px;
     margin-top: 10px;
+    min-height: 50px;
     font-size: 13px;
     white-space: normal;
     color: #666;
@@ -335,10 +386,12 @@
     background-size: 16px;
 }
 .site-content .news .list-container .list .image{
-    float: right;
-    width:35%;
-    height: 150px;
-    text-align: right;
+    display: inline-block;
+    vertical-align: top;
+    height: inherit;
+    margin-left: 1%;
+    min-width: 200px;
+    max-height: 150px;
     overflow: hidden;
 }
 .site-content .news .list-container .list .image img{
@@ -350,8 +403,9 @@
 }
 .site-content .news .rank-container{
     width: 25%;
-    padding: 30px 30px 20px 0;
-    float: right;
+    max-width: 380px;
+    padding: 45px 0 20px 30px;
+    float: left;
 }
 .site-content .news .rank-container .parent{
     padding: 0 15px 30px;
@@ -403,6 +457,7 @@
     border-bottom: 1px dotted #999;
 }
 .site-content .news .rank-container .item h6 .time{
+    margin-left: 8px;
     color: #999;
     font-size: 12px;
 }
