@@ -13,12 +13,17 @@
 //站点首页
 Route::get('/', 'Site\IndexController@index');
 Route::get('/index/list', 'Site\IndexController@articles');
-Route::get('/test', 'Site\IndexController@test');
+Route::get('/test', 'Site\TagController@test');
+Route::get('/403', function(){
+    abort(403);
+});
 //搜索
 Route::get('/search', 'Site\SearchController@index');
 Route::get('/search/{keyword}', 'Site\SearchController@index');
 Route::get('/search/{keyword}/list', 'Site\SearchController@results');
 //标签
+Route::get('/tag/{tag}', 'Site\TagController@index');
+Route::get('/tag/{tag}/list', 'Site\TagController@tags');
 //站点专题页
 Route::get('/special', 'Site\SpecialController@home');
 Route::get('/special/{id}', 'Site\SpecialController@index');

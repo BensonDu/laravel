@@ -31,29 +31,30 @@
 
 (function(){
     var self = this,
-        keyword = default_data.search.keyword,
-        total = default_data.search.total,
+        tag = default_data.tag,
+        total = default_data.total,
         index = 0,
         size = 10;
 
     this.model = {
         el : '#site-content',
         data : {
+            visible : 'visible',
             total : total,
-            keyword : keyword,
+            tag : tag,
             load:'More',
-            list : default_data.search.list
+            list : default_data.list
         },
         methods : {
             get_list : function(){
                 self.get_list();
             },
-            search : function(){
-                location.href = '/search/'+self.model.data.keyword;
+            tag : function(){
+                location.href = '/tag/'+self.model.data.keyword;
             }
         }
     };
-    this.list = default_data.search.list;
+    this.list = default_data.list;
     this.insert_list = function(list){
         self.list = self.list.concat(list);
         self.model.data.list = $.extend([],self.list);
@@ -74,7 +75,7 @@
     this.get_list = function(){
         if(!self.has_more())return;
         self.btn_loading();
-        request.get('/search/'+encodeURIComponent(self.model.data.keyword)+'/list',function(ret){
+        request.get('/tag/'+encodeURIComponent(self.model.data.tag)+'/list',function(ret){
                 if(ret.hasOwnProperty('code') && ret.code ==0){
                     index++;
                     setTimeout(function(){

@@ -377,14 +377,6 @@
     color: #999;
     margin-left: 5px;
 }
-.site-content .news .list-container .list .info .social .like em{
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/like-4.png) no-repeat center;
-    background-size: 24px;
-}
-.site-content .news .list-container .list .info .social .collect em{
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/stars-2.png) no-repeat center;
-    background-size: 16px;
-}
 .site-content .news .list-container .list .image{
     display: inline-block;
     vertical-align: top;

@@ -216,14 +216,14 @@ class ArticleSiteModel extends Model
             ->get($select);
     }
     /*
-   |--------------------------------------------------------------------------
-   | 关键词搜索文章数量
-   |--------------------------------------------------------------------------
-   |
-   | @param  string $keyword
-   | @return int  $count
-   |
-   */
+    |--------------------------------------------------------------------------
+    | 关键词搜索文章数量
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $tag
+    | @return int  $count
+    |
+    */
     public static function search_article_count($site_id, $keyword){
         return  DB::table('articles_site')
             ->leftJoin('users', 'articles_site.author_id', '=', 'users.id')
@@ -237,6 +237,60 @@ class ArticleSiteModel extends Model
                     ->where('articles_site.deleted',0)
                     ->where('users.nickname', 'LIKE', '%'.$keyword.'%');
             })
+            ->count();
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 标签对应文章
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $keyword
+    | @return array  $article_list
+    |
+    */
+    public static function tag_article($site_id, $tag, $skip = 0, $take = 10){
+        $select = [
+            'users.id AS user_id',
+            'users.nickname',
+            'users.avatar',
+            'articles_site.id AS article_id',
+            'articles_site.title',
+            'articles_site.summary',
+            'articles_site.tags',
+            'articles_site.create_time',
+            'articles_site.image'
+        ];
+        return DB::table('articles_site')
+            ->leftJoin('users', 'articles_site.author_id', '=', 'users.id')
+            ->where('articles_site.site_id' ,$site_id)
+            ->where('articles_site.deleted',0)
+            ->where('articles_site.tags', 'LIKE', '%'.$tag.'%')
+            /* TODO
+             * ->where('post_status',1)
+             */
+            ->orderBy('create_time', 'desc')
+            ->take($take)
+            ->skip($skip)
+            ->get($select);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 标签对应文章数量
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $keyword
+    | @return int  $count
+    |
+    */
+    public static function tag_article_count($site_id, $tag){
+        return DB::table('articles_site')
+            ->leftJoin('users', 'articles_site.author_id', '=', 'users.id')
+            ->where('articles_site.site_id' ,$site_id)
+            ->where('articles_site.deleted',0)
+            ->where('articles_site.tags', 'LIKE', '%'.$tag.'%')
+            /* TODO
+             * ->where('post_status',1)
+             */
             ->count();
     }
 
