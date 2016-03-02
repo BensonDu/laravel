@@ -1,6 +1,9 @@
 @extends('layout.user')
 @section('style')@parent  <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor.min.css" rel="stylesheet">
-    <link href="http://dn-t2ipo.qbox.me/v3/public/editor/default.min.css" rel="stylesheet">
+    <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fdefault.custom.min.css" rel="stylesheet">
+<style>
+
+</style>
     <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Ffont-awesome.css?" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
     <link href="/css/user.edit.css" rel="stylesheet">

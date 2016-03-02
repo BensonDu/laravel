@@ -57,7 +57,7 @@
     </div>
     <div class="bottom ">
         <div class="entry">
-            <a href="#">
+            <a href="/admin">
                 <i class="web"></i><span>站点管理</span>
             </a>
             <a href="/account/logout">

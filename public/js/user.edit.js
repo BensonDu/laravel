@@ -66,7 +66,10 @@
         }
     });
     this.insert_plugin = $('#content-editor').mediumInsert({
-        editor: self.content
+        editor: self.content,
+        insertBtnPositionFix : {
+            left : -50
+        }
     });
 
 }).call(define('plugin_editor'));

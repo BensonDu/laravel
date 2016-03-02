@@ -352,7 +352,6 @@ class DataImport extends Controller
                     'category'      => '',
                     'post_status'   => 1,
                     'post_time'     => $v->post_time,
-                    'contribute_time'     => $v->post_time,
                     'update_time'         => $v->update_time,
                     'create_time'         => $v->create_time
                 ]);

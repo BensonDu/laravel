@@ -148,6 +148,11 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             addons: {
                 images: true, // boolean or object containing configuration
                 embeds: true
+            },
+            //修复插入按钮位置
+            insertBtnPositionFix:{
+                left : 0,
+                top : 0
             }
         };
 
@@ -614,10 +619,9 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
 
                 top += $p.height() + 15; // 15px offset
             }
-
             $buttons.css({
-                left: left,
-                top: top
+                left: left+this.options.insertBtnPositionFix.left,
+                top: top+this.options.insertBtnPositionFix.top
             });
         }
     };

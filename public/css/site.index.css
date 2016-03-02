@@ -361,6 +361,7 @@
     display: inline-block;
     height: 100%;
     margin-left: 5px;
+    vertical-align: top;
 }
 .site-content .news .list-container .list .info .social .inter em{
     display: inline-block;

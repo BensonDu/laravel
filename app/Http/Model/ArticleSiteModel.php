@@ -100,24 +100,20 @@ class ArticleSiteModel extends Model
      | @return array  $article_list
      |
     */
-    public static function get_article_categorys($id){
+    public static function get_article_categories($id){
         $items =  DB::table('article_category')
             ->where('site_id' ,$id)
             ->orderBy('order','asc')
             ->take(5)
             ->get();
-        $categorys = [];
+        $categories = [];
         if(!empty($items)){
             foreach($items as $k => $v){
-                $categorys[$k]['name']     = $v->name;
-                $categorys[$k]['id']       = $v->id;
+                $categories[$k]['name']     = $v->name;
+                $categories[$k]['id']       = $v->id;
             }
         }
-        array_unshift($categorys,[
-            'id'    => 0,
-            'name'  => '全部'
-        ]);
-        return $categorys;
+        return $categories;
     }
     /*
     |--------------------------------------------------------------------------

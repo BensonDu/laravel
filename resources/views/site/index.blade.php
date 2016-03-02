@@ -31,7 +31,7 @@
             <div id="filter" class="filter-container">
                 <div class="parent">
                     <div class="cate">
-@foreach ($categorys as $category)
+@foreach ($categories as $category)
                         <a v-bind:class="category.active == {{$category['id']}} ? 'active' : ''" v-on:click="filter({{$category['id']}})"><span>{{$category['name']}}</span></a>
 @endforeach
                     </div>

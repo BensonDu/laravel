@@ -150,7 +150,6 @@ class ArticleUserModel extends Model
             $article_site->image            = $article_user->image;
             $article_site->tags             = $article_user->tags;
             $article_site->post_status      = 0;
-            $article_site->contribute_time  = now();
             $article_site->create_time      = now();
             $article_site->update_time      = now();
             $article_site->save();

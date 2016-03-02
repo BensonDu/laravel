@@ -378,6 +378,7 @@
     -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
 }
 .content .container{
+    position: relative;
     width: 100%;
     min-width: 500px;
     min-height: 500px;

@@ -1,0 +1,220 @@
+<?php
+
+namespace App\Http\Model\Admin;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+class ArticleModel extends Model
+{
+    protected $table = 'articles_site';
+    public $timestamps = false;
+
+    /*
+    |--------------------------------------------------------------------------
+    | 获取文章列表
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @param  number $skip
+    | @param  number $take
+    | @param  string $order desc | asc
+    | @param  mix $keyword
+    | @return array
+    |
+    */
+   public static function get_articles($site_id, $skip, $take, $order = 'desc', $keyword = null,$post_status = 0,$orderby = 'create_time', $uid = null, $deleted = 0){
+       $select = [
+           'users.nickname',
+           'users.id AS user_id',
+           'site_auth_map.role',
+           'articles_site.id AS article_id',
+           'articles_site.title',
+           'articles_site.create_time',
+           'articles_site.post_status',
+           'articles_site.post_time',
+           'articles_site.create_time',
+           'articles_site.contribute_status'
+       ];
+
+       $query = DB::table('articles_site')
+                ->leftJoin('users', 'articles_site.author_id', '=', 'users.id')
+                ->leftJoin('site_auth_map', function($join){
+                    $join->on('site_auth_map.site_id', '=', 'articles_site.site_id');
+                    $join->on('site_auth_map.user_id', '=', 'articles_site.author_id');
+                });
+
+       if(empty($keyword)){
+           //我的文章
+           if(!is_null($uid)){
+               $query->where('articles_site.author_id' ,$uid);
+           }
+           $query->where('articles_site.site_id' ,$site_id)
+               ->where('articles_site.deleted',$deleted);
+           if(!is_null($post_status)){
+               $query->where('articles_site.post_status' ,$post_status);
+           }
+       }
+       else{
+           $query->where(function($query) use($site_id,$keyword,$post_status,$uid,$deleted){
+               //我的文章
+               if(!is_null($uid)){
+                   $query->where('articles_site.author_id' ,$uid);
+               }
+               $query->where('articles_site.site_id' ,$site_id)
+                   ->where('articles_site.deleted',$deleted)
+                   ->where('articles_site.title', 'LIKE', '%'.$keyword.'%');
+               if(!is_null($post_status)){
+                   $query->where('articles_site.post_status' ,$post_status);
+               }
+           })
+           ->orWhere(function($query) use($site_id,$keyword,$post_status,$uid,$deleted){
+               //我的文章
+               if(!is_null($uid)){
+                   $query->where('articles_site.author_id' ,$uid);
+               }
+               $query->where('articles_site.site_id' ,$site_id)
+                   ->where('articles_site.deleted',$deleted)
+                   ->where('users.nickname', 'LIKE', '%'.$keyword.'%');
+               if(!is_null($post_status)){
+                   $query->where('articles_site.post_status' ,$post_status);
+               }
+           });
+       }
+
+       return  $query->orderBy('articles_site.contribute_status', 'asc')
+           ->orderBy('articles_site.'.$orderby, $order)
+           ->skip($skip)
+           ->take($take)
+           ->get($select);
+
+   }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取未发表文章列表总数
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @param  string $keyword
+    | @return number
+    |
+    */
+    public static function get_articles_count($site_id,$keyword = null,$post_status = 0,$uid = null,$deleted = 0){
+        $query = DB::table('articles_site')
+            ->leftJoin('users', 'articles_site.author_id', '=', 'users.id');
+
+        if(empty($keyword)){
+            if(!is_null($uid)){
+                $query->where('articles_site.author_id' ,$uid);
+            }
+            $query->where('articles_site.site_id' ,$site_id)
+                ->where('articles_site.deleted',$deleted);
+            if(!is_null($post_status)){
+                $query->where('articles_site.post_status' ,$post_status);
+            }
+        }
+        else{
+            $query->where(function($query) use($site_id,$keyword,$post_status,$uid,$deleted){
+                //我的文章
+                if(!is_null($uid)){
+                    $query->where('articles_site.author_id' ,$uid);
+                }
+                $query->where('articles_site.site_id' ,$site_id)
+                    ->where('articles_site.deleted',$deleted)
+                    ->where('articles_site.title', 'LIKE', '%'.$keyword.'%');
+
+                if(!is_null($post_status)){
+                    $query->where('articles_site.post_status' ,$post_status);
+                }
+
+            })
+                ->orWhere(function($query) use($site_id,$keyword,$post_status,$uid,$deleted){
+                    //我的文章
+                    if(!is_null($uid)){
+                        $query->where('articles_site.author_id' ,$uid);
+                    }
+                    $query->where('articles_site.site_id' ,$site_id)
+                        ->where('articles_site.deleted',$deleted)
+                        ->where('users.nickname', 'LIKE', '%'.$keyword.'%');
+                    if(!is_null($post_status)){
+                        $query->where('articles_site.post_status' ,$post_status);
+                    }
+                });
+        }
+
+
+        return  $query->count();
+
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取文章基本信息
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @param  string $article_id
+    | @return object
+    |
+    */
+    public static function get_artcile_brief_info($site_id ,$article_id){
+        return DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->first();
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 设置文章发布信息
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @param  string $article_id
+    | @param  string $category
+    | @param  string $type
+    | @param  string $time Optional
+    | @return object
+    |
+    */
+    public static function save_article_post($site_id, $article_id, $category, $post_status, $time = 0){
+        $update = [
+            'category'=>$category,
+            'post_status'=>$post_status,
+            'post_time'=>$time,
+            'contribute_status' => 1
+        ];
+        return  DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->update($update);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 更新文章
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @param  string $article_id
+    | @param  string $data
+    | @return bool
+    |
+    */
+    public static function update_article($site_id, $article_id, $data){
+        $info = [
+            'title'     => $data['title'],
+            'summary'   => $data['summary'],
+            'content'   => $data['content'],
+            'tags'      => $data['tags'],
+            'image'     => $data['image'],
+            'contribute_status' => 1,
+            'update_time'=> now()
+        ];
+        return  DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->update($info);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 删除文章
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $article_id
+    | @return bool
+    |
+    */
+    public static function delete_article($site_id, $article_id, $deleted = 1){
+        return  DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->update(['deleted' => $deleted]);
+    }
+
+}

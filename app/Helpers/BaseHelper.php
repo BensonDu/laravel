@@ -98,3 +98,19 @@ if (! function_exists('json_encode_safe')) {
         return $result;
     }
 }
+if (! function_exists('admin_role_map')) {
+    /**
+     * 站点管理角色类型 id
+     * @param  string $role_id
+     * @return string $name
+     */
+    function admin_role_map($id)
+    {
+        $map = [
+            1 => '撰稿人',
+            2 => '编辑',
+            3 => '管理员'
+        ];
+        return isset($map[$id]) ? $map[$id] : '访客';
+    }
+}

@@ -1,0 +1,176 @@
+.admin-mid{
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    border-right: 1px solid #eee;
+    background: #fafafa;
+    left: 60px;
+    top: 0;
+    z-index: 10;
+    transition: left .4s;
+    -moz-transition: left .4s; /* Firefox 4 */
+    -webkit-transition: left .4s; /* Safari 和 Chrome */
+}
+.admin-mid div{
+    width: 100%;
+}
+/*中栏头部start*/
+.admin-mid .top{
+    margin-top: 50px;
+}
+.admin-mid .top .logo{
+    display: inline-block;
+    text-align: center;
+}
+.admin-mid .top .logo img{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.admin-mid .top h2{
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 35px;
+    letter-spacing: 3px;
+}
+.admin-mid .top h3{
+    font-size: 14px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 20px;
+    letter-spacing: 3px;
+    padding: 0 8%;
+}
+/*中栏头部end*/
+/*中栏中部导航start*/
+.admin-mid .mid{
+    margin-top: 40px;
+    padding: 0 70px;
+}
+.admin-mid .mid .container{
+    width: 100%;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px 0;
+    overflow: visible;
+}
+.admin-mid .mid .container a{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    line-height: 45px;
+    font-weight: 800;
+    overflow: visible;
+}
+.admin-mid .mid .container a span{
+    display: inline-block;
+    line-height: 22px;
+}
+.admin-mid .mid .container a.active span{
+    border-bottom: 1px dotted #999;
+}
+.admin-mid .mid .container a:hover span{
+    border-bottom: 1px dotted #999;
+}
+.admin-mid .mid .container a em{
+    position: absolute;
+    display: inline-block;
+    padding: 3px 5px;
+    font-size: 12px;
+    line-height: 12px;
+    right: -7px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 1px 0;
+}
+/*中栏中部导航end*/
+/*中栏底部导航start*/
+.admin-mid .bottom{
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    padding: 15px;
+}
+.admin-mid .bottom a{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: #999;
+    font-size: 12px;
+    line-height: 20px;
+}
+/*中栏底部导航end*/
+
+.admin-content{
+    position: relative;
+    width: 100%;
+    padding-left: 310px;
+    transition: padding-left .4s;
+    -moz-transition: padding-left .4s; /* Firefox 4 */
+    -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
+}
+.admin-content .top{
+    width: 100%;
+    height: 40px;
+    padding-left: 50px;
+    background: #fafafa;
+}
+.admin-content .top .name{
+    height: 100%;
+}
+.admin-content .top .name em{
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    padding: 10px;
+    margin-right: 8px;
+    width: 20px;
+    float: left;
+}
+.admin-content .top .name h3{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 40px;
+    float: left;
+}
+.admin-content .top .name.article em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fariticle.png) no-repeat center;
+    background-size: 20px;
+}
+.admin-content .admin-area{
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    padding: 0 50px;
+}
+.admin-content .admin-area.hide{
+    opacity: 0.3;
+}
+/*遮罩 star*/
+.background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,.8);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1;
+    transition: visibility 0s, opacity 0.5s linear;
+    -moz-transition: visibility 0s, opacity 0.5s linear;
+    -webkit-transition: visibility 0s, opacity 0.5s linear;
+}
+.background.show{
+    visibility: visible;
+    opacity: 1;
+}
+/*遮罩 end*/

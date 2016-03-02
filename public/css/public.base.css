@@ -28,7 +28,6 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 
 img {
     border:0;
-    width: 100%;
 }
 figure{
     margin: 5px 0;
@@ -134,7 +133,6 @@ body{
 .load-more.loading p:hover{
     background: #fff;
 }
-/*弹窗*/
 /*弹窗start*/
 .global-pop{
     visibility: hidden;

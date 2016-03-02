@@ -31,8 +31,6 @@
         return dom.mid.css('left',140),dom.content.css('padding-left',390), dom.filter.addClass('trans').addClass('unfold');
     };
 
-    this.resize_event = dom.w.resize(function(){});
-
     this.scroll_event = dom.w.scroll(self.filter_fixed());
 
 }).call(define('view_page_response'));
@@ -157,7 +155,6 @@
                 controller_list.get_category_list(id);
             },
             search : function(){
-                console.log(self.model.data.keyword);
                 window.open('/search/'+self.model.data.keyword, '_blank');
             }
         }
