@@ -216,5 +216,16 @@ class ArticleModel extends Model
     public static function delete_article($site_id, $article_id, $deleted = 1){
         return  DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->update(['deleted' => $deleted]);
     }
+    /*
+    |--------------------------------------------------------------------------
+    | 待审核的文章数量
+    |--------------------------------------------------------------------------
+    | @param  string $site_id
+    | @return number
+    |
+    */
+    public static function contribute_article_count($site_id){
+        return DB::table('articles_site')->where('site_id',$site_id)->where('deleted',0)->where('contribute_status',0)->count();
+    }
 
 }

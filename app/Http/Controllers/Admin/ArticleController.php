@@ -13,7 +13,14 @@ use App\Http\Model\ArticleSiteModel;
 
 class ArticleController extends AdminController
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+        view()->share(['admin_nav_top'=>[
+            'name' => '文章管理',
+            'class'=> 'article'
+        ]]);
+    }
     /*
      |--------------------------------------------------------------------------
      | 未发布文章
@@ -134,7 +141,7 @@ class ArticleController extends AdminController
         $article_id = $request->input('id');
         $info = $this->check_article_auth($article_id, null, 'array');
         if(empty($article_id) || empty($info)){
-            $this->ApiOut(40003,'权限不足');
+            return $this->ApiOut(40003,'权限不足');
         }
         //TODO 处理通知
         if($info->contribute_status == 0){
@@ -154,7 +161,7 @@ class ArticleController extends AdminController
         $article_id = $request->input('id');
         $info = $this->check_article_auth($article_id, null, 'array');
         if(empty($article_id) || empty($info)){
-            $this->ApiOut(40003,'权限不足');
+            return $this->ApiOut(40003,'权限不足');
         }
         //TODO 处理通知
         if($info->contribute_status == 0){
@@ -174,7 +181,7 @@ class ArticleController extends AdminController
         $article_id = $request->input('id');
         $info = $this->check_article_auth($article_id, null, 'array');
         if(empty($article_id) || empty($info)){
-            $this->ApiOut(40003,'权限不足');
+            return $this->ApiOut(40003,'权限不足');
         }
         //TODO 处理通知
         if($info->contribute_status == 0){
@@ -384,9 +391,7 @@ class ArticleController extends AdminController
         //TODO 最后权限判断获取角色ID
         $ret = [];
         if(!empty($list)){
-            $i = 2;
             foreach($list as $k => $v){
-                $i++;
                 $ret[$k]['create_time'] = $v->create_time;
                 $ret[$k]['article_id']  = $this->check_article_auth($v->article_id,$v->user_id) ? $v->article_id : null;
                 $ret[$k]['title']       = $v->title;

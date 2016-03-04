@@ -15,12 +15,11 @@
     </div>
     <div class="mid">
         <div class="container">
-            <a href="/admin/" ><span>文章管理</span><em>15</em></a>
+            <a href="/admin/" ><span>文章管理</span><em>{{$uncontribute_article_num}}</em></a>
             <a href="#"><span>专题管理</span></a>
             <a href="#" ><span>精选管理</span></a>
             <a href="#" ><span>分类管理</span></a>
-            <a href="#" ><span>用户管理</span></a>
-            <a href="#" ><span>站点配置</span></a>
+            <a href="/admin/user" ><span>用户管理</span></a>
         </div>
     </div>
     <div class="bottom">
@@ -32,9 +31,9 @@
 <!--管理内容start-->
 <div id="admin-content" class="admin-content">
     <div class="top">
-        <div class="name article">
+        <div class="name {{$admin_nav_top['class']}}">
             <em></em>
-            <h3>文章管理</h3>
+            <h3>{{$admin_nav_top['name']}}</h3>
         </div>
     </div>
     <div class="admin-area">
@@ -51,7 +50,5 @@
 <!--弹出层end-->
 
 @stop
-@section('script')@parent<script src="/js/admin/admin.base.js"></script>
-<script src="/lib/datetimepicker/js/moment.min.js"></script>
-<script src="/lib/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+@section('script')@parent<script src="/js/admin/base.js"></script>
 @stop

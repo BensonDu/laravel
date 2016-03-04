@@ -613,17 +613,21 @@
     border-bottom: 2px solid #6e8cfb;;
 }
 .pop-container .post .time{
-    opacity: 0;
+    visibility: hidden;
     width: 100%;
     padding:  20px 0 10px;
     border-bottom: 1px solid #eee;
+}
+.pop-container .post .time .next,
+.pop-container .post .time .prev{
+    visibility: hidden !important;
 }
 .pop-container .post .time .picker-container{
     width: 220px;
     margin: 0 auto;
 }
 .pop-container .post .time .picked{
-   width: 100%;
+    width: 100%;
     text-align: center;
 }
 .pop-container .post .time .picked p{
@@ -634,7 +638,11 @@
     line-height: 30px;
 }
 .pop-container .post .time.active{
-    opacity: 1;
+    visibility: visible;
+}
+.pop-container .post .time.active .next,
+.pop-container .post .time.active .prev{
+    visibility: visible !important;
 }
 .pop-container .post .confirm{
     margin-top: 30px;

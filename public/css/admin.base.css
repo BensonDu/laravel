@@ -145,6 +145,10 @@
     background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fariticle.png) no-repeat center;
     background-size: 20px;
 }
+.admin-content .top .name.user em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fuser.png) no-repeat center;
+    background-size: 20px;
+}
 .admin-content .admin-area{
     position: relative;
     width: 100%;

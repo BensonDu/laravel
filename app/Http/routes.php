@@ -81,7 +81,8 @@ Route::get('/user/index/list', 'User\IndexController@article_list');
 Route::get('/user/{id}/{articleid}', 'User\DetailController@index');
 
 //站点管理
-Route::group(['middleware' => 'AdminAuth'], function () {
+Route::group(['middleware' => 'AdminAuth'], function (){
+    //文章管理
     Route::get('/admin', 'Admin\ArticleController@unpub');
     Route::get('/admin/article', 'Admin\ArticleController@unpub');
     Route::get('/admin/article/unpub', 'Admin\ArticleController@unpub');
@@ -99,6 +100,14 @@ Route::group(['middleware' => 'AdminAuth'], function () {
     Route::get('/admin/article/recycles', 'Admin\ArticleController@recycles');
     Route::get('/admin/article/info', 'Admin\ArticleController@info');
     Route::post('/admin/article/save', 'Admin\ArticleController@save');
+    //用户管理
+    Route::get('/admin/user', 'Admin\UserController@index');
+    Route::get('/admin/user/users', 'Admin\UserController@users');
+    Route::get('/admin/user/delete', 'Admin\UserController@delete');
+    Route::get('/admin/user/info', 'Admin\UserController@info');
+    Route::get('/admin/user/update', 'Admin\UserController@update');
+    Route::get('/admin/user/search', 'Admin\UserController@search');
+    Route::get('/admin/user/add', 'Admin\UserController@add');
 });
 
 //数据导入

@@ -37,7 +37,7 @@ class Auth
      */
     private function set_env_admin_role(){
         if(isset($_ENV['uid'])){
-            $role = UserModel::get_user_role_($_ENV['site_id'],$_ENV['uid']);
+            $role = UserModel::get_user_role($_ENV['site_id'],$_ENV['uid']);
             $_ENV['admin']['role'] = !empty($role) ? intval($role) : null;
         }
     }
