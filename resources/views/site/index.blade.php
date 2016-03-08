@@ -5,7 +5,7 @@
     @parent
     <!--站点内容start-->
     <div id="site-content" class="site-content">
-
+@if(!empty($stars))
         <div class="star">
             <div id="star-album" class="album">
                 <div class="nav prev"><em></em></div>
@@ -26,7 +26,7 @@
                 <div class="nav next"><em></em></div>
             </div>
         </div>
-
+@endif
         <div class="filter">
             <div id="filter" class="filter-container">
                 <div class="parent">

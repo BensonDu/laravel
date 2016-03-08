@@ -1,0 +1,715 @@
+.box-container{
+    width: 100%;
+    min-width: 900px;
+    border: 1px solid #eee;
+    margin-top: 60px;
+    padding-bottom: 40px;
+    max-height: 762px;
+    overflow: hidden;
+}
+.box-container .box {
+    display: inline-block;
+    vertical-align: top;
+    width: 33%;
+    height: 240px;
+}
+.box-container .box.drag-enter{
+    background: #0088cc;
+}
+.box-container .box .star{
+    position: relative;
+    width: 240px;
+    height: 200px;
+    margin: 40px  auto;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+.box-container .box .star .head{
+    width: 100%;
+    height: 30px;
+    background: #fff;
+    cursor: move;
+}
+.box-container .box .star .head p{
+    display: inline-block;
+    float: left;
+    font-size: 12px;
+    line-height: 30px;
+    color: #999;
+    padding-left: 12px;
+    text-align: center;
+}
+.box-container .box .star .head a{
+    display: inline-block;
+    float: right;
+    font-size: 12px;
+    line-height: 30px;
+    color: #999;
+    padding-right: 12px;
+    cursor: pointer;
+}
+.box-container .box .star .head a:hover{
+    color: #000;
+}
+.box-container .box .star .img{
+    width: 100%;
+    height: 110px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.box-container .box .star .img img{
+    width: 100%;
+    height: auto;
+}
+.box-container .box .star .desc{
+    width: 100%;
+    height: 60px;
+    padding: 3px 12px;
+}
+.box-container .box .star .desc p{
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    line-height: 30px;
+    white-space: nowrap;
+    color: #999;
+}
+.box-container .box .star .desc span{
+    display: inline-block;
+    float: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    line-height: 12px;
+    white-space: nowrap;
+    color: #ccc;
+    text-align: right;
+}
+.box-container .add{
+    display: inline-block;
+    vertical-align: top;
+    width: 33%;
+    height: 240px;
+}
+.box-container .add .star{
+    position: relative;
+    width: 240px;
+    height: 200px;
+    margin: 40px  auto;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+.box-container .add .star p{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    color: #ccc;
+    font-size: 70px;
+    cursor: pointer;
+}
+.box-container .add .star p:hover{
+    color: #999;
+}
+.box-container .occupy{
+    display: inline-block;
+    vertical-align: top;
+    width: 66%;
+    height: 240px;
+}
+/*侧栏start*/
+.pop-container{
+    position: fixed;
+    top: 0;
+    padding-top: 40px;
+    right: -100%;
+    height: 100%;
+    z-index: 10;
+    box-shadow: -4px 43px 10px rgba(0,0,0,.07);
+    -webkit-transition: right 0.4s ease-out;
+    -moz-transition: right 0.4s ease-out;
+    transition: right 0.4s ease-out;
+}
+.pop-container.add,
+.pop-container.edit,
+.pop-container.search{
+    right: 0;
+}
+.pop-container .common::-webkit-scrollbar-track-piece{background-color:#fff;}
+.pop-container .common::-webkit-scrollbar{width:3px;}
+.pop-container .common::-webkit-scrollbar-thumb{background:#fff;}
+.pop-container .common:hover::-webkit-scrollbar-thumb{background:#999;}
+.pop-container.common .common{
+    display: block;
+}
+.pop-container .common{
+    height: 100%;
+    padding: 20px 40px;
+    background: rgba(255,255,255,1);
+    overflow: auto;
+}
+.pop-container .common .header{
+    width: 100%;
+    height: 30px;
+}
+.pop-container .common .header h3{
+    display: none;
+    line-height: 30px;
+    font-size: 16px;
+    height: 30px;
+}
+.pop-container .common .header h3 em{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 22px;
+    font-size: 20px;
+}
+.pop-container .common .header .edit em{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+    background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-position: -24px -56px;
+    background-size: 116px;
+}
+.pop-container .common .header h3 span{
+    vertical-align: top;
+    line-height: inherit;
+    font-size: inherit;
+}
+.pop-container .common .header a{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+    -webkit-transition: transform 0.1s ease-in;
+    -moz-transition: transform 0.1s ease-in;
+    transition: transform 0.1s ease-in;
+}
+.pop-container.add .common .header .add,
+.pop-container.edit .common .header .edit,
+.pop-container.search .common .header .search{
+    display: inline-block;
+}
+.pop-container.search .common .header .search{
+    cursor: pointer;
+}
+.pop-container .common .header a:hover{
+    transform: rotate(75deg);
+    -ms-transform: rotate(75deg);		/* IE 9 */
+    -webkit-transform: rotate(75deg);	/* Safari and Chrome */
+    -moz-transform: rotate(75deg);		/* Firefox */
+}
+.pop-container .common .content{
+    padding: 50px 0 80px 0;
+    width: 300px;
+    overflow: hidden;
+}
+.pop-container .common .content .wrap{
+    width: 600px;
+}
+.pop-container .common .content .left{
+    width: 300px;
+    float: left;
+    -webkit-transition: margin 0.3s ease-in;
+    -moz-transition: margin 0.3s ease-in;
+    transition: margin 0.3s ease-in;
+}
+.pop-container.search .common .content .left{
+    margin-left: -100%;
+}
+.pop-container .common .content .left .type{
+    width: 100%;
+    margin-top: 20px;
+}
+.pop-container .common .content .left .type ul{
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #eee;
+}
+.pop-container .common .content .left .type ul li{
+    display: inline-block;
+    width: 33%;
+    height: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    padding: 0 15px;
+    cursor: pointer;
+}
+.pop-container .common .content .left .type ul li p{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.pop-container .common .content .left .type ul li p em{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    vertical-align: top;
+}
+.pop-container .common .content .left .type ul li.link p em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fstar-type-icon.png) no-repeat center;
+    background-size: 60px;
+    background-position: 6px 6px;
+}
+.pop-container .common .content .left .type ul li.article p em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fstar-type-icon.png) no-repeat center;
+    background-size: 60px;
+    background-position: 8px -29px;
+}
+.pop-container .common .content .left .type ul li.special p em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fstar-type-icon.png) no-repeat center;
+    background-size: 60px;
+    background-position: -30px 6px;
+}
+.pop-container .common .content .left .type ul li span{
+    display: inline-block;
+    height: 15px;
+    width: 100%;
+    line-height: 15px;
+    color: #999;
+    font-size: 12px;
+}
+.pop-container .common .content .left .type ul li:hover{
+    opacity: .7;
+}
+.pop-container .common .content .left .type.link ul li.link,
+.pop-container .common .content .left .type.article ul li.article,
+.pop-container .common .content .left .type.special ul li.special{
+    border-bottom: 2px solid #6e8cfb;
+}
+.pop-container .common .content .left .type .result{
+    width: 100%;
+}
+.pop-container .common .content .left .type .result>div{
+    height: 124px;
+}
+.pop-container .common .content .left .type .result .link{
+    display: none;
+    padding: 45px 30px 50px;
+    width: 100%;
+}
+.pop-container .common .content .left .type .result .link input{
+    display: inline-block;
+    width: 100%;
+    border: 1px solid #eee;
+    font-size: 12px;
+    color: #999;
+    line-height: 26px;
+    padding: 0 10px;
+}
+.pop-container .common .content .left .type .result .link input:focus{
+    outline: none;
+}
+.pop-container .common .content .left .type .result .special,
+.pop-container .common .content .left .type .result .article{
+    display: none;
+    width: 100%;
+    padding: 24px 10px;
+}
+.pop-container .common .content .left .type .result .special .normal,
+.pop-container .common .content .left .type .result .article .normal{
+    width: 100%;
+    height: 100%;
+}
+.pop-container .common .content .left .type .result .special .normal .brief,
+.pop-container .common .content .left .type .result .article .normal .brief{
+    position: relative;
+    width: 200px;
+    height: 100%;
+    float: left;
+}
+.pop-container .common .content .left .type .result .special .normal .brief p,
+.pop-container .common .content .left .type .result .article .normal .brief p{
+    display: inline-block;
+    font-size: 12px;
+    color: #999;
+    width: 100%;
+    padding: 0 10px;
+    height: 48px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pop-container .common .content .left .type .result .special .normal .brief span,
+.pop-container .common .content .left .type .result .article .normal .brief span{
+    position: absolute;
+    display: inline-block;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    color: #ccc;
+    width: 100%;
+    padding: 0 10px;
+}
+.pop-container .common .content .left .type .result .special .normal .change,
+.pop-container .common .content .left .type .result .article .normal .change{
+    width: 80px;
+    height: 100%;
+    float: right;
+}
+.pop-container .common .content .left .type .result .special .normal .change a,
+.pop-container .common .content .left .type .result .article .normal .change a{
+    display: inline-block;
+    font-size: 12px;
+    color: #6e8cfb;
+    width: 100%;
+    margin-top: 25px;
+    cursor: pointer;
+    text-align: center;
+}
+.pop-container .common .content .left .type .result .special .empty,
+.pop-container .common .content .left .type .result .article .empty{
+    width: 100%;
+    height: 100%;
+    padding: 18px 0;
+    text-align: center;
+}
+.pop-container .common .content .left .type .result .special .empty a,
+.pop-container .common .content .left .type .result .article .empty a{
+    display: inline-block;
+    font-size: 32px;
+    color: #999;
+    cursor: pointer;
+}
+.pop-container .common .content .left .type .result .special .empty a:hover,
+.pop-container .common .content .left .type .result .article .empty a:hover{
+    color: #333;
+}
+.pop-container .common .content .left .type.link .result .link,
+.pop-container .common .content .left .type.article .result .article,
+.pop-container .common .content .left .type.special .result .special{
+    display: block;
+}
+.pop-container .common .content .left .image{
+    width: 100%;
+}
+.pop-container .common .content .left .image .name{
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+}
+.pop-container .common .content .left .image .name p{
+    display: inline-block;
+    float: left;
+    line-height: 20px;
+    font-size: 12px;
+    color: #999;
+}
+.pop-container .common .content .left .image .preview{
+    width: 100%;
+    height: 120px;
+    padding: 15px 0;
+    overflow: hidden;
+}
+.pop-container .common .content .left .image .preview .img{
+    position: relative;
+    height: 90px;
+    width: 135px;
+    border-radius: 3px;
+    border: 1px dashed #eee;
+    float: left;
+}
+.pop-container .common .content .left .image .preview .img img{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+.pop-container .common .content .left .image .preview .img input{
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.001;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    cursor: pointer;
+}
+.pop-container .common .content .left .image .preview .img .process{
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    opacity: .8;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    visibility: hidden;
+}
+.pop-container .common .content .left .image .preview .img.loading .process{
+    visibility: visible;
+}
+.pop-container .common .content .left .image .preview .img .process p{
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+    margin-top: 38px;
+    color: #666;
+    text-align: center;
+}
+.pop-container .common .content .left .image .preview .img .close{
+    display: inline-block;
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    width: 16px;
+    height: 16px;
+    line-height: 12px;
+    font-size: 14px;
+    border: 1px dotted #ccc;
+    color: #ccc;
+    text-align: center;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    z-index: 4;
+}
+.pop-container .common .content .left .image .preview .img .close:hover{
+    color: #999;
+}
+.pop-container .common .content .left .image .preview .remark{
+    width: 110px;
+    height: 100%;
+    padding: 10px 0;
+    margin-right: 32px;
+    float: right;
+}
+.pop-container .common .content .left .image .preview .remark p{
+    text-align: justify;
+    font-size: 12px;
+    color: #ccc;
+}
+
+
+.pop-container .common .content .left .title{
+    width: 100%;
+    margin-top: 50px;
+}
+.pop-container .common .content .left .category{
+    width: 100%
+}
+.pop-container .common .content .left .category .name,
+.pop-container .common .content .left .title .name{
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+}
+.pop-container .common .content .left .category .name p,
+.pop-container .common .content .left .title .name p{
+    display: inline-block;
+    float: left;
+    line-height: 20px;
+    font-size: 12px;
+    color: #999;
+}
+.pop-container .common .content .left .title .textarea{
+    width: 100%;
+    padding: 20px 0;
+}
+.pop-container .common .content .left .title .textarea textarea{
+    display: inline-block;
+    color: #666;
+    padding: 0;
+    width: 100%;
+    font-size: 14px;
+    line-height: 28px;
+    height: 90px;
+    text-align: left;
+    resize: none;
+    border: none;
+}
+.pop-container .common .content .left .category .input{
+    width: 100%;
+    padding: 10px 0;
+}
+.pop-container .common .content .left .category .input input{
+    display: inline-block;
+    color: #666;
+    padding: 0;
+    width: 100%;
+    font-size: 14px;
+    line-height: 28px;
+    text-align: left;
+    border: none;
+}
+.pop-container .common .content .left .category .input input:focus,
+.pop-container .common .content .left .title .textarea textarea:focus{
+    outline: none;
+}
+.pop-container .common .content .left input::-webkit-input-placeholder,
+.pop-container .common .content .left textarea::-webkit-input-placeholder{
+    color: #ccc;
+    line-height: 28px;
+    font-size: 12px;
+}
+.pop-container .common .content .left input::-moz-placeholder,
+.pop-container .common .content .left textarea::-moz-placeholder{
+    color: #ccc;
+    line-height: 28px;
+    font-size: 12px;
+}
+.pop-container .common .content .left input:-moz-placeholder,
+.pop-container .common .content .left textarea:-moz-placeholder{
+    color: #ccc;
+    line-height: 28px;
+    font-size: 12px;
+}
+.pop-container .common .content .left input:-ms-input-placeholder,
+.pop-container .common .content .left textarea:-ms-input-placeholder{
+    color: #ccc;
+    line-height: 28px;
+    font-size: 12px;
+}
+.pop-container .common .content .right{
+    width: 300px;
+    height: 100%;
+    float: left;
+}
+.pop-container .common .content .right .keyword{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    -webkit-transition: margin 0.3s ease-in;
+    -moz-transition: margin 0.3s ease-in;
+    transition: margin 0.3s ease-in;
+}
+.pop-container .common .content .right .keyword input{
+    display: inline-block;
+    height: 34px;
+    width: 240px;
+    font-size: 12px;
+    color: #999;
+    padding: 0 10px;
+    vertical-align: bottom;
+    border:1px solid #eee;
+    background: rgba(0,0,0,0);
+    float: left;
+}
+.pop-container .common .content .right .keyword input:focus{
+    outline: none;
+}
+.pop-container .common .content .right .keyword a{
+    display: inline-block;
+    height: 34px;
+    width: 60px;
+    line-height: 34px;
+    font-size: 12px;
+    background: #999;
+    color: #fff;
+    vertical-align: bottom;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: background 0.3s ease-in;
+    -moz-transition: background 0.3s ease-in;
+    transition: background 0.3s ease-in;
+}
+.pop-container .common .content .right .keyword a:hover{
+    background: #333;
+}
+.pop-container .common .content .right .list{
+    width: 100%;
+    margin-top: 20px;
+}
+.pop-container .common .content .right .list a{
+    display: inline-block;
+    height: 60px;
+    padding: 14px 10px;
+    border-bottom: 1px solid #eee;
+}
+.pop-container .common .content .right .list a p{
+    display: inline-block;
+    width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #999;
+    float: left;
+}
+.pop-container .common .content .right .list a span{
+    display: inline-block;
+    width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #ccc;
+    margin-top: 8px;
+    float: left;
+}
+.pop-container .common .content .right .list a em{
+    display: inline-block;
+    height: 100%;
+    width: 30px;
+    line-height: 2px;
+    font-weight: 900;
+    float: right;
+    cursor: pointer;
+    color: #999;
+}
+.pop-container .common .content .right .list a em:hover{
+    color: #333;
+}
+.pop-container .common .confirm{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 80px;
+    border-top: 1px solid #eee;
+    width: 100%;
+    padding-top: 10px;
+    background: #fff;
+}
+.pop-container .common .confirm div{
+    float: left;
+    width: 50%;
+    height: 70px;
+    overflow: hidden;
+    text-align: center;
+}
+.pop-container .common .confirm div a{
+    display: inline-block;
+    width: 40px;
+    height: 70px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.pop-container .common .confirm div a em{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-size: 140px;
+}
+.pop-container .common .confirm div a em.yes{
+    background-position:  8px 8px;;
+}
+.pop-container .common .confirm div a em.no{
+    background-position:  8px -27px;;
+}
+.pop-container .common .confirm div a:hover{
+    opacity: .6;
+}
+.pop-container .common .confirm div a span{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    line-height: 12px;
+    font-size: 12px;
+    color: #999;
+}
+/*侧栏end*/

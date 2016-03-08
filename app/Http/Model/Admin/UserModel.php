@@ -162,10 +162,8 @@ class UserModel extends Model
     | @return bool
     |
     */
-    public static function update_user($site_id, $user_id, $role,$create_time = null){
-        $update = ['role'=>$role];
-        if(!is_null($create_time))$update['create_time'] = $create_time;
-        return  DB::table('site_auth_map')->where('site_id',$site_id)->where('user_id',$user_id)->update($update);
+    public static function update_user($site_id, $user_id, $role){
+        return  DB::table('site_auth_map')->where('site_id',$site_id)->where('user_id',$user_id)->update(['role'=>$role]);
     }
     /*
     |--------------------------------------------------------------------------
@@ -204,7 +202,7 @@ class UserModel extends Model
     public static function add_user($site_id,$user_id,$role){
         $ex =  DB::table('site_auth_map')->where('site_id',$site_id)->where('user_id',$user_id)->count();
         if($ex){
-            return self::update_user($site_id,$user_id,$role,now());
+            return  DB::table('site_auth_map')->where('site_id',$site_id)->where('user_id',$user_id)->update(['role'=>$role,'create_time'=>now(),'deleted'=>0]);
         }
         else{
             $user = new UserModel();

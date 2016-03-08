@@ -52,21 +52,21 @@
 }
 .list-header .nav{
     height: 100%;
-    padding: 10px 0 0;
+    padding: 14px 0 0;
     float: right;
 }
 .list-header .nav a{
     display: inline-block;
-    height: 100%;
-    line-height: 40px;
+    height: 36px;
+    line-height: 36px;
     font-size: 12px;
     cursor: pointer;
     color: #fff;
+    background: #aaa;
     padding: 0 14px;
-    background: #999;
     transition: background .4s;
-    -moz-transition: background .4s; /* Firefox 4 */
-    -webkit-transition: background .4s; /* Safari 和 Chrome */
+    -moz-transition: background .4s;
+    -webkit-transition: background .4s;
 }
 .list-header .nav a span{
     line-height: inherit;
@@ -79,7 +79,7 @@
     color: inherit;
 }
 .list-header .nav a:hover{
-    background: #666;
+    background: #999;
 }
 
 .list-body{

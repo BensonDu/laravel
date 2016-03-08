@@ -28,8 +28,11 @@ class ArticleModel extends Model
            'users.nickname',
            'users.id AS user_id',
            'site_auth_map.role',
+           'article_category.id AS category_id',
+           'article_category.name AS category_name',
            'articles_site.id AS article_id',
            'articles_site.title',
+           'articles_site.image',
            'articles_site.create_time',
            'articles_site.post_status',
            'articles_site.post_time',
@@ -39,6 +42,7 @@ class ArticleModel extends Model
 
        $query = DB::table('articles_site')
                 ->leftJoin('users', 'articles_site.author_id', '=', 'users.id')
+                ->leftJoin('article_category', 'article_category.id', '=', 'articles_site.category')
                 ->leftJoin('site_auth_map', function($join){
                     $join->on('site_auth_map.site_id', '=', 'articles_site.site_id');
                     $join->on('site_auth_map.user_id', '=', 'articles_site.author_id');
@@ -156,8 +160,8 @@ class ArticleModel extends Model
     | @return object
     |
     */
-    public static function get_artcile_brief_info($site_id ,$article_id){
-        return DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->first();
+    public static function get_artcile_brief_info($site_id ,$article_id,$select = ['*']){
+        return DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->first($select);
     }
     /*
     |--------------------------------------------------------------------------
@@ -226,6 +230,19 @@ class ArticleModel extends Model
     */
     public static function contribute_article_count($site_id){
         return DB::table('articles_site')->where('site_id',$site_id)->where('deleted',0)->where('contribute_status',0)->count();
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 站点文章是否存在
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @param  string $article_id
+    | @return bool
+    |
+    */
+    public static function is_article_exist($site_id,$article_id){
+        return !!DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->where('deleted',0)->count();
     }
 
 }

@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Site;
 
 
 use App\Http\Model\ArticleSiteModel;
-use App\Http\Model\SiteAdModel;
+use App\Http\Model\StarModel;
 
 class IndexController extends SiteController
 {
@@ -25,7 +25,7 @@ class IndexController extends SiteController
         $data['active'] = 'home';
 
         //首页精选
-        $data['stars']  = SiteAdModel::get_site_star_list($id);
+        $data['stars']  = StarModel::get_star_list($id);
         //热榜
         $data['hot']    = ArticleSiteModel::get_hot_list($id);
         //文章分类

@@ -1003,7 +1003,6 @@
     overflow: auto;
     padding: 0 20px 90px 60px;
     float: right;
-    box-shadow: inset -4px 4px 6px 0px #eee;
 }
 .pop-container .article .right .editor{
     width: 100%;

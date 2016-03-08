@@ -13,7 +13,7 @@
 //站点首页
 Route::get('/', 'Site\IndexController@index');
 Route::get('/index/list', 'Site\IndexController@articles');
-Route::get('/test', 'Admin\ArticleController@test');
+Route::get('/test', 'Admin\StarController@test');
 //搜索
 Route::get('/search', 'Site\SearchController@index');
 Route::get('/search/{keyword}', 'Site\SearchController@index');
@@ -108,6 +108,16 @@ Route::group(['middleware' => 'AdminAuth'], function (){
     Route::get('/admin/user/update', 'Admin\UserController@update');
     Route::get('/admin/user/search', 'Admin\UserController@search');
     Route::get('/admin/user/add', 'Admin\UserController@add');
+    //精选管理
+    Route::get('/admin/star', 'Admin\StarController@index');
+    Route::get('/admin/star/list', 'Admin\StarController@starlist');
+    Route::get('/admin/star/del', 'Admin\StarController@del');
+    Route::get('/admin/star/save', 'Admin\StarController@save');
+    Route::get('/admin/star/add', 'Admin\StarController@add');
+    Route::get('/admin/star/info', 'Admin\StarController@info');
+    Route::get('/admin/star/articles', 'Admin\StarController@articles');
+    Route::get('/admin/star/specials', 'Admin\StarController@specials');
+    Route::get('/admin/star/order/save', 'Admin\StarController@ordersave');
 });
 
 //数据导入

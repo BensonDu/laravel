@@ -3,11 +3,11 @@
 @stop
 @section('area')
     <div class="list-header">
-        <div class="nav">
-            <a v-on:click="_add"><em>+</em> <span>添加</span></a>
-        </div>
         <div class="search">
             <div class="input"><em></em><input v-model="search.keyword" v-on:keyup.enter="_search" type="text" placeholder="用户名、用户 ID"><i></i></div>
+        </div>
+        <div class="nav">
+            <a v-on:click="_add"><em>+</em> <span>添加</span></a>
         </div>
     </div>
     <div class="list-body">
