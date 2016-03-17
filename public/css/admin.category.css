@@ -1,0 +1,277 @@
+.admin-content .admin-area{
+    overflow: hidden;
+    min-width: 1060px;
+    padding-right: 0;
+}
+.box-mid{
+    position: relative;
+    height: 445px;
+    width: 50px;
+    float: left;
+    margin: 30px 0;
+    padding-bottom: 40px;
+    overflow: hidden;
+}
+.box-mid .img{
+    width: 100%;
+    padding: 0 13px;
+    margin-top: 194px;
+}
+.box-mid .img img{
+    width: 100%;
+    height: auto;
+}
+.box-container{
+    position: relative;
+    height: 445px;
+    width: 470px;
+    float: left;
+    border: 1px solid #eee;
+    margin: 30px 0;
+    padding-bottom: 40px;
+    overflow: hidden;
+}
+.box-container .header{
+    width: 100%;
+    height: 40px;
+    padding:  0 18px;
+    background: #eee;
+    box-shadow: 0 0 7px 0 #ccc;
+}
+.box-container .header p{
+    display: inline-block;
+    line-height: 40px;
+    font-size: 12px;
+    color: #999;
+}
+.box-container ul{
+    display: inline-block;
+    min-height: 60px;
+    width: 100%;
+}
+.box-container ul li{
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 8px;
+    background: #f9f9f9;
+    cursor: pointer;
+    animation: fadeIn 0.7s linear 0s normal forwards;
+    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
+    -moz-animation: fadeIn 0.7s linear 0s normal forwards;
+}
+.box-container ul li>div{
+    height: 100%;
+    float: left;
+}
+.box-container ul li .name{
+    display: block;
+    padding: 15px 0 15px 15px;
+    width: 258px;
+    overflow: hidden;
+}
+.box-container ul li .name p{
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    line-height: 30px;
+    color: #666;
+    font-weight: 900;
+    max-width: 290px;
+    padding:  0 10px;
+}
+.box-container ul li .name em{
+    float: left;
+    display: none;
+    width: 30px;
+    height: 30px;
+    vertical-align: top;
+    background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-position: -20px -46px;
+    background-size: 100px;
+}
+.box-container ul li .name em:hover{
+    opacity: .6;
+}
+.box-container ul li .edit{
+    display: none;
+    width: 258px;
+    padding: 15px 0 15px 15px;
+    overflow: hidden;
+}
+.box-container ul li .edit input{
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    line-height: 30px;
+    color: #666;
+    font-weight: 900;
+    border: none;
+    width: 160px;
+    padding:  0 10px;
+    font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif","Microsoft YaHei";
+}
+.box-container ul li .edit input:focus{
+    outline: none;
+}
+.box-container ul li .edit a{
+    float: left;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    vertical-align: top;
+    margin-left: 8px;
+    background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-size: 100px;
+}
+.box-container ul li .edit a.confirm{
+    background-position: 10px 8px;
+}
+.box-container ul li .edit a.cancel{
+    background-position: 7px -17px;
+}
+.box-container ul li .edit a:hover{
+    opacity: .7;
+}
+.box-container ul li .count{
+    width: 160px;
+    padding: 15px 20px 15px 0;
+    text-align: right;
+    overflow: hidden;
+}
+.box-container ul li .count p{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 32px;
+    vertical-align: top;
+    white-space: nowrap;
+    color: #999;
+}
+.box-container ul li .count span{
+    display: inline-block;
+    line-height: 32px;
+    vertical-align: top;
+    font-size: 12px;
+    padding: 0 5px;
+    color: #f06292;
+}
+.box-container ul li .close{
+    width: 30px;
+    padding: 15px 10px;
+}
+.box-container ul li .close p{
+    display: inline-block;
+    width: 100%;
+    line-height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #999;
+}
+.box-container ul li .close p:hover{
+    color: #000;
+}
+.box-container ul li:hover .name em{
+    display: inline-block;
+}
+.box-container ul li.edit .edit{
+    display: block;
+}
+.box-container ul li.edit .name{
+    display: none;
+}
+.box-container .cover{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255,255,255,.8);
+    left: 0;
+    top: 0;
+    -webkit-transition: opacity 0.4s ease-in;
+    -moz-transition: opacity 0.4s ease-in;
+    transition: opacity 0.4s ease-in;
+}
+.box-container .add{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 8px;
+    padding: 15px 20px;
+    text-align: center;
+    z-index: 3;
+}
+.box-container .add a{
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 100;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    width: 30px;
+    color: #999;
+    cursor: pointer;
+    -webkit-transition: transform 0.4s ease-in;
+    -moz-transition: transform 0.4s ease-in;
+    transition: transform 0.4s ease-in;
+}
+.box-container .add a:hover{
+    color: #333;
+}
+.box-container .add .input{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 0;
+    overflow: hidden;
+    height: 30px;
+    background: #f5f5f5;
+    margin-right: 5px;
+    -webkit-transition: width 0.4s ease-out;
+    -moz-transition: width 0.4s ease-out;
+    transition: width 0.4s ease-out;
+}
+.box-container .add input{
+    display: inline-block;
+    width: 90%;
+    height: 30px;
+    border: none;
+    background: #f5f5f5;
+    vertical-align: top;
+    font-size: 14px;
+    color: #999;
+}
+.box-container .add input+em{
+    position: absolute;
+    display: inline-block;
+    visibility: hidden;
+    right: 12px;
+    width: 25px;
+    height: 25px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fenter-key.png) no-repeat center;
+    background-size: 14px 16px;
+    margin-top: 2px;
+}
+.box-container .add input:focus{
+    outline: none;
+}
+.box-container .add input:focus+em{
+    visibility: visible;
+}
+.box-container.add ul{
+    -webkit-filter: blur(2px);
+}
+.box-container.add .cover{
+    visibility: visible;
+    opacity: 1;
+}
+.box-container.add .add a{
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);		/* IE 9 */
+    -webkit-transform: rotate(45deg);	/* Safari and Chrome */
+    -moz-transform: rotate(45deg);		/* Firefox */
+}
+.box-container.add .add .input{
+    width: 50%;
+}

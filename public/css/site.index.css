@@ -79,6 +79,7 @@
 .site-content .star .album a{
     position: relative;
     display: inline-block;
+    vertical-align: top;
     height: 100%;
     width: 440px;
     letter-spacing: normal;
@@ -109,13 +110,15 @@
     letter-spacing: 2px;
     line-height: 26px;
     color: #bdbdbd;
+    overflow: hidden;
 }
 .site-content .star .album a .summary h2{
     line-height: 22px;
     font-size: 16px;
     white-space: normal;
     font-weight: 600;
-    min-height: 44px;
+    height: 44px;
+    overflow: hidden;
 }
 .site-content .star .album a .summary h6{
     font-size: 12px;

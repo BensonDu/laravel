@@ -36,7 +36,7 @@ class IndexController extends SiteController
             'list'  => $this->get_articles($id)
         ];
 
-        return view('/site/index',$data);
+        return self::view('/site/index',$data);
     }
     public function articles(){
         $id = $_ENV['site_id'];
@@ -85,9 +85,6 @@ class IndexController extends SiteController
                     ];
                 }
             }
-
-            $list[$k]->like     = 23;
-            $list[$k]->favorite = 64;
             $list[$k]->avatar   = avatar($v->avatar);
             $list[$k]->user_url = user_url($v->user_id);
             $list[$k]->tags = $tags;
@@ -97,5 +94,8 @@ class IndexController extends SiteController
     }
     private function get_articles_count($id,$category = 0){
         return ArticleSiteModel::get_article_count($id,$category);
+    }
+    public function test(){
+        return ArticleSiteModel::get_hot_list_($_ENV['site_id']);
     }
 }

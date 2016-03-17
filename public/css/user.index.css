@@ -111,7 +111,7 @@
     margin-right: 5px;
 }
 .user-content .container .list-container .list .info .tags a:hover{
-    opacity: .7;
+    opacity: 1;
 }
 .user-content .container .list-container .list .info .title{
     display: inline-block;

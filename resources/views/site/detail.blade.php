@@ -12,7 +12,7 @@
             <h6>{{$article['summary']}}</h6>
         </div>
         <div class="social">
-            <a href="/user/{{$user['id']}}" class="author"><img src="{{$user['avatar']}}"><span>{{$user['name']}}</span></a>
+            <a href="{{$_ENV['platform']['home']}}/user/{{$user['id']}}" class="author"><img src="{{$user['avatar']}}"><span>{{$user['name']}}</span></a>
             <p class="time">发布于 {{$article['time']}}</p>
             <div class="tag">
                 <em></em>
@@ -24,9 +24,20 @@
         <div class="content medium">
             {!! $article['content'] !!}
         </div>
+        <div class="action">
+            <div class="wrap">
+                <div id="favorite" class="favorite {{$article['favorite'] ? 'active' : ''}}">
+                    <a><em></em><span></span><i>+1</i></a>
+                </div>
+                <div class="tip"></div>
+                <div id="like" class="like {{$article['like'] ? 'active' : ''}}">
+                    <a><em></em><span></span><i>+1</i></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!--新闻内容end-->
 @stop
-@section('script')@parent<script src="/js/public.detail.js"></script>
+@section('script')@parent<script src="/js/site.detail.js"></script>
 @stop

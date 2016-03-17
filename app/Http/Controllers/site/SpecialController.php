@@ -35,7 +35,7 @@ class SpecialController extends SiteController
         if(empty($data['info']))abort(404);
         $list = SiteSpecialModel::get_special_article_list($id);
         $data['article_list'] = $list;
-        return view('/site/special',$data);
+        return self::view('/site/special',$data);
     }
     public function home(){
         $info = SiteSpecialModel::get_first_special($_ENV['site_id']);

@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'lifetime' => 120,
+    'lifetime' => 10080,
 
     'expire_on_close' => false,
 
@@ -109,7 +109,7 @@ return [
     |
     */
 
-    'cookie' => 'ac_session',
+    'cookie' => 'session',
 
     /*
     |--------------------------------------------------------------------------

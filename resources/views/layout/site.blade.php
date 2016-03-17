@@ -9,7 +9,7 @@
 <!--站点中栏start-->
 <div id="mid" class="site-mid">
     <div class="top">
-        <div class="logo"><img src="{{$site['logo']}}"></div>
+        <div class="logo"><a href="/"><img src="{{$site['logo']}}"></a></div>
         <h2>{{$site['name']}}</h2>
         <h3>{{$site['slogan']}}</h3>
         <div class="social">
@@ -29,7 +29,7 @@
 @endif
         </div>
         <div class="post">
-            <a href="/user/edit">投稿</a>
+            <a href="{{$_ENV['platform']['home']}}/user/edit">投稿</a>
         </div>
     </div>
     <div class="mid">

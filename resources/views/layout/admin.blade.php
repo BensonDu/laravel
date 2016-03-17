@@ -18,7 +18,7 @@
             <a href="/admin/" ><span>文章管理</span><em>{{$uncontribute_article_num}}</em></a>
             <a href="#"><span>专题管理</span></a>
             <a href="/admin/star" ><span>精选管理</span></a>
-            <a href="#" ><span>分类管理</span></a>
+            <a href="/admin/category" ><span>分类管理</span></a>
             <a href="/admin/user" ><span>用户管理</span></a>
         </div>
     </div>

@@ -16,7 +16,7 @@ class FindController extends AccountController
 
     public function index()
     {
-        return view('/account/find');
+        return self::view('/account/find');
     }
 
     public function post()

@@ -22,7 +22,7 @@ class ProfileController extends UserController
                             'avatar'    => avatar(self::$info->avatar),
                             'username'  => self::$info->username
                          ];
-        return view('/user/profile',$data);
+        return self::view('/user/profile',$data);
     }
     public function post()
     {

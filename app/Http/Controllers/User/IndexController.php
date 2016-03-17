@@ -23,12 +23,12 @@ class IndexController extends Controller
         $data['active'] = 'home';
         $data['list'] = $this->get_list($id);
         $data['total'] = $this->get_list_count($id);
-        return view('/user/index',$data);
+        return self::view('/user/index',$data);
     }
     public function self(){
         return redirect('/user/'.$_ENV['uid']);
     }
-    public function article_list(){
+    public function articles(){
         $id    = request()->input('id');
         $index = request()->input('index');
         if(empty($index) || empty($id)){
@@ -39,7 +39,7 @@ class IndexController extends Controller
         return self::ApiOut(0,$list);
     }
     private function get_list($id, $skip=0){
-        $list = ArticleUserModel::get_home_article_list($id, $skip,['id','title','summary','tags','image','create_time']);
+        $list = ArticleUserModel::get_home_article_list($id, $skip);
         foreach($list as $k =>$v){
             $tags = [];
             foreach(explode(' ',$v->tags) as $vv){

@@ -35,7 +35,7 @@
             <a href="/user/{{$id}}" class="{{isset($active) && $active =='home' ? 'active' : ''}}"><span>个人主页</span></a>
             <a href="/user/profile" class="{{isset($active) && $active =='profile' ? 'active' : ''}}"><span>资料修改</span></a>
             <a href="/user/password" class="{{isset($active) && $active =='password' ? 'active' : ''}}"><span>密码修改</span></a>
-            <a href="/user/social" class="{{isset($active) && $active =='social' ? 'active' : ''}}"><span>社交账户</span></a>
+            <a href="/user/social" class="{{isset($active) && $active =='social' ? 'active' : ''}}"><span>社交资料</span></a>
         </div>
     </div>
 @endif

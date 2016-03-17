@@ -42,5 +42,18 @@ class SiteModel extends Model
     public static function get_site_info($id){
         return SiteModel::where('id',$id)->first();
     }
+    /*
+     |--------------------------------------------------------------------------
+     | 获取站点所有信息
+     |--------------------------------------------------------------------------
+     |
+     | @param  string $site_id
+     | @return bool
+     |
+     */
+    public static function get_site_info_all($id){
+        return SiteModel::leftJoin('site_routing','site_info.id', '=', 'site_routing.site_id')
+            ->where('site_info.id',$id)->first();
+    }
 
 }

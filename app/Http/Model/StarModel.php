@@ -74,7 +74,21 @@ class StarModel extends Model
     |
     */
     public static function max_order($site_id){
-         return  StarModel::where('site_id',$site_id)->where('deleted' , 0)->orderby('order','desc')->first(['order'])->order;
+         return  StarModel::where('site_id',$site_id)->where('deleted' , 0)->orderby('order','desc')->first(['order']);
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 站点精选总数
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @return number
+    |
+    */
+    public static function star_count($site_id){
+        return  StarModel::where('site_id',$site_id)->where('deleted' , 0)->count();
 
     }
     /*

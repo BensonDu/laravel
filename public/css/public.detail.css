@@ -146,3 +146,146 @@
     margin-top: 30px;
     padding: 0 5%;
 }
+/*点赞 收藏 start*/
+.page-content .container .action{
+    display: inline-block;
+    max-width: 850px;
+    text-align: left;
+    margin-top: 30px;
+    padding: 0 5%;
+    width: 100%;
+}
+.page-content .container .action .wrap{
+    width: 100%;
+    border-top: 1px solid #eee;
+    height: 50px;
+    padding: 18px 0;
+    overflow: visible;
+}
+.page-content .container .action .wrap>div{
+    width: 33%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+.page-content .container .action .wrap>div a{
+    position: relative;
+    display: inline-block;
+    height: 86px;
+    width: 100px;
+    padding: 10px 0;
+    cursor: pointer;
+    text-align: left;
+    overflow: visible;
+}
+.page-content .container .action .wrap>div a i{
+    position: absolute;
+    font-size: 16px;
+    width: 30px;
+    left: 28px;
+    opacity: 0;
+}
+.page-content .container .action .wrap>div a em{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Flike-fav.png) no-repeat center;
+    transition: transform .2s;
+    -moz-transition: -moz-transform .2s; /* Firefox 4 */
+    -webkit-transition: -webkit-transform .2s; /* Safari 和 Chrome */
+}
+.page-content .container .action .wrap>div a span{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    height: 30px;
+    line-height: 40px;
+    margin-left: 12px;
+    color: #999;
+}
+.page-content .container .action .wrap .active a i{
+    animation: floatUp 0.6s ease-out 0s normal forwards;
+    -webkit-animation: floatUp 0.6s ease-out 0s normal forwards;
+    -moz-animation: floatUp 0.6s ease-out 0s normal forwards;
+}
+.page-content .container .action .wrap>div a:hover em{
+    transform:scale(1.2);
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+}
+.page-content .container .action .wrap .favorite a i{
+    color: #FFBF35;
+}
+.page-content .container .action .wrap .favorite a span:after{
+    content: '收藏';
+}
+.page-content .container .action .wrap .favorite.active a span:after{
+    content: '已收藏';
+}
+.page-content .container .action .wrap .favorite a em{
+    background-size: 66px;
+    background-position: -34px -34px;
+}
+.page-content .container .action .wrap .favorite.active a em{
+    background-size: 76px;
+    background-position: -42px -2px;
+}
+.page-content .container .action .wrap .like a i{
+    color: #FF4081;
+}
+.page-content .container .action .wrap .like a span:after{
+    content: '点赞';
+}
+.page-content .container .action .wrap .like.active a span:after{
+    content: '已点赞';
+}
+.page-content .container .action .wrap .like a em{
+    background-size: 65px;
+    background-position: 1px -32px;
+}
+.page-content .container .action .wrap .like.active a em{
+    background-size: 65px;
+    background-position: 1px 0;
+}
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        top: 10px;
+    }
+    80%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        top: -40px;
+    }
+}
+
+@-webkit-keyframes floatUp {
+    0% {
+        opacity: 0;
+        top: 10px;
+    }
+    80%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        top: -40px;
+    }
+}
+
+@-moz-keyframes floatUp {
+    0% {
+        opacity: 0;
+        top: 10px;
+    }
+    80%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        top: -40px;
+    }
+}
+/*点赞收藏 end*/

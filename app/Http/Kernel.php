@@ -18,7 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\DomainResolution::class,
-        \App\Http\Middleware\Auth::class
+        \App\Http\Middleware\Init::class
     ];
 
     /**

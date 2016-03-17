@@ -20,7 +20,7 @@ class SocialController extends UserController
             'email'     => self::$info->email,
             'weibo'     => empty(self::$info->weibo)? 'http://weibo.com/' : self::$info->weibo
         ]);
-        return view('/user/social',$data);
+        return self::view('/user/social',$data);
     }
     public function post()
     {

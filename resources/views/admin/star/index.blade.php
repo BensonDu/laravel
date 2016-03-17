@@ -109,7 +109,7 @@
                         <div class="category">
                             <div class="name"><p>类型</p></div>
                             <div class="input">
-                                <input type="text" placeholder="输入类型" v-model="category">
+                                <input type="text" maxlength="30" placeholder="输入类型" v-model="category" v-on:keydown.tab="_stop_tab">
                             </div>
                         </div>
                     </div>

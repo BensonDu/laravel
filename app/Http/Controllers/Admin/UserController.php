@@ -23,7 +23,7 @@ class UserController extends AdminController
     }
     public function index(){
         $data['users']   = $this->get_list(0,10);
-        return view('admin.user.index',$data);
+        return self::view('admin.user.index',$data);
     }
     /*
      |--------------------------------------------------------------------------

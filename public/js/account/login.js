@@ -40,7 +40,8 @@
     this.do_login = function(){
         var data = {
             username:$username_input.val(),
-            password:$password_input.val()
+            password:$password_input.val(),
+            redirect : input.get('redirect')
         };
         if(!username_check){
             return self.username_error('请检查用户名');
@@ -48,8 +49,9 @@
         else{
             request.post('/account/login',function(ret){
                 if(ret.hasOwnProperty('code') && ret.code == '0'){
-                    if(input.get('redirect'))return location.href = decodeURIComponent(input.get('redirect'));
-                    location.href = ret.msg;
+                    request.jsonp('http://crababy.com/sso/',function(){
+                        self.redirect();
+                    },{session:ret.data.session});
                 }
                 else{
                     self.password_error(ret.msg);
@@ -57,6 +59,11 @@
 
             },data);
         }
+    };
+
+    this.redirect= function(){
+        if(input.get('redirect'))return location.href = decodeURIComponent(input.get('redirect'));
+        location.href = '/';
     };
 
     $confirm.click(self.do_login);

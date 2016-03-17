@@ -5,7 +5,7 @@
         Sortable.create(document.getElementById('box-container'), {
             animation: 300,
             draggable: '.box',
-            handle: '.head',
+            handle: '.star',
             ghostClass: "drag-ghost",
             onUpdate: function () {
                 var d = $('.box'),order = [], i;
@@ -224,6 +224,10 @@
                 else{
                     self.save_star();
                 }
+            },
+            _stop_tab : function(e){
+                e.preventDefault();
+                return false;
             }
         }
     });
@@ -282,7 +286,7 @@
         var form = self.get_form(),
             w = (form.title == '' && '标题') || (form.category == '' && '类型') || (form.type == '' && '跳转信息') || (!form.jump_info && '跳转信息') || (form.image == '' && '配图') || false;
         if(!w){
-            return form
+            return true;
         }
         else{
             pop.error(w+'为空','确定').one();

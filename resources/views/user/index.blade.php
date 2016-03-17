@@ -8,6 +8,9 @@
     <div class="user-nav-container">
         <div class="left">
             <a class="active" href="#">最新文章</a>
+@if(isset($self))
+            <a href="/user/favorite">我的收藏</a>
+@endif
         </div>
     </div>
 </div>
@@ -19,7 +22,7 @@
                 <div class="info">
                     <div class="tags">
 @foreach ($article->tags as $tag)
-                        <a href="/tag/{{$tag['item']}}" style="color: {{$tag['color']}}">{{$tag['item']}}</a>
+                        <a style="color: {{$tag['color']}}">{{$tag['item']}}</a>
 @endforeach
                     </div>
                     <div class="title">
@@ -30,8 +33,8 @@
                     </div>
                     <div class="social">
                         <p class="time">发布于 {{$article->post_time}}</p>
-                        <a class="inter like"><span>赞 51</span></a>
-                        <a class="inter collect"><span>收藏 36</span></a>
+                        <a class="inter like"><span>赞 {{$article->likes}}</span></a>
+                        <a class="inter collect"><span>收藏 {{$article->favorites}}</span></a>
                     </div>
                 </div>
 @if(!empty($article->image))
@@ -49,7 +52,7 @@
             <div class="list" v-bind:class="visible" v-for="article in list">
                 <div class="info">
                     <div class="tags">
-                        <a v-for="tag in article.tags" v-bind:href="'tag/'+tag.item" v-bind:style="'color:'+tag.color" v-text="tag.item"></a>
+                        <a v-for="tag in article.tags" v-bind:style="'color:'+tag.color" v-text="tag.item"></a>
                     </div>
                     <div class="title">
                         <a v-bind:href="'/user/{{$id}}/'+article.id" v-text="article.title"></a>
@@ -59,8 +62,8 @@
                     </div>
                     <div class="social">
                         <p class="time" v-text="'发布于 '+article.post_time"></p>
-                        <a class="inter like"><span>赞 51</span></a>
-                        <a class="inter collect"><span>收藏 36</span></a>
+                        <a class="inter like"><span v-text="'赞 '+article.likes"></span></a>
+                        <a class="inter collect"><span v-text="'收藏 '+article.favorites"></span></a>
                     </div>
                 </div>
                 <div class="image" v-if="!!article.image">
@@ -78,6 +81,6 @@
 <!--主页内容end-->
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.js"></script>
-<script>var default_data = {id : '{{$id}}', article : {total : '{{$total}}'}}</script>
+<script>var default_data = {id : '{{$id}}', article : {total : '{{$total}}'},api : '/user/index/list'}</script>
 <script src="/js/user.index.js"></script>
 @stop

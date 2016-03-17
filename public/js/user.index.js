@@ -68,7 +68,7 @@
     this.get_list = function(){
         if(!self.has_more())return;
         self.btn_loading();
-        request.get('/user/index/list',function(ret){
+        request.get(default_data.api,function(ret){
            if(ret.hasOwnProperty('code') && ret.code ==0){
                index++;
                setTimeout(function(){

@@ -81,7 +81,7 @@ if (! function_exists('user_url')) {
      */
     function user_url($user_id)
     {
-        return '/user/'.$user_id;
+        return $_ENV['platform']['home'].'/user/'.$user_id;
     }
 }
 if (! function_exists('json_encode_safe')) {
@@ -112,5 +112,41 @@ if (! function_exists('admin_role_map')) {
             3 => '管理员'
         ];
         return isset($map[$id]) ? $map[$id] : '访客';
+    }
+}
+if (! function_exists('url_fix')) {
+    /**
+     * URL 修复
+     * @param  string $url
+     * @return string $fixed url
+     */
+    function url_fix($url)
+    {
+        return ((substr(trim($url),0,2) == '//') || (substr(trim($url),0,7) == 'http://')) ? $url : 'http://'.$url;
+    }
+}
+if (! function_exists('cdata')) {
+    /**
+     * RSS 添加 CDATA
+     * @param  string $s
+     * @return string $CDATA[$s]
+     */
+    function cdata($s)
+    {
+        return '<![CDATA['.$s.']]>';
+    }
+}
+if (! function_exists('utf8_safe')) {
+    /**
+     * Remove non utf-8 character
+     * @param  string $s
+     * @return string $r
+     */
+    function utf8_safe($s)
+    {
+        $escapers = array("\x08", "\x0c","'");
+        $replacements = array("\\f", "\\b","\\'");
+        $result = str_replace($escapers, $replacements, $s);
+        return $result;
     }
 }

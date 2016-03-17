@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Model\ArticleSocialModel;
 use App\Http\Model\ArticleUserModel;
 
 class DetailController extends Controller
@@ -23,12 +24,13 @@ class DetailController extends Controller
 
         if(empty($data) || empty($article))abort(404);
 
+        $article->like = !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_like($article_id,$_ENV['uid'],2) : false;
+        $article->favorite = !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_favorite($article_id,$_ENV['uid'],2) : false;
         $article->avatar = avatar($article->avatar);
         $article->post_time = date('Y年m月d日',strtotime($article->post_time));
         $article->tags = explode(' ',$article->tags);
 
         $data['article'] = $article;
-
-        return view('/user/detail',$data);
+        return self::view('/user/detail',$data);
     }
 }

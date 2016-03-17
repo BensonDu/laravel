@@ -14,7 +14,7 @@ class User
 {
     public function handle($request, Closure $next)
     {
-        if(empty($_ENV['uid']))return redirect('/account/login?redirect='.urlencode($request->url()));
+        if(empty($_ENV['uid']))return redirect($_ENV['platform']['home'].'/account/login?redirect='.urlencode($request->url()));
         return $next($request);
     }
 }

@@ -30,7 +30,7 @@ class ArticleController extends AdminController
         $data['sub_active'] = 'unpub';
         $data['articles']   = $this->get_unpub_list(0,10);
         $data['categories'] = ArticleSiteModel::get_article_categories($_ENV['site_id']);
-        return view('admin.article.unpub',$data);
+        return self::view('admin.article.unpub',$data);
     }
     /*
      |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ class ArticleController extends AdminController
         $data['sub_active'] = 'pub';
         $data['articles']   = $this->get_pub_list(0,10);
         $data['categories'] = ArticleSiteModel::get_article_categories($_ENV['site_id']);
-        return view('admin.article.pub',$data);
+        return self::view('admin.article.pub',$data);
     }
     /*
      |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ class ArticleController extends AdminController
         $data['sub_active'] = 'mine';
         $data['articles']   = $this->get_mine_list(0,10);
         $data['categories'] = ArticleSiteModel::get_article_categories($_ENV['site_id']);
-        return view('admin.article.mine',$data);
+        return self::view('admin.article.mine',$data);
     }
     /*
      |--------------------------------------------------------------------------
@@ -63,7 +63,7 @@ class ArticleController extends AdminController
         $data['sub_active'] = 'recycle';
         $data['articles']   = $this->get_recycle_list(0,10);
         $data['categories'] = ArticleSiteModel::get_article_categories($_ENV['site_id']);
-        return view('admin.article.recycle',$data);
+        return self::view('admin.article.recycle',$data);
     }
     /*
      |--------------------------------------------------------------------------

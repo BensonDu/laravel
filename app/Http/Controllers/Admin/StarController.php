@@ -30,7 +30,7 @@ class StarController extends AdminController
     */
     public function index(){
         $data['list'] = StarModel::get_star_list($_ENV['site_id']);
-        return view('admin.star.index',$data);
+        return self::view('admin.star.index',$data);
     }
     /*
     |--------------------------------------------------------------------------
@@ -77,6 +77,9 @@ class StarController extends AdminController
         $image      = $request->input('image');
         $type       = $request->input('type');
         $jump_info  = $request->input('jump_info');
+        if($type == 'link'){
+            $jump_info = url_fix($jump_info);
+        }
         $update_time= now();
         if(!$id || !$title || !$category || !$image || !$this->check_jump($type,$jump_info))return $this->ApiOut(40001,'请求错误');
         StarModel::save_star($_ENV['site_id'], $id, compact("title","category","image","type","jump_info","update_time"));
@@ -94,10 +97,15 @@ class StarController extends AdminController
         $image      = $request->input('image');
         $type       = $request->input('type');
         $jump_info  = $request->input('jump_info');
+        if($type == 'link'){
+            $jump_info = url_fix($jump_info);
+        }
         if(!$title || !$category || !$image || !$this->check_jump($type,$jump_info))return $this->ApiOut(40001,'请求错误');
         $max_order = StarModel::max_order($_ENV['site_id']);
-        if($max_order >= 8)return $this->ApiOut(40001,'超过最大精选数');
-        StarModel::add_star($_ENV['site_id'], compact("title","category","image","type","jump_info"),$max_order);
+        $max = isset($max_order->order) ? $max_order->order : 0;
+        $count = StarModel::star_count($_ENV['site_id']);
+        if($count >= 8)return $this->ApiOut(40001,'超过最大精选数');
+        StarModel::add_star($_ENV['site_id'], compact("title","category","image","type","jump_info"),$max);
         return $this->ApiOut(0,'保存成功');
     }
     /*

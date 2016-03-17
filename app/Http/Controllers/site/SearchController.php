@@ -19,7 +19,8 @@ class SearchController extends SiteController
             'list'      => !empty($keyword) ? json_encode_safe($this->get_list($keyword)) : '[]',
             'total'     => !empty($keyword) ? ArticleSiteModel::search_article_count($_ENV['site_id'],$keyword) : 0
         ];
-        return view('site.search',$data);
+
+        return self::view('site.search',$data);
     }
     public function results($keyword = null){
         $index      = request()->input('index');

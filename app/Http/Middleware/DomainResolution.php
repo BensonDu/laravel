@@ -20,7 +20,6 @@ class DomainResolution
    */
     public function handle($request, Closure $next)
     {
-        $_ENV['site_platform_base'] = config('site.platform_base');
         $sever_name = $request->server('HTTP_HOST');
         $ret = SiteRouting::CheckRoutingTable($sever_name);
         if(isset($ret['is_mobile'])){

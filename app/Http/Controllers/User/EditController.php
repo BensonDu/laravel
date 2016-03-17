@@ -28,7 +28,7 @@ class EditController extends UserController
         $route = session(self::$route_session_key);
         session()->forget(self::$route_session_key);
         $list = $this->sort_article_list();
-        return view('/user/edit',['list'=>json_encode($list),'route'=>$route]);
+        return self::view('/user/edit',['list'=>json_encode($list),'route'=>$route]);
     }
     /*
     |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ class EditController extends UserController
     |--------------------------------------------------------------------------
     |
     */
-    public function article_list(){
+    public function articles(){
         $list = $this->sort_article_list();
         return self::ApiOut(0,$list);
     }

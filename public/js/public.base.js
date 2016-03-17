@@ -29,9 +29,11 @@
     this.get = function(url,call,data,error){
         self.base(url,call,data,error,'get');
     };
-
+    this.jsonp = function(url,call,data,error){
+        self.base(url,call,data,error,'jsonp');
+    };
     this.base = function(url,call,data,error,type){
-        $.ajax({
+        var option = {
             url:url,
             type:type,
             cache:false,
@@ -60,7 +62,16 @@
                     pop.error('服务器错误','确定').one();
                 }
             }
-        });
+        };
+        if(type == 'jsonp'){
+            option.jsonp = 'callback';
+            option.dataType = 'jsonp';
+        }
+        $.ajax(option);
+    };
+    this.quick = function(url,data){
+        var img = new Image();
+        return img.src = url+input.create_param(data || {});
     }
 }).call(define('request'));
 
@@ -95,6 +106,25 @@
         }
     };
 }).call(define('input'));
+
+(function(){
+    this.set = function(cname, cvalue, exmins){
+        var d = new Date(),expires;
+        d.setTime(d.getTime() + (exmins*60*1000));
+        expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+    };
+    this.get = function(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+        }
+        return "";
+    }
+}).call(define('cookie'));
 
 (function(){
     var self = this;

@@ -39,30 +39,31 @@
         <a href="/">
             <i class="home"></i><span>站点首页</span>
         </a>
-        <a href="/user/edit/create">
-            <i class="add"></i><span>新建文章</span>
-        </a>
-        <a href="/user/edit">
+        <a href="{{$nav['edit']}}">
             <i class="article"></i><span>文章管理</span>
         </a>
-        <a href="#">
+        <a href="{{$nav['favorite']}}">
             <i class="folder"></i><span>我的收藏</span>
         </a>
-        <a href="/user/profile">
+        <a href="{{$nav['profile']}}">
             <i class="setting"></i><span>个人设置</span>
         </a>
-        <a href="/user/">
+        <a href="{{$nav['user']}}">
             <i class="people"></i><span>个人主页</span>
         </a>
     </div>
     <div class="bottom ">
         <div class="entry">
+@if(isset($_ENV['admin']['role']) && $_ENV['admin']['role'] > 0)
             <a href="/admin">
                 <i class="web"></i><span>站点管理</span>
             </a>
+@endif
+@if(!empty($_ENV['uid']))
             <a href="/account/logout">
                 <i class="exit"></i><span>退出</span>
             </a>
+@endif
         </div>
         <div id="nav-left-switch" class="switch">
             <i class="arrow"></i>

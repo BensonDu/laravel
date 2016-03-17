@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Site;
 
 
 use App\Http\Model\ArticleSiteModel;
+use App\Http\Model\ArticleSocialModel;
 
 class DetailController extends SiteController
 {
@@ -36,7 +37,9 @@ class DetailController extends SiteController
             'time'      => date('Y年m月d日',strtotime($info->create_time)),
             'category'  => $info->category_name,
             'image'     => $info->image,
+            'like'      => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_like($id,$_ENV['uid']) : false,
+            'favorite'  => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_favorite($id,$_ENV['uid']) : false
         ];
-        return view('/site/detail',$data);
+        return self::view('site.detail',$data);
     }
 }

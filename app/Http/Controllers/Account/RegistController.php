@@ -13,7 +13,7 @@ class RegistController extends AccountController
     }
 
     public function index(){
-        return view('/account/regist');
+        return self::view('/account/regist');
     }
     public function post(){
 

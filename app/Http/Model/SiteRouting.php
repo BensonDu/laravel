@@ -22,7 +22,7 @@ class SiteRouting extends Model
     {
         if(!self::$init){
             self::$init = true;
-            self::$platform_base = $_ENV['site_platform_base'];
+            self::$platform_base = config('site.platform_base');
             self::$redis_ttl = config('site.platform_redis_routing_ttl');
             self::$redis_key_name = config('site.platform_redis_prefix').':'.config('site.platform_redis_routingtable_key');
         }

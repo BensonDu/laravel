@@ -13,7 +13,7 @@ class PasswordController extends UserController
     public function index()
     {
         $data['active'] = 'password';
-        return view('/user/password',$data);
+        return self::view('/user/password',$data);
     }
     public function post()
     {

@@ -17,16 +17,27 @@
             <div class="tag">
                 <em></em>
 @foreach ($article->tags as $tag)
-                <a href="/tag/{{$tag}}">{{$tag}}</a>
+                <a style="color: #999">{{$tag}}</a>
 @endforeach
             </div>
         </div>
         <div class="content medium">
             {!! $article->content !!}
         </div>
+       <div class="action">
+            <div class="wrap">
+                <div id="favorite" class="favorite {{$article['favorite'] ? 'active' : ''}}">
+                    <a><em></em><span></span><i>+1</i></a>
+                </div>
+                <div class="tip"></div>
+                <div id="like" class="like {{$article['like'] ? 'active' : ''}}">
+                    <a><em></em><span></span><i>+1</i></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!--新闻内容end-->
 @stop
-@section('script')@parent<script src="/js/public.detail.js"></script>
+@section('script')@parent<script src="/js/user.detail.js"></script>
 @stop

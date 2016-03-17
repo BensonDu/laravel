@@ -47,15 +47,15 @@
             <ul>
                 <li v-bind:class="{ 'active': post.type.val == 'now' }" v-on:click="_type_select('now')">
                     <p><em class="flash"></em></p>
-                    <span>立即发布</span>
+                    <span>已发布</span>
                 </li>
                 <li v-bind:class="{ 'active': post.type.val == 'time' }" v-on:click="_type_select('time')">
                     <p><em class="clock"></em></p>
-                    <span>定时发布</span>
+                    <span>延迟</span>
                 </li>
                 <li v-bind:class="{ 'active': post.type.val == 'cancel' }" v-on:click="_type_select('cancel')">
                     <p><em class="cancel"></em></p>
-                    <span>暂不发布</span>
+                    <span>撤回</span>
                 </li>
             </ul>
         </div>

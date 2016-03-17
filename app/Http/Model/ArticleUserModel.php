@@ -8,6 +8,7 @@
 namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class ArticleUserModel extends Model
 {
@@ -50,9 +51,98 @@ class ArticleUserModel extends Model
     | @return array  $article_list
     |
     */
-    public static function get_home_article_list($user_id,$skip = 0,$select = ['*']){
-        $list = ArticleUserModel::where('user_id' ,$user_id)->where('deleted',0)->where('post_status',2)->orderBy('update_time', 'desc')->take(10)->skip($skip)->get($select);
+    public static function get_home_article_list($user_id,$skip = 0){
+        $select = '
+        articles_user.id,
+        articles_user.title,
+        articles_user.summary,
+        articles_user.tags,
+        articles_user.image,
+        articles_user.create_time,
+        articles_user.favorites,
+        articles_user.likes
+        ';
+        $list = ArticleUserModel::select(DB::raw($select))
+            ->where('articles_user.user_id' ,$user_id)
+            ->where('articles_user.deleted',0)
+            ->where('articles_user.post_status',2)
+            ->orderBy('articles_user.update_time', 'desc')
+            ->take(10)->skip($skip)->get();
+
         return $list;
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取用户收藏文章
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $user_id
+    | @param  string $skip
+    | @param  string $select
+    | @return array  $article_list
+    |
+    */
+    public static function get_favorite_article_list($user_id,$skip = 0){
+        $select_site = '
+        articles_site.id,
+        articles_site.title,
+        articles_site.summary,
+        articles_site.tags,
+        articles_site.image,
+        user_favorite.type,
+        user_favorite.create_time,
+        site_routing.custom_domain AS jump
+        ';
+        $site_list = DB::table('user_favorite')
+            ->select(DB::raw($select_site))
+            ->leftJoin('articles_site', function($join){
+                $join->on('articles_site.id', '=', 'user_favorite.article_id');
+            })
+            ->leftJoin('site_routing', function($join){
+                $join->on('articles_site.site_id', '=', 'site_routing.site_id');
+            })
+            ->where('user_favorite.valid', 1)
+            ->where('user_favorite.type', 1)
+            ->where('user_favorite.user_id', $user_id);
+        ;
+        $select_user = '
+        articles_user.id,
+        articles_user.title,
+        articles_user.summary,
+        articles_user.tags,
+        articles_user.image,
+        user_favorite.type AS type,
+        user_favorite.create_time AS create_time,
+        articles_user.user_id AS jump
+        ';
+        $user_list = DB::table('user_favorite')
+            ->select(DB::raw($select_user))
+            ->leftJoin('articles_user', function($join){
+                $join->on('articles_user.id', '=', 'user_favorite.article_id');
+            })
+            ->where('user_favorite.valid', 1)
+            ->where('user_favorite.type', 2)
+            ->where('user_favorite.user_id', $user_id);
+        ;
+        $list = $site_list->unionAll($user_list)->take(10)->skip($skip)->get();
+        usort($list, function($a, $b) {
+            return strtotime($b->create_time) - strtotime($a->create_time);
+        });
+        return $list;
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取用户收藏文章总数
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $user_id
+    | @param  string $skip
+    | @param  string $select
+    | @return array  $article_list
+    |
+    */
+    public static function get_favorite_article_count($user_id){
+        return DB::table('user_favorite')->where('user_favorite.valid', 1)->where('user_favorite.user_id', $user_id)->count();
     }
     /*
    |--------------------------------------------------------------------------

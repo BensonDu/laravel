@@ -53,6 +53,7 @@ html{
     display: block;
 }
 body{
+    min-width: 1024px;
     margin: 0;
     padding: 0;
     font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
@@ -107,7 +108,7 @@ body{
     display: none;
     height: 48px;
     width: 48px;
-    background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Floading-three-dots.gif) no-repeat center;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Floading-dots.gif) no-repeat center;
     background-size: 28px;
 }
 .load-more.More p:hover{
