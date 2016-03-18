@@ -258,7 +258,7 @@
 .site-content .news .list-container .none{
     position: relative;
     width: 100%;
-    padding: 80px 0;
+    padding: 80px 150px;
     text-align: center;
     display: none;
 }

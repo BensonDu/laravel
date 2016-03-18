@@ -46,7 +46,7 @@
 }
 .box-container ul{
     display: inline-block;
-    min-height: 60px;
+    height: 340px;
     width: 100%;
 }
 .box-container ul li{
@@ -274,4 +274,123 @@
 }
 .box-container.add .add .input{
     width: 50%;
+}
+.delete-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 2;
+    -webkit-transition: opacity 0.4s ease-in;
+    -moz-transition: opacity 0.4s ease-in;
+    transition: opacity 0.4s ease-in;
+}
+.delete-container.active{
+    visibility: visible;
+    opacity: 1;
+}
+.delete-container .wrap{
+    width: 400px;
+    height: 500px;
+    margin-left: 300px;
+}
+.delete-container .wrap .delete{
+    height: 400px;
+    margin-top: 100px;
+    width: 100%;
+    background: #fefefe;
+    box-shadow: 0 0 10px 0 #ccc;
+}
+.delete-container .wrap .delete h3{
+    display: inline-block;
+    width: 100%;
+    line-height:46px;
+    margin-top: 16px;
+    font-size: 20px;
+    text-align: center;
+    color: #333;
+}
+.delete-container .wrap .delete span,
+.delete-container .wrap .delete p{
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: top;
+    line-height: 22px;
+    text-align: center;
+}
+.delete-container .wrap .delete p{
+    color: #aaa;
+    padding: 0 30px;
+    width: 100%;
+}
+.delete-container .wrap .delete span{
+    color: #f06292;
+}
+.delete-container .wrap .delete .list{
+    width: 100%;
+    height: 200px;
+    margin-top: 16px;
+}
+.delete-container .wrap .delete .list .content{
+    width: 100%;
+    padding: 5px 40px;
+    border-top: 1px solid #eee;
+}
+.delete-container .wrap .delete .list .content a{
+    display: inline-block;
+    width: 100%;
+    height: 38px;
+    overflow: hidden;
+    padding: 0 20px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+.delete-container .wrap .delete .list .content a span{
+    display: inline-block;
+    line-height: 38px;
+    color: #999;
+    float: left;
+}
+.delete-container .wrap .delete .list .content a.active em{
+    display: inline-block;
+    height: 30px;
+    width: 20px;
+    float: right;
+    vertical-align: -7px;
+    margin-right: 5px;
+    background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-size: 90px;
+    background-position: 0 10px;
+}
+.delete-container .wrap .delete .list .content a:hover{
+    opacity: .6;
+}
+.delete-container .wrap .delete .btn{
+    width: 100%;
+    height: 100px;
+    padding: 35px;
+    text-align: center;
+}
+.delete-container .wrap .delete .btn a{
+    display: inline-block;
+    line-height: 30px;
+    width: 40%;
+}
+.delete-container .wrap .delete .btn a.cancel{
+    cursor: pointer;
+}
+.delete-container .wrap .delete .btn a.cancel:hover{
+    text-decoration: underline;
+}
+.delete-container .wrap .delete .btn a.confirm{
+    color: #aaa;
+    cursor: not-allowed;
+}
+.delete-container .wrap .delete .btn a.confirm.active{
+    color: #000;
+    cursor: pointer;
+}
+.delete-container .wrap .delete .btn a.confirm.active:hover{
+    text-decoration: underline;
 }

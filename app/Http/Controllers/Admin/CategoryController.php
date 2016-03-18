@@ -49,11 +49,9 @@ class CategoryController extends AdminController
         $hide = [];
         foreach($list as $v){
             if($v->deleted == 0){
-                if(count($show) == 5)continue;
                 $show[] = $v;
             }
             if($v->deleted == 1){
-                if(count($hide) == 5)continue;
                 $hide[] = $v;
             }
         }
@@ -73,7 +71,7 @@ class CategoryController extends AdminController
         $hide =  request()->input('hide');
         $show = !!$show ? $show : [];
         $hide = !!$hide ? $hide : [];
-        if(count($show)>5 || count($hide)>5)return $this->ApiOut(40001,'请求错误');
+        if((count($show) + count($hide))>5)return $this->ApiOut(40001,'请求错误');
         CategoryModel::order_save($_ENV['site_id'],$show,$hide);
         return $this->ApiOut(0,'保存成功');
     }
@@ -85,6 +83,19 @@ class CategoryController extends AdminController
     public function del(){
         $id =  request()->input('id');
         if(empty($id) || !!CategoryModel::get_category_related_article_count($_ENV['site_id'],$id))return $this->ApiOut(40001,'请求错误');
+        CategoryModel::del_category($_ENV['site_id'],$id);
+        return $this->ApiOut(0,'删除成功');
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 分类删除关联文章 接口
+    |--------------------------------------------------------------------------
+    */
+    public function delete(){
+        $id     =  request()->input('id');
+        $move   =  request()->input('move');
+        if(empty($id) || empty($move) || !CategoryModel::category_owner($_ENV['site_id'],$move))return $this->ApiOut(40001,'请求错误');
+        CategoryModel::article_transfer($_ENV['site_id'],$id,$move);
         CategoryModel::del_category($_ENV['site_id'],$id);
         return $this->ApiOut(0,'删除成功');
     }

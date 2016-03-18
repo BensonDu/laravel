@@ -37,7 +37,7 @@ class CategoryModel extends Model
             ->where('article_category.site_id' ,$id)
             ->where('article_category.deleted' ,'<',2)
             ->orderBy('article_category.order','desc')
-            ->take(10)
+            ->take(5)
             ->get();
         $count_list = self::get_category_related_article_count_list($id);
         foreach($items as $k => $v){
@@ -133,7 +133,6 @@ class CategoryModel extends Model
     public static function max_order($site_id){
          return  CategoryModel::where('site_id',$site_id)->where('deleted' , 1)->orderby('order','desc')->first(['order']);
     }
-
     /*
     |--------------------------------------------------------------------------
     | 站点分类总数
@@ -144,8 +143,36 @@ class CategoryModel extends Model
     |
     */
     public static function category_count($site_id){
-        return  CategoryModel::where('site_id',$site_id)->where('deleted' , 1)->count();
+        return  CategoryModel::where('site_id',$site_id)->where('deleted' , '<', 2)->count();
 
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 分类ID 是否属于该站点
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @param  string $category_id
+    | @return bool
+    |
+    */
+    public static function category_owner($site_id,$category_id){
+        return  CategoryModel::where('site_id',$site_id)->where('deleted' , '<', 2)->where('id' , $category_id)->count();
+
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 文章分类迁移
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @param  string $from_id
+    | @param  string $to_id
+    | @return bool
+    |
+    */
+    public static function article_transfer($site_id,$from_id,$to_id){
+        return DB::table('articles_site')->where('site_id',$site_id)->where('category' , $from_id)->update(['category'=>$to_id]);
     }
     /*
     |--------------------------------------------------------------------------

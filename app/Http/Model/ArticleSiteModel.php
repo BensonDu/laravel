@@ -138,10 +138,10 @@ class ArticleSiteModel extends Model
      | @return array  $article_list
      |
     */
-    public static function get_article_categories($id){
+    public static function get_article_categories($id,$deleted = 1){
         $items =  DB::table('article_category')
             ->where('site_id' ,$id)
-            ->where('deleted' ,0)
+            ->where('deleted' ,'<' ,$deleted)
             ->orderBy('order','desc')
             ->take(5)
             ->get();

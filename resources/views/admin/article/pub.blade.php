@@ -18,7 +18,7 @@
                 <td v-text="a.create_time"></td>
                 <td class="handle">
                     <div v-bind:class="!a.article_id ? 'hide' : ''">
-                        <a class="preview" v-bind:href="'/'+a.article_id" target="_blank"><em></em><span>预览</span></a>
+                        <a class="preview" v-bind:href="'/'+a.article_id" target="_blank"><em></em><span>查看</span></a>
                         <a class="post" v-on:click="_post(a.article_id)"><em></em><span>发布状态</span></a>
                         <a class="edit" v-on:click="_edit(a.article_id)"><em></em><span>编辑</span></a>
                         <a class="del" v-on:click="_del(a.article_id)"><em></em><span>删除</span></a>

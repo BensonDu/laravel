@@ -220,8 +220,8 @@
         return self.vue.load = 'loading';
     };
     //获取数据
-    this.get_data = function(i,call){
-        if(!self.has_more())return;
+    this.get_data = function(i,call,hasmore){
+        if(!self.has_more() && !hasmore)return;
         self.btn_loading();
         request.get('/index/list',function(ret){
                 if(ret.hasOwnProperty('code') && ret.code ==0){
@@ -250,7 +250,7 @@
         self.category = category_id;
         self.get_data(index,function(list){
             self.swith_list(list);
-        });
+        },1);
 
     };
 

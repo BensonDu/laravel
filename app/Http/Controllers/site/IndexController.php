@@ -54,7 +54,7 @@ class IndexController extends SiteController
      |--------------------------------------------------------------------------
      */
     private function get_categories(){
-        $categories = ArticleSiteModel::get_article_categories($_ENV['site_id']);
+        $categories = ArticleSiteModel::get_article_categories($_ENV['site_id'],1);
         array_unshift($categories,[
             'id'    => 0,
             'name'  => '全部'
