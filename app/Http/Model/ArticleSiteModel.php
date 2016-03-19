@@ -360,5 +360,18 @@ class ArticleSiteModel extends Model
             ->where('articles_site.post_status',1)
             ->count();
     }
+    /*
+    |--------------------------------------------------------------------------
+    | 获得文章列表 根据 ID 组
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @param  array  $ids
+    | @return array
+    |
+    */
+    public static function get_article_list_by_ids($site_id,$ids = [],$select=['id','title','summary']){
+        return ArticleSiteModel::whereIn('id',$ids)->where('site_id' ,$site_id)->where('deleted',0)->where('articles_site.post_status',1)->get($select);
+    }
 
 }

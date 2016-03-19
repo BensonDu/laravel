@@ -26,8 +26,8 @@ class SiteSpecialModel extends Model
      | @return array
      |
      */
-    public static function get_special_info($site_id){
-        return SiteSpecialModel::where('site_id',$site_id)->where('post_status' , 1)->where('deleted' , 0)->orderby('post_time','desc')->get();
+    public static function get_special_all($site_id){
+        return SiteSpecialModel::where('site_id',$site_id)->where('post_status' , 1)->where('deleted' , 0)->orderby('update_time','desc')->get();
     }
     /*
      |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ class SiteSpecialModel extends Model
      |
      */
     public static function get_first_special($site_id){
-        return SiteSpecialModel::where('deleted' , 0)->where('post_status' , 1)->where('site_id' , $site_id)->orderby('post_time','desc')->first();
+        return SiteSpecialModel::where('deleted' , 0)->where('post_status' , 1)->where('site_id' , $site_id)->orderby('update_time','desc')->first();
     }
     /*
      |--------------------------------------------------------------------------
@@ -81,6 +81,63 @@ class SiteSpecialModel extends Model
     }
     /*
     |--------------------------------------------------------------------------
+    | 站点专题总数
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @return array
+    |
+    */
+    public static function get_special_count($site_id,$deleted = 0){
+        return SiteSpecialModel::where('site_id' ,$site_id)->where('deleted',$deleted)->count();
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 站点专题删除
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @return array
+    |
+    */
+    public static function special_delete($site_id,$id){
+        return SiteSpecialModel::where('site_id' ,$site_id)->where('id',$id)->update(['deleted' => 1]);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 站点专题更新
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @return array
+    |
+    */
+    public static function special_update($site_id,$id,$data){
+        return SiteSpecialModel::where('site_id' ,$site_id)->where('id',$id)->update($data);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 站点专题新增
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @return array
+    |
+    */
+    public static function special_add($site_id,$data){
+        $special = new SiteSpecialModel();
+        $special->site_id       = $site_id;
+        $special->title         = $data['title'];
+        $special->summary       = $data['summary'];
+        $special->bg_image      = $data['bg_image'];
+        $special->image         = $data['image'];
+        $special->list          = $data['list'];
+        $special->create_time   = now();
+        $special->update_time   = now();
+        return $special->save();
+    }
+    /*
+    |--------------------------------------------------------------------------
     | 站点专题列表
     |--------------------------------------------------------------------------
     |
@@ -89,12 +146,13 @@ class SiteSpecialModel extends Model
     | @return array
     |
     */
-    public static function get_special_list($site_id,$skip,$take,$keyword,$post_status = 1,$deleted = 0){
+    public static function get_special_list($site_id,$skip,$take,$keyword,$post_status = 1,$deleted = 0,$orderby = 'update_time',$order = 'desc'){
         $select = [
             'title',
             'summary',
             'id',
             'image',
+            'post_status',
             'create_time',
             'update_time'
         ];
@@ -117,7 +175,7 @@ class SiteSpecialModel extends Model
             });
         }
 
-        return  $query->orderBy('update_time', 'desc')
+        return  $query->orderBy($orderby, $order)
             ->skip($skip)
             ->take($take)
             ->get($select);

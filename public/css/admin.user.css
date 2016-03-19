@@ -61,25 +61,25 @@
     line-height: 36px;
     font-size: 12px;
     cursor: pointer;
-    color: #fff;
-    background: #aaa;
     padding: 0 14px;
     transition: background .4s;
     -moz-transition: background .4s;
     -webkit-transition: background .4s;
 }
 .list-header .nav a span{
-    line-height: inherit;
-    font-size: inherit;
+    line-height: 34px;
+    font-size: 14px;
     color: inherit;
+    vertical-align: top;
+    margin-left: 4px;
 }
 .list-header .nav a em{
-    line-height: inherit;
-    font-size: 14px;
+    line-height: 14px;
+    font-size: 20px;
     color: inherit;
 }
 .list-header .nav a:hover{
-    background: #999;
+    opacity: .7;
 }
 
 .list-body{

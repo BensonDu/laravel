@@ -160,6 +160,11 @@
     background-size: 20px 25px;
     background-position: 0 8px;
 }
+.admin-content .top .name.special em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fspeical.png) no-repeat center;
+    background-size: 22px 22px;
+    background-position: 0 8px;
+}
 .admin-content .admin-area{
     position: relative;
     width: 100%;

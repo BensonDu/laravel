@@ -95,6 +95,15 @@ if(!strpos(' '.request()->server('HTTP_HOST'),config('site.platform_base'))) {
         Route::get('/admin/category/delete', 'Admin\CategoryController@delete');
         Route::get('/admin/category/edit', 'Admin\CategoryController@edit');
         Route::get('/admin/category/add', 'Admin\CategoryController@add');
+        //专题管理
+        Route::get('/admin/special', 'Admin\SpecialController@index');
+        Route::get('/admin/special/list', 'Admin\SpecialController@specials');
+        Route::get('/admin/special/delete', 'Admin\SpecialController@delete');
+        Route::get('/admin/special/articles', 'Admin\SpecialController@articles');
+        Route::get('/admin/special/info', 'Admin\SpecialController@info');
+        Route::get('/admin/special/save', 'Admin\SpecialController@save');
+        Route::get('/admin/special/add', 'Admin\SpecialController@add');
+        Route::get('/admin/special/post', 'Admin\SpecialController@post');
     });
 }
 //平台部分

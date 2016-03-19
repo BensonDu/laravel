@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Site;
 
 
+use App\Http\Model\ArticleSiteModel;
 use App\Http\Model\SiteSpecialModel;
 
 class SpecialController extends SiteController
@@ -18,11 +19,11 @@ class SpecialController extends SiteController
     }
 
     public function index($id){
-        $info = SiteSpecialModel::get_special_info($_ENV['site_id']);
+        $info = SiteSpecialModel::get_special_all($_ENV['site_id']);
         $data['info'] = [];
         $data['list'] = [];
         foreach($info as $v){
-            $v->time = date('Y年m月d日', strtotime($v->post_time));
+            $v->time = date('Y年m月d日', strtotime($v->update_time));
             if($v['id'] == $id){
                 $data['info'] = $v;
             }
@@ -33,7 +34,8 @@ class SpecialController extends SiteController
 
         $data['active'] = 'special';
         if(empty($data['info']))abort(404);
-        $list = SiteSpecialModel::get_special_article_list($id);
+        $ids = explode(' ',$data['info']->list);
+        $list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$ids);
         $data['article_list'] = $list;
         return self::view('/site/special',$data);
     }
