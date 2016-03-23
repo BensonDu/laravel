@@ -74,7 +74,7 @@
     });
     //IMG ID 转化为 URL
     this.get_img_url=function(id, option){
-        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2' + (option ? "/crop/!" + get_crop(option) : "") + "/auto-orient/thumbnail/480x";
+        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2/thumbnail/!400x400r/gravity/Center/crop/400x400';
     };
     //上传进度显示
     this.uploading = function(loaded, total){

@@ -66,5 +66,5 @@
 <script src="http://dn-noman.qbox.me/imageuploader.min.js"></script>
 <script>var default_data = JSON.parse('{!! $input !!}');</script>
 <script src="/js/user/base.js"></script>
-<script src="/js/user/social.js"></script>
+<script src="/js/user/social.js?"></script>
 @stop
