@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tech2ipo</title>
-    <meta name="keywords" content="创见"/>
-    <meta name="description" content="Tech2ipo"/>
+    <title>TECH2IPO/创见</title>
+    <meta name="keywords" content="TECH2IPO/创见"/>
+    <meta name="description" content="全世界在等待新的科技故事"/>
     <meta name="robots" content="all"/>
     <meta name="copyright" content="Tech2ipo"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
