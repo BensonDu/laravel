@@ -105,7 +105,7 @@
             form = {
                 username : base.username.val,
                 captcha :base.captcha.val,
-                password : base.captcha.val
+                password : base.password.val
             };
         return request.post('/account/find',function(ret){
             if(ret.hasOwnProperty('code')){

@@ -253,7 +253,7 @@ class ArticleController extends AdminController
                     $info->tags = [];
                 }
                 else{
-                    $info->tags = explode(' ',$info->tags);
+                    $info->tags = explode('T@G',$info->tags);
                 }
             }
             $ret = [

@@ -8,18 +8,19 @@ class DataImport extends Controller
 {
 
     public function auto(){
-        exit;
         set_time_limit(0);
         ini_set('memory_limit', '-1');
         $this->article();
         $this->user();
-        $this->tag();
+        //$this->tag();
         $this->fix_author_exist();
         $this->fix_author_not_exist();
         $this->fix_author_not_exist_create();
+
         $this->user_syn();
         $this->del_muti_article();
         $this->article_syn();
+        $this->add_category_article();
     }
     /*
      * 导入数据Post_after.json
@@ -29,7 +30,7 @@ class DataImport extends Controller
     {
         ini_set('memory_limit', '20000M');
         $disk = Storage::disk('local');
-        $json = $disk->get('json/Post_after.json');
+        $json = $disk->get('json/article.json');
         $data = json_decode($json,1);
         $cache = [
             'id'            => '',
@@ -37,7 +38,7 @@ class DataImport extends Controller
             'title'         => '',
             'author'        => '',
             'brief'         => '',
-            'tag_list'      => json_encode([]),
+            'tag_list'      => '',
             'kind'          => '',
             'owner_id'      => '',
             'html'          => '',
@@ -54,10 +55,10 @@ class DataImport extends Controller
                 'title'         => $v['title'],
                 'author'        => $v['author'],
                 'brief'         => $v['brief'],
-                'tag_list'      => json_encode($v['tag_list']),
+                'tag_list'      => is_array($v['tag_list']) ? implode('T@G',$v['tag_list']) :'',
                 'kind'          => $v['kind'],
                 'owner_id'      => isset($v['owner']['objectId'])?$v['owner']['objectId']:'',
-                'html'          => $v['html'],
+                'html'          => trim($v['html']),
                 'create_time'   => date('Y-m-d H:i:s',strtotime($v['createdAt'])),
                 'update_time'   => date('Y-m-d H:i:s',strtotime($v['updatedAt'])),
                 'star_count'    =>$v['star_count']
@@ -76,7 +77,7 @@ class DataImport extends Controller
     {
         ini_set('memory_limit', '-1');
         $disk = Storage::disk('local');
-        $json = $disk->get('json/User.json');
+        $json = $disk->get('json/users.json');
         $data = json_decode($json,1);
         $ret    = [];
         $cache = [
@@ -92,9 +93,10 @@ class DataImport extends Controller
             'phone_verified'   => '',
             'username'   => ''
         ];
+
         foreach($data['results'] as $vv){
             $v = array_merge($cache , $vv);
-            $ret[] = [
+            $ret = [
                 'id'            => $v['ID'],
                 'objectid'      => $v['objectId'],
                 'email'         => $v['email'],
@@ -107,8 +109,9 @@ class DataImport extends Controller
                 'phone_verified'   => $v['mobilePhoneVerified'],
                 'username'      => $v['username']
             ];
+            DB::table('users_old')->insert($ret);
         }
-        DB::table('users_old')->insert($ret);
+
         unset($data);
         unset($json);
         echo 'Done';
@@ -122,33 +125,32 @@ class DataImport extends Controller
     {
         ini_set('memory_limit', '-1');
         $disk = Storage::disk('local');
-        $json = $disk->get('json/Post_tag.json');
+        $json = $disk->get('json/tags.json');
         $data = json_decode($json,1);
-        $cache = [
-            'objectid'          =>'',
-            'article_id'         => '',
-            'site_id'         => '',
-            'tag'                => json_encode([]),
-            'post_time'          => ''
-        ];
+
         $ex = [];
-        foreach($data['results'] as $vv){
-            $v = array_merge($cache , $vv);
+        $ret = [];
+        foreach($data['results'] as $v){
             //过滤站点ID
             if($v['site']['objectId'] != '556eb106e4b0925e00040e88')continue;
             //文章ID去重
-            if(!in_array($v['post']['objectId'],$ex,1)){
+            if(!in_array($v['post']['objectId'],$ex,1) && isset($v['objectId']) && isset($v['post']['objectId']) && isset($v['site']['objectId'])){
                 $ex[] = $v['post']['objectId'];
-                $ret = [
+                $ret[] = [
                     'objectid'           => $v['objectId'],
                     'article_id'         => $v['post']['objectId'],
                     'site_id'            => $v['site']['objectId'],
-                    'tag'                => isset($v['tag_list'])?json_encode($v['tag_list']):json_encode([]),
+                    'tag'                => (isset($v['tag_list']) && is_array($v['tag_list']) )?implode('T@G',$v['tag_list']):'',
                     'post_time'          => date('Y-m-d H:i:s',strtotime($v['createdAt']))
                 ];
-                DB::table('article_tag')->insert($ret);
+
             }
         }
+        array_reverse($ret);
+        foreach($ret as $v){
+            DB::table('article_tag')->insert($v);
+        }
+
 
         unset($data);
         unset($json);
@@ -326,9 +328,6 @@ class DataImport extends Controller
         users_old
         ON
         articles_old.owner_id = users_old.objectid
-        ORDER BY
-        article_tag.post_time
-        DESC
         ;"
         ;
         $data = DB::select(DB::raw($sql));
@@ -347,11 +346,12 @@ class DataImport extends Controller
                     'title'         => $v->title,
                     'summary'       => $summary,
                     'content'       => $v->html,
-                    'tags'          => $v->tag,
+                    'tags'          => !empty($v->tag)?$v->tag:'',
                     'image'        => $image,
                     'category'      => '',
+                    'contribute_status' =>1,
                     'post_status'   => 1,
-                    'post_time'     => $v->post_time,
+                    'post_time'     => !empty($v->post_time)?$v->post_time:$v->update_time,
                     'update_time'         => $v->update_time,
                     'create_time'         => $v->create_time
                 ]);
@@ -384,11 +384,11 @@ class DataImport extends Controller
     public function add_category_article()
     {
         $s = [
-            '\\\\u6bcf\\\\\u65e5\\\\u8d44\\\\u8baf',
-            '\\\\u6df1\\\\u5ea6\\\\u89c2\\\\u70b9',
-            '\\\\u4eba\\\\u7269\\\\u7279\\\\u5199',
-            '\\\\u516c\\\\u53f8\\\\u884c\\\\u4e1a',
-            '\\\\u4ea7\\\\u54c1\\\\u5feb\\\\u62a5'
+            '每日资讯',
+            '深度观点',
+            '人物特写',
+            '公司行业',
+            '产品快报'
         ];
         $r = [];
         foreach($s as $k =>$v){
@@ -396,10 +396,6 @@ class DataImport extends Controller
             $r[] = DB::table('articles_site')->where('tags', 'LIKE', '%'.$v.'%')->update(['category'=>$o]);
         }
         echo json_encode($r);
-
-    }
-    public function test()
-    {
 
     }
 

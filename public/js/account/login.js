@@ -67,7 +67,7 @@
             after = decodeURIComponent(cur[0] || location.href);
         }
         param = input.create_param({session:session,redirect:after});
-        location.href = 'http://crababy.com/sso/'+param;
+        location.href = 'http://tech2ipo.com/sso/'+param;
     };
 
     this.redirect= function(){

@@ -72,7 +72,7 @@ class EditController extends UserController
                 $info->tags = [];
             }
             else{
-                $info->tags = explode(' ',$info->tags);
+                $info->tags = explode('T@G',$info->tags);
             }
             return self::ApiOut(0,$info);
         }
