@@ -35,7 +35,7 @@ class ProfileController extends UserController
         if ( !preg_match('/[\x4E00-\x9FA5\w]{1,20}/',$nickname) ) return self::ApiOut(20001,'包含非法字符');
 
 
-        if(UserModel::nickname_exist($nickname))return self::ApiOut(20001,'昵称已存在');
+        if(UserModel::nickname_exist($_ENV['uid'],$nickname))return self::ApiOut(20001,'昵称已存在');
         UserModel::save_profile($_ENV['uid'],$avatar,$nickname,$slogan,$introduce);
         return self::ApiOut(0,'/');
     }
