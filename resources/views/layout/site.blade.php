@@ -36,7 +36,7 @@
         <div class="container">
             <a href="/" class="{{isset($active) && $active =='home' ? 'active' : ''}}"><span>最近更新</span><em>15</em></a>
             <a href="/special" class="{{isset($active) && $active =='special' ? 'active' : ''}}"><span>专题聚光</span></a>
-            <a href="#" class="{{isset($active) && $active =='joinus' ? 'active' : ''}}"><span>加入我们</span></a>
+            <a href="http://tech2ipo.com/10028495" class="{{isset($active) && $active =='joinus' ? 'active' : ''}}"><span>加入我们</span></a>
         </div>
     </div>
     <div class="bottom">
