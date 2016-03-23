@@ -64,6 +64,7 @@ if(!strpos(' '.request()->server('HTTP_HOST'),config('site.platform_base'))) {
     Route::get('/social/favorite', 'Common\SocialController@favorite');
 
     //渠道输出
+    Route::get('/feed', 'Feed\IndexController@index');
     Route::get('/feed/toutiao', 'Feed\ToutiaoController@index');
     Route::get('/feed/toutiao/{id}', 'Feed\ToutiaoController@detail');
 
