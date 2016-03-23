@@ -208,7 +208,7 @@ class ArticleController extends AdminController
         $summary    = $request->input('summary');
         $content    = $request->input('content');
         $image      = $request->input('image');
-        $tags       = trim(implode(' ', json_decode($request->input('tags'),1)));
+        $tags       = trim(implode('T@G', json_decode($request->input('tags'),1)));
 
         if(empty($article_id) ||empty($title) || !$this->check_article_auth($article_id)){
             return self::ApiOut(40001,'请求错误');
