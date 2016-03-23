@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d354ce4-7934-414a-b506-94450ffcb7fc" name="Default" comment="Add Site ...">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/Device.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/Device.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Model/ArticleUserModel.php" afterPath="$PROJECT_DIR$/app/Http/Model/ArticleUserModel.php" />
     </list>
     <ignored path="Tech2ipo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,11 +40,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Device.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Device.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Middleware/Device.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16496465">
-              <caret line="19" column="49" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+            <state vertical-scroll-proportion="-6.875">
+              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/User/EditController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.137255">
+              <caret line="204" column="44" selection-start-line="204" selection-start-column="44" selection-end-line="204" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArticleUserModel.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Model/ArticleUserModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3330658">
+              <caret line="58" column="25" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -108,7 +128,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/css/admin.article.css" />
         <option value="$PROJECT_DIR$/resources/views/admin/article/pub.blade.php" />
         <option value="$PROJECT_DIR$/public/js/public.base.js" />
         <option value="$PROJECT_DIR$/public/js/admin/article.js" />
@@ -159,6 +178,7 @@
         <option value="$PROJECT_DIR$/public/js/user/social.js" />
         <option value="$PROJECT_DIR$/resources/views/user/social.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/Device.php" />
+        <option value="$PROJECT_DIR$/app/Http/Model/ArticleUserModel.php" />
       </list>
     </option>
   </component>
@@ -590,6 +610,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tech2ipo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tech2ipo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Http" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="User" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -955,14 +1001,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Workspace/import.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.25">
-          <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Model/ArticleSiteModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-38.75">
@@ -991,14 +1029,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40062845">
           <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/User/EditController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2600157">
-          <caret line="74" column="42" selection-start-line="74" selection-start-column="42" selection-end-line="74" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -1367,8 +1397,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/Device.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16496465">
-          <caret line="19" column="49" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+        <state vertical-scroll-proportion="-6.875">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/User/EditController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.137255">
+          <caret line="204" column="44" selection-start-line="204" selection-start-column="44" selection-end-line="204" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Model/ArticleUserModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3330658">
+          <caret line="58" column="25" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="25" />
           <folding />
         </state>
       </provider>
