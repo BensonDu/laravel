@@ -33,7 +33,7 @@ class DetailController extends SiteController
             'title'     => $info->title,
             'summary'   => $info->summary,
             'content'   => $info->content,
-            'tags'      => explode(' ',$info->tags),
+            'tags'      => explode('T@G',$info->tags),
             'time'      => date('Y年m月d日',strtotime($info->create_time)),
             'category'  => $info->category_name,
             'image'     => $info->image,

@@ -49,7 +49,7 @@ class TagController extends SiteController
                 }
             }
             else{
-                foreach(explode(' ',$v->tags) as $vv){
+                foreach(explode('T@G',$v->tags) as $vv){
                     $tags[] = [
                         'item'  => $vv,
                         'color' => rand_color()

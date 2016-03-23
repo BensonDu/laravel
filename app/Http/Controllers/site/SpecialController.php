@@ -34,7 +34,7 @@ class SpecialController extends SiteController
 
         $data['active'] = 'special';
         if(empty($data['info']))abort(404);
-        $ids = explode(' ',$data['info']->list);
+        $ids = explode('T@G',$data['info']->list);
         $list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$ids);
         $data['article_list'] = $list;
         return self::view('/site/special',$data);
