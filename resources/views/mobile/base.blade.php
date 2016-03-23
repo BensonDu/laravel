@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tech2ipo</title>
-    <meta name="keywords" content="创见"/>
-    <meta name="description" content="Tech2ipo"/>
+    <title>TECH2IPO/创见</title>
+    <meta name="keywords" content="TECH2IPO/创见"/>
+    <meta name="description" content="全世界在等待新的科技故事"/>
     <meta name="robots" content="all"/>
     <meta name="copyright" content="Tech2ipo"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -34,5 +34,14 @@
 @section('script')
 <script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/mobile/js/public.base.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?047eac725727fc206cb8019dc0fb9dc9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 @show
 </html>
