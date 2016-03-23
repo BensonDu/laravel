@@ -38,6 +38,48 @@ class IndexController extends SiteController
 
         return self::view('/site/index',$data);
     }
+    /*
+     |--------------------------------------------------------------------------
+     | M 站首页
+     |--------------------------------------------------------------------------
+     */
+    public function mobile(){
+
+        $id = $_ENV['site_id'];
+        $data['active'] = 'home';
+
+        //首页精选
+        $data['stars']  = StarModel::get_mobile_star_list($id);
+        //文章分类
+        $data['categories'] = $this->get_categories();
+        //文章列表
+        $data['articles']  = [
+            'total' => $this->get_articles_count($id),
+            'list'  => $this->get_mobile_articles($id)
+        ];
+
+        return self::view('mobile.site.index',$data);
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | M 站文章列表 接口
+     |--------------------------------------------------------------------------
+     */
+    public function mobilearticles(){
+        $id = $_ENV['site_id'];
+        $index      = request()->input('index');
+        $category   = request()->input('category');
+        $skip =intval($index)*15;
+        return self::ApiOut(0,[
+            'list'  => $this->get_mobile_articles($id,$skip,$category),
+            'total' => $this->get_articles_count($id, $category),
+        ]);
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 文章列表 接口
+     |--------------------------------------------------------------------------
+     */
     public function articles(){
         $id = $_ENV['site_id'];
         $index      = request()->input('index');
@@ -92,10 +134,24 @@ class IndexController extends SiteController
         }
         return $list;
     }
+    private function get_mobile_articles($id, $skip = 0, $category = 0){
+        $ret = [];
+        $list = ArticleSiteModel::get_home_article_list($id, $skip,$category);
+        $i = 0;
+        foreach($list as $k =>$v){
+            if(empty(trim($v->image)))continue;
+            $ret[$i] = (object) [];
+            $ret[$i]->article_id    = $v->article_id;
+            $ret[$i]->title         = $v->title;
+            $ret[$i]->summary       = $v->summary;
+            $ret[$i]->image         = $v->image;
+            $ret[$i]->category_name = $v->category_name;
+            $ret[$i]->create_time   = time_down(strtotime($v->create_time));
+            $i++;
+        }
+        return $ret;
+    }
     private function get_articles_count($id,$category = 0){
         return ArticleSiteModel::get_article_count($id,$category);
-    }
-    public function test(){
-        return ArticleSiteModel::get_hot_list_($_ENV['site_id']);
     }
 }

@@ -176,7 +176,7 @@
                     d = self.vue,
                 //拼接实际URL地址
                     get_img_url = function(id, option){
-                        return 'http://dn-xswe.qbox.me/' + id + '?imageMogr2/thumbnail/!600x400r/gravity/Center/crop/600x400';
+                        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2/thumbnail/!600x400r/gravity/Center/crop/600x400';
                     },
                 //上传进度显示
                     uploading = function(loaded, total){

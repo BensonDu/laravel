@@ -14,7 +14,9 @@
             qq: /^\d{5,10}$/,
             chinese_Unicode: /^[\u2E80-\u9FFF]+$/,
             chinese_Name: /^[\u2E80-\u9FFF]{2,5}$/,
-            weibo : /http:\/\/weibo.com\/\w.*/
+            weibo : /http:\/\/weibo.com\/\w.*/,
+            username : /^\w+$/,
+            nickname :/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/
         };
     }
 }).call(define('constant'));
@@ -55,7 +57,7 @@
                 call(json);
             },
             error:function(e){
-                if(typeof  error == 'function'){
+                if( !!error ){
                     error(e);
                 }
                 else{

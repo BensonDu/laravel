@@ -311,7 +311,9 @@
         request.get('/admin/user/update',function(ret){
                 if(ret.hasOwnProperty('code') && ret.code ==0){
                     self.display.edit.hide();
-                    self.update_list();
+                    pop.success('设置成功','确定',function(){
+                        self.update_list();
+                    }).one();
                 }
                 else{
                     pop.error('保存失败','确定').one();

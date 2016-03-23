@@ -18,7 +18,7 @@ class SocialController extends UserController
             'id'        => self::$info->id,
             'wechat'    => self::$info->wechat,
             'email'     => self::$info->email,
-            'weibo'     => empty(self::$info->weibo)? 'http://weibo.com/' : self::$info->weibo
+            'weibo'     => self::$info->weibo
         ]);
         return self::view('/user/social',$data);
     }

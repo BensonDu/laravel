@@ -30,9 +30,12 @@ class ProfileController extends UserController
         $avatar = $this->request->input('avatar'); 
         $introduce = $this->request->input('introduce');
         $slogan = $this->request->input('slogan');
-        if(empty(trim($nickname))){
-            return self::ApiOut(20001,'昵称为空');
-        }
+        if(empty(trim($nickname)))return self::ApiOut(20001,'昵称为空');
+
+        if ( !preg_match('/[\x4E00-\x9FA5\w]{1,20}/',$nickname) ) return self::ApiOut(20001,'包含非法字符');
+
+
+        if(UserModel::nickname_exist($nickname))return self::ApiOut(20001,'昵称已存在');
         UserModel::save_profile($_ENV['uid'],$avatar,$nickname,$slogan,$introduce);
         return self::ApiOut(0,'/');
     }

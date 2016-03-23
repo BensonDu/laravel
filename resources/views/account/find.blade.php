@@ -57,7 +57,7 @@
             </div>
             <div class="entry">
                 <div class="right">
-                    <a href="/account/login">直接登录</a>
+                    <a href="/account/login{{$redirect}}">直接登录</a>
                     <em class="arrow"></em>
                 </div>
             </div>

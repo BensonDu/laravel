@@ -154,6 +154,7 @@
     };
     //注册成功
     this.regist_success = function(){
+        if(input.get('redirect'))return location.href = decodeURIComponent(input.get('redirect'));
         return $success.addClass('active');
     };
     this.vue = new Vue({

@@ -25,6 +25,8 @@ class DomainResolution
         if(isset($ret['is_mobile'])){
             $_ENV['site_id'] = $ret['id'];
             $_ENV['site_is_mobile'] = $ret['is_mobile'];
+            $_ENV['site_pc_domain'] = $ret['pc_domain'];
+            $_ENV['site_m_domain']  = $ret['m_domain'];
         }
         else{
             abort(404);

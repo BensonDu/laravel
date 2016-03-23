@@ -46,7 +46,9 @@ class SiteRouting extends Model
         foreach($route_rules as $v){
             $table[$v['domain']] = serialize([
                 'id'        => $v['id'],
-                'is_mobile' => $v['is_mobile']
+                'is_mobile' => $v['is_mobile'],
+                'pc_domain' => $v['pc_domain'],
+                'm_domain'  => $v['m_domain']
             ]);
         }
         if(!empty($table)) {
@@ -69,12 +71,16 @@ class SiteRouting extends Model
             [
                 'domain'    => is_null($platform_home) ? self::$platform_base : self::CreatePlatformSubdomain($platform_home),
                 'id'        => '0' ,
-                'is_mobile' => FALSE
+                'is_mobile' => FALSE,
+                'pc_domain' => null,
+                'm_domain'  => null
             ],
             [
                 'domain'    => is_null($platform_mobile) ? self::$platform_base : self::CreatePlatformSubdomain($platform_mobile),
                 'id'        => '0',
-                'is_mobile' => TRUE
+                'is_mobile' => TRUE,
+                'pc_domain' => null,
+                'm_domain'  => null
             ]
         ];
     }
@@ -86,15 +92,19 @@ class SiteRouting extends Model
         $all = self::GetAllDomainsFromDB();
         if(count($all) > 0 ){
             foreach($all as $v){
-                if(!is_null($v['mobile_domain'])){
-                    $rules[] = self::CreateRouteRuleItem($v['mobile_domain'],$v['site_id'],TRUE);
+                $m = !is_null($v['mobile_domain']) ? $v['mobile_domain'] : null;
+                $p = !is_null($v['custom_domain']) ? $v['custom_domain'] : null;
+                if(!!$m){
+                    $rules[] = self::CreateRouteRuleItem($m,$v['site_id'],TRUE,$p,$m);
                 }
-                if(!is_null($v['custom_domain'])){
-                    $rules[] = self::CreateRouteRuleItem($v['custom_domain'],$v['site_id'],FALSE);
+                if(!!$p){
+                    $rules[] = self::CreateRouteRuleItem($p,$v['site_id'],FALSE,$p,$m);
                 }
                 if(!is_null($v['platform_domain'])){
-                    $rules[] = self::CreateRouteRuleItem(self::CreatePlatformSubdomain($v['platform_domain']),$v['site_id'],FALSE);
-                    $rules[] = self::CreateRouteRuleItem(self::CreatePlatformSubdomain('m.'.$v['platform_domain']),$v['site_id'],TRUE);
+                    $plat_m = self::CreatePlatformSubdomain('m.'.$v['platform_domain']);
+                    $plat_p = self::CreatePlatformSubdomain($v['platform_domain']);
+                    $rules[] = self::CreateRouteRuleItem($plat_m,$v['site_id'],TRUE,$plat_p,$plat_m);
+                    $rules[] = self::CreateRouteRuleItem($plat_p,$v['site_id'],FALSE,$plat_p,$plat_m);
                 }
             }
         }
@@ -107,12 +117,14 @@ class SiteRouting extends Model
         return array_merge(self::CreatePlatformRules(), self::CreateSiteRules());
     }
     //创建路由规则条目
-    private static function CreateRouteRuleItem($domain, $id, $is_mobile = FALSE)
+    private static function CreateRouteRuleItem($domain, $id, $is_mobile = FALSE,$pc_domain = null,$m_domain = null)
     {
         return [
             'domain'    => $domain,
             'id'        => $id,
-            'is_mobile' => $is_mobile
+            'is_mobile' => $is_mobile,
+            'pc_domain' => $pc_domain,
+            'm_domain'  => $m_domain
         ];
     }
     //生成平台二级域名

@@ -212,7 +212,7 @@
                     d = self.vue.special.cover,
                 //拼接实际URL地址
                     get_img_url = function(id, option){
-                        return 'http://dn-xswe.qbox.me/' + id + '?imageMogr2/thumbnail/!500x200r/gravity/Center/crop/500x200';
+                        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2/thumbnail/!500x200r/gravity/Center/crop/500x200';
                     },
                 //上传进度显示
                     uploading = function(loaded, total){
@@ -258,7 +258,7 @@
                     d = self.vue.special.bk,
                 //拼接实际URL地址
                     get_img_url = function(id, option){
-                        return 'http://dn-xswe.qbox.me/' + id ;
+                        return 'http://dn-noman.qbox.me/' + id ;
                     },
                 //上传进度显示
                     uploading = function(loaded, total){

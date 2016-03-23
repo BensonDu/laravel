@@ -60,7 +60,7 @@
         });
     };
     this.verify_all = function(call){
-        if(self.data.weibo.val != '' && !constant.regex().weibo.test(self.data.weibo.val))return self.error(self.data.weibo,'格式错误');
+        if(self.data.weibo.val != '' && !constant.regex().username.test(self.data.weibo.val))return self.error(self.data.weibo,'格式错误');
         call();
     };
     this.error = function(obj,text){
@@ -74,7 +74,7 @@
     });
     //IMG ID 转化为 URL
     this.get_img_url=function(id, option){
-        return 'http://dn-xswe.qbox.me/' + id + '?imageMogr2' + (option ? "/crop/!" + get_crop(option) : "") + "/auto-orient/thumbnail/480x";
+        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2' + (option ? "/crop/!" + get_crop(option) : "") + "/auto-orient/thumbnail/480x";
     };
     //上传进度显示
     this.uploading = function(loaded, total){

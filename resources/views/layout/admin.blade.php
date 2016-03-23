@@ -15,11 +15,17 @@
     </div>
     <div class="mid">
         <div class="container">
+@if(isset($_ENV['admin']['role']))
             <a href="/admin/" ><span>文章管理</span><em>{{$uncontribute_article_num}}</em></a>
+@endif
+@if(isset($_ENV['admin']['role']) && ($_ENV['admin']['role'] > 1))
             <a href="/admin/special"><span>专题管理</span></a>
             <a href="/admin/star" ><span>精选管理</span></a>
             <a href="/admin/category" ><span>分类管理</span></a>
+@endif
+@if(isset($_ENV['admin']['role']) && ($_ENV['admin']['role'] > 2))
             <a href="/admin/user" ><span>用户管理</span></a>
+@endif
         </div>
     </div>
     <div class="bottom">

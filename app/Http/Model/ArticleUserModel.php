@@ -218,15 +218,15 @@ class ArticleUserModel extends Model
         return $article->save();
     }
     /*
-   |--------------------------------------------------------------------------
-   | 投稿文章到站点
-   |--------------------------------------------------------------------------
-   |
-   | @param  string $article_id 用户文章ID
-   | @prarm  array  $site list  站点ID列表
-   | @return bool
-   |
-   */
+    |--------------------------------------------------------------------------
+    | 投稿文章到站点
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $article_id 用户文章ID
+    | @prarm  array  $site list  站点ID列表
+    | @return bool
+    |
+    */
     public static function contribute_article($article_id,$sites){
         $article_user = ArticleUserModel::where('id' ,$article_id)->first();
         foreach($sites as $v){
@@ -247,6 +247,19 @@ class ArticleUserModel extends Model
         return true;
     }
     /*
+    |--------------------------------------------------------------------------
+    | 投稿文章是否已经投稿
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $article_id 用户文章ID
+    | @prarm  array  $site list  站点ID列表
+    | @return bool
+    |
+    */
+    public static function has_contributed($article_id,$site_id){
+        return ArticleSiteModel::where('site_id',$site_id)->where('source_id',$article_id)->count();
+    }
+    /*
    |--------------------------------------------------------------------------
    | 文章所属权
    |--------------------------------------------------------------------------
@@ -259,20 +272,6 @@ class ArticleUserModel extends Model
     public static function own_article($user_id, $article_id){
         $ret = ArticleUserModel::where('id' ,$article_id)->where('user_id',$user_id)->where('deleted',0)->count();
         return $ret > 0;
-    }
-   /*
-   |--------------------------------------------------------------------------
-   | 取消发布文章
-   |--------------------------------------------------------------------------
-   |
-   | @param  string $article_id
-   | @return bool
-   |
-   */
-    public static function cancel_post($article_id){
-        $article = ArticleUserModel::where('id' ,$article_id)->first();
-        $article->post_status   = 1;
-        return $article->save();
     }
     /*
    |--------------------------------------------------------------------------

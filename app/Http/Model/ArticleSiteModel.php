@@ -42,6 +42,7 @@ class ArticleSiteModel extends Model
             'articles_site.create_time',
             'articles_site.image'
         ];
+
         DB::table('articles_site')
             ->where('articles_site.site_id' ,$site_id)
             ->where('articles_site.id',$id)
@@ -52,6 +53,8 @@ class ArticleSiteModel extends Model
                 ->leftJoin('article_category', 'article_category.id', '=', 'articles_site.category')
                 ->where('articles_site.site_id' ,$site_id)
                 ->where('articles_site.id',$id)
+                ->where('articles_site.post_status',1)
+                ->where('articles_site.post_time','<',now())
                 ->where('articles_site.deleted',0)
                 ->first($select);
     }
@@ -87,6 +90,7 @@ class ArticleSiteModel extends Model
                 ->where('articles_site.site_id' ,$id)
                 ->where('articles_site.deleted',0)
                 ->where('articles_site.post_status',1)
+                ->where('articles_site.post_time','<',now())
                 ->orderBy('create_time','desc')
                 ->take(50)
                 ->get($select);
@@ -191,7 +195,8 @@ class ArticleSiteModel extends Model
 
         return $ret
             ->where('articles_site.post_status',1)
-            ->orderBy('articles_site.create_time', 'desc')
+            ->where('articles_site.post_time','<',now())
+            ->orderBy('articles_site.post_time', 'desc')
             ->take($take)
             ->skip($skip)
             ->get();
@@ -214,6 +219,7 @@ class ArticleSiteModel extends Model
         article_category.name AS category_name,
         articles_site.id AS article_id,
         articles_site.title,
+        articles_site.tags,
         articles_site.summary,
         articles_site.content,
         articles_site.create_time,
@@ -228,7 +234,8 @@ class ArticleSiteModel extends Model
 
         return $ret
             ->where('articles_site.post_status',1)
-            ->orderBy('articles_site.create_time', 'desc')
+            ->where('articles_site.post_time','<',now())
+            ->orderBy('articles_site.post_time', 'desc')
             ->take($take)
             ->skip($skip)
             ->get();
@@ -249,6 +256,7 @@ class ArticleSiteModel extends Model
 
         return $ret
                 ->where('articles_site.post_status',1)
+                ->where('articles_site.post_time','<',now())
                 ->count();
     }
     /*
@@ -274,14 +282,18 @@ class ArticleSiteModel extends Model
             ->where(function($query) use($site_id,$keyword){
                 $query->where('articles_site.site_id' ,$site_id)
                 ->where('articles_site.deleted',0)
+                ->where('articles_site.post_status',1)
+                ->where('articles_site.post_time','<',now())
                 ->where('articles_site.title', 'LIKE', '%'.$keyword.'%');
             })
             ->orWhere(function($query) use($site_id,$keyword){
                 $query->where('articles_site.site_id' ,$site_id)
                     ->where('articles_site.deleted',0)
+                    ->where('articles_site.post_status',1)
+                    ->where('articles_site.post_time','<',now())
                     ->where('users.nickname', 'LIKE', '%'.$keyword.'%');
             })
-            ->orderBy('create_time', 'desc')
+            ->orderBy('post_time', 'desc')
             ->take($take)
             ->skip($skip)
             ->get($select);
@@ -301,11 +313,15 @@ class ArticleSiteModel extends Model
             ->where(function($query) use($site_id,$keyword){
                 $query->where('articles_site.site_id' ,$site_id)
                     ->where('articles_site.deleted',0)
+                    ->where('articles_site.post_status',1)
+                    ->where('articles_site.post_time','<',now())
                     ->where('articles_site.title', 'LIKE', '%'.$keyword.'%');
             })
             ->orWhere(function($query) use($site_id,$keyword){
                 $query->where('articles_site.site_id' ,$site_id)
                     ->where('articles_site.deleted',0)
+                    ->where('articles_site.post_status',1)
+                    ->where('articles_site.post_time','<',now())
                     ->where('users.nickname', 'LIKE', '%'.$keyword.'%');
             })
             ->count();
@@ -337,7 +353,8 @@ class ArticleSiteModel extends Model
             ->where('articles_site.deleted',0)
             ->where('articles_site.tags', 'LIKE', '%'.$tag.'%')
             ->where('articles_site.post_status',1)
-            ->orderBy('create_time', 'desc')
+            ->where('articles_site.post_time','<',now())
+            ->orderBy('post_time', 'desc')
             ->take($take)
             ->skip($skip)
             ->get($select);
@@ -358,6 +375,7 @@ class ArticleSiteModel extends Model
             ->where('articles_site.deleted',0)
             ->where('articles_site.tags', 'LIKE', '%'.$tag.'%')
             ->where('articles_site.post_status',1)
+            ->where('articles_site.post_time','<',now())
             ->count();
     }
     /*
@@ -371,7 +389,12 @@ class ArticleSiteModel extends Model
     |
     */
     public static function get_article_list_by_ids($site_id,$ids = [],$select=['id','title','summary']){
-        return ArticleSiteModel::whereIn('id',$ids)->where('site_id' ,$site_id)->where('deleted',0)->where('articles_site.post_status',1)->get($select);
+        return ArticleSiteModel::whereIn('id',$ids)
+            ->where('site_id' ,$site_id)
+            ->where('deleted',0)
+            ->where('articles_site.post_status',1)
+            ->where('articles_site.post_time','<',now())
+            ->get($select);
     }
 
 }

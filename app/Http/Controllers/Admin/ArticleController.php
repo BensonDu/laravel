@@ -304,8 +304,8 @@ class ArticleController extends AdminController
         if(empty($info))return $this->ApiOut(40003,'No permission');
         $ret['category'] = $info->category;
         $ret['type'] = $info->post_status == 1 ? (time()>strtotime($info->post_time) ? 'now' : 'time') : 'cancel';
-        $ret['time'] = $ret['type'] == 'time' ? date('Y-m-d H:i',strtotime($info->post_time)) : null;
-        $ret['min'] = time()-strtotime($info->post_time);
+        $ret['time'] = ($ret['type'] == 'time' || $ret['type'] == 'now')  ? date('Y-m-d H:i',strtotime($info->post_time)) : null;
+        //$ret['min'] = time()-strtotime($info->post_time);
         return $this->ApiOut(0,$ret);
     }
     /*

@@ -42,4 +42,25 @@ class DetailController extends SiteController
         ];
         return self::view('site.detail',$data);
     }
+    public function mobile($id){
+        $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
+
+        if(empty($info))abort(404);
+
+        $data['user'] = [
+            'id'    => $info->user_id,
+            'name'  => $info->nickname,
+            'avatar'=>avatar($info->avatar)
+        ];
+
+        $data['article'] = [
+            'title'     => $info->title,
+            'summary'   => $info->summary,
+            'content'   => $info->content,
+            'time'      => time_down(strtotime($info->create_time)),
+            'category'  => $info->category_name,
+            'image'     => $info->image
+        ];
+        return self::view('mobile.site.detail',$data);
+    }
 }

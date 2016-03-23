@@ -14,8 +14,8 @@ return [
   'captcha' => [
       'account'     => 'aaf98f8947a0321a0147a95cc0a503c9',
       'token' => '9857971450334348b8205784997d2819',
-      'template_id' => '13896',
-      'app_id'      => '8a48b55147a01adb0147a99b770f03cb',
+      'template_id' => '74847',
+      'app_id'      => 'aaf98f8953841df5015387707f430427',
       'server_ip'   => 'sandboxapp.cloopen.com',
       'port'        => '8883',
       'version'     => '2013-12-26',

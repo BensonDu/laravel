@@ -17,7 +17,7 @@ class AdminAuth
     {
 
         if(empty($_ENV['uid']))return redirect('/account/login?redirect='.urlencode($request->url()));
-        self::check();
+        self::check($request);
         return $next($request);
     }
     /*
@@ -25,7 +25,40 @@ class AdminAuth
     | 权限判断 通过 全局变量 admin->role
     |--------------------------------------------------------------------------
     */
-    private static function check(){
+    private static function check($request){
+        //无权限
         if(empty($_ENV['admin']['role']))abort(403);
+
+        $role = $_ENV['admin']['role'];
+        $path = explode('/', $request->path());
+
+        //最高权限
+        if($role == 3)return true;
+
+        //编辑
+        if($role == 2){
+            if(isset($path[1]) && $path[1] == 'user')abort(403);
+        }
+        //认证撰稿人
+        if($role == 1 ){
+            if(isset($path[1]) && $path[1] != 'article')abort(403);
+        }
+
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | TODO 根据权限返回相应菜单 暂时未启用
+    |--------------------------------------------------------------------------
+    */
+    private  static function nav(){
+        $nav = config('admin.nav');
+        $role= $_ENV['admin']['role'];
+        $view = [];
+        foreach($nav as $v){
+            if(in_array($role,$v['auth'])){
+                $view[] = $v;
+            }
+        }
+        view()->share('nav',$view);
     }
 }

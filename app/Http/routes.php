@@ -12,9 +12,31 @@
 */
 //子站路由
 if(!strpos(' '.request()->server('HTTP_HOST'),config('site.platform_base'))) {
-    //站点首页
-    Route::get('/', 'Site\IndexController@index');
-    Route::get('/index/list', 'Site\IndexController@articles');
+
+    //设备跳转
+    Route::group(['middleware' => 'Device'], function () {
+        //PC站
+        if(!is_mobile()){
+            //站点首页
+            Route::get('/', 'Site\IndexController@index');
+            Route::get('/index/list', 'Site\IndexController@articles');
+            //文章详情
+            Route::get('/{id}', 'Site\DetailController@index');
+            Route::get('/{id}.html', 'Site\DetailController@index');
+        }
+        //M站
+        else{
+            //站点首页
+            Route::get('/','Site\IndexController@mobile');
+            Route::get('/index/list', 'Site\IndexController@mobilearticles');
+            //文章详情
+            Route::get('/{id}', 'Site\DetailController@mobile');
+            Route::get('/{id}.html', 'Site\DetailController@mobile');
+        }
+    });
+    //站点专题页
+    Route::get('/special', 'Site\SpecialController@home');
+    Route::get('/special/{id}', 'Site\SpecialController@index');
     //搜索
     Route::get('/search', 'Site\SearchController@index');
     Route::get('/search/{keyword}', 'Site\SearchController@index');
@@ -22,11 +44,7 @@ if(!strpos(' '.request()->server('HTTP_HOST'),config('site.platform_base'))) {
     //标签
     Route::get('/tag/{tag}', 'Site\TagController@index');
     Route::get('/tag/{tag}/list', 'Site\TagController@tags');
-    //站点专题页
-    Route::get('/special', 'Site\SpecialController@home');
-    Route::get('/special/{id}', 'Site\SpecialController@index');
-    //文章详情
-    Route::get('/{id}', 'Site\DetailController@index');
+
     //登录页面
     Route::get('/account/login', function(){
         return redirect($_ENV['platform']['home'].request()->server('REQUEST_URI'));
@@ -48,6 +66,9 @@ if(!strpos(' '.request()->server('HTTP_HOST'),config('site.platform_base'))) {
     //渠道输出
     Route::get('/feed/toutiao', 'Feed\ToutiaoController@index');
     Route::get('/feed/toutiao/{id}', 'Feed\ToutiaoController@detail');
+
+    Route::get('/feed/xiaozhi', 'Feed\XiaozhiController@index');
+    Route::get('/feed/xiaozhi/{id}', 'Feed\XiaozhiController@detail');
 
     //站点管理
     Route::group(['middleware' => 'AdminAuth'], function () {
@@ -174,3 +195,5 @@ else{
 
 //数据导入
 Route::get('/import/auto', 'DataImport@auto');
+//七牛上传
+Route::get('/qiniu/upload/token', 'Qiniu\UploadController@token');

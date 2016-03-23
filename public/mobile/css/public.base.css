@@ -1,0 +1,193 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, ins, kbd, bdi, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    border: 0;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    color: #333;
+    font-size: 14px;
+    font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif","Microsoft YaHei";
+    font-style: inherit;
+    font-weight: inherit;
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+img {
+    border:0;
+}
+figure{
+    margin: 5px 0;
+}
+
+li,a{
+    overflow:hidden;
+}
+
+a{
+    text-decoration:none;
+}
+
+li{
+    list-style-type:none;
+    float:left;
+}
+
+i {
+    font-style:normal;
+}
+html{
+    display: block;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    background-color: #fff;
+    color: #555;
+    font-size: 14px;
+}
+/*默认隐藏*/
+.default-hide{
+    display: none !important;
+}
+/*背景过渡动画*/
+.pub-background-transition{
+    transition: background .4s;
+    -moz-transition: background .4s; /* Firefox 4 */
+    -webkit-transition: background .4s; /* Safari 和 Chrome */
+}
+/*Fade 动画*/
+.pub-fade-transition{
+    transition: opacity .4s;
+    -moz-transition: opacity .4s; /* Firefox 4 */
+    -webkit-transition: opacity .4s; /* Safari 和 Chrome */
+}
+/*加载更多按钮*/
+.load-more{
+    display: none;
+    text-align: center;
+    padding-bottom: 20px;
+    background: #f5f5f5;
+}
+.load-more p{
+    display: inline-block;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background: #fafafa;
+    cursor: pointer;
+    border: 1px solid #999;
+    transition: background-color .3s;
+    -moz-transition: background-color .3s;
+    -webkit-transition: background-color .3s;
+}
+.load-more p span{
+    display: inline-block;
+    color: #999;
+    line-height: 40px;
+    width: 40px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: color .9s;
+    -moz-transition: color .9s;
+    -webkit-transition: color .9s;
+}
+.load-more p em{
+    display: none;
+    height: 40px;
+    width: 38px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Floading-dots.gif) no-repeat center;
+    background-size: 28px;
+}
+.load-more.more p span:before{
+    content: '•••';
+}
+.load-more.loading,
+.load-more.end,
+.load-more.more{
+    display: block;
+}
+.load-more.end p{
+    cursor: default;
+}
+.load-more.end p span:before{
+    content: ' End';
+    letter-spacing: 0;
+}
+.load-more.loading p span{
+    display: none;
+}
+.load-more.loading p em{
+    display: inline-block;
+}
+.load-more.loading p:hover{
+    background: #fff;
+}
+.head{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    z-index: 10;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(64,64,64,.8)),color-stop(0.2, rgba(64,64,64,.85)),color-stop(0.6, rgba(64,64,64,.4)), to(rgba(0,0,0,0)));
+    -webkit-background-origin: padding;
+    -webkit-background-clip: content;
+}
+.head a{
+    display: inline-block;
+    height: 100%;
+}
+.head .logo{
+    padding: 6px 0;
+}
+.head .logo img{
+    display: inline-block;
+    height: 100%;
+}
+/*列表fadein keyframes*/
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

@@ -226,9 +226,12 @@
         },
         methods : {
             _close : function(){
-                this.display = '';
-                this.post.category.active = 0;
-                if(controller_admin.model.data.background) controller_admin.model.data.background = false;
+                var t = this;
+                self.save_confirm(function(){
+                    t.display = '';
+                    t.post.category.active = 0;
+                    if(controller_admin.model.data.background) controller_admin.model.data.background = false;
+                });
             },
             _category_display : function(){
                 this.post.category.active = !this.post.category.active;
@@ -285,7 +288,7 @@
                     d = self.model.data.article,
                 //拼接实际URL地址
                     get_img_url = function(id, option){
-                        return 'http://dn-xswe.qbox.me/' + id + '?imageMogr2/thumbnail/!600x400r/gravity/Center/crop/600x400';
+                        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2/thumbnail/!600x400r/gravity/Center/crop/600x400';
                     },
                 //上传进度显示
                     uploading = function(loaded, total){
@@ -347,11 +350,22 @@
             }
         }
     };
+    //确认保存
+    this.save_confirm = function(call){
+        if(controller_save.check()){
+            call();
+        }
+        else{
+            pop.confirm('当前文章未保存','放弃修改', call,'返回');
+        }
+
+    };
     //请求文章信息
     this.get_article_info = function(id){
         request.get(default_data.api.get_article_info,function(ret){
             var data;
             if(ret.hasOwnProperty('code') && ret.code == 0){
+                controller_save.start();
                 data = ret.data;
                 self.set_article({
                     title : data.title,
@@ -386,6 +400,7 @@
                 if(ret.hasOwnProperty('code') && ret.code == 0){
                     self.display.article.hide();
                     self.update_list();
+                    controller_save.end();
                 }
                 else{
                     pop.error('保存失败','确定').one();
@@ -485,3 +500,35 @@
         controller_pop.model.data.post.type.time = $(this).data('date');
     });
 }).call(define('controller_timerpicker'));
+
+//是否文章变动未保存
+(function(){
+    var self = this,
+        can = true,
+        cache = {};
+
+    this.get_cur = function(){
+        var start = controller_pop.get_editing_article(),tag;
+        return start.title+start.summary+start.image+start.tags+start.content;
+    };
+    //已打开文章,缓存起始状态
+    this.start = function(){
+        can = false;
+        cache = self.get_cur();
+    };
+    //终止检查,文章被删除
+    this.end = function(){
+        can = true;
+    };
+    //是否已经打开文章,且文章未变动
+    this.check = function(){
+        return can || cache == self.get_cur();
+    };
+
+    // 关闭窗口时弹出确认提示
+    dom.w.bind('beforeunload', function(){
+        if(!self.check())
+            return '当前文章未保存,确定关闭?';
+    });
+
+}).call(define('controller_save'));

@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Model\ArticleSiteModel;
 use App\Http\Model\ArticleUserModel;
 use App\Http\Model\SiteModel;
 
@@ -236,10 +237,17 @@ class EditController extends UserController
     */
     public function cancel(){
         $article_id = $this->request->input('id');
-        if(empty($article_id)){
+        $title      = $this->request->input('title');
+        $summary    = $this->request->input('summary');
+        $content    = $this->request->input('content');
+        $image      = $this->request->input('image');
+        $tags       = json_decode($this->request->input('tags'),1);
+        $post_status= 1;
+        $user_id    = $_ENV['uid'];
+        if(empty($title) || empty($summary)){
             return self::ApiOut(40001,'请求错误');
         }
-        $ret = ArticleUserModel::cancel_post($article_id);
+        $ret = ArticleUserModel::update_article($user_id,$article_id,compact('title', 'summary', 'content', 'image', 'tags', 'post_status'));
         if($ret){
             return self::ApiOut(0,[
                 'id'    => $article_id,
@@ -249,7 +257,6 @@ class EditController extends UserController
         else{
             return self::ApiOut(10001,'操作失败');
         }
-
     }
     /*
     |--------------------------------------------------------------------------
@@ -286,6 +293,7 @@ class EditController extends UserController
         else{
             ArticleUserModel::update_article($user_id,$article_id,compact('title', 'summary', 'content', 'image', 'tags', 'post_status'));
         }
+        if(ArticleUserModel::has_contributed($article_id,$sites[0]))return self::ApiOut(10002,'请勿重复投稿');
         //投稿
         $ret = ArticleUserModel::contribute_article($id,$sites);
         if($ret){

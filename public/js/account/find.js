@@ -135,4 +135,4 @@
         setTimeout(function(){obj.error = 0},2000);
     }
 
-}).call(define('controller_regist'));
+}).call(define('controller_find'));

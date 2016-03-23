@@ -101,7 +101,7 @@
                     uploader   = simple.uploader({}),
                     //拼接实际URL地址
                     get_img_url = function(id, option){
-                        return 'http://dn-xswe.qbox.me/' + id + '?imageMogr2/thumbnail/!600x400r/gravity/Center/crop/600x400';
+                        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2/thumbnail/!600x400r/gravity/Center/crop/600x400';
                     },
                     //上传进度显示
                     uploading = function(loaded, total){
@@ -293,6 +293,7 @@
             request.post('/user/post/cancel',function(ret){
 
                 if(ret.hasOwnProperty('code') && ret.code == 0){
+                    controller_save.end();
                     self.vue.lastmodify = ret.data.time;
                     self.vue.ispost = false;
                     controller_list.update_list(self.article_id);
@@ -301,7 +302,7 @@
                     pop.error('操作失败','确定').one();
                 }
 
-            },{id:self.article_id});
+            },self.get_editing_article());
         }
     };
     //投稿到站点
@@ -325,7 +326,7 @@
                         controller_list.update_list(self.article_id);
                     }
                     else{
-                        pop.error(ret.msg,'确定').one();
+                        pop.error(ret.msg || '投稿失败','确定').one();
                     }
 
                 }, $.extend({},{sites:JSON.stringify(site_list)},self.get_editing_article()));

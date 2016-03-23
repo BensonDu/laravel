@@ -1,0 +1,197 @@
+.article-image{
+    position: relative;
+    min-height: 100px;
+}
+.article-image .img{
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.article-image .summary{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)),color-stop(0.5, rgba(0,0,0,.4)), to(rgba(0,0,0,.8)));
+    -webkit-background-origin: padding;
+    -webkit-background-clip: content;
+    z-index: 1;
+    overflow: visible;
+}
+.article-image .summary .info{
+    display: inline-block;
+    margin-top: 14px;
+    float: right;
+    text-align: right;
+    padding: 0 12px;
+}
+.article-image .summary .info span{
+    font-size: 12px;
+    font-weight: 100;
+    color: #f0f0f0;
+    vertical-align: top;
+    line-height: 20px;
+}
+.author{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    z-index: 5;
+    margin-top: -25px;
+    padding: 0 20px;
+}
+.author .avatar{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #aaa;
+}
+.author .avatar img{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+.author .name{
+    width: 100%;
+    padding:25px 0 0 0;
+    height: 60px;
+}
+.author .name p{
+    display: inline-block;
+    font-size: 12px;
+    color: #999;
+    line-height: 30px;
+    padding: 0 60px;
+}
+.article{
+    width: 100%;
+    padding: 20px 20px;
+}
+.article h3{
+    font-size: 18px;
+    line-height: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+.article h5{
+    font-size: 14px;
+    color: #999;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+.medium {
+    font-size: 16px;
+    line-height: 1.875
+}
+
+.medium h1,
+.medium h1 span {
+    font-size: 28px
+}
+
+.medium h2 {
+    font-size: 20px
+}
+
+.medium h2 span {
+    font-size: 20px
+}
+
+.medium h3,
+.medium h3 span {
+    font-size: 16px
+}
+
+.medium embed {
+    display: block;
+    width: 100%;
+    min-height: 503px
+}
+.medium i{
+    font-style: italic;
+}
+.medium blockquote {
+    top: 6px;
+    position: relative;
+    margin: 0;
+    margin-bottom: 30px;
+    padding-left: 16px;
+    color: #666
+}
+.medium blockquote p {
+    margin-bottom: 14px
+}
+
+.medium blockquote:after {
+    content: '';
+    position: absolute;
+    top: 9px;
+    bottom: 4px;
+    left: 0;
+    width: 5px;
+    background-color: #EAEEF1
+}
+
+.medium a {
+    text-decoration: underline;
+}
+
+.medium a:hover {
+    color: #304ffe;
+}
+
+.medium img {
+    display: block;
+    max-width: 100%;
+    margin: 20px auto
+}
+.medium li{
+    float: none;
+    display: list-item;
+    list-style-position: inside;
+}
+.medium ol,
+.medium ul{
+    display: list-item;
+    list-style-type: none;
+}
+.medium ol li{
+    list-style-type:  decimal;
+}
+.medium ul li{
+    list-style-type: square;
+}
+.medium p,
+.medium p a,
+.medium ul,
+.medium pre,
+.medium blockquote,
+.medium span {
+    font-size: 16px;
+}
+
+.medium p,
+.medium ul {
+    margin-bottom: 15px;
+}
+
+.medium .author .name {
+    float: right;
+}
+
+.medium .author .name u {
+    display: inline-block;
+    width: 28px;
+    border-bottom: 1px solid #000;
+    height: 17px;
+    vertical-align: 6px;
+    margin-right: 12px
+}
+
+.medium .author .name i {
+    font-style: normal;
+}

@@ -49,9 +49,7 @@
         else{
             request.post('/account/login',function(ret){
                 if(ret.hasOwnProperty('code') && ret.code == '0'){
-                    request.jsonp('http://crababy.com/sso/',function(){
-                        self.redirect();
-                    },{session:ret.data.session});
+                    self.sso(ret.data.session);
                 }
                 else{
                     self.password_error(ret.msg);
@@ -59,6 +57,17 @@
 
             },data);
         }
+    };
+    this.sso = function(session){
+        var after,cur = location.href.split('/account'),param = {};
+        if(input.get('redirect')){
+            after = decodeURIComponent(input.get('redirect'));
+        }
+        else{
+            after = decodeURIComponent(cur[0] || location.href);
+        }
+        param = input.create_param({session:session,redirect:after});
+        location.href = 'http://crababy.com/sso/'+param;
     };
 
     this.redirect= function(){

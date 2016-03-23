@@ -14,6 +14,7 @@ class AccountController extends Controller
     {
         parent::__construct();
         $this->request = request();
+        $this->rediect_syn();
     }
     /*
     |--------------------------------------------------------------------------
@@ -85,6 +86,15 @@ class AccountController extends Controller
     {
         $ret = CaptchaModel::verify($phone,$captcha);
         return $ret['code'] == '0';
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 回调链接同步
+    |--------------------------------------------------------------------------
+    */
+    private function rediect_syn(){
+        $redirect = request()->input('redirect');
+        view()->share('redirect','?redirect='.$redirect);
     }
 
 }

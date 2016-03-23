@@ -136,7 +136,7 @@
     </div>
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.js"></script>
-<script src="http://dn-acac.qbox.me/mobile/public/image_upload.min.js"></script>
+<script src="http://dn-noman.qbox.me/imageuploader.min.js?"></script>
 <script src="/lib/sortable/js/Sortable.min.js"></script>
 <script>
     var default_data = {

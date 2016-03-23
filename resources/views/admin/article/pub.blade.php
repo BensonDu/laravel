@@ -6,6 +6,7 @@
                 <th><span>标题</span></th>
                 <th><span>作者</span></th>
                 <th><span>身份</span></th>
+                <th class="orderable" v-bind:class="orderby == 'post_status' ? order : ''" v-on:click="_order('post_status')"><span>发布状态</span><em></em></th>
                 <th class="orderable" v-bind:class="orderby == 'create_time' ? order : ''" v-on:click="_order('create_time')"><span>创建时间</span><em></em></th>
                 <th><span>操作</span></th>
             </tr>
@@ -15,6 +16,7 @@
                 <td class="title" v-bind:class="{ 'new': a.new, 'active': !!a.article_id }" v-on:click="_edit(a.article_id)"><a v-text="a.title"></a></td>
                 <td v-text="a.nickname"></td>
                 <td v-text="a.role"></td>
+                <td class="publish" v-bind:class="a.post_status"><em></em></td>
                 <td v-text="a.create_time"></td>
                 <td class="handle">
                     <div v-bind:class="!a.article_id ? 'hide' : ''">

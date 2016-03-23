@@ -17,6 +17,12 @@ class Item implements ItemInterface
     /** @var string */
     protected $description;
 
+    /** @var string */
+    protected $content;
+
+    /** @var string */
+    protected $tags;
+
     /** @var array */
     protected $categories = [];
 
@@ -75,6 +81,18 @@ class Item implements ItemInterface
         return $this;
     }
 
+    public function content($content)
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    public function tags($tags)
+    {
+        $this->tags = $tags;
+        return $this;
+    }
+
     public function enclosure($url, $length = 0, $type = 'audio/mpeg')
     {
         $this->enclosure = ['url' => $url, 'length' => $length, 'type' => $type];
@@ -112,6 +130,14 @@ class Item implements ItemInterface
             if (isset($category[1])) {
                 $element->addAttribute('domain', $category[1]);
             }
+        }
+
+        if ($this->content){
+            $xml->addChild('content', $this->content);
+        }
+
+        if ($this->tags){
+            $xml->addChild('tags', $this->tags);
         }
 
         if ($this->source){

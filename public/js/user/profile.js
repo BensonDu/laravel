@@ -57,7 +57,8 @@
                         },1000);
                     },700);
                 }
-                pop.error('网络错误','确定');
+                data.save = '';
+                pop.error(ret.msg || '网络错误','确定').one();
             },form);
         }
     };
@@ -72,11 +73,20 @@
             setTimeout(function(){self.data.nickname.error = false},2000);
             return false;
         }
+        if(!constant.regex().nickname.test(self.data.nickname.val)){
+            self.data.nickname.error = '包含非法字符';
+            setTimeout(function(){self.data.nickname.error = false},2000);
+            return false;
+        }if(self.data.nickname.val.length > 10){
+            self.data.nickname.error = '昵称过长';
+            setTimeout(function(){self.data.nickname.error = false},2000);
+            return false;
+        }
         return true;
     };
     //IMG ID 转化为 URL
     this.get_img_url=function(id, option){
-        return 'http://dn-xswe.qbox.me/' + id + '?imageMogr2' + (option ? "/crop/!" + get_crop(option) : "") + "/auto-orient/thumbnail/480x";
+        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2' + (option ? "/crop/!" + get_crop(option) : "") + "/auto-orient/thumbnail/480x";
     };
     //上传进度显示
     this.uploading = function(loaded, total){

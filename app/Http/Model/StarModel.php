@@ -51,6 +51,37 @@ class StarModel extends Model
     }
     /*
     |--------------------------------------------------------------------------
+    | 获取移动站点精选列表
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $site_id
+    | @return array
+    |
+    */
+    public static function get_mobile_star_list($site_id){
+        $list = StarModel::where('site_id' , $site_id)->where('deleted' , 0)->orderby('order','desc')->orderby('create_time','desc')->get();
+        $ret = [];
+        foreach($list as $k => $v){
+            if($v->type == 'special')continue;
+            $ret[$k]['id']          = $v->id;
+            $ret[$k]['title']       = $v->title;
+            $ret[$k]['image']       = $v->image;
+            $ret[$k]['category']    = $v->category;
+            $ret[$k]['time'] = date('m-d H:i',strtotime($v->update_time));;
+            switch($v->type){
+                case 'article':
+                    $ret[$k]['jump'] = '/'.$v->jump_info;
+                    break;
+                case 'link' :
+                    $ret[$k]['jump'] = $v->jump_info;
+                    break;
+                default:
+            }
+        }
+        return $ret;
+    }
+    /*
+    |--------------------------------------------------------------------------
     | 保存站点精选列表排序
     |--------------------------------------------------------------------------
     |

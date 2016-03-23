@@ -36,7 +36,8 @@
             <div class="wrap">
                 <p class="name">微博:</p>
                 <div class="input">
-                    <input type="text" v-model="weibo.val">
+                    <input class="weibo-left" type="text" value="http://weibo.com/" disabled>
+                    <input class="weibo-right" type="text" v-model="weibo.val">
                     <div class="error pub-fade-transition" v-bind:class="weibo.error ? 'active' : ''">
                         <p v-text="weibo.error"></p>
                     </div>
@@ -62,7 +63,7 @@
 <!--主页内容end-->
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.js"></script>
-<script src="http://dn-acac.qbox.me/mobile/public/image_upload.min.js"></script>
+<script src="http://dn-noman.qbox.me/imageuploader.min.js"></script>
 <script>var default_data = JSON.parse('{!! $input !!}');</script>
 <script src="/js/user/base.js"></script>
 <script src="/js/user/social.js"></script>
