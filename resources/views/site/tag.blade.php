@@ -46,7 +46,7 @@
 </div>
 <!--主页内容end-->
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.js"></script>
+@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script>var default_data = {
             tag : '{{$tag}}',
             total : '{{$total}}',
