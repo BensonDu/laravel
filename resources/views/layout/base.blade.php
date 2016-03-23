@@ -93,5 +93,14 @@
 <script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/js/public.base.js"></script>
 <script src="/js/public.nav.left.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?047eac725727fc206cb8019dc0fb9dc9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 @show
 </html>
