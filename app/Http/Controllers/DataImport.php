@@ -464,9 +464,9 @@ class DataImport extends Controller
         ;"
         ;
         $data = DB::select(DB::raw($sql));
-       /* foreach($data as $v){
-            DB::table('articles_user')->where('id', $v->id)->update(['deleted'=>0]);
-        }*/
+        foreach($data as $v){
+            DB::table('articles_user')->where('id', $v->id)->update(['deleted'=>1]);
+        }
         dd('Count:'.count($data));
     }
 
