@@ -454,8 +454,6 @@ class DataImport extends Controller
         AND
         articles_site.create_time = articles_user.create_time
         AND
-        articles_site.source_id != articles_user.id
-        AND
         articles_site.author_id = articles_user.user_id
         WHERE
         articles_site.post_status = 1
@@ -463,11 +461,13 @@ class DataImport extends Controller
         articles_user.deleted = 0
         ;"
         ;
+       /* AND
+        articles_site.source_id != articles_user.id*/
         $data = DB::select(DB::raw($sql));
        /* foreach($data as $v){
             DB::table('articles_user')->where('id', $v->id)->update(['deleted'=>0]);
         }*/
-        dd(count($data));
+        dd($data);
     }
 
 }
