@@ -272,10 +272,11 @@ class EditController extends UserController
     */
     public function contribute(){
         $article_id = $this->request->input('id');
-        $sites      = json_decode($this->request->input('sites'),1);
+        /*TODO 多站点投稿*/
+        $sites      = ['1'];//json_decode($this->request->input('sites'),1);
         $user_id    = $_ENV['uid'];
-        if(empty($article_id) || empty($sites) || !SiteModel::check_site($sites)){
-            return self::ApiOut(40001,$sites);
+        if(empty($article_id) || empty($sites)){
+            return self::ApiOut(40001,'请求错误');
         }
         //新建文章 并投稿
         $id = $article_id;

@@ -119,5 +119,5 @@
 <script src="/js/medium-plugin.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script>var default_data = {list : JSON.parse('{!! $list !!}'),route : '{{isset($route)?$route:null}}'}</script>
-<script src="/js/user.edit.js?"></script>
+<script src="/js/user.edit.js?v"></script>
 @stop

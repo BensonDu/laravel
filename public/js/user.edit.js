@@ -325,7 +325,7 @@
     //投稿到站点
     this.contribute_article = function(){
         if(!self.article_id){
-            pop.error('文章信息错误','确定').one();
+            pop.error('网络错误','确定').one();
         }
         else{
             self.update_article_common(function(){
