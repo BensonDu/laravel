@@ -22,7 +22,7 @@ class DataImport extends Controller
         //$this->article_syn();
         //$this->add_category_article();
         //$this->user_article_syn();
-        $this->user_uni();
+        //$this->user_uni();
     }
     /*
      * 导入数据Post_after.json
