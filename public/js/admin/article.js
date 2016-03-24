@@ -356,7 +356,10 @@
             call();
         }
         else{
-            pop.confirm('当前文章未保存','放弃修改', call,'返回');
+            pop.confirm('当前文章未保存','放弃修改',function(){
+                call();
+                controller_save.end();
+            },'返回');
         }
 
     };
@@ -365,7 +368,6 @@
         request.get(default_data.api.get_article_info,function(ret){
             var data;
             if(ret.hasOwnProperty('code') && ret.code == 0){
-                controller_save.start();
                 data = ret.data;
                 self.set_article({
                     title : data.title,
@@ -375,6 +377,7 @@
                     id : id,
                     content : data.content
                 });
+                controller_save.start();
             }
             else{
                 pop.error('请求数据出错','确定').one();

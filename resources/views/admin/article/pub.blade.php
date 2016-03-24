@@ -147,5 +147,5 @@
         }
     }
 </script>
-<script src="/js/admin/article.js"></script>
+<script src="/js/admin/article.js?"></script>
 @stop

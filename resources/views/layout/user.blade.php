@@ -1,5 +1,5 @@
 @extends('layout.base')
-@section('style')@parent<link href="/css/user.mid.css" rel="stylesheet">
+@section('style')@parent<link href="/css/user.mid.css?" rel="stylesheet">
 @stop
 @section('nav')
 @parent
