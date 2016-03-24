@@ -463,13 +463,11 @@ class DataImport extends Controller
         articles_user.deleted = 0
         ;"
         ;
-       /* AND
-        articles_site.source_id != articles_user.id*/
         $data = DB::select(DB::raw($sql));
        /* foreach($data as $v){
             DB::table('articles_user')->where('id', $v->id)->update(['deleted'=>0]);
         }*/
-        dd($data);
+        dd(count($data));
     }
 
 }
