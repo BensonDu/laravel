@@ -116,13 +116,24 @@
           };
         return request.post('/account/regist',function(ret){
             if(ret.hasOwnProperty('code')){
-                if(ret.code == '0')return self.regist_success();
+                if(ret.code == '0')return self.sso(ret.data.session||'');
                 if(ret.code == '20001')return self.error_show(base.username,ret.msg);
                 if(ret.code == '20002')return self.error_show(base.phone,ret.msg);
                 if(ret.code == '20003')return self.error_show(base.captcha,ret.msg);
                 if(ret.code == '20004')return self.error_show(base.password,ret.msg);
             }
         },form);
+    };
+    this.sso = function(session){
+        var after,cur = location.href.split('/account'),param = {};
+        if(input.get('redirect')){
+            after = decodeURIComponent(input.get('redirect'));
+        }
+        else{
+            after = decodeURIComponent(cur[0] || location.href);
+        }
+        param = input.create_param({session:session,redirect:after});
+        location.href = 'http://tech2ipo.com/sso/'+param;
     };
     //发送验证码
     this.captcha_send = function(){

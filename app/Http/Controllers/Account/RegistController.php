@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Account;
 
 
 use App\Http\Model\AccountModel;
+use Illuminate\Support\Facades\Crypt;
 
 class RegistController extends AccountController
 {
@@ -43,8 +44,10 @@ class RegistController extends AccountController
         //注册 并登录
         $info = AccountModel::regist($username,$phone,$password);
         if(isset($info->id))$this->login($info->id);
+        /*TODO 单点登录的 HACK*/
+        $session = Crypt::encrypt(request()->cookie('session'));
 
-        return self::ApiOut(0,'/');
+        return self::ApiOut(0,['session'=>$session]);
 
     }
 
