@@ -22,6 +22,7 @@ class DataImport extends Controller
         //$this->article_syn();
         //$this->add_category_article();
         //$this->user_article_syn();
+        $this->user_uni();
     }
     /*
      * 导入数据Post_after.json
@@ -436,6 +437,35 @@ class DataImport extends Controller
         }
         echo 'Done';
     }
-    public function user_
+    public function user_uni(){
+        set_time_limit(0);
+        ini_set('memory_limit', '-1');
+        $sql  = "
+        SELECT
+        articles_user.id
+        FROM
+        articles_site
+        LEFT JOIN
+        articles_user
+        ON
+        articles_site.title = articles_user.title
+        AND
+        articles_site.create_time = articles_user.create_time
+        AND
+        articles_site.source_id != articles_user.id
+        AND
+        articles_site.author_id = articles_user.user_id
+        WHERE
+        articles_site.post_status = 1
+        AND
+        articles_user.deleted = 0
+        ;"
+        ;
+        $data = DB::select(DB::raw($sql));
+       /* foreach($data as $v){
+            DB::table('articles_user')->where('id', $v->id)->update(['deleted'=>0]);
+        }*/
+        dd(count($data));
+    }
 
 }
