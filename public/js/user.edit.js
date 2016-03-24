@@ -349,6 +349,7 @@
                     self.vue.lastmodify = ret.data.time;
                     pop.success('投稿成功','确定').one();
                     self.vue.site_list.display = false;
+                    self.vue.ispost = true;
                     controller_list.update_list(self.article_id);
                 }
                 else{

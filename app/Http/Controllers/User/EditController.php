@@ -284,6 +284,7 @@ class EditController extends UserController
         if(ArticleUserModel::has_contributed($article_id,$sites[0]))return self::ApiOut(10002,'请勿重复投稿');
         //投稿
         $ret = ArticleUserModel::contribute_article($id,$sites);
+        ArticleUserModel::post_article($user_id,$article_id);
         if($ret){
             return self::ApiOut(0,[
                 'id'    => $id,

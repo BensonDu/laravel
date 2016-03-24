@@ -287,5 +287,18 @@ class ArticleUserModel extends Model
         $article->deleted   = 1;
         return $article->save();
     }
+    /*
+    |--------------------------------------------------------------------------
+    | 发布文章
+    |--------------------------------------------------------------------------
+    |
+    | @param  string $article_id
+    | @param  string $user_id
+    | @return bool
+    |
+    */
+    public static function post_article($user_id, $article_id,$post_status = 2){
+        return ArticleUserModel::where('user_id' ,$user_id)->where('id',$article_id)->where('deleted',0)->update(['post_status'=>$post_status]);
+    }
 
 }
