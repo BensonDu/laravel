@@ -14,7 +14,7 @@
         <h3>{{$profile['introduce']}}</h3>
         <div class="social">
 @if(!empty($profile['weibo']))
-            <a class="weibo" href="{{$profile['weibo']}}" target="_blank" title="微博"></a>
+            <a class="weibo" href="http://weibo.com/{{$profile['weibo']}}" target="_blank" title="微博"></a>
 @endif
 @if(!empty($profile['email']))
             <a class="email" href="mailto:{{$profile['email']}}" title="E-mail"></a>
