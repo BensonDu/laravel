@@ -14,7 +14,7 @@ class SocialController extends UserController
     public function index()
     {
         $data['active'] = 'social';
-        $data['input'] = json_encode([
+        $data['input'] = json_encode_safe([
             'id'        => self::$info->id,
             'wechat'    => self::$info->wechat,
             'email'     => self::$info->email,

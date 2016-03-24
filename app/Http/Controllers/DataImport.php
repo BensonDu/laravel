@@ -10,17 +10,18 @@ class DataImport extends Controller
     public function auto(){
         set_time_limit(0);
         ini_set('memory_limit', '-1');
-        $this->article();
-        $this->user();
+        //$this->article();
+        //$this->user();
         //$this->tag();
-        $this->fix_author_exist();
-        $this->fix_author_not_exist();
-        $this->fix_author_not_exist_create();
+        //$this->fix_author_exist();
+        //$this->fix_author_not_exist();
+        //$this->fix_author_not_exist_create();
 
-        $this->user_syn();
-        $this->del_muti_article();
-        $this->article_syn();
-        $this->add_category_article();
+        //$this->user_syn();
+        //$this->del_muti_article();
+        //$this->article_syn();
+        //$this->add_category_article();
+        $this->user_article_syn();
     }
     /*
      * 导入数据Post_after.json
@@ -397,6 +398,43 @@ class DataImport extends Controller
         }
         echo json_encode($r);
 
+    }
+    public function user_article_syn(){
+        set_time_limit(0);
+        ini_set('memory_limit', '-1');
+        $sql  = "
+        SELECT
+        id,
+        title,
+        summary,
+        content,
+        image,
+        tags,
+        create_time,
+        author_id
+        FROM
+        articles_site
+        WHERE
+        post_status = 1
+        ;"
+        ;
+        $data = DB::select(DB::raw($sql));
+        foreach($data as $v){
+            $id = DB::table('articles_user')->insertGetId([
+                'user_id'     => $v->author_id,
+                'title'         => $v->title,
+                'summary'       => $v->summary,
+                'content'       => $v->content,
+                'tags'          => $v->tags,
+                'image'         => $v->image,
+                'post_status'   => 2,
+                'post_time'     => $v->create_time,
+                'update_time'   => $v->create_time,
+                'create_time'   => $v->create_time
+            ]);
+            DB::table('articles_site')->where('id', $v->id)->update(['source_id'=>$id]);
+        }
+        echo 'Done';
     }
 
 }

@@ -132,7 +132,7 @@ if(!strpos(' '.request()->server('HTTP_HOST'),config('site.platform_base'))) {
 else{
     //平台首页
     Route::get('/', function(){
-        return redirect('http://tech2ipo.com');
+        return redirect('http://crababy.com');
     });
     //点赞收藏
     Route::get('/social/like', 'Common\SocialController@like');
