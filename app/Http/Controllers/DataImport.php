@@ -21,7 +21,7 @@ class DataImport extends Controller
         //$this->del_muti_article();
         //$this->article_syn();
         //$this->add_category_article();
-        $this->user_article_syn();
+        //$this->user_article_syn();
     }
     /*
      * 导入数据Post_after.json
