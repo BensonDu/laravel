@@ -444,9 +444,9 @@ class DataImport extends Controller
         SELECT
         articles_user.id
         FROM
-        articles_site
-        LEFT JOIN
         articles_user
+        LEFT JOIN
+        articles_site
         ON
         articles_site.title = articles_user.title
         AND
@@ -454,7 +454,7 @@ class DataImport extends Controller
         AND
         articles_site.create_time = articles_user.create_time
         AND
-        articles_site.source_id = articles_user.id
+        articles_site.source_id != articles_user.id
         AND
         articles_site.author_id = articles_user.user_id
         WHERE
@@ -467,7 +467,7 @@ class DataImport extends Controller
        /* foreach($data as $v){
             DB::table('articles_user')->where('id', $v->id)->update(['deleted'=>0]);
         }*/
-        dd(count($data));
+        dd('Count:'.count($data));
     }
 
 }
