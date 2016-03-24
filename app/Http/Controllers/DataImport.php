@@ -454,6 +454,8 @@ class DataImport extends Controller
         AND
         articles_site.create_time = articles_user.create_time
         AND
+        articles_site.source_id = articles_user.id
+        AND
         articles_site.author_id = articles_user.user_id
         WHERE
         articles_site.post_status = 1
