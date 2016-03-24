@@ -467,7 +467,7 @@ class DataImport extends Controller
         foreach($data as $v){
             DB::table('articles_user')->where('id', $v->id)->update(['deleted'=>1]);
         }
-        dd('Count:'.count($data));
+        dd('Now:'.count($data));
     }
 
 }
