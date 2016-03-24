@@ -31,7 +31,7 @@ class UserController extends Controller
                 'slogan'    => self::$info->slogan,
                 'introduce' => self::$info->introduce,
                 'email'     => self::$info->email,
-                'weibo'     => 'http://weibo.com/'.self::$info->weibo,
+                'weibo'     => self::$info->weibo,
                 'wechat'    => self::$info->wechat
             ];
         }
