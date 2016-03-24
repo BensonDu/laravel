@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TECH2IPO/创见</title>
+    <title>{{isset($base['title']) ? $base['title'] : 'TECH2IPO/创见'}}</title>
     <meta name="keywords" content="TECH2IPO/创见"/>
     <meta name="description" content="全世界在等待新的科技故事"/>
     <meta name="robots" content="all"/>

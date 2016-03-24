@@ -31,6 +31,7 @@ class DetailController extends Controller
         $article->tags = explode('T@G',$article->tags);
 
         $data['article'] = $article;
+        $data['base']['title'] = $article->title.' | '.$data['profile']['nickname'];
         return self::view('/user/detail',$data);
     }
 }

@@ -22,7 +22,7 @@ class DetailController extends SiteController
         $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
 
         if(empty($info))abort(404);
-
+        $data['base']['title'] = $info->title.' | TECH2IPO/创见';
         $data['user'] = [
             'id'    => $info->user_id,
             'name'  => $info->nickname,
@@ -46,6 +46,8 @@ class DetailController extends SiteController
         $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
 
         if(empty($info))abort(404);
+
+        $data['base']['title'] = $info->title.' | TECH2IPO/创见';
 
         $data['user'] = [
             'id'    => $info->user_id,

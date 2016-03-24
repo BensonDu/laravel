@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta id="viewport" name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
     <meta name="format-detection" content="telephone=no">
-    <title>{{$article->title}}</title>
+    <title>{{$article->title}} | TECH2IPO/创见</title>
     <!--头条css-->
     <link href="http://s2.pstatp.com/inapp/TTDefaultCSS.css" rel="stylesheet" type="text/css">
 </head>

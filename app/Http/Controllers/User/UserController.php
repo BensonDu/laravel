@@ -34,6 +34,7 @@ class UserController extends Controller
                 'weibo'     => self::$info->weibo,
                 'wechat'    => self::$info->wechat
             ];
+            $data['base']['title'] = self::$info->nickname.'的个人主页';
         }
         return $data;
     }
