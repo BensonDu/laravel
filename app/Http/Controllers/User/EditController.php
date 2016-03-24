@@ -272,27 +272,14 @@ class EditController extends UserController
     */
     public function contribute(){
         $article_id = $this->request->input('id');
-        $title      = $this->request->input('title');
-        $summary    = $this->request->input('summary');
-        $content    = $this->request->input('content');
-        $image      = $this->request->input('image');
-        $tags       = json_decode($this->request->input('tags'),1);
-        $post_status= 2;
-        $sites      = json_decode($this->request->input('sites'));
+        $sites      = json_decode($this->request->input('sites'),1);
         $user_id    = $_ENV['uid'];
-        if(empty($title) || empty($summary) || empty($sites) || !SiteModel::check_site($sites)){
-            return self::ApiOut(40001,'请求错误');
+        if(empty($article_id) || empty($sites) || !SiteModel::check_site($sites)){
+            return self::ApiOut(40001,$sites);
         }
         //新建文章 并投稿
         $id = $article_id;
-        if(empty($article_id)){
-            $id = ArticleUserModel::new_article($user_id,compact('title', 'summary', 'content', 'image', 'tags','post_status'));
-
-        }
-        //更新文章
-        else{
-            ArticleUserModel::update_article($user_id,$article_id,compact('title', 'summary', 'content', 'image', 'tags', 'post_status'));
-        }
+        if(!ArticleUserModel::own_article($user_id,$id))return self::ApiOut(40002,'请求错误');
         if(ArticleUserModel::has_contributed($article_id,$sites[0]))return self::ApiOut(10002,'请勿重复投稿');
         //投稿
         $ret = ArticleUserModel::contribute_article($id,$sites);

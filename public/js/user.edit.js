@@ -261,6 +261,23 @@
             },self.get_editing_article());
         }
     };
+    //保存文章 公共方法
+    this.update_article_common = function(call){
+        if(self.check_article()){
+            request.post('/user/save',function(ret){
+
+                if(ret.hasOwnProperty('code') && ret.code == 0 && ret.data.id){
+                    self.vue.lastmodify = ret.data.time;
+                    self.article_id = ret.data.id;
+                    call();
+                }
+                else{
+                    pop.error('保存失败','确定').one();
+                }
+
+            },self.get_editing_article());
+        }
+    };
     //发布到个人主页
     this.post_article = function(){
         if(self.check_article()){
@@ -307,30 +324,38 @@
     };
     //投稿到站点
     this.contribute_article = function(){
+        if(!self.article_id){
+            pop.error('文章信息错误','确定').one();
+        }
+        else{
+            self.update_article_common(function(){
+                self.contribute();
+            });
+        }
+    };
+    //投稿
+    this.contribute = function(){
         var site_list = [];
-        if(self.check_article()){
-            for(var i in self.vue.site_list.items){
-                if(self.vue.site_list.items[i].active){
-                    site_list.push(self.vue.site_list.items[i].id);
+
+        for(var i in self.vue.site_list.items){
+            if(self.vue.site_list.items[i].active){
+                site_list.push(self.vue.site_list.items[i].id);
+            }
+        }
+        if(site_list.length>0){
+            request.get('/user/contribute',function(ret){
+                if(ret.hasOwnProperty('code') && ret.code == 0){
+                    controller_save.end();
+                    self.vue.lastmodify = ret.data.time;
+                    pop.success('投稿成功','确定').one();
+                    self.vue.site_list.display = false;
+                    controller_list.update_list(self.article_id);
                 }
-            }
-            if(site_list.length>0){
-                request.post('/user/contribute',function(ret){
+                else{
+                    pop.error(ret.msg || '投稿失败','确定').one();
+                }
 
-                    if(ret.hasOwnProperty('code') && ret.code == 0){
-                        controller_save.end();
-                        self.vue.lastmodify = ret.data.time;
-                        self.article_id = ret.data.id;
-                        pop.success('投稿成功','确定').one();
-                        self.vue.site_list.display = false;
-                        controller_list.update_list(self.article_id);
-                    }
-                    else{
-                        pop.error(ret.msg || '投稿失败','确定').one();
-                    }
-
-                }, $.extend({},{sites:JSON.stringify(site_list)},self.get_editing_article()));
-            }
+            }, {sites:JSON.stringify(site_list),id:self.article_id});
         }
     };
     //VUE Model

@@ -184,7 +184,7 @@ else{
         Route::post('/user/post', 'User\EditController@post');
         Route::post('/user/post/cancel', 'User\EditController@cancel');
         //投稿到站点
-        Route::post('/user/contribute', 'User\EditController@contribute');
+        Route::get('/user/contribute', 'User\EditController@contribute');
     });
     //用户主页
     Route::get('/user/{id}', 'User\IndexController@index');
