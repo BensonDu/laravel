@@ -449,7 +449,7 @@ class DataImport extends Controller
         articles_user
         ON
         articles_site.title = articles_user.title
-        ON
+        AND
         articles_site.summary = articles_user.summary
         AND
         articles_site.create_time = articles_user.create_time
