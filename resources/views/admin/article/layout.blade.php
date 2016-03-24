@@ -5,7 +5,7 @@
     <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fdefault.custom.min.css" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Ffont-awesome.css?" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
-    <link href="/css/public.content.css" rel="stylesheet">
+    <link href="/css/public.content.css?" rel="stylesheet">
 @stop
 @section('area')
 <div class="list-header">
@@ -54,7 +54,7 @@
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery-sortable-min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.center.min.js"></script>
-<script src="/js/medium-plugin.min.js"></script>
+<script src="/js/medium-plugin.min.js?"></script>
 @section('script-article')
 @show
 @stop

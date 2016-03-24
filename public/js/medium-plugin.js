@@ -784,7 +784,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             placeholder: '插入一个优酷视频的链接地址,然后按回车键',
             oembedProxy: false,
             captions: true,
-            captionPlaceholder: 'Type caption (optional)',
+            captionPlaceholder: '添加描述 (可选)',
             styles: {
                 wide: {
                     label: '<span class="fa fa-align-justify"></span>',
@@ -1406,7 +1406,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             deleteScript: 'delete.php',*/
             preview: true,
             captions: true,
-            captionPlaceholder: 'Type caption for image (optional)',
+            captionPlaceholder: '添加图片描述 (可选)',
             autoGrid: 3,
             fileUploadOptions: { // See https://github.com/blueimp/jQuery-File-Upload/wiki/Options
                 url: 'upload.php',

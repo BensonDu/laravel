@@ -1,5 +1,5 @@
 @extends('layout.user')
-@section('style')@parent  <link href="/css/public.content.css" rel="stylesheet">
+@section('style')@parent  <link href="/css/public.content.css?" rel="stylesheet">
 <link href="/css/public.detail.css" rel="stylesheet">
 @stop
 @section('body')
