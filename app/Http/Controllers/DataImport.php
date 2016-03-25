@@ -472,7 +472,7 @@ class DataImport extends Controller
     }
     public function user_article_post_time_fix(){
         $sql  = "
-        SELECT update_time
+        SELECT id,update_time
         FROM  `articles_user`
         WHERE  `post_status` =2
         AND  `post_time` IS NULL
