@@ -42,7 +42,7 @@ class ToutiaoController extends FeedController
                 ->author(cdata($v->nickname))
                 ->category(cdata($v->category_name))
                 ->source(cdata($info->name))
-                ->pubDate(strtotime($v->create_time))
+                ->pubDate(strtotime($v->post_time))
                 ->appendTo($channel);
         }
         return self::rss_out(htmlspecialchars_decode(utf8_safe($feed)));

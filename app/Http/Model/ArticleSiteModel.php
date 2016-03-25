@@ -40,6 +40,7 @@ class ArticleSiteModel extends Model
             'articles_site.content',
             'articles_site.tags',
             'articles_site.create_time',
+            'articles_site.post_time',
             'articles_site.image'
         ];
 
@@ -180,6 +181,7 @@ class ArticleSiteModel extends Model
         articles_site.summary,
         articles_site.tags,
         articles_site.create_time,
+        articles_site.post_time,
         articles_site.image,
         articles_site.favorites,
         articles_site.likes
@@ -223,6 +225,7 @@ class ArticleSiteModel extends Model
         articles_site.summary,
         articles_site.content,
         articles_site.create_time,
+        articles_site.post_time,
         articles_site.image
         ';
         $ret =  DB::table('articles_site')

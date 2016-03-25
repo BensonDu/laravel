@@ -34,7 +34,7 @@ class DetailController extends SiteController
             'summary'   => $info->summary,
             'content'   => $info->content,
             'tags'      => explode('T@G',$info->tags),
-            'time'      => date('Y年m月d日',strtotime($info->create_time)),
+            'time'      => date('Y年m月d日',strtotime($info->post_time)),
             'category'  => $info->category_name,
             'image'     => $info->image,
             'like'      => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_like($id,$_ENV['uid']) : false,
@@ -59,7 +59,7 @@ class DetailController extends SiteController
             'title'     => $info->title,
             'summary'   => $info->summary,
             'content'   => $info->content,
-            'time'      => time_down(strtotime($info->create_time)),
+            'time'      => time_down(strtotime($info->post_time)),
             'category'  => $info->category_name,
             'image'     => $info->image
         ];

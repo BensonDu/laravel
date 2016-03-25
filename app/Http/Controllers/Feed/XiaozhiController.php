@@ -39,7 +39,7 @@ class XiaozhiController extends FeedController
                 ->description(cdata($v->summary))
                 ->content(cdata($v->content))
                 ->url(cdata($base_article_url.$v->article_id))
-                ->pubDate(strtotime($v->create_time))
+                ->pubDate(strtotime($v->post_time))
                 ->source(cdata($info->name))
                 ->tags(str_replace(" ",",",$v->tags))
                 ->appendTo($channel);

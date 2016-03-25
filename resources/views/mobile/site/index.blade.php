@@ -41,7 +41,7 @@
                     <img src="{{$article->image}}">
                     <div class="info">
                         <div class="time">
-                            <span>{{$article->category_name}}</span><span> | </span><span>{{$article->create_time}}</span>
+                            <span>{{$article->category_name}}</span><span> | </span><span>{{$article->time}}</span>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                     <img v-bind:src="article.image">
                     <div class="info">
                         <div class="time">
-                            <span v-text="article.category_name"></span><span> | </span><span v-text="'发布于 '+article.create_time"></span>
+                            <span v-text="article.category_name"></span><span> | </span><span v-text="'发布于 '+article.time"></span>
                         </div>
                     </div>
                 </div>

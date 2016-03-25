@@ -7,7 +7,7 @@
                 <th><span>作者</span></th>
                 <th><span>身份</span></th>
                 <th class="orderable" v-bind:class="orderby == 'post_status' ? order : ''" v-on:click="_order('post_status')"><span>发布状态</span><em></em></th>
-                <th class="orderable" v-bind:class="orderby == 'create_time' ? order : ''" v-on:click="_order('create_time')"><span>创建时间</span><em></em></th>
+                <th class="orderable" v-bind:class="orderby == 'post_time' ? order : ''" v-on:click="_order('post_time')"><span>发布时间</span><em></em></th>
                 <th><span>操作</span></th>
             </tr>
         </thead>
@@ -135,7 +135,7 @@
         total : '{{$articles['total']}}',
         list : JSON.parse('{!! json_encode_safe($articles['list']) !!}'),
         categories : JSON.parse('{!! json_encode_safe($categories) !!}'),
-        orderby : 'create_time',
+        orderby : 'post_time',
         api : {
             get_list : '/admin/article/pubs',
             del_article : '/admin/article/delete',

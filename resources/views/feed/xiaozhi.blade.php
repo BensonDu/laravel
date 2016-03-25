@@ -21,7 +21,7 @@
     <h1>{{$article->title}}</h1>
     <div class="subtitle">
         <a id="source">{{$article->nickname}}</a>
-        <time>{{substr($article->create_time,5,11)}}</time>
+        <time>{{substr($article->post_time,5,11)}}</time>
     </div>
 </header>
 

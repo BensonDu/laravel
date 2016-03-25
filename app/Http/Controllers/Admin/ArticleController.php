@@ -244,18 +244,9 @@ class ArticleController extends AdminController
         }
 
         if(isset($info->id)){
-            //Todo 兼容 JSON Tag
-            if(substr($info->tags,0,1) == '['){
-                    $info->tags = json_decode($info->tags,1);
-            }
-            else{
-                if(empty(trim($info->tags))){
-                    $info->tags = [];
-                }
-                else{
-                    $info->tags = explode('T@G',$info->tags);
-                }
-            }
+
+            $info->tags = explode('T@G',$info->tags);
+
             $ret = [
                 'title'     => $info->title,
                 'summary'   => $info->summary,
@@ -345,7 +336,7 @@ class ArticleController extends AdminController
     private function get_pub_list($skip,$take,$order = 'desc' ,$keyword = null){
         return [
             'total' => ArticleModel::get_articles_count($_ENV['site_id'],$keyword,1),
-            'list'  =>  $this->format(ArticleModel::get_articles($_ENV['site_id'], $skip,$take,$order,$keyword,1))
+            'list'  =>  $this->format(ArticleModel::get_articles($_ENV['site_id'], $skip,$take,$order,$keyword,1,'post_time'))
         ];
     }
     /*

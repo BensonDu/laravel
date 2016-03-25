@@ -107,30 +107,18 @@ class IndexController extends SiteController
         $list = ArticleSiteModel::get_home_article_list($id, $skip,$category);
         foreach($list as $k =>$v){
             $tags = [];
-            //老版JSON储存标签
-            if(substr($v->tags,0,1) == '['){
-                $json = json_decode($v->tags,1);
-                if(!empty($json)){
-                    foreach($json as $vv){
-                        $tags[] = [
-                            'item'  => $vv,
-                            'color' => rand_color()
-                        ];
-                    }
-                }
+
+            foreach(explode('T@G',$v->tags) as $vv){
+                $tags[] = [
+                    'item'  => $vv,
+                    'color' => rand_color()
+                ];
             }
-            else{
-                foreach(explode('T@G',$v->tags) as $vv){
-                    $tags[] = [
-                        'item'  => $vv,
-                        'color' => rand_color()
-                    ];
-                }
-            }
+
             $list[$k]->avatar   = avatar($v->avatar);
             $list[$k]->user_url = user_url($v->user_id);
             $list[$k]->tags = $tags;
-            $list[$k]->create_time = time_down(strtotime($v->create_time));
+            $list[$k]->time = time_down(strtotime($v->post_time));
         }
         return $list;
     }
@@ -146,7 +134,7 @@ class IndexController extends SiteController
             $ret[$i]->summary       = $v->summary;
             $ret[$i]->image         = $v->image;
             $ret[$i]->category_name = $v->category_name;
-            $ret[$i]->create_time   = time_down(strtotime($v->create_time));
+            $ret[$i]->time   = time_down(strtotime($v->post_time));
             $i++;
         }
         return $ret;

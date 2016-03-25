@@ -22,7 +22,7 @@
     <h1>{{$article->title}}</h1>
     <div class="subtitle">
         <a id="source">{{$article->nickname}}</a>
-        <time>{{substr($article->create_time,5,11)}}</time>
+        <time>{{substr($article->post_time,5,11)}}</time>
         <a id="toggle_img" onClick="TouTiao.showImage(); return false" href="#">显示图片</a>
     </div>
 </header>

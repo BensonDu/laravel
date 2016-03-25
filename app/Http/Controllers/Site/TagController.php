@@ -36,26 +36,14 @@ class TagController extends SiteController
     private function format($list){
         foreach($list as $k =>$v){
             $tags = [];
-            //老版JSON储存标签
-            if(substr($v->tags,0,1) == '['){
-                $json = json_decode($v->tags,1);
-                if(!empty($json)){
-                    foreach($json as $vv){
-                        $tags[] = [
-                            'item'  => $vv,
-                            'color' => rand_color()
-                        ];
-                    }
-                }
+
+            foreach(explode('T@G',$v->tags) as $vv){
+                $tags[] = [
+                    'item'  => $vv,
+                    'color' => rand_color()
+                ];
             }
-            else{
-                foreach(explode('T@G',$v->tags) as $vv){
-                    $tags[] = [
-                        'item'  => $vv,
-                        'color' => rand_color()
-                    ];
-                }
-            }
+
 
             $list[$k]->like     = 23;
             $list[$k]->favorite = 64;

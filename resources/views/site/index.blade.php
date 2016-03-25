@@ -57,7 +57,7 @@
                         <h5 class="summary">{{$article->summary}}</h5>
                         <div class="social">
                             <a href="{{$article->user_url}}" class="author"><img src="{{$article->avatar}}"><span>{{$article->nickname}}</span></a>
-                            <p class="time">发布于 {{$article->create_time}}</p>
+                            <p class="time">发布于 {{$article->time}}</p>
                             <a class="inter like"><span>赞 {{$article->likes}}</span></a>
                             <a class="inter collect"><span>收藏 {{$article->favorites}}</span></a>
                         </div>
@@ -81,7 +81,7 @@
                         <h5 class="summary" v-text="article.summary"></h5>
                         <div class="social">
                             <a target="_blank" v-bind:href="article.user_url" class="author"><img v-bind:src="article.avatar"><span v-text="article.nickname"></span></a>
-                            <p class="time" v-text="'发布于 '+article.create_time"></p>
+                            <p class="time" v-text="'发布于 '+article.time"></p>
                             <a class="inter like"><span v-text="'赞 '+article.likes"></span></a>
                             <a class="inter collect"><span v-text="'收藏 '+article.favorites"></span></a>
                         </div>
