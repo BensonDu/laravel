@@ -27,7 +27,7 @@ class FeedController extends Controller
     |--------------------------------------------------------------------------
     */
     private function site_info(){
-        $this->info = SiteModel::get_site_info_all($_ENV['site_id']);
+        $this->info = SiteModel::get_site_info($_ENV['site_id']);
     }
 
     /*

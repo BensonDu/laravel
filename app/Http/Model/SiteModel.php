@@ -9,6 +9,7 @@
 namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use PRedis;
 use Illuminate\Support\Facades\DB;
 
 class SiteModel extends Model
@@ -40,20 +41,17 @@ class SiteModel extends Model
      |
      */
     public static function get_site_info($id){
-        return SiteModel::where('id',$id)->first();
-    }
-    /*
-     |--------------------------------------------------------------------------
-     | 获取站点所有信息
-     |--------------------------------------------------------------------------
-     |
-     | @param  string $site_id
-     | @return bool
-     |
-     */
-    public static function get_site_info_all($id){
-        return SiteModel::leftJoin('site_routing','site_info.id', '=', 'site_routing.site_id')
+        $rediskey = config('cache.prefix').':'. config('cache.site.info').':'.$id;
+        if(PRedis::exists($rediskey)){
+            return unserialize(PRedis::get($rediskey));
+        }
+        $info = SiteModel::leftJoin('site_routing','site_info.id', '=', 'site_routing.site_id')
             ->where('site_info.id',$id)->first();
+        if(isset($info->id)){
+            PRedis::set($rediskey,serialize($info));
+            PRedis::expire($rediskey,600);
+        }
+        return $info;
     }
 
 }
