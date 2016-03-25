@@ -347,6 +347,8 @@ class ArticleSiteModel extends Model
             'articles_site.title',
             'articles_site.summary',
             'articles_site.tags',
+            'articles_site.likes',
+            'articles_site.favorites',
             'articles_site.create_time',
             'articles_site.image'
         ];

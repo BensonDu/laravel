@@ -45,8 +45,8 @@ class TagController extends SiteController
             }
 
 
-            $list[$k]->like     = 23;
-            $list[$k]->favorite = 64;
+            $list[$k]->like     = $v->likes;
+            $list[$k]->favorite = $v->favorites;
             $list[$k]->avatar   = avatar($v->avatar);
             $list[$k]->user_url = user_url($v->user_id);
             $list[$k]->tags = $tags;
