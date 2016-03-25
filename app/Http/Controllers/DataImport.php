@@ -23,6 +23,7 @@ class DataImport extends Controller
         //$this->add_category_article();
         //$this->user_article_syn();
         //$this->user_uni();
+        $this->user_article_post_time_fix();
     }
     /*
      * 导入数据Post_after.json
@@ -468,6 +469,20 @@ class DataImport extends Controller
             DB::table('articles_user')->where('id', $v->id)->update(['deleted'=>1]);
         }
         dd('Now:'.count($data));
+    }
+    public function user_article_post_time_fix(){
+        $sql  = "
+        SELECT update_time
+        FROM  `articles_user`
+        WHERE  `post_status` =2
+        AND  `post_time` IS NULL
+        AND  `deleted` =0;"
+        ;
+        $data = DB::select(DB::raw($sql));
+        foreach($data as $v){
+            DB::table('articles_user')->where('id', $v->id)->update(['post_time'=>$v->update_time]);
+        }
+        echo count($data);
     }
 
 }
