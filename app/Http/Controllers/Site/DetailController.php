@@ -47,7 +47,7 @@ class DetailController extends SiteController
 
         if(empty($info))abort(404);
 
-        $data['base']['title'] = $info->title.' | TECH2IPO/创见';
+        $data['base']['title'] = $info->title.' - TECH2IPO/创见';
 
         $data['user'] = [
             'id'    => $info->user_id,
