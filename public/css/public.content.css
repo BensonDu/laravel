@@ -88,7 +88,9 @@
 .medium span {
     font-size: 18px;
 }
-
+.medium p span{
+    font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif","Microsoft YaHei" !important;
+}
 .medium p,
 .medium ul {
     margin-bottom: 15px;
