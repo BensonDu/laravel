@@ -28,28 +28,34 @@ class ArticleSiteModel extends Model
     |
     */
     public static function get_artilce_detail($site_id,$id){
-        $select = [
-            'users.id AS user_id',
-            'users.nickname',
-            'users.avatar',
-            'article_category.name AS category_name',
-            'articles_site.id AS article_id',
-            'articles_site.site_id',
-            'articles_site.title',
-            'articles_site.summary',
-            'articles_site.content',
-            'articles_site.tags',
-            'articles_site.create_time',
-            'articles_site.post_time',
-            'articles_site.image'
-        ];
+        $rediskey = config('cache.prefix').':'. config('cache.site.article').':'.$site_id.':'.$id;
+        if(PRedis::exists($rediskey)){
+            return unserialize(PRedis::get($rediskey));
+        }
+        else {
+            $select = [
+                'users.id AS user_id',
+                'users.nickname',
+                'users.avatar',
+                'article_category.name AS category_name',
+                'articles_site.id AS article_id',
+                'articles_site.site_id',
+                'articles_site.title',
+                'articles_site.summary',
+                'articles_site.content',
+                'articles_site.tags',
+                'articles_site.create_time',
+                'articles_site.post_time',
+                'articles_site.image'
+            ];
 
-        DB::table('articles_site')
-            ->where('articles_site.site_id' ,$site_id)
-            ->where('articles_site.id',$id)
-            ->where('articles_site.deleted',0)
-            ->increment('views', 1);
-        return DB::table('articles_site')
+            DB::table('articles_site')
+                ->where('articles_site.site_id', $site_id)
+                ->where('articles_site.id', $id)
+                ->where('articles_site.deleted', 0)
+                ->increment('views', 1);
+
+            $detail = DB::table('articles_site')
                 ->leftJoin('users', 'articles_site.author_id', '=', 'users.id')
                 ->leftJoin('article_category', 'article_category.id', '=', 'articles_site.category')
                 ->where('articles_site.site_id' ,$site_id)
@@ -58,6 +64,14 @@ class ArticleSiteModel extends Model
                 ->where('articles_site.post_time','<',now())
                 ->where('articles_site.deleted',0)
                 ->first($select);
+            if(!empty($detail)){
+                PRedis::set($rediskey,serialize($detail));
+                PRedis::expire($rediskey,300);
+            }
+            return $detail;
+
+        }
+
     }
     /*
     |--------------------------------------------------------------------------

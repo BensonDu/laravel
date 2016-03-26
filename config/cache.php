@@ -85,7 +85,9 @@ return [
         //热榜缓存key hot:id
         'hot' => 'hot',
         //信息 info:id
-        'info'=> 'info'
+        'info'=> 'info',
+        //文章 article:site:id
+        'article'=>'article'
     ]
 
 ];
