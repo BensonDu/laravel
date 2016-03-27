@@ -28,7 +28,7 @@ class DetailController extends Controller
         $article->favorite = !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_favorite($article_id,$_ENV['uid'],2) : false;
         $article->avatar = avatar($article->avatar);
         $article->post_time = date('Y年m月d日',strtotime($article->post_time));
-        $article->tags = explode('T@G',$article->tags);
+        $article->tags = tag($article->tags);
 
         $data['article'] = $article;
         $data['base']['title'] = $article->title.' | '.$data['profile']['nickname'];

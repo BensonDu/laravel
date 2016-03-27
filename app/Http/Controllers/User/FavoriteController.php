@@ -32,7 +32,8 @@ class FavoriteController extends UserController
         $list = ArticleUserModel::get_favorite_article_list($id, $skip);
         foreach($list as $k =>$v){
             $tags = [];
-            foreach(explode('T@G',$v->tags) as $vv){
+            $tag = tag($v->tags);
+            foreach($tag as $vv){
                 $tags[] = [
                     'item'  => $vv,
                     'color' => rand_color()

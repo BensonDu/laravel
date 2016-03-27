@@ -6,8 +6,7 @@ if (! function_exists('avatar')) {
      * @param  string
      * @return saved avatar | default avatar
      */
-    function avatar($url)
-    {
+    function avatar($url){
         return !empty($url) ? $url : 'https://dn-t2ipo.qbox.me/v3%2Fpublic%2Fdefault-avatar.png';
     }
 }
@@ -18,8 +17,7 @@ if (! function_exists('now')) {
      * @param $datatime 是否为数据库储存字段
      * @return data time $ Y-m-d H:i:s
      */
-    function now($db = true)
-    {
+    function now($db = true){
         return $db ? date('Y-m-d H:i:s') : date('Y年m月d日 H:i:s');
     }
 }
@@ -29,8 +27,7 @@ if (! function_exists('rand_color')) {
      *
      * @return string $color
      */
-    function rand_color()
-    {
+    function rand_color(){
         $color = [
             '#fad53e',
             '#f06292',
@@ -54,8 +51,7 @@ if (! function_exists('time_down')) {
      * @param timestamp
      * @return string $time from now
      */
-    function time_down($time)
-    {
+    function time_down($time){
         $t=time()-$time;
         $f=array(
             '31536000'=>'年',
@@ -79,8 +75,7 @@ if (! function_exists('user_url')) {
      * @param  string $user_id
      * @return string $color
      */
-    function user_url($user_id)
-    {
+    function user_url($user_id){
         return $_ENV['platform']['home'].'/user/'.$user_id;
     }
 }
@@ -90,8 +85,7 @@ if (! function_exists('json_encode_safe')) {
      * @param  string $json
      * @return string $json
      */
-    function json_encode_safe($json)
-    {
+    function json_encode_safe($json){
         $escapers = array("\\", "/", "\"", "\n", "\r", "\t", "\x08", "\x0c","'");
         $replacements = array("\\\\", "\\/", "\\\"", "\\n", "\\r", "\\t", "\\f", "\\b","\\'");
         $result = str_replace($escapers, $replacements, json_encode($json));
@@ -104,8 +98,7 @@ if (! function_exists('admin_role_map')) {
      * @param  string $role_id
      * @return string $name
      */
-    function admin_role_map($id)
-    {
+    function admin_role_map($id){
         $map = [
             1 => '撰稿人',
             2 => '编辑',
@@ -120,8 +113,7 @@ if (! function_exists('url_fix')) {
      * @param  string $url
      * @return string $fixed url
      */
-    function url_fix($url)
-    {
+    function url_fix($url){
         return ((substr(trim($url),0,2) == '//') || (substr(trim($url),0,7) == 'http://')) ? $url : 'http://'.$url;
     }
 }
@@ -131,8 +123,7 @@ if (! function_exists('cdata')) {
      * @param  string $s
      * @return string $CDATA[$s]
      */
-    function cdata($s)
-    {
+    function cdata($s){
         return '<![CDATA['.$s.']]>';
     }
 }
@@ -142,8 +133,7 @@ if (! function_exists('utf8_safe')) {
      * @param  string $s
      * @return string $r
      */
-    function utf8_safe($s)
-    {
+    function utf8_safe($s){
         $escapers = array("\x08", "\x0c","'");
         $replacements = array("\\f", "\\b","\\'");
         $result = str_replace($escapers, $replacements, $s);
@@ -166,6 +156,17 @@ if (! function_exists('is_mobile')) {
             }
         }
         return $is_mobile;
+    }
+
+}
+if (! function_exists('tag')) {
+    /**
+     * 标签解析|编码
+     * @param  array $tags || string tags split with T@G
+     * @return string tags || array tags
+     */
+    function tag($tags){
+        return (is_string($tags) || is_array($tags)) ? (is_string($tags) ? explode('T@G',$tags) : trim(implode('T@G',$tags))) : NULL;
     }
 
 }

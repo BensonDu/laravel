@@ -176,7 +176,7 @@ class ArticleUserModel extends Model
         $article->summary       = $info['summary'];
         $article->content       = $info['content'];
         $article->image         = $info['image'];
-        $article->tags          = implode('T@G', $info['tags']);
+        $article->tags          = tag($info['tags']);
         $article->post_status   = isset($info['post_status']) ? $info['post_status'] : 1;
         if(isset($info['post_time'])){
             $article->post_time     = $info['post_time'];
@@ -206,7 +206,7 @@ class ArticleUserModel extends Model
         $article->summary       = $info['summary'];
         $article->content       = $info['content'];
         $article->image         = $info['image'];
-        $article->tags          = implode('T@G', $info['tags']);
+        $article->tags          = tag($info['tags']);
         if(isset($info['post_status'])){
             $article->post_status   = $info['post_status'];
         }
