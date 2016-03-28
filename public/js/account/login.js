@@ -52,7 +52,7 @@
                     self.sso(ret.data.session);
                 }
                 else{
-                    self.password_error(ret.msg);
+                    self.username_error('用户名或密码错误');
                 }
 
             },data);
