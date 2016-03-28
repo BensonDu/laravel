@@ -115,7 +115,7 @@ class SpecialController extends AdminController
     public function info(){
         $id =  request()->input('id');
         if(empty($id))return $this->ApiOut(40001,'请求错误');
-        $info = SiteSpecialModel::get_special_brief_info($_ENV['site_id'],$id,['id','title','summary','image','bg_image','list']);
+        $info = SiteSpecialModel::get_special_brief_info($_ENV['site_id'],$id,['id','title','summary','image','bg_image','list'],null);
         if(!isset($info->id))return $this->ApiOut(40001,'请求错误');
         $list =explode(' ',$info->list);
         $info->list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$list,['id','title']);

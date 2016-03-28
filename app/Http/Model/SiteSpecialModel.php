@@ -63,8 +63,12 @@ class SiteSpecialModel extends Model
      | @return array
      |
      */
-    public static function get_special_brief_info($site_id,$special_id,$select=['*']){
-        return SiteSpecialModel::where('deleted' , 0)->where('post_status' , 1)->where('site_id' , $site_id)->where('id' , $special_id)->first($select);
+    public static function get_special_brief_info($site_id,$special_id,$select=['*'],$post_status = 1){
+        $special = SiteSpecialModel::where('deleted' , 0)->where('site_id' , $site_id)->where('id' , $special_id);
+        if(!is_null($post_status)){
+            $special->where('post_status' , $post_status);
+        }
+        return $special->first($select);
     }
     /*
     |--------------------------------------------------------------------------

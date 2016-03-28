@@ -343,6 +343,7 @@
         hide : function(){
             controller_admin.model.data.background = false;
             self.vue.display = '';
+            self.vue.special.id='';
             self.empty();
         }
     };

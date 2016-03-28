@@ -179,5 +179,5 @@
         orderby : 'update_time'
     }
 </script>
-<script src="/js/admin/special.js"></script>
+<script src="/js/admin/special.js?"></script>
 @stop
