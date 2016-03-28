@@ -18,11 +18,3 @@ else{
 }
 
 exit;
-/*$callback = isset($_GET['callback']) ? $_GET['callback'] : '';
-$ret = json_encode(['code'=>0]);
-if(!empty($callback)){
-    echo $callback.'('.$ret.')';
-}
-else{
-    echo $ret;
-}*/
