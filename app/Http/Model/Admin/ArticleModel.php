@@ -2,6 +2,7 @@
 
 namespace App\Http\Model\Admin;
 
+use App\Http\Model\Cache\SiteCacheModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -177,6 +178,7 @@ class ArticleModel extends Model
     |
     */
     public static function save_article_post($site_id, $article_id, $category, $post_status, $time = 0){
+        SiteCacheModel::clear_article_cache($site_id,$article_id);
         $update = [
             'category'=>$category,
             'post_status'=>$post_status,
@@ -197,6 +199,7 @@ class ArticleModel extends Model
     |
     */
     public static function update_article($site_id, $article_id, $data){
+        SiteCacheModel::clear_article_cache($site_id,$article_id);
         $info = [
             'title'     => $data['title'],
             'summary'   => $data['summary'],
@@ -218,6 +221,7 @@ class ArticleModel extends Model
     |
     */
     public static function delete_article($site_id, $article_id, $deleted = 1){
+        SiteCacheModel::clear_article_cache($site_id,$article_id);
         return  DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->update(['deleted' => $deleted]);
     }
     /*

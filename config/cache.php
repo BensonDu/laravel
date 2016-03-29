@@ -87,7 +87,9 @@ return [
         //信息 info:id
         'info'=> 'info',
         //文章 article:site:id
-        'article'=>'article'
+        'article'=>'article',
+        //文章列表缓存
+        'home'=>'home'
     ]
 
 ];

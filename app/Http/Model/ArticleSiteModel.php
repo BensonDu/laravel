@@ -8,6 +8,7 @@
 
 namespace App\Http\Model;
 
+use App\Http\Model\Cache\SiteCacheModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use PRedis;
@@ -28,9 +29,8 @@ class ArticleSiteModel extends Model
     |
     */
     public static function get_artilce_detail($site_id,$id){
-        $rediskey = config('cache.prefix').':'. config('cache.site.article').':'.$site_id.':'.$id;
-        if(PRedis::exists($rediskey)){
-            return unserialize(PRedis::get($rediskey));
+        if(SiteCacheModel::article_exists($site_id,$id)){
+            return SiteCacheModel::aritcle_get($site_id,$id);
         }
         else {
             $select = [
@@ -65,8 +65,7 @@ class ArticleSiteModel extends Model
                 ->where('articles_site.deleted',0)
                 ->first($select);
             if(!empty($detail)){
-                PRedis::set($rediskey,serialize($detail));
-                PRedis::expire($rediskey,300);
+                SiteCacheModel::aritcle_set($site_id,$id,$detail);
             }
             return $detail;
 
@@ -83,9 +82,8 @@ class ArticleSiteModel extends Model
     |
     */
     public static function get_hot_list($id){
-        $rediskey = config('cache.prefix').':'. config('cache.site.hot').':'.$id;
-        if(PRedis::exists($rediskey) && 1){
-            return unserialize(PRedis::get($rediskey));
+        if(SiteCacheModel::hot_get($id)){
+            return SiteCacheModel::hot_get($id);
         }
         else{
             $select = [
@@ -125,8 +123,7 @@ class ArticleSiteModel extends Model
             });
             $list = array_slice($list,0,5);
             if(!empty($list)){
-                PRedis::set($rediskey,serialize($list));
-                PRedis::expire($rediskey,300);
+                SiteCacheModel::hot_set($id,$list);
             }
             return $list;
         }
@@ -185,6 +182,9 @@ class ArticleSiteModel extends Model
     |
     */
     public static function get_home_article_list($site_id,$skip = 0,$category = 0,$take = 15){
+        if(SiteCacheModel::home_list_exists($site_id,$skip,$take,$category)){
+            return SiteCacheModel::home_list_get($site_id,$skip,$take,$category);
+        }
         $select = '
         users.id AS user_id,
         users.nickname,
@@ -209,13 +209,17 @@ class ArticleSiteModel extends Model
 
         if(!!$category) $ret = $ret->where('articles_site.category',$category);
 
-        return $ret
+        $list =  $ret
             ->where('articles_site.post_status',1)
             ->where('articles_site.post_time','<',now())
             ->orderBy('articles_site.post_time', 'desc')
             ->take($take)
             ->skip($skip)
             ->get();
+        if(!empty($list)){
+            SiteCacheModel::home_list_set($site_id,$skip,$take,$category,$list);
+        }
+        return $list;
     }
     /*
     |--------------------------------------------------------------------------
