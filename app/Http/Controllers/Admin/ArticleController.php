@@ -384,6 +384,7 @@ class ArticleController extends AdminController
         if(!empty($list)){
             foreach($list as $k => $v){
                 $ret[$k]['create_time'] = $v->create_time;
+                $ret[$k]['post_time']   = $v->post_time;
                 $ret[$k]['article_id']  = $this->check_article_auth($v->article_id,$v->user_id) ? $v->article_id : null;
                 $ret[$k]['title']       = $v->title;
                 $ret[$k]['nickname']    = $v->nickname;

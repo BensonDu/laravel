@@ -17,7 +17,7 @@
                 <td v-text="a.nickname"></td>
                 <td v-text="a.role"></td>
                 <td class="publish" v-bind:class="a.post_status"><em></em></td>
-                <td v-text="a.create_time"></td>
+                <td v-text="a.post_time"></td>
                 <td class="handle">
                     <div v-bind:class="!a.article_id ? 'hide' : ''">
                         <a class="preview" v-bind:href="'/'+a.article_id" target="_blank"><em></em><span>查看</span></a>
