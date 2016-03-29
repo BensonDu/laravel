@@ -93,7 +93,7 @@
                 </div>
                 <div class="tag">
                     <span v-for="tag in tag.items" track-by="$index"><p v-text="tag"></p><em v-on:click = tag_del>×</em></span>
-                    <input v-model = "tag.input" v-on:keydown="tag_keydown($event)"  type="text" placeholder="输入标签(5个以内)">
+                    <input v-model = "tag.input" v-on:keydown="tag_keydown($event)"  type="text" placeholder="输入标签(Enter键选中)">
                 </div>
             </div>
         </div>
@@ -119,5 +119,5 @@
 <script src="/js/medium-plugin.min.js?"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script>var default_data = {list : JSON.parse('{!! $list !!}'),route : '{{isset($route)?$route:null}}'}</script>
-<script src="/js/user.edit.js?v1"></script>
+<script src="/js/user.edit.js?v2"></script>
 @stop

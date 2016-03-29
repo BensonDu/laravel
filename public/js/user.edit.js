@@ -153,9 +153,12 @@
                 if(e.keyCode == 8){
                     this.tag.input == '' && this.tag.items.pop();
                 }
-                if(e.keyCode == 13 || e.keyCode ==32){
-                    input = this.tag.input.replace(/ /g,'');
+                if(e.keyCode == 13){
+                    input = this.tag.input.replace(/ {2,20}/g,' ');
                     index = $.inArray(input, this.tag.items);
+                    if(this.tag.items.length >= 5){
+                        return pop.error('最多5个标签','确认').one();
+                    }
                     if(this.tag.items.length <5 && input.length > 1){
                         if(index > -1){
                             this.tag.items.splice(index,1);

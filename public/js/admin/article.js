@@ -263,9 +263,12 @@
                 if(e.keyCode == 8){
                     t.input == '' && t.items.pop();
                 }
-                if(e.keyCode == 13 || e.keyCode ==32){
-                    input = t.input.replace(/ /g,'');
+                if(e.keyCode == 13){
+                    input = t.input.replace(/ {2,20}/g,' ');
                     index = $.inArray(input, t.items);
+                    if(t.items.length >= 5){
+                        return pop.error('最多5个标签','确认').one();
+                    }
                     if(t.items.length <5 && input.length > 1){
                         if(index > -1){
                             t.items.splice(index,1);

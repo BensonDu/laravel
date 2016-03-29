@@ -112,7 +112,7 @@
                     <div class="name"><p>标签</p><span>5个以内</span></div>
                     <div class="tags">
                         <span v-for="tag in article.tag.items" track-by="$index"><p v-text="tag"></p><em v-on:click = _tag_del>×</em></span>
-                        <input v-model = "article.tag.input" v-on:keydown="_tag_keydown($event)"  type="text" placeholder="输入标签">
+                        <input v-model = "article.tag.input" v-on:keydown="_tag_keydown($event)"  type="text" placeholder="输入标签(Enter键选中)">
                     </div>
                 </div>
             </div>
@@ -146,5 +146,5 @@
             }
         }
     </script>
-    <script src="/js/admin/article.js?"></script>
+    <script src="/js/admin/article.js?v"></script>
 @stop
