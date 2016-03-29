@@ -24,6 +24,7 @@ class DataImport extends Controller
         //$this->user_article_syn();
         //$this->user_uni();
         //$this->user_article_post_time_fix();
+        $this->time_fix();
     }
     /*
      * 导入数据Post_after.json
@@ -483,6 +484,27 @@ class DataImport extends Controller
             DB::table('articles_user')->where('id', $v->id)->update(['post_time'=>$v->update_time]);
         }
         echo count($data);
+    }
+    public function time_fix(){
+        $start = now();
+        $sql  = "
+        SELECT art_id,art_post_time,creat_time,update_time
+        FROM  `t_article`
+        WHERE  `art_post_time` IS NOT NULL
+        ;";
+        $data = DB::select(DB::raw($sql));
+        $a = 0;
+        foreach($data as $v){
+            DB::table('articles_site')->where('id', $v->art_id)->update([
+                'post_time'=>$v->art_post_time,
+                'create_time'=>$v->creat_time,
+                'update_time'=>$v->update_time
+            ]);
+            $a++;
+        }
+        $end = now();
+        Storage::disk('local')->put('Done.txt', '修改时间:'.$a.'条;'.'开始时间:'.$start.' 结束时间:'.$end);
+
     }
 
 }
