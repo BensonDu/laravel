@@ -272,8 +272,8 @@ class ArticleController extends AdminController
         $time       = $request->input('time');
 
         $info = $this->check_article_auth($article_id, null, 'array');
-        if(empty($article_id) || empty($category) || empty($type) || empty($info)){
-            $this->ApiOut(40003,'权限不足');
+        if(empty($article_id) || ($type !='cancel' && empty($category)) || empty($type) || empty($info)){
+            return $this->ApiOut(40003,'权限不足');
         }
         //TODO 处理通知
         if($info->contribute_status == 0){

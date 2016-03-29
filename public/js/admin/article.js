@@ -245,9 +245,11 @@
                 t = 'time' && (this.post.type.time = moment().format('YYYY-MM-DD HH:mm'));
             },
             _confirm_post : function(){
-                this.display = '';
-                this.post.category.active = 0;
-                self.confirm_post();
+                var t = this;
+                self.confirm_post(function(){
+                    t.display = '';
+                    t.post.category.active = 0;
+                });
             },
             _confirm_article : function(){
                 self.save_article();
@@ -472,7 +474,7 @@
         !!time && (d.type.time = time);
     };
     //Save post
-    this.confirm_post = function(){
+    this.confirm_post = function(call){
         var d = self.model.data.post,
             data = {
                 id : d.id,
@@ -480,9 +482,12 @@
                 type : d.type.val,
                 time : d.type.time
             };
+        //发布必须选择分类
+        if((data.type == 'now' || data.type=='time') && data.category == '0')return pop.error('请选择分类','确定').one();
         request.get(default_data.api.save_post,function(ret){
                 if(ret.hasOwnProperty('code') && ret.code ==0){
                     self.update_list();
+                    call();
                 }
                 else{
                     pop.error('设置失败','确定').one();
