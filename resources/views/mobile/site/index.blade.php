@@ -1,5 +1,5 @@
 @extends('mobile.base')
-@section('style')@parent  <link href="/mobile/css/site.index.css" rel="stylesheet">
+@section('style')@parent  <link href="/mobile/css/site.index.css?" rel="stylesheet">
 @stop
 @section('body')
 @if(!empty($stars))
@@ -78,5 +78,5 @@
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script>var article = {total : '{{$articles['total']}}'}</script>
-<script src="/mobile/js/site.index.js"></script>
+<script src="/mobile/js/site.index.js?"></script>
 @stop

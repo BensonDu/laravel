@@ -16,9 +16,7 @@
     left: 0;
     height: 40px;
     width: 100%;
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)),color-stop(0.5, rgba(0,0,0,.4)), to(rgba(0,0,0,.8)));
-    -webkit-background-origin: padding;
-    -webkit-background-clip: content;
+    border-bottom: 1px solid #aaa;
     z-index: 1;
     overflow: visible;
 }
@@ -32,9 +30,18 @@
 .article-image .summary .info span{
     font-size: 12px;
     font-weight: 100;
-    color: #f0f0f0;
+    color: #999;
     vertical-align: top;
     line-height: 20px;
+}
+.article-image .summary.image{
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)),color-stop(0.5, rgba(0,0,0,.4)), to(rgba(0,0,0,.8)));
+    -webkit-background-origin: padding;
+    -webkit-background-clip: content;
+    border: none;
+}
+.article-image .summary.image .info span{
+    color: #f0f0f0;
 }
 .author{
     position: relative;
@@ -82,6 +89,15 @@
     color: #999;
     line-height: 20px;
     margin-bottom: 30px;
+}
+.article .end{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+    margin-top: 10px;
+    vertical-align: middle;
 }
 .medium {
     font-size: 16px;

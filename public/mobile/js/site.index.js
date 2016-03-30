@@ -45,7 +45,7 @@
         self.animate(index);
     };
     this.animate=function(index){
-        var c = 'transition',marginleft= index==1 ? 0 : 98-103*index;
+        var c = 'transition',marginleft= 102-104*index;
         $first.addClass(c).css('margin-left',marginleft+'%');
         playing = false;
         setTimeout(function(){
@@ -127,7 +127,6 @@
             el.addEventListener('touchend',end, false);
         }
     })(dom);
-
     window.onresize = function(){width=$(window).width();}
     
 }).call(define('star'));
