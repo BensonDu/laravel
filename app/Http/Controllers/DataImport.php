@@ -25,6 +25,7 @@ class DataImport extends Controller
         //$this->user_uni();
         //$this->user_article_post_time_fix();
         //$this->time_fix();
+        $this->user_time_fix();
     }
     /*
      * 导入数据Post_after.json
@@ -505,6 +506,40 @@ class DataImport extends Controller
         $end = now();
         Storage::disk('local')->put('Done.txt', '修改时间:'.$a.'条;'.'开始时间:'.$start.' 结束时间:'.$end);
 
+    }
+    public function user_time_fix(){
+        $start = now();
+        $sql = "
+        SELECT
+        source_id,
+        post_time,
+        update_time,
+        create_time
+        FROM
+        articles_site
+        WHERE
+        post_status = 1
+        AND
+        deleted = 0
+        AND
+        source_id IS NOT NULL
+        AND
+        create_time < '2015-06-24 17:21:35'
+        ORDER BY create_time DESC;
+        ";
+        $data = DB::select(DB::raw($sql));
+        $a = 0;
+        foreach($data as $v){
+            DB::table('articles_user')->where('id', $v->source_id)->update([
+                'post_time'=>$v->post_time,
+                'create_time'=>$v->create_time,
+                'update_time'=>$v->update_time
+            ]);
+            $a++;
+        }
+        $end = now();
+        Storage::disk('local')->put('Done.txt', '修改时间:'.$a.'条;'.'开始时间:'.$start.' 结束时间:'.$end);
+        return true;
     }
 
 }
