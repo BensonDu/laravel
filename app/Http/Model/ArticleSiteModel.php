@@ -412,12 +412,21 @@ class ArticleSiteModel extends Model
     |
     */
     public static function get_article_list_by_ids($site_id,$ids = [],$select=['id','title','summary']){
-        return ArticleSiteModel::whereIn('id',$ids)
+        $data = ArticleSiteModel::whereIn('id',$ids)
             ->where('site_id' ,$site_id)
             ->where('deleted',0)
             ->where('articles_site.post_status',1)
             ->where('articles_site.post_time','<',now())
             ->get($select);
+        $ret = [];
+        foreach($ids as $k => $v){
+            foreach($data as $vv){
+                if($vv->id == $v){
+                    $ret[$k] = $vv;
+                }
+            }
+        }
+        return $ret;
     }
 
 }

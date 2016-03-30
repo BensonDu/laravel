@@ -1,6 +1,26 @@
 /**
  * Created by Benson on 16/3/2.
  */
+(function () {
+
+    Sortable.create(document.getElementById('special-article-container'), {
+        animation: 300,
+        draggable: '.special-article',
+        handle: '.special-article',
+        ghostClass: "drag-ghost",
+        onUpdate: function () {
+            var d = $('.special-article'),order = [], i;
+            d.each(function(){
+                i = $(this).data('id');
+                !!i && order.push(i);
+            });
+            console.log(order);
+            controller_pop.selected = order;
+        }
+    });
+
+}).call(define('plugin_sortable'));
+
 (function(){
     var self = this;
 

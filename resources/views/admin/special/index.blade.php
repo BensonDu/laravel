@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.special.css" rel="stylesheet">
+@section('style')@parent  <link href="/css/admin.special.css?v" rel="stylesheet">
 @stop
 @section('area')
     <div class="list-header">
@@ -145,8 +145,8 @@
                     <div class="title">
                         <div class="name"><p>专题文章</p><a v-on:click="_fold"></a></div>
                     </div>
-                    <ul>
-                        <li v-for="a in special.list"><p v-text="a.title"></p><a v-on:click="_remove_article(a.id)">×</a></li>
+                    <ul id="special-article-container">
+                        <li class="special-article" v-bind:data-id="a.id" v-for="a in special.list"><p v-text="a.title"></p><a v-on:click="_remove_article(a.id)">×</a></li>
                     </ul>
                 </div>
                 <div class="selector">
@@ -172,6 +172,7 @@
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script src="http://dn-noman.qbox.me/imageuploader.min.js"></script>
+<script src="/lib/sortable/js/Sortable.min.js"></script>
 <script>
     var default_data = {
         total : '{{$total}}',
@@ -179,5 +180,5 @@
         orderby : 'update_time'
     }
 </script>
-<script src="/js/admin/special.js?"></script>
+<script src="/js/admin/special.js?v"></script>
 @stop

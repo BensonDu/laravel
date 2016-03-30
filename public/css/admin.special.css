@@ -966,6 +966,11 @@
     border-bottom: 1px solid #eee;
     padding: 0 6px 0 0;
     overflow: hidden;
+    cursor: pointer;
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
+    user-select: none;
 }
 .pop-container .special .right .list ul li p,
 .pop-container .special .right .list ul li a{
