@@ -1,5 +1,5 @@
 @extends('mobile.base')
-@section('style')@parent  <link href="/mobile/css/public.detail.css?" rel="stylesheet">
+@section('style')@parent  <link href="/mobile/css/public.detail.css?v" rel="stylesheet">
 @stop
 @section('body')
 <div class="article-image">
