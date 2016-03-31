@@ -10,14 +10,11 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     margin: 0;
     outline: 0;
     padding: 0;
-    color: #333;
     font-size: 14px;
-    font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif","Microsoft YaHei";
     font-style: inherit;
     font-weight: inherit;
     -webkit-tap-highlight-color: rgba(255,255,255,0);
 }
-
 *,
 *:before,
 *:after {
@@ -25,7 +22,6 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
 img {
     border:0;
 }
@@ -39,6 +35,7 @@ li,a{
 
 a{
     text-decoration:none;
+    color: #333;
 }
 
 li{
@@ -56,10 +53,10 @@ body{
     min-width: 1024px;
     margin: 0;
     padding: 0;
-    font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     background-color: #fff;
     color: #555;
     font-size: 14px;
+    font-family: "Lucida Grande","Microsoft YaHei",sans-serif;
 }
 /*默认隐藏*/
 .default-hide{

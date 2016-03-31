@@ -17,7 +17,7 @@
     <meta name="format-detection" content="email=no" />
     <meta name="format-detection" content="telephone=yes" />
     @section('style')<link rel="shortcut icon" href="http://dn-css7.qbox.me/tc.ico" type="image/ico" />
-    <link href="/css/public.base.css" rel="stylesheet">
+    <link href="/css/public.base.css?" rel="stylesheet">
     <link href="/css/public.nav.left.css" rel="stylesheet">
     @show
 </head>

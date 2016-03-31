@@ -62,7 +62,24 @@
             text: '输入文章内容'
         },
         toolbar: {
-            buttons: ['bold', 'italic', 'underline','h2','h3','anchor', 'orderedlist','unorderedlist', 'quote']
+            buttons: ['bold', 'italic', 'underline','h2','h3',
+                {
+                    name: 'anchor',
+                    action: 'createLink',
+                    aria: 'link',
+                    tagNames: ['a'],
+                    contentDefault: '<i class="fa fa-link"></i>',
+                    contentFA: '<i class="fa fa-link"></i>'
+                },
+                'orderedlist','unorderedlist', 'quote']
+        },
+        anchor: {
+            customClassOption: null,
+            customClassOptionText: 'Button',
+            linkValidation: false,
+            placeholderText: '粘贴或输入链接',
+            targetCheckbox: false,
+            targetCheckboxText: 'Open in new window'
         }
     });
     this.insert_plugin = $('#content-editor').mediumInsert({

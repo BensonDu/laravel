@@ -1,13 +1,10 @@
 @extends('layout.user')
-@section('style')@parent  <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor.min.css" rel="stylesheet">
-    <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fdefault.custom.min.css" rel="stylesheet">
-<style>
-
-</style>
+@section('style')@parent  <link href="http://static.chuang.pro/public-medium-editor.min.css" rel="stylesheet">
+    <link href="http://static.chuang.pro/public-default.min.css" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Ffont-awesome.css?" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
     <link href="/css/user.edit.css" rel="stylesheet">
-    <link href="/css/public.content.css?v" rel="stylesheet">
+    <link href="/css/public.content.css?v1" rel="stylesheet">
 @stop
 @section('body')
 <!--文章列表start-->
@@ -111,7 +108,7 @@
 <!--主体部分end-->
 @stop
 @section('script')@parent<script src="http://dn-noman.qbox.me/imageuploader.min.js"></script>
-<script src="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor.min.js"></script>
+<script src="http://static.chuang.pro/public-medium-editor.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fhandlebars.runtime.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery-sortable-min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.min.js"></script>
@@ -119,5 +116,5 @@
 <script src="/js/medium-plugin.min.js?"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script>var default_data = {list : JSON.parse('{!! $list !!}'),route : '{{isset($route)?$route:null}}'}</script>
-<script src="/js/user.edit.js?v2"></script>
+<script src="/js/user.edit.js?v3"></script>
 @stop

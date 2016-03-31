@@ -1,6 +1,10 @@
-.medium {
-    font-size: 16px;
-    line-height: 1.875
+.medium{
+    font-size: 18px;
+    line-height: 1.875;
+    color: #333;
+}
+.medium:focus{
+    outline: none;
 }
 
 .medium h1,
@@ -8,11 +12,8 @@
     font-size: 34px
 }
 
-.medium h2 {
-    font-size: 24px
-}
-
-.medium h2 span {
+.medium h2,
+.medium h2 span{
     font-size: 24px
 }
 
@@ -20,35 +21,25 @@
 .medium h3 span {
     font-size: 20px
 }
-
-.medium embed {
-    display: block;
-    width: 100%;
-    min-height: 503px
+.medium h1,
+.medium h2,
+.medium h3{
+    line-height: 1.875;
 }
+
 .medium i{
     font-style: italic;
 }
 .medium blockquote {
-    top: 6px;
     position: relative;
-    margin: 0;
-    margin-bottom: 30px;
+    display: block;
+    border-left: 5px solid  #EAEEF1;
     padding-left: 16px;
-    color: #666
+    color: #666;
+    margin: 6px 0 16px;
 }
 .medium blockquote p {
     margin-bottom: 14px
-}
-
-.medium blockquote:after {
-    content: '';
-    position: absolute;
-    top: 9px;
-    bottom: 4px;
-    left: 0;
-    width: 5px;
-    background-color: #EAEEF1
 }
 
 .medium a {
@@ -72,6 +63,7 @@
 .medium ol,
 .medium ul{
     display: list-item;
+    padding-left: 16px;
     list-style-type: none;
 }
 .medium ol li{
@@ -81,25 +73,52 @@
     list-style-type: square;
 }
 .medium p,
-.medium p a,
+.medium a,
 .medium ul,
+.medium li,
 .medium pre,
 .medium blockquote,
 .medium span {
     font-size: 18px;
+    line-height: 1.875;
 }
-.medium p span{
-    font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif","Microsoft YaHei" !important;
+.medium h2 a,
+.medium h3 a,
+.medium h4 a,
+.medium h5 a,
+.medium p a{
+    font-size: inherit;
+}
+.medium p,
+.medium a,
+.medium li,
+.medium span{
+    color: inherit;
 }
 .medium p,
 .medium ul {
     margin-bottom: 15px;
 }
 
+.medium embed {
+    display: block;
+    width: 100%;
+    min-height: 503px
+}
+.medium-editor-toolbar-form a{
+    vertical-align: middle;
+}
+/*编辑器insert icon*/
+.medium-editor-insert-plugin .medium-insert-buttons{
+    color: #999;
+}
+.medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons li a .fa{
+    color: inherit;
+}
+/*编辑器insert插件 图片描述样式*/
 .medium .author .name {
     float: right;
 }
-
 .medium .author .name u {
     display: inline-block;
     width: 28px;
@@ -108,7 +127,6 @@
     vertical-align: 6px;
     margin-right: 12px
 }
-
 .medium .author .name i {
     font-style: normal;
 }
