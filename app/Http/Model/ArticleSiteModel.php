@@ -90,7 +90,7 @@ class ArticleSiteModel extends Model
                 'articles_site.id AS article_id',
                 'articles_site.title',
                 'articles_site.summary',
-                'articles_site.create_time',
+                'articles_site.post_time',
                 'articles_site.views',
                 'articles_site.likes',
                 'articles_site.favorites',
@@ -104,13 +104,13 @@ class ArticleSiteModel extends Model
                 ->where('articles_site.deleted',0)
                 ->where('articles_site.post_status',1)
                 ->where('articles_site.post_time','<',now())
-                ->orderBy('create_time','desc')
+                ->orderBy('post_time','desc')
                 ->take(50)
                 ->get($select);
 
             $list = [];
             foreach($items as $k => $v){
-                $time = strtotime($v->create_time);
+                $time = strtotime($v->post_time);
                 $list[$k]['rank'] = self::hot_algorithm($time,$v->likes,$v->favorites,$v->views);
                 $list[$k]['author']     = $v->nickname;
                 $list[$k]['user_id']    = $v->user_id;
