@@ -13,7 +13,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="author" content="http://m.angelcrunch.com" />
-    <meta name="revisit-after"  content="1 days" />
     <meta name="format-detection" content="email=no" />
     <meta name="format-detection" content="telephone=yes" />
     @section('style')<link rel="shortcut icon" href="http://dn-css7.qbox.me/tc.ico" type="image/ico" />

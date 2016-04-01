@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Feed;
 
 use App\Http\Model\ArticleSiteModel;
 use \App\Libs\rss;
+use PRedis;
+use Illuminate\Support\Facades\View;
 
 /**
  * Created by PhpStorm.
@@ -49,9 +51,18 @@ class ToutiaoController extends FeedController
     }
     public function detail($id){
         if(empty($id))abort(404);
-        $data['site'] = $this->info;
-        $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
-        return view('/feed.toutiao',$data);
+        $key = 'laravel:view:feed:toutiao:'.$id;
+        if(PRedis::exists($key)){
+            $ret = PRedis::get($key);
+        }
+        else{
+            $data['site'] = $this->info;
+            $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
+            $view = View::make('feed.toutiao', $data);
+            $ret = $view->render();
+            PRedis::setex($key,600,$ret);
+        }
+        return $ret;
     }
 
 }
