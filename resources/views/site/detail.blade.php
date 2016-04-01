@@ -1,5 +1,6 @@
 @extends('layout.site')
 @section('style')@parent  <link href="/css/public.content.css?v2" rel="stylesheet">
+<link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
 <link href="/css/public.detail.css?" rel="stylesheet">
 @stop
 @section('body')
