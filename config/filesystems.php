@@ -48,6 +48,11 @@ return [
             'root'   => storage_path('app'),
         ],
 
+        'toutiao' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/feed/toutiao',
+        ],
+
         'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'ftp.example.com',
