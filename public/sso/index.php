@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Benson
- * Date: 16/3/15
- * Time: 下午1:49
- */
 
 if (isset($_SERVER['HTTP_COOKIE'])) {
     $cookies = explode(';', $_SERVER['HTTP_COOKIE']);

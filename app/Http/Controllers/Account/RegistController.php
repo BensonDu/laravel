@@ -22,6 +22,7 @@ class RegistController extends AccountController
         $phone = $this->request->input('phone');
         $captcha = $this->request->input('captcha');
         $password = $this->request->input('password');
+        $redirect = $this->request->input('redirect');
 
         if(empty(trim($username))){
             return self::ApiOut(20001,'用户输入为空');
@@ -44,10 +45,11 @@ class RegistController extends AccountController
         //注册 并登录
         $info = AccountModel::regist($username,$phone,$password);
         if(isset($info->id))$this->login($info->id);
-        /*TODO 单点登录的 HACK*/
-        $session = Crypt::encrypt(request()->cookie('session'));
 
-        return self::ApiOut(0,['session'=>$session]);
+        $site = !stristr($redirect, $_ENV['SITE_PLATFORM_BASE']);
+        $sid = session()->getId();
+
+        return self::ApiOut(0,['session'=>$sid,'site'=>$site]);
 
     }
 

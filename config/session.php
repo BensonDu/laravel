@@ -29,7 +29,9 @@ return [
     |
     */
 
-    'lifetime' => 2880,
+    'lifetime' => 3*24*60,
+
+    'temp_lifetime' => 5,
 
     'expire_on_close' => false,
 

@@ -27,7 +27,7 @@ class AccountController extends Controller
     */
     public function login($id)
     {
-        $this->request->session()->put('uid', $id);
+        session()->put('uid', $id);
     }
     /*
     |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ class AccountController extends Controller
     |--------------------------------------------------------------------------
     */
     public function logout(){
-        $this->request->session()->flush();
+        session()->flush();
         return redirect('/');
     }
     /*

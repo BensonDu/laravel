@@ -19,7 +19,7 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="pragma" content="no-cache" />
     @section('style')<link rel="shortcut icon" href="http://dn-css7.qbox.me/tc.ico" type="image/ico" />
-<link href="/mobile/css/public.base.css" rel="stylesheet">
+    <link href="/mobile/css/public.base.css" rel="stylesheet">
     @show
 </head>
 <body>

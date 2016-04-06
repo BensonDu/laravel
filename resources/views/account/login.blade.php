@@ -42,5 +42,5 @@
         </div>
     </div>
 @stop
-@section('script')@parent<script src="/js/account/login.js?"></script>
+@section('script')@parent<script src="/js/account/login.js?v"></script>
 @stop

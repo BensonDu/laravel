@@ -1,5 +1,5 @@
 @extends('mobile.base')
-@section('style')@parent  <link href="/mobile/css/site.index.css?" rel="stylesheet">
+@section('style')@parent<link href="/mobile/css/site.index.css?" rel="stylesheet">
 @stop
 @section('body')
 @if(!empty($stars))

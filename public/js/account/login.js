@@ -49,7 +49,9 @@
         else{
             request.post('/account/login',function(ret){
                 if(ret.hasOwnProperty('code') && ret.code == '0'){
-                    self.sso(ret.data.session);
+                    if(ret.data.hasOwnProperty('site') && ret.data.hasOwnProperty('session')){
+                        self.redirect(ret.data.session,ret.data.site);
+                    }
                 }
                 else{
                     self.username_error('用户名或密码错误');
@@ -58,21 +60,17 @@
             },data);
         }
     };
-    this.sso = function(session){
-        var after,cur = location.href.split('/account'),param = {};
-        if(input.get('redirect')){
-            after = decodeURIComponent(input.get('redirect'));
+    this.redirect = function(session,site){
+        var urlReg = /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/,
+            r = input.get('redirect'),
+            redirect = !!r ? decodeURIComponent(r) : '/',
+            url = urlReg.exec(redirect);
+        if(site && !!url && !!url[0]){
+            return location.href = 'http://'+url[0]+'/sso/'+ input.create_param({session:session,redirect:redirect});
         }
         else{
-            after = decodeURIComponent(cur[0] || location.href);
+            return location.href = redirect;
         }
-        param = input.create_param({session:session,redirect:after});
-        location.href = 'http://tech2ipo.com/sso/'+param;
-    };
-
-    this.redirect= function(){
-        if(input.get('redirect'))return location.href = decodeURIComponent(input.get('redirect'));
-        location.href = '/';
     };
 
     $confirm.click(self.do_login);

@@ -116,7 +116,7 @@
           };
         return request.post('/account/regist',function(ret){
             if(ret.hasOwnProperty('code')){
-                if(ret.code == '0')return self.sso(ret.data.session||'');
+                if(ret.code == '0')return self.redirect(ret.data.session,ret.data.site);
                 if(ret.code == '20001')return self.error_show(base.username,ret.msg);
                 if(ret.code == '20002')return self.error_show(base.phone,ret.msg);
                 if(ret.code == '20003')return self.error_show(base.captcha,ret.msg);
@@ -124,16 +124,17 @@
             }
         },form);
     };
-    this.sso = function(session){
-        var after,cur = location.href.split('/account'),param = {};
-        if(input.get('redirect')){
-            after = decodeURIComponent(input.get('redirect'));
+    this.redirect = function(session,site){
+        var urlReg = /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/,
+            r = input.get('redirect'),
+            redirect = !!r ? decodeURIComponent(r) : '/',
+            url = urlReg.exec(redirect);
+        if(site && !!url && !!url[0]){
+            return location.href = 'http://'+url[0]+'/sso/'+ input.create_param({session:session,redirect:redirect});
         }
         else{
-            after = decodeURIComponent(cur[0] || location.href);
+            return location.href = redirect;
         }
-        param = input.create_param({session:session,redirect:after});
-        location.href = 'http://tech2ipo.com/sso/'+param;
     };
     //发送验证码
     this.captcha_send = function(){

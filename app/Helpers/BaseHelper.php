@@ -170,3 +170,15 @@ if (! function_exists('tag')) {
     }
 
 }
+if (! function_exists('get_domain')) {
+    /**
+     * 域名解析 获得 url
+     * @param  string $url
+     * @return string domain
+     */
+    function get_domain($url){
+        preg_match("/[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/", $url, $matches);
+        return isset($matches[0]) ? $matches[0] : '';
+    }
+
+}

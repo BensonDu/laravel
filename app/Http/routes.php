@@ -192,8 +192,8 @@ else{
     //用户文章详情
     Route::get('/user/{id}/{articleid}', 'User\DetailController@index');
 }
-//测试
-//Route::get('/test', 'Temp\TempController@test');
+//临时 && 测试
+Route::get('/test', 'Temp\TempController@test');
 Route::get('/temp/device', 'Temp\TempController@device');
 //七牛上传
 Route::get('/qiniu/upload/token', 'Qiniu\UploadController@token');
