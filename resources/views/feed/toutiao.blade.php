@@ -29,6 +29,11 @@
 
 <!--正文内容-->
 <article>
+@if(!empty($article->image))
+    <figure class="image">
+        <img src='{{$article->image}}'>
+    </figure>
+@endif
     {!! $article->content !!}
 </article>
 

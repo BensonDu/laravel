@@ -67,19 +67,13 @@ class ToutiaoController extends FeedController
     }
     public function detail($id){
         if(empty($id))abort(404);
-        $key = 'laravel:view:feed:toutiao:'.$id;
-        if(PRedis::exists($key)){
-            $ret = PRedis::get($key);
-        }
-        else{
-            $data['site'] = $this->info;
-            $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
-            $view = View::make('feed.toutiao', $data);
-            $ret = $view->render();
-            PRedis::setex($key,600,$ret);
 
-        }
+        $data['site'] = $this->info;
+        $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
+        $view = View::make('feed.toutiao', $data);
+        $ret = $view->render();
         Storage::disk('toutiao')->put($id, $ret);
+
         return $ret;
     }
 
