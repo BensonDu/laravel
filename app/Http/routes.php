@@ -12,7 +12,6 @@
 */
 //子站路由
 if(!strpos(' '.request()->server('HTTP_HOST'),config('site.platform_base'))) {
-
     //设备跳转
     Route::group(['middleware' => 'Device'], function () {
         //PC站
@@ -193,8 +192,8 @@ else{
     //用户文章详情
     Route::get('/user/{id}/{articleid}', 'User\DetailController@index');
 }
-
-//数据导入
-Route::get('/import/auto', 'DataImport@auto');
+//测试
+//Route::get('/test', 'Temp\TempController@test');
+Route::get('/temp/device', 'Temp\TempController@device');
 //七牛上传
 Route::get('/qiniu/upload/token', 'Qiniu\UploadController@token');
