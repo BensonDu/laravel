@@ -7,7 +7,6 @@
     <meta name="description" content="全世界在等待新的科技故事"/>
     <meta name="robots" content="all"/>
     <meta name="copyright" content="Tech2ipo"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
     <meta name="apple-touch-fullscreen" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -15,8 +14,12 @@
     <meta name="author" content="http://m.angelcrunch.com" />
     <meta name="format-detection" content="email=no" />
     <meta name="format-detection" content="telephone=yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
     @section('style')<link rel="shortcut icon" href="http://dn-css7.qbox.me/tc.ico" type="image/ico" />
-    <link href="/mobile/css/public.base.css" rel="stylesheet">
+<link href="/mobile/css/public.base.css" rel="stylesheet">
     @show
 </head>
 <body>
