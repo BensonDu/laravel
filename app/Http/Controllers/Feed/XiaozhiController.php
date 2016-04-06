@@ -50,6 +50,9 @@ class XiaozhiController extends FeedController
         if(empty($id))abort(404);
         $data['site'] = $this->info;
         $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
+
+        if(empty($data['article'])) abort(404);
+
         return view('/feed.xiaozhi',$data);
     }
 
