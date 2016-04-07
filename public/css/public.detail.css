@@ -11,147 +11,148 @@
 }
 .page-content .container{
     width: 100%;
-    padding: 90px 15% 90px 10%;
+    padding: 0 15% 90px 10%;
     text-align: center;
 }
 .page-content .container .summary{
-    display: inline-block;
+    position: relative;
     width: 100%;
-    max-width: 850px;
-    padding: 0 5%;
+    max-width: 950px;
+    margin: 0 auto 50px;
+    min-height: 150px;
 }
-.page-content .container .summary h1{
-    font-size: 32px;
-    font-weight: 100;
-    font-family: 'PT Serif','Hiragino Sans GB','Microsoft YaHei',sans-serif;
-    line-height: 40px;
-    color: #2b2f37;
-    text-align: left;
-}
-.page-content .container .summary h6{
-    font-size: 14px;
-    color: #999;
-    text-align: justify;
-    margin-top: 20px;
-}
-.page-content .container .social{
-    display: inline-block;
-    max-width: 850px;
+.page-content .container .summary .image{
     width: 100%;
-    height: 50px;
-    padding: 12px 5%;
-    margin-top: 25px;
+    max-height: 500px;
     overflow: hidden;
 }
-.page-content .container .social .author{
-    display: inline-block;
-    height: 100%;
+.page-content .container .summary .image img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.page-content .container .summary .info{
+    position: absolute;
+    width: 100%;
+    height: 140px;
+    left: 0;
+    bottom:-70px;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(253,253,253,0)),color-stop(0.499, rgba(0,0,0,.6)),color-stop(0.5, rgba(253,253,253,1)),color-stop(0.9, rgba(253,253,253,.7)), to(rgba(253,253,253,.0)));
+    -webkit-background-origin: padding;
+    -webkit-background-clip: content;
+}
+.page-content .container .summary .info.no-image{
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(253,253,253,0)),color-stop(0.499, rgba(107,107,107,.6)),color-stop(0.5, rgba(253,253,253,1)),color-stop(0.9, rgba(253,253,253,.7)), to(rgba(253,253,253,.0)));
+    -webkit-background-origin: padding;
+    -webkit-background-clip: content;
+}
+.page-content .container .summary .info .wrap{
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 5%;
+    overflow: hidden;
+}
+.page-content .container .summary .info .author{
+    display: block;
     float: left;
+    margin: 25px 0 0 0;
+    width: 300px;
+    height: 80px;
+    overflow: hidden;
+    cursor: pointer;
 }
-.page-content .container .social .author img{
-    width: 26px;
-    height: 26px;
-}
-.page-content .container .social .author span{
-    display: inline-block;
-    height: 100%;
-    line-height: 36px;
-    vertical-align: top;
-    font-size: 12px;
-    color: #999;
-    margin-left: 5px;
-}
-.page-content .container .social .author:hover span{
-    color: #000;
-}
-.page-content .container .social .time{
-    display: inline-block;
-    height: 100%;
-    line-height: 36px;
-    vertical-align: top;
-    font-size: 12px;
-    color: #999;
-    margin-left: 5px;
+.page-content .container .summary .info .author img{
+    display: block;
     float: left;
-}
-.page-content .container .social .tag{
-    display: inline-block;
+    width: 80px;
     height: 100%;
-    margin-right: 10px;
+    border: 1px solid #f5f5f5;
+    border-radius: 2px;
+}
+.page-content .container .summary .info .author .name{
+    display: inline-block;
+    float: left;
+    color: #999;
+    margin: 55px 0 0 15px;
+    white-space: nowrap;
+}
+.page-content .container .summary .info .desc{
+    min-width: 300px;
+    height: 80px;
+    margin: 20px 0 0 0;
     float: right;
 }
-.page-content .container .social .tag b{
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 900;
-    height: 100%;
-    line-height: 32px;
-    vertical-align: top;
-    color: #999;
+.page-content .container .summary .info .desc .top {
+    width: 100%;
+    height: 40px;
+    text-align: right;
 }
-.page-content .container .social .tag a{
+.page-content .container .summary .info .desc .top a{
     display: inline-block;
-    height: 100%;
-    line-height: 36px;
+    color: #fff;
     vertical-align: top;
     font-size: 12px;
+    margin: 25px 0 0 3px;
+}
+.page-content .container .title{
+    width: 100%;
+    margin: 50px auto 0;
+    max-width: 900px;
+    padding: 0 5%;
+}
+.page-content .container .title h1{
+    font-size: 28px;
+    color: #333;
+    text-align: left;
+}
+.page-content .container .title h6{
+    font-size: 14px;
     color: #999;
-    margin-left: 5px;
+    text-align: left;
+    margin-top: 18px;
 }
-.page-content .container .social .tag a:hover{
-    color: #000;
+.page-content .container .tag{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 0 5%;
+    text-align: left;
 }
-.page-content .container .social .tag em{
+.page-content .container .tag a{
+    font-size: 14px;
+    color: #999;
     display: inline-block;
-    width: 22px;
-    height: 18px;
-    margin-top: 9px;
-    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ftag-fill.png) no-repeat center;
-    background-size: 20px;
-    background-position: 0 -2px;
-}
-.page-content .container .social .inter{
-    display: inline-block;
-    height: 100%;
-    margin-right: 10px;
-    float: right;
-}
-.page-content .container .social .inter em{
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    margin-top: 6px;
-}
-.page-content .container .social .inter span{
-    display: inline-block;
-    height: 100%;
-    line-height: 36px;
     vertical-align: top;
-    font-size: 12px;
-    color: #999;
-    margin-left: 5px;
+    padding: 3px 7px;
+    text-align: center;
 }
-.page-content .container .social .like em{
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/like-4.png) no-repeat center;
-    background-size: 24px;
+.page-content .container .tag em{
+    font-size: 14px;
+    background: #999;
+    color: #fff;
+    display: inline-block;
+    vertical-align: top;
+    padding: 3px 7px;
+    text-align: center;
 }
-.page-content .container .social .collect em{
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/stars-2.png) no-repeat center;
-    background-size: 16px;
+.page-content .container .tag a:hover{
+    background: #999;
+    color: #fff;
 }
 .page-content .container .content{
     display: inline-block;
-    max-width: 850px;
+    max-width: 900px;
     text-align: left;
-    margin-top: 30px;
+    margin: 30px 0 70px 0;
     padding: 0 5%;
 }
 /*点赞 收藏 start*/
 .page-content .container .action{
     display: inline-block;
-    max-width: 850px;
+    max-width: 900px;
     text-align: left;
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 0 5%;
     width: 100%;
 }

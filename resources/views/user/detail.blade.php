@@ -1,6 +1,6 @@
 @extends('layout.user')
 @section('style')@parent  <link href="/css/public.content.css?" rel="stylesheet">
-<link href="/css/public.detail.css" rel="stylesheet">
+<link href="/css/public.detail.css?v" rel="stylesheet">
 @stop
 @section('body')
 @parent
@@ -8,19 +8,31 @@
 <div id="page-content" class="page-content">
     <div class="container">
         <div class="summary">
+            @if(!empty($article->image))
+                <div class="image">
+                    <img src="{{$article->image}}">
+                </div>
+            @endif
+            <div class="info {{empty($article->image) ? 'no-image' : ''}}">
+                <div class="wrap">
+                    <a class="author" href="{{$_ENV['platform']['home']}}/user/{{$id}}">
+                        <img src="{{$profile['avatar']}}">
+                        <p class="name">{{$profile['nickname']}}</p>
+                    </a>
+                    <div class="desc">
+                        <div class="top">
+                            <a>{{isset($article->tags[0]) ? $article->tags[0].' | ':''}}</a>
+                            <a>发布于 {{$article->post_time}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="title">
             <h1>{{$article->title}}</h1>
             <h6>{{$article->summary}}</h6>
         </div>
-        <div class="social">
-            <a href="/user/{{$id}}" class="author"><img src="{{$profile['avatar']}}"><span>{{$profile['nickname']}}</span></a>
-            <p class="time">发布于 {{$article->post_time}}</p>
-            <div class="tag">
-                <em></em>
-@foreach ($article->tags as $tag)
-                <a style="color: #999">{{$tag}}</a>
-@endforeach
-            </div>
-        </div>
+
         <div class="content medium">
             {!! $article->content !!}
         </div>

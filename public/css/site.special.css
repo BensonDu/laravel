@@ -119,10 +119,10 @@
     color: #ccc;
 }
 .site-content .all .list-container a:hover h5{
-    color: #fff;;
+    color: #ffeb3b;
 }
 .site-content .all .list-container a:hover p{
-    color: #ffeb3b;;
+    color: #fff;;
 }
 .site-content .container{
     width: 100%;

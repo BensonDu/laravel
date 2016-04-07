@@ -1,5 +1,5 @@
 @extends('layout.site')
-@section('style')@parent  <link href="/css/site.special.css" rel="stylesheet">
+@section('style')@parent  <link href="/css/site.special.css?" rel="stylesheet">
 @stop
 @section('body')
     @parent
