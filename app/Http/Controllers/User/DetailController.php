@@ -29,6 +29,8 @@ class DetailController extends Controller
         $article->avatar = avatar($article->avatar);
         $article->post_time = date('Y年m月d日',strtotime($article->post_time));
         $article->tags = tag($article->tags);
+        $image = explode('?',$article->image);
+        $article->image = isset($image[0]) ? $image[0] : $article->image ;
 
         $data['article'] = $article;
         $data['base']['title'] = $article->title.' | '.$data['profile']['nickname'];

@@ -29,6 +29,8 @@ class DetailController extends SiteController
             'avatar'=>avatar($info->avatar)
         ];
 
+        $image = explode('?',$info->image);
+
         $data['article'] = [
             'title'     => $info->title,
             'summary'   => $info->summary,
@@ -36,7 +38,7 @@ class DetailController extends SiteController
             'tags'      => tag($info->tags),
             'time'      => date('Y年m月d日',strtotime($info->post_time)),
             'category'  => $info->category_name,
-            'image'     => $info->image,
+            'image'     => isset($image[0]) ? $image[0] : $info->image,
             'like'      => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_like($id,$_ENV['uid']) : false,
             'favorite'  => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_favorite($id,$_ENV['uid']) : false
         ];
