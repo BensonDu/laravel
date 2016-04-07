@@ -98,7 +98,7 @@
                             <a class="close" v-on:click="_del_image">×</a>
                         </div>
                         <div class="remark">
-                            <p>文章配图需上传大于300 x 200像素且宽高比为 3:2 的图片,最大尺寸2M.</p>
+                            <p>文章配图需上传大于800 x 530像素且宽高比为 3:2 的图片,最大尺寸2M.</p>
                         </div>
                     </div>
                 </div>

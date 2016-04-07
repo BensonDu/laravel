@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="desc">
-                        <p>文章配图需上传大于300 x 200像素且宽高比为 3:2 的图片,最大尺寸2M.</p>
+                        <p>文章配图需上传大于800 x 530像素且宽高比为 3:2 的图片,最大尺寸2M.</p>
                     </div>
                 </div>
                 <div class="tag">
@@ -116,5 +116,5 @@
 <script src="/js/medium-plugin.min.js?"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script>var default_data = {list : JSON.parse('{!! $list !!}'),route : '{{isset($route)?$route:null}}'}</script>
-<script src="/js/user.edit.js?v3"></script>
+<script src="/js/user.edit.js?v4"></script>
 @stop
