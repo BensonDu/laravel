@@ -23,13 +23,12 @@ class TempController extends Controller
         ini_set('memory_limit', '-1');
         $start = now();
         $sql = "
-        SELECT
-        id,
-        content
-        FROM
-        articles_site
-        WHERE
-        id <= 55078;
+        SELECT id,content
+        FROM  `articles_user`
+        WHERE  `id` <=13150
+        AND  `post_status` =2
+        AND  `deleted` =0;
+        ;
         ";
         $data = DB::select(DB::raw($sql));
         $a = 0;
@@ -37,7 +36,7 @@ class TempController extends Controller
             $c = $v->content;
             $c =  str_replace("http://tech2ipo.com/upload/","http://img0.tech2ipo.com/upload/",$c);
             $c =  str_replace("http://tech2ipo.com/wp-content/","http://img0.tech2ipo.com/wp-content/",$c);
-            DB::table('articles_site')->where('id', $v->id)->update([
+            DB::table('articles_user')->where('id', $v->id)->update([
                 'content'=>$c
             ]);
             $a++;
