@@ -465,7 +465,7 @@ class SessionService implements SessionContract
     */
     public function isValidId($id)
     {
-        return is_string($id) && preg_match('/^[a-f0-9]{40}$/', $id);
+        return is_string($id) && preg_match('/^[a-f0-9]{10,40}$/', $id);
     }
     /*
     |--------------------------------------------------------------------------

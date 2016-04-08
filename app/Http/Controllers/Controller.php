@@ -36,8 +36,13 @@ abstract class Controller extends BaseController
                 $ret['data'] = $data;
             }
         }
+        $response = response()->json($ret);
 
-        return response()->json($ret);
+        /*JSONP*/
+        $callback = request()->input('callback');
+        if(!empty($callback)) $response->setCallback($callback);
+
+        return $response;
     }
     /*
     |--------------------------------------------------------------------------

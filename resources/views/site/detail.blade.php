@@ -6,7 +6,7 @@
 @section('body')
 @parent
 <!--新闻内容部分start-->
-<div id="page-content" class="page-content">
+<div id="site-content" class="page-content">
     <div class="container">
         <div class="summary">
 @if(!empty($article['image']))
@@ -57,5 +57,5 @@
 </div>
 <!--新闻内容end-->
 @stop
-@section('script')@parent<script src="/js/site.detail.js"></script>
+@section('script')@parent<script src="/js/site.detail.js?"></script>
 @stop

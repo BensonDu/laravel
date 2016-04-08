@@ -144,6 +144,8 @@ else{
     Route::post('/account/regist', 'Account\RegistController@post');
     //注销
     Route::get('/account/logout', 'Account\AccountController@logout');
+    //平台登录状态
+    Route::get('/account/status', 'Account\AccountController@status');
     //用户名检查
     Route::post('/account/exist', 'Account\AccountController@exist');
     //发送验证码

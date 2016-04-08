@@ -53,5 +53,5 @@
             list : JSON.parse('{!! $list !!}')
     }
 </script>
-<script src="/js/site.tag.js"></script>
+<script src="/js/site.tag.js?"></script>
 @stop

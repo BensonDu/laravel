@@ -93,6 +93,14 @@
 <script src="/js/public.base.js"></script>
 <script src="/js/public.nav.left.js"></script>
 <script>
+    /*全局变量*/
+    (function(){
+        this.uid = '{{$_ENV['uid']}}';
+        this.platform = {
+            home : '{{$_ENV['platform']['home']}}'
+        }
+    }).call(define('global'));
+
     var _hmt = _hmt || [];
     (function() {
         var hm = document.createElement("script");

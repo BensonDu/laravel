@@ -49,6 +49,3 @@
     </div>
     <!--专题内容end-->
 @stop
-@section('script')
-@parent<script src="/js/site.special.js"></script>
-@stop
