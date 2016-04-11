@@ -21,6 +21,9 @@
     margin: 0 auto 50px;
     min-height: 150px;
 }
+.page-content .container .summary.no-image{
+    border-bottom: 1px solid #ccc;
+}
 .page-content .container .summary .image{
     width: 100%;
     max-height: 500px;
@@ -30,6 +33,9 @@
     display: block;
     width: 100%;
     height: auto;
+}
+.page-content .container .summary.no-image .image img{
+    display: none;
 }
 .page-content .container .summary .info{
     position: absolute;
@@ -41,10 +47,8 @@
     -webkit-background-origin: padding;
     -webkit-background-clip: content;
 }
-.page-content .container .summary .info.no-image{
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(253,253,253,0)),color-stop(0.499, rgba(107,107,107,.6)),color-stop(0.5, rgba(253,253,253,1)),color-stop(0.9, rgba(253,253,253,.7)), to(rgba(253,253,253,.0)));
-    -webkit-background-origin: padding;
-    -webkit-background-clip: content;
+.page-content .container .summary.no-image .info{
+    background: none;
 }
 .page-content .container .summary .info .wrap{
     width: 100%;
@@ -68,6 +72,9 @@
     height: 100%;
     border: 1px solid #f5f5f5;
     border-radius: 2px;
+}
+.page-content .container .summary.no-image .info .author img{
+    border: 1px solid #ccc;
 }
 .page-content .container .summary .info .author .name{
     display: inline-block;
@@ -93,6 +100,9 @@
     vertical-align: top;
     font-size: 12px;
     margin: 25px 0 0 3px;
+}
+.page-content .container .summary.no-image .info .desc .top a{
+    color: #999;
 }
 .page-content .container .title{
     width: 100%;

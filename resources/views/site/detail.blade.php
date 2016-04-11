@@ -1,20 +1,18 @@
 @extends('layout.site')
 @section('style')@parent  <link href="/css/public.content.css?v2" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
-    <link href="/css/public.detail.css?v2" rel="stylesheet">
+    <link href="/css/public.detail.css?v3" rel="stylesheet">
 @stop
 @section('body')
 @parent
 <!--新闻内容部分start-->
 <div id="site-content" class="page-content">
     <div class="container">
-        <div class="summary">
-@if(!empty($article['image']))
+        <div class="summary {{empty($article['image']) ? 'no-image' : ''}}">
             <div class="image">
                 <img src="{{$article['image']}}">
             </div>
-@endif
-            <div class="info {{empty($article['image']) ? 'no-image' : ''}}">
+            <div class="info">
                 <div class="wrap">
                     <a class="author" href="{{$_ENV['platform']['home']}}/user/{{$user['id']}}">
                         <img src="{{$user['avatar']}}">
