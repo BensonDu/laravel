@@ -1,13 +1,20 @@
 <?php
-
 $env = explode("\n",@file_get_contents('../../.env'));
+
+$domain = null;
+
 foreach ($env as $v){
     if(strpos(' '.$v,'SITE_PLATFORM_BASE')){
         $value = explode("=",$v);
-        $domain = isset($value[1]) ? str_replace( ["'",'"'],"",$value[1]): null;
+        $env_domain = isset($value[1]) ? str_replace( ["'",'"'],"",$value[1]): null;
     }
 }
-$domain = isset($domain) ? $domain : null;
+
+$host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+
+if(stripos('prefix '.$host,$env_domain)){
+    $domain = isset($env_domain) ? $env_domain : null;
+}
 
 if (isset($_SERVER['HTTP_COOKIE'])) {
     $cookies = explode(';', $_SERVER['HTTP_COOKIE']);

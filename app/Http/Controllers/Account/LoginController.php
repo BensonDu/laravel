@@ -19,20 +19,28 @@ class LoginController extends AccountController
         $uid = session()->get('uid');
         //已经登录
         if(!empty($uid)){
-            $sid = session()->getId();
-            $redirect = $this->request->input('redirect');
-            //平台自跳转
-            if(get_domain($redirect == $_ENV['SITE_PLATFORM_BASE'])){
-                return redirect(urldecode($redirect));
-            }
-            //跳转子站
-            else{
-                $host = get_domain(urldecode($redirect));
-                return redirect('http://'.$host.'/sso/?session='.$sid.'&redirect='.urlencode($redirect));
-            }
+            return $this->redirect();
         }
         //没有登录
         return self::view('/account/login');
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 跳转策略
+     |--------------------------------------------------------------------------
+     */
+    private function redirect(){
+        $sid = session()->getId();
+        $redirect = $this->request->input('redirect');
+        //平台自跳转
+        if(get_domain($redirect == $_ENV['SITE_PLATFORM_BASE'])){
+            return redirect(urldecode($redirect));
+        }
+        //跳转子站
+        else{
+            $host = get_domain(urldecode($redirect));
+            return redirect('http://'.$host.'/sso/?session='.$sid.'&redirect='.urlencode($redirect));
+        }
     }
 
     public function post()
