@@ -22,7 +22,7 @@ class LoginController extends AccountController
             $sid = session()->getId();
             $redirect = $this->request->input('redirect');
             //平台自跳转
-            if(stristr($redirect, $_ENV['SITE_PLATFORM_BASE'])){
+            if(get_domain($redirect == $_ENV['SITE_PLATFORM_BASE'])){
                 return redirect(urldecode($redirect));
             }
             //跳转子站
