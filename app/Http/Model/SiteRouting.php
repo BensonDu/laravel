@@ -24,7 +24,7 @@ class SiteRouting extends Model
             self::$init = true;
             self::$platform_base = config('site.platform_base');
             self::$redis_ttl = config('site.platform_redis_routing_ttl');
-            self::$redis_key_name = config('site.platform_redis_prefix').':'.config('site.platform_redis_routingtable_key');
+            self::$redis_key_name = config('site.platform_redis_prefix').':platform:'.config('site.platform_redis_routingtable_key');
         }
     }
     //路由表查询

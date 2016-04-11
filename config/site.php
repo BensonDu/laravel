@@ -46,5 +46,5 @@ return [
      | 平台及多站点域名配置   Redis路由表对应key
      |--------------------------------------------------------------------------
     */
-    'platform_redis_routingtable_key'   => 'routingtable'
+    'platform_redis_routingtable_key'   => 'route'
 ];
