@@ -500,7 +500,7 @@
                 time : d.type.time
             };
         //发布必须选择分类
-        if((data.type == 'now' || data.type=='time') && data.category == '0')return pop.error('请选择分类','确定').one();
+        if((data.type == 'now' || data.type=='time') && (data.category == '0' || data.category == ''))return pop.error('请选择分类','确定').one();
         request.get(default_data.api.save_post,function(ret){
                 if(ret.hasOwnProperty('code') && ret.code ==0){
                     self.update_list();
