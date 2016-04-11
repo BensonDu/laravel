@@ -10,7 +10,11 @@ class SocialController extends UserController
     public function __construct(){
         parent::__construct();
     }
-
+    /*
+     |--------------------------------------------------------------------------
+     | 个人社交资料修改
+     |--------------------------------------------------------------------------
+     */
     public function index()
     {
         $data['active'] = 'social';
@@ -22,12 +26,18 @@ class SocialController extends UserController
         ]);
         return self::view('/user/social',$data);
     }
+    /*
+     |--------------------------------------------------------------------------
+     | 个人社交资料保存
+     |--------------------------------------------------------------------------
+     */
     public function post()
     {
         $wechat = $this->request->input('wechat');
-        $weibo = $this->request->input('weibo');
-        $email = $this->request->input('email');
+        $weibo  = $this->request->input('weibo');
+        $email  = $this->request->input('email');
         UserModel::save_social($_ENV['uid'],$wechat,$weibo,$email);
+        
         return self::ApiOut(0,'/');
     }
 

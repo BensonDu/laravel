@@ -8,37 +8,64 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
 use App\Http\Model\ArticleUserModel;
 
-class IndexController extends Controller
+class IndexController extends UserController
 {
 
+    /*
+     |--------------------------------------------------------------------------
+     | 用户主页
+     |--------------------------------------------------------------------------
+     */
     public function index($id = null){
 
         if(is_null($id))abort(404);
         $data = UserController::profile($id);
         if(empty($data))abort(404);
-        if($id == $_ENV['uid'])$data['self']=true;
+
+        /*是否为本人主页*/
+        $data['self']   = ($id == $_ENV['uid']) ? true : false;
+        /*当前 Active 菜单*/
         $data['active'] = 'home';
-        $data['list'] = $this->get_list($id);
-        $data['total'] = $this->get_list_count($id);
+        /*设置页面 title*/
+        $data['base']['title'] = $data['profile']['nickname'].'的个人主页';
+
+        $data['list']   = self::get_list($id);
+
+        $data['total']  = ArticleUserModel::get_article_count($id);
+
         return self::view('/user/index',$data);
     }
+    /*
+     |--------------------------------------------------------------------------
+     | 个人主页 -> 跳转到当前登录uid主页
+     |--------------------------------------------------------------------------
+     */
     public function self(){
         return redirect('/user/'.$_ENV['uid']);
     }
-    public function articles(){
+    /*
+     |--------------------------------------------------------------------------
+     | 文章列表接口
+     |--------------------------------------------------------------------------
+     */
+    public static function articles(){
         $id    = request()->input('id');
         $index = request()->input('index');
         if(empty($index) || empty($id)){
             return self::ApiOut(40001,'请求错误');
         }
         $skip =intval($index)*10;
-        $list = $this->get_list($id,$skip);
+        $list = self::get_list($id,$skip);
         return self::ApiOut(0,$list);
     }
-    private function get_list($id, $skip=0){
+    /*
+     |--------------------------------------------------------------------------
+     | 私有方法 获取格式化文章列表
+     |--------------------------------------------------------------------------
+     */
+    private static function get_list($id, $skip=0){
         $list = ArticleUserModel::get_home_article_list($id, $skip);
         foreach($list as $k =>$v){
             $tags = [];
@@ -53,9 +80,6 @@ class IndexController extends Controller
             $list[$k]->post_time = time_down(strtotime($v->create_time));
         }
         return $list;
-    }
-    private function get_list_count($id){
-        return ArticleUserModel::get_article_count($id);
     }
 
 }

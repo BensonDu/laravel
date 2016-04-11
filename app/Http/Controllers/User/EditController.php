@@ -16,9 +16,6 @@ class EditController extends UserController
 {
     private static $route_session_key = 'user_edit_route';
 
-    public function __construct(){
-        parent::__construct();
-    }
     /*
     |--------------------------------------------------------------------------
     | 用户文章管理中心首页

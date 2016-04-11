@@ -8,7 +8,7 @@
     <div class="user-nav-container">
         <div class="left">
             <a class="active" href="#">最新文章</a>
-@if(isset($self))
+@if(!empty($self))
             <a href="/user/favorite">我的收藏</a>
 @endif
         </div>

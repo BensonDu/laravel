@@ -29,7 +29,7 @@
 @endif
         </div>
     </div>
-@if(isset($self))
+@if(!empty($self))
     <div class="mid">
         <div class="container">
             <a href="/user/{{$id}}" class="{{isset($active) && $active =='home' ? 'active' : ''}}"><span>个人主页</span></a>

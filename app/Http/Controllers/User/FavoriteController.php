@@ -10,25 +10,41 @@ class FavoriteController extends UserController
     public function __construct(){
         parent::__construct();
     }
-
+    /*
+     |--------------------------------------------------------------------------
+     | 个人收藏页
+     |--------------------------------------------------------------------------
+     */
     public function index()
     {
         $data['active'] = 'home';
-        $data['list'] = $this->get_list($_ENV['uid']);
-        $data['total'] = $this->get_list_count($_ENV['uid']);
+        $data['list']   = self::get_list($_ENV['uid']);
+        $data['total']  = ArticleUserModel::get_favorite_article_count($_ENV['uid']);
+
         return self::view('/user/favorite',$data);
     }
-    public function favorites(){
+    /*
+     |--------------------------------------------------------------------------
+     | 个人收藏列表接口
+     |--------------------------------------------------------------------------
+     */
+    public static function favorites(){
         $id    = request()->input('id');
         $index = request()->input('index');
-        if(empty($index) || empty($id)){
-            return self::ApiOut(40001,'请求错误');
-        }
-        $skip =intval($index)*10;
-        $list = $this->get_list($id,$skip);
+
+        if(empty($index) || empty($id)) return self::ApiOut(40001,'请求错误');
+
+        $skip = intval($index)*10;
+        $list = self::get_list($id,$skip);
+
         return self::ApiOut(0,$list);
     }
-    private function get_list($id, $skip=0){
+    /*
+     |--------------------------------------------------------------------------
+     | 获取格式化列表
+     |--------------------------------------------------------------------------
+     */
+    private static function get_list($id, $skip=0){
         $list = ArticleUserModel::get_favorite_article_list($id, $skip);
         foreach($list as $k =>$v){
             $tags = [];
@@ -45,12 +61,4 @@ class FavoriteController extends UserController
         }
         return $list;
     }
-    private function get_list_count($id){
-        return ArticleUserModel::get_favorite_article_count($id);
-    }
-    public function test(){
-        return $list = ArticleUserModel::get_favorite_article_list('10001716', 0);
-    }
-
-
 }

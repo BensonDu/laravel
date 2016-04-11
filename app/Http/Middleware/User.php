@@ -6,7 +6,7 @@
  * Time: 上午12:00
  */
 
-namespace app\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Closure;
 
@@ -14,6 +14,7 @@ class User
 {
     public function handle($request, Closure $next)
     {
+        /*是否已登录,未登录跳转登录*/
         if(empty($_ENV['uid']))return redirect($_ENV['platform']['home'].'/account/login?redirect='.urlencode($request->url()));
         return $next($request);
     }
