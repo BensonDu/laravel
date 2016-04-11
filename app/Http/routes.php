@@ -11,7 +11,7 @@
 |
 */
 //子站路由
-if(!strpos(' '.request()->server('HTTP_HOST'),config('site.platform_base'))) {
+if(request()->server('HTTP_HOST') != config('site.platform_base')) {
     //设备跳转
     Route::group(['middleware' => 'Device'], function () {
         //PC站
