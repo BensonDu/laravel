@@ -36,6 +36,7 @@
 </article>
 
 </body>
+<script src="http://download.inveno.com/SDK/malacca_js/1.1/src/inveno_default.min.1.0.js"></script>
 <script>
     var _hmt = _hmt || [];
     (function() {
