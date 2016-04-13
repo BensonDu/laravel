@@ -21,18 +21,17 @@
         setTimeout(function(){$password_error.removeClass('active')},2000);
     };
 
-    this.check_username = function(){
+    this.check_username = function(call){
         var username = $username_input.val();
-        username_check = false;
         if(username == ''){
             return self.username_error('用户名为空');
         }
         request.post('/account/exist',function(ret){
             if(ret.hasOwnProperty('code') && ret.code=='10001'){
-                self.username_error(ret.msg);
+                self.username_error(ret.msg || '请检查用户名');
             }
             else{
-                username_check = true;
+                call();
             }
         },{username:username});
     };
@@ -43,10 +42,7 @@
             password:$password_input.val(),
             redirect : input.get('redirect')
         };
-        if(!username_check){
-            return self.username_error('请检查用户名');
-        }
-        else{
+        self.check_username(function () {
             request.post('/account/login',function(ret){
                 if(ret.hasOwnProperty('code') && ret.code == '0'){
                     if(ret.data.hasOwnProperty('site') && ret.data.hasOwnProperty('session')){
@@ -58,7 +54,7 @@
                 }
 
             },data);
-        }
+        });
     };
     this.redirect = function(session,site){
         var urlReg = /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/,

@@ -9,7 +9,7 @@
                     <em class="username"></em>
                     <div class="input">
                         <span></span>
-                        <input type="text" placeholder="用户名/手机号">
+                        <input type="text"  autocomplete="on" placeholder="用户名/手机号">
                     </div>
                     <div class="error">
                         <p>用户名不存在</p>
@@ -19,7 +19,7 @@
                     <em class="password"></em>
                     <div class="input">
                         <span></span>
-                        <input type="password" placeholder="密码">
+                        <input type="password"  autocomplete="on" placeholder="密码">
                     </div>
                     <div class="error">
                         <p>用户名不存在</p>
@@ -42,5 +42,5 @@
         </div>
     </div>
 @stop
-@section('script')@parent<script src="/js/account/login.js?v"></script>
+@section('script')@parent<script src="/js/account/login.js?v1"></script>
 @stop
