@@ -131,7 +131,7 @@
                         self.model.data.image.progress.active = false;
                         pop.error( t || '上传失败','确定').one();
                     }
-                ).upload(_this.files);
+                ).maxSize(2).upload(_this.files);
 
             },
             //摘要 配图 标签 输入状态 Tab 光标统一到标题输入框

@@ -204,7 +204,7 @@
     this.imageUploader = function (start,progress,success,error) {
         var uploader = null,
             err = !!error ? error :alert,
-            maxSize = 1000*1000*2,
+            maxSize = 1024*1024*2,
             self = {},
             prefix = 'http://dn-noman.qbox.me/';
 
@@ -239,7 +239,7 @@
                 return self;
             },
             maxSize:function (size) {
-                maxSize = size*1000*1000;
+                maxSize = size*1024*1024;
                 return self;
             }
         };
