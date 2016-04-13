@@ -48,13 +48,13 @@
 @section('script')@parent <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script src="/lib/datetimepicker/js/moment.min.js"></script>
 <script src="/lib/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script src="http://dn-noman.qbox.me/imageuploader.min.js"></script>
+<script src="http://static.chuang.pro/imageuploader.min.js"></script>
 <script src="http://static.chuang.pro/public-medium-editor.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fhandlebars.runtime.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery-sortable-min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.center.min.js"></script>
-<script src="/js/medium-plugin.min.js?"></script>
+<script src="http://static.chuang.pro/medium-plugin.min.js"></script>
 @section('script-article')
 @show
 @stop

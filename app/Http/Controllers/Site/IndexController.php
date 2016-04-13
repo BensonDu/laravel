@@ -114,7 +114,7 @@ class IndexController extends SiteController
                     'color' => rand_color()
                 ];
             }
-
+            $list[$k]->image    = crop_list($v->image);
             $list[$k]->avatar   = avatar($v->avatar);
             $list[$k]->user_url = user_url($v->user_id);
             $list[$k]->tags = $tags;

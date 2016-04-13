@@ -188,7 +188,7 @@
                 return $(window).off(".uploader-" + this.id), $(document).off(".uploader-" + this.id)
             }, b.i18n = {
                 "zh-CN": {
-                    leaveConfirm: "�����ϴ��ļ��������뿪�ϴ����Զ�ȡ��"
+                    leaveConfirm: "文件正在上传,确认退出?"
                 }
             }, b.locale = "zh-CN", b
         }(SimpleModule), b = function(b) {
@@ -198,3 +198,50 @@
             return d = a, e = 0, g = 0, h = 0, d && (f = d.w, c = d.h, f > c ? (e = c, g = (f - c) / 2, h = 0) : (e = f, g = 0, h = (c - f) / 2)), b = "" + e + "x" + e + "a" + g + "a" + h
         }
     }.call(this);
+
+(function () {
+
+    this.imageUploader = function (start,progress,success,error) {
+        var uploader = null,
+            err = !!error ? error :alert,
+            maxSize = 1000*100*2,
+            self = {},
+            prefix = 'http://dn-noman.qbox.me/';
+
+        uploader = simple.uploader({});
+
+        uploader.on("beforeupload", function (e, file, r) {
+            start(e, file, r);
+        });
+
+        uploader.on("uploadprogress", function (e, file, loaded, total) {
+            progress(parseFloat(((loaded / total) * 100).toFixed(0)))
+        });
+
+        uploader.on("uploadsuccess", function (e, file, r) {
+            r.hasOwnProperty('key') ? success(prefix+r.key,r.key) : err('上传失败');
+        });
+
+        uploader.on('uploaderror', function (e, file, xhr, status) {
+            err('服务器错误');
+        });
+
+        return self =  {
+            upload : function (files) {
+                var size = 0;
+                if(!!files && files[0]  && files[0].size)size = files[0].size;
+                if(size > maxSize)return err('上传文件过大');
+                uploader.upload(files);
+                return self;
+            },
+            cancel : function () {
+                uploader.cancel();
+                return self;
+            },
+            maxSize:function (size) {
+                maxSize = size*1000*1000;
+                return self;
+            }
+        };
+    }
+}).call(this);

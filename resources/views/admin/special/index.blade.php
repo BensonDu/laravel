@@ -135,7 +135,7 @@
                             <a class="close" v-on:click="_del_bk_image">×</a>
                         </div>
                         <div class="remark">
-                            <p>背景图需上传大于1024 x 768像素且宽高比为 16:9 的图片,最大尺寸2M.</p>
+                            <p>背景图需上传大于1024 x 768像素且宽高比为 16:9 的图片,最大尺寸5M.</p>
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
     </div>
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script src="http://dn-noman.qbox.me/imageuploader.min.js"></script>
+<script src="http://static.chuang.pro/imageuploader.min.js"></script>
 <script src="/lib/sortable/js/Sortable.min.js"></script>
 <script>
     var default_data = {

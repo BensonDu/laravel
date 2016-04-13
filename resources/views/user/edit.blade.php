@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="desc">
-                        <p>文章配图需上传大于800 x 530像素且宽高比为 3:2 的图片,最大尺寸2M.</p>
+                        <p>文章配图需上传大于500 x 200像素且宽高比为 5:2 的图片,最大尺寸2M.</p>
                     </div>
                 </div>
                 <div class="tag">
@@ -107,14 +107,14 @@
 </div>
 <!--主体部分end-->
 @stop
-@section('script')@parent<script src="http://dn-noman.qbox.me/imageuploader.min.js"></script>
+@section('script')@parent<script src="http://static.chuang.pro/imageuploader.min.js"></script>
 <script src="http://static.chuang.pro/public-medium-editor.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fhandlebars.runtime.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery-sortable-min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.center.min.js"></script>
-<script src="/js/medium-plugin.min.js?"></script>
+<script src="http://static.chuang.pro/medium-plugin.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script>var default_data = {list : JSON.parse('{!! $list !!}'),route : '{{isset($route)?$route:null}}'}</script>
-<script src="/js/user.edit.js?v4"></script>
+<script src="/js/user.edit.js?v5"></script>
 @stop

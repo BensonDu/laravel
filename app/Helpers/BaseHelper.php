@@ -182,3 +182,35 @@ if (! function_exists('get_domain')) {
     }
 
 }
+if (! function_exists('crop_star')) {
+    /**
+     * 精选图裁剪 | 针对七牛
+     * @param  string $url
+     * @return string $start_url
+     */
+    function crop_star($url){
+        $ret = $url;
+        if(strripos($url,".qbox.me")){
+            $base = explode("?" ,$url)[0];
+            $ret = $base.'?imageMogr2/thumbnail/!800x530r/gravity/Center/crop/800x530';
+        }
+        return $ret;
+    }
+
+}
+if (! function_exists('crop_list')) {
+    /**
+     *  PC文章列表图裁剪 | 针对七牛
+     * @param  string $url
+     * @return string $start_url
+     */
+    function crop_list($url){
+        $ret = $url;
+        if(strripos($url,".qbox.me")){
+            $base = explode("?" ,$url)[0];
+            $ret = $base.'?imageMogr2/thumbnail/!228x130r/gravity/Center/crop/228x130';
+        }
+        return $ret;
+    }
+
+}

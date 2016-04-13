@@ -1,6 +1,5 @@
 (function(){
-    var self = this,
-        uploader   = simple.uploader({});
+    var self = this;
     this.data = {
         wechat : {
             val : default_data.wechat,
@@ -27,14 +26,26 @@
         self.data.weibo.val = '';
     };
     this.methods.upload = function(){
-        var _this = this.$els.wechat,
-            $this = $(_this),
-            exist_file = $($this).attr('exist-file');
-        if(exist_file){
-            uploader.cancel(exist_file);
-        }
-        $this.attr('exist-file', $this.val());
-        uploader.upload(_this.files);
+        var _this = this.$els.wechat;
+        if(!_this.files)return pop.error( '浏览器兼容性错误','确定' ).one();
+        imageUploader(
+            function () {
+                self.data.wechat.progress.active = true;
+            },
+            function (p) {
+                self.data.wechat.progress.percent = p+'%'
+            },
+            function (url) {
+                self.data.wechat.val = url+'?imageMogr2/thumbnail/!200x200r/gravity/Center/crop/200x200';
+                setTimeout(function(){
+                    self.data.wechat.progress.active = false;
+                },1000);
+            },
+            function (t) {
+                self.data.wechat.progress.active = false;
+                pop.error( t || '上传失败','确定').one();
+            }
+        ).upload(_this.files);
     };
     this.methods.submit = function(){
         var data = self.data,
@@ -71,50 +82,6 @@
         el: '#social',
         data: self.data,
         methods: self.methods
-    });
-    //IMG ID 转化为 URL
-    this.get_img_url=function(id, option){
-        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2/thumbnail/!400x400r/gravity/Center/crop/400x400';
-    };
-    //上传进度显示
-    this.uploading = function(loaded, total){
-        return self.data.wechat.progress.percent = parseFloat(((loaded / total) * 100).toFixed(0))+' %';
-    };
-    //上传错误显示
-    this.upload_error = function(text){
-        self.data.wechat.error = text;
-        setTimeout(function(){self.data.wechat.error = false;},3000);
-    };
-    //初始化
-    uploader.on("beforeupload", function (e, file, r) {
-        self.data.wechat.progress.active = true;
-        self.uploading(5,100);
-    });
-    //进行中
-    uploader.on("uploadprogress", function (e, file, loaded, total) {
-        self.uploading(loaded*0.9,total);
-    });
-    //成功
-    uploader.on("uploadsuccess", function (e, file, r) {
-        if(r.hasOwnProperty('key')){
-            self.uploading(100,100);
-            self.data.wechat.val = self.get_img_url(r.key,r);
-            setTimeout(function(){
-                self.data.wechat.progress.active = false;
-            },1000);
-        }
-        else{
-            self.upload_error('上传失败');
-        }
-    });
-    //完成
-    uploader.on('uploadcomplete', function (e, file, r) {
-
-
-    });
-    //错误
-    uploader.on('uploaderror', function (e, file, xhr, status) {
-        self.upload_error('上传失败');
     });
 
 }).call(define('social'));

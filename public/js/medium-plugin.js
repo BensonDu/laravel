@@ -1586,7 +1586,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             $file = $(this.templates['src/js/templates/images-fileupload.hbs']()),
             uploader = simple.uploader({}),
             get_img_url = function(id, option){
-                return 'http://dn-noman.qbox.me/' + id;
+                return 'http://dn-noman.qbox.me/' + id + '?imageMogr2/thumbnail/900000@';
             },
             submit_data = {};
         $file.prop("accept","image/*").removeAttr('multiple');

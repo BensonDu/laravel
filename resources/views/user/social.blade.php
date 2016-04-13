@@ -63,8 +63,8 @@
 <!--主页内容end-->
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script src="http://dn-noman.qbox.me/imageuploader.min.js"></script>
+<script src="http://static.chuang.pro/imageuploader.min.js"></script>
 <script>var default_data = JSON.parse('{!! $input !!}');</script>
 <script src="/js/user/base.js"></script>
-<script src="/js/user/social.js?"></script>
+<script src="/js/user/social.js?v"></script>
 @stop

@@ -304,49 +304,26 @@
             //上传图片
             _upload_image : function(){
                 var _this = this.$els.image,
-                    $this = $(_this),
-                    exist_file = $($this).attr('exist-file'),
-                    uploader   = simple.uploader({}),
-                    d = self.model.data.article,
-                //拼接实际URL地址
-                    get_img_url = function(id, option){
-                        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2/thumbnail/!800x530r/gravity/Center/crop/800x530';
+                    d = self.model.data.article;
+                if(!_this.files)return pop.error( '浏览器兼容性错误','确定' ).one();
+                imageUploader(
+                    function () {
+                        d.image.progress.active = true;
                     },
-                //上传进度显示
-                    uploading = function(loaded, total){
-                        if(loaded == 5)d.image.progress.active = true;
-                        return d.image.progress.percent = parseFloat(((loaded / total) * 100).toFixed(0))+' %';
-                    };
-
-                //初始化
-                uploader.on("beforeupload", function (e, file, r) {
-                    uploading(5,100);
-                });
-                //进行中
-                uploader.on("uploadprogress", function (e, file, loaded, total) {
-                    uploading(loaded*0.9,total);
-                });
-                //成功
-                uploader.on("uploadsuccess", function (e, file, r) {
-                    if(r.hasOwnProperty('key')){
-                        uploading(100,100);
-                        d.image.val = get_img_url(r.key,r);
+                    function (p) {
+                        d.image.progress.percent = p+'%'
+                    },
+                    function (url) {
+                        d.image.val = url+'?imageMogr2/thumbnail/!900x500r/gravity/Center/crop/900x500';
                         setTimeout(function(){
                             d.image.progress.active = false;
                         },1000);
+                    },
+                    function (t) {
+                        d.image.progress.active = false;
+                        pop.error( t || '上传失败','确定').one();
                     }
-                    else{
-                        pop.error('上传失败','确定').one();
-                    }
-                });
-                //错误
-                uploader.on('uploaderror', function (e, file, xhr, status) {
-                    pop.error('上传失败','确定').one();
-                });
-
-                if(exist_file)uploader.cancel(exist_file);
-                $this.attr('exist-file', $this.val());
-                uploader.upload(_this.files);
+                ).upload(_this.files);
             }
         }
     };

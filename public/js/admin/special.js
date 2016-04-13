@@ -14,7 +14,6 @@
                 i = $(this).data('id');
                 !!i && order.push(i);
             });
-            console.log(order);
             controller_pop.selected = order;
         }
     });
@@ -226,95 +225,49 @@
             },
             _upload_cover_image : function(){
                 var _this = this.$els.cover,
-                    $this = $(_this),
-                    exist_file = $($this).attr('exist-file'),
-                    uploader   = simple.uploader({}),
-                    d = self.vue.special.cover,
-                //拼接实际URL地址
-                    get_img_url = function(id, option){
-                        return 'http://dn-noman.qbox.me/' + id + '?imageMogr2/thumbnail/!500x200r/gravity/Center/crop/500x200';
+                    d = self.vue.special.cover;
+                if(!_this.files)return pop.error( '浏览器兼容性错误','确定' ).one();
+                imageUploader(
+                    function () {
+                        d.progress.active = true;
                     },
-                //上传进度显示
-                    uploading = function(loaded, total){
-                        if(loaded == 5)d.progress.active = true;
-                        return d.progress.percent = parseFloat(((loaded / total) * 100).toFixed(0))+' %';
-                    };
-
-                //初始化
-                uploader.on("beforeupload", function (e, file, r) {
-                    uploading(5,100);
-                });
-                //进行中
-                uploader.on("uploadprogress", function (e, file, loaded, total) {
-                    uploading(loaded*0.9,total);
-                });
-                //成功
-                uploader.on("uploadsuccess", function (e, file, r) {
-                    if(r.hasOwnProperty('key')){
-                        uploading(100,100);
-                        d.val = get_img_url(r.key,r);
+                    function (p) {
+                        d.progress.percent = p+'%'
+                    },
+                    function (url) {
+                        d.val = url+'?imageMogr2/thumbnail/!900x500r';
                         setTimeout(function(){
                             d.progress.active = false;
                         },1000);
+                    },
+                    function (t) {
+                        d.progress.active = false;
+                        pop.error( t || '上传失败','确定').one();
                     }
-                    else{
-                        pop.error('上传失败','确定').one();
-                    }
-                });
-                //错误
-                uploader.on('uploaderror', function (e, file, xhr, status) {
-                    pop.error('上传失败','确定').one();
-                });
-
-                if(exist_file)uploader.cancel(exist_file);
-                $this.attr('exist-file', $this.val());
-                uploader.upload(_this.files);
+                ).upload(_this.files);
             },
             _upload_bk_image : function(){
-                var _this = this.$els.bk,
-                    $this = $(_this),
-                    exist_file = $($this).attr('exist-file'),
-                    uploader   = simple.uploader({}),
-                    d = self.vue.special.bk,
-                //拼接实际URL地址
-                    get_img_url = function(id, option){
-                        return 'http://dn-noman.qbox.me/' + id ;
+                var _this = _this = this.$els.bk,
+                    d = self.vue.special.bk;
+                if(!_this.files)return pop.error( '浏览器兼容性错误','确定' ).one();
+                imageUploader(
+                    function () {
+                        d.progress.active = true;
                     },
-                //上传进度显示
-                    uploading = function(loaded, total){
-                        if(loaded == 5)d.progress.active = true;
-                        return d.progress.percent = parseFloat(((loaded / total) * 100).toFixed(0))+' %';
-                    };
-
-                //初始化
-                uploader.on("beforeupload", function (e, file, r) {
-                    uploading(5,100);
-                });
-                //进行中
-                uploader.on("uploadprogress", function (e, file, loaded, total) {
-                    uploading(loaded*0.9,total);
-                });
-                //成功
-                uploader.on("uploadsuccess", function (e, file, r) {
-                    if(r.hasOwnProperty('key')){
-                        uploading(100,100);
-                        d.val = get_img_url(r.key,r);
+                    function (p) {
+                        d.progress.percent = p+'%'
+                    },
+                    function (url) {
+                        d.val = url+'?imageMogr2/thumbnail/900000@';
                         setTimeout(function(){
                             d.progress.active = false;
                         },1000);
+                    },
+                    function (t) {
+                        d.progress.active = false;
+                        pop.error( t || '上传失败','确定').one();
                     }
-                    else{
-                        pop.error('上传失败','确定').one();
-                    }
-                });
-                //错误
-                uploader.on('uploaderror', function (e, file, xhr, status) {
-                    pop.error('上传失败','确定').one();
-                });
-
-                if(exist_file)uploader.cancel(exist_file);
-                $this.attr('exist-file', $this.val());
-                uploader.upload(_this.files);
+                ).maxSize(5).upload(_this.files);
             },
             _confirm_special : function(){
                 self.vue.special.id == '' ? self.add() : self.save();
