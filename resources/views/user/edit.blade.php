@@ -107,7 +107,7 @@
 </div>
 <!--主体部分end-->
 @stop
-@section('script')@parent<script src="http://static.chuang.pro/imageuploader.min.js"></script>
+@section('script')@parent<script src="http://static.chuang.pro/imageuploader.min.js?"></script>
 <script src="http://static.chuang.pro/public-medium-editor.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fhandlebars.runtime.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery-sortable-min.js"></script>
