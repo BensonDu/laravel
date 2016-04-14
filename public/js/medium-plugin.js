@@ -1585,8 +1585,10 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
         var that = this,
             $file = $(this.templates['src/js/templates/images-fileupload.hbs']()),
             uploader = simple.uploader({}),
+            size = 0,
             get_img_url = function(id, option){
-                return 'http://dn-noman.qbox.me/' + id + '?imageMogr2/thumbnail/900000@';
+                //尺寸超过 640k 压缩尺寸..
+                return 'http://dn-noman.qbox.me/' + id + (size>640*1024 ? '?imageMogr2/thumbnail/900000@' : '');
             },
             submit_data = {};
         $file.prop("accept","image/*").removeAttr('multiple');
@@ -1620,12 +1622,13 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
 
         //$file.fileupload($.extend(true, {}, this.options.fileUploadOptions, fileUploadOptions));
         $file.change(function(e){
-            var val = $(this).val(),
+            var val = $(this).val(),_this = this,
                 data = {
                     files : this,
                     submit : function(after_submit_data){
                         submit_data = after_submit_data;
-                        uploader.upload(this.files);
+                        if(_this.files && _this.files && _this.files[0].size) size = _this.files[0].size;
+                        uploader.upload(_this.files);
                     }
                 };
             $.proxy(that, 'uploadAdd', e, data)();
