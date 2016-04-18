@@ -166,7 +166,7 @@ if (! function_exists('tag')) {
      * @return string tags || array tags
      */
     function tag($tags){
-        return (is_string($tags) || is_array($tags)) ? (is_string($tags) ? (!empty($tags) ? explode('T@G',$tags) : null) : trim(implode('T@G',$tags))) : NULL;
+        return (is_string($tags) || is_array($tags)) ? (is_string($tags) ? (!empty($tags) ? explode('T@G',$tags) : []) : trim(implode('T@G',$tags))) : NULL;
     }
 
 }

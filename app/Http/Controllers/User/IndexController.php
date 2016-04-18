@@ -70,11 +70,13 @@ class IndexController extends UserController
         foreach($list as $k =>$v){
             $tags = [];
             $tag = tag($v->tags);
-            foreach($tag as $vv){
-                $tags[] = [
-                    'item'  => $vv,
-                    'color' => rand_color()
-                ];
+            if(!empty($tag)){
+                foreach($tag as $vv){
+                    $tags[] = [
+                        'item'  => $vv,
+                        'color' => rand_color()
+                    ];
+                }
             }
             $list[$k]->tags = $tags;
             $list[$k]->post_time = time_down(strtotime($v->create_time));
