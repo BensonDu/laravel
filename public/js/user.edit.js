@@ -114,25 +114,20 @@
             upload : function(){
                 var _this = this.$els.image;
                 if(!_this.files)return pop.error( '浏览器兼容性错误','确定' ).one();
-                imageUploader(
-                    function () {
-                        self.model.data.image.progress.active = true;
+                imageCrop(_this.files,{
+                    aspectRatio : 16 / 9,
+                    croppedable : true,
+                    finish : function (url) {
+                        self.model.data.image.val = url;
                     },
-                    function (p) {
-                        self.model.data.image.progress.percent = p+'%'
-                    },
-                    function (url) {
-                        self.model.data.image.val = url+'?imageMogr2/thumbnail/!900x500r/gravity/Center/crop/900x500';
-                        setTimeout(function(){
-                            self.model.data.image.progress.active = false;
-                        },1000);
-                    },
-                    function (t) {
-                        self.model.data.image.progress.active = false;
-                        pop.error( t || '上传失败','确定').one();
+                    error : function (text) {
+                        pop.error( text || '上传失败','确定').one();
                     }
-                ).maxSize(2).upload(_this.files);
-
+                });
+                _this.value = '';
+            },
+            _del_image : function () {
+                self.model.data.image.val = '';
             },
             //摘要 配图 标签 输入状态 Tab 光标统一到标题输入框
             default_keydown :function(){

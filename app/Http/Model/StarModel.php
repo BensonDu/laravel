@@ -31,7 +31,7 @@ class StarModel extends Model
         foreach($list as $k => $v){
             $ret[$k]['id']          = $v->id;
             $ret[$k]['title']       = $v->title;
-            $ret[$k]['image']       = crop_star($v->image);
+            $ret[$k]['image']       = $v->image;
             $ret[$k]['category']    = $v->category;
             $ret[$k]['time'] = date('m-d H:i',strtotime($v->update_time));;
             switch($v->type){

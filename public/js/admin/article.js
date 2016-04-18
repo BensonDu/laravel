@@ -306,24 +306,17 @@
                 var _this = this.$els.image,
                     d = self.model.data.article;
                 if(!_this.files)return pop.error( '浏览器兼容性错误','确定' ).one();
-                imageUploader(
-                    function () {
-                        d.image.progress.active = true;
+                imageCrop(_this.files,{
+                    aspectRatio : 16 / 9,
+                    croppedable : true,
+                    finish : function (url) {
+                        d.image.val = url;
                     },
-                    function (p) {
-                        d.image.progress.percent = p+'%'
-                    },
-                    function (url) {
-                        d.image.val = url+'?imageMogr2/thumbnail/!900x500r/gravity/Center/crop/900x500';
-                        setTimeout(function(){
-                            d.image.progress.active = false;
-                        },1000);
-                    },
-                    function (t) {
-                        d.image.progress.active = false;
-                        pop.error( t || '上传失败','确定').one();
+                    error : function (text) {
+                        pop.error( text || '上传失败','确定').one();
                     }
-                ).upload(_this.files);
+                });
+                _this.value = '';
             }
         }
     };

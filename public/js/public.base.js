@@ -128,6 +128,10 @@
     }
 }).call(define('cookie'));
 
+(function () {
+    
+}).call(define('plugin'));
+
 (function(){
     var self = this;
     this.now = function(){

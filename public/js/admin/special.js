@@ -227,47 +227,33 @@
                 var _this = this.$els.cover,
                     d = self.vue.special.cover;
                 if(!_this.files)return pop.error( '浏览器兼容性错误','确定' ).one();
-                imageUploader(
-                    function () {
-                        d.progress.active = true;
+                imageCrop(_this.files,{
+                    aspectRatio : 16 / 9,
+                    croppedable : true,
+                    finish : function (url) {
+                        d.val = url;
                     },
-                    function (p) {
-                        d.progress.percent = p+'%'
-                    },
-                    function (url) {
-                        d.val = url+'?imageMogr2/thumbnail/!900x500r';
-                        setTimeout(function(){
-                            d.progress.active = false;
-                        },1000);
-                    },
-                    function (t) {
-                        d.progress.active = false;
-                        pop.error( t || '上传失败','确定').one();
+                    error : function (text) {
+                        pop.error( text || '上传失败','确定').one();
                     }
-                ).upload(_this.files);
+                });
+                _this.value = '';
             },
             _upload_bk_image : function(){
-                var _this = _this = this.$els.bk,
+                var _this = this.$els.bk,
                     d = self.vue.special.bk;
                 if(!_this.files)return pop.error( '浏览器兼容性错误','确定' ).one();
-                imageUploader(
-                    function () {
-                        d.progress.active = true;
-                    },
-                    function (p) {
-                        d.progress.percent = p+'%'
-                    },
-                    function (url) {
+                imageCrop(_this.files,{
+                    aspectRatio : 16 / 9,
+                    croppedable : false,
+                    finish : function (url) {
                         d.val = url+'?imageMogr2/thumbnail/900000@';
-                        setTimeout(function(){
-                            d.progress.active = false;
-                        },1000);
                     },
-                    function (t) {
-                        d.progress.active = false;
-                        pop.error( t || '上传失败','确定').one();
+                    error : function (text) {
+                        pop.error( text || '上传失败','确定').one();
                     }
-                ).maxSize(5).upload(_this.files);
+                });
+                _this.value = '';
             },
             _confirm_special : function(){
                 self.vue.special.id == '' ? self.add() : self.save();

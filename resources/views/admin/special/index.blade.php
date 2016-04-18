@@ -1,5 +1,6 @@
 @extends('layout.admin')
 @section('style')@parent  <link href="/css/admin.special.css?v" rel="stylesheet">
+    <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
 @stop
 @section('area')
     <div class="list-header">
@@ -102,16 +103,13 @@
                     <div class="preview">
                         <div class="img" v-bind:class="special.cover.progress.active ? 'loading' : ''">
                             <div class="img-wrap">
-                                <img v-bind:src="!special.cover.val ? 'http://dn-t2ipo.qbox.me/v3/public/img-click-upload-dark.png' : special.cover.val">
+                                <img v-bind:src="!special.cover.val ? 'http://dn-noman.qbox.me/default-upload-image.png' : special.cover.val">
                             </div>
                             <input type="file" accept="image/*" v-on:change="_upload_cover_image" v-el:cover>
                             <div class="process">
                                 <p v-text="special.cover.progress.percent"></p>
                             </div>
                             <a class="close" v-on:click="_del_cover_image">×</a>
-                        </div>
-                        <div class="remark">
-                            <p>封面图需上传大于500 x 200像素且宽高比为 5:2 的图片,最大尺寸2M.</p>
                         </div>
                     </div>
                 </div>
@@ -126,16 +124,13 @@
                     <div class="preview">
                         <div class="img" v-bind:class="special.bk.progress.active ? 'loading' : ''">
                             <div class="img-wrap">
-                                <img v-bind:src="!special.bk.val ? 'http://dn-t2ipo.qbox.me/v3/public/img-click-upload-dark.png' : special.bk.val">
+                                <img v-bind:src="!special.bk.val ? 'http://dn-noman.qbox.me/default-upload-image.png' : special.bk.val">
                             </div>
                             <input type="file" accept="image/*" v-on:change="_upload_bk_image" v-el:bk>
                             <div class="process">
                                 <p v-text="special.bk.progress.percent"></p>
                             </div>
                             <a class="close" v-on:click="_del_bk_image">×</a>
-                        </div>
-                        <div class="remark">
-                            <p>背景图需上传大于1024 x 768像素且宽高比为 16:9 的图片,最大尺寸5M.</p>
                         </div>
                     </div>
                 </div>
@@ -173,6 +168,7 @@
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script src="http://static.chuang.pro/imageuploader.min.js"></script>
 <script src="/lib/sortable/js/Sortable.min.js"></script>
+<script src="/lib/cropper/cropper.min.js"></script>
 <script>
     var default_data = {
         total : '{{$total}}',
@@ -180,5 +176,5 @@
         orderby : 'update_time'
     }
 </script>
-<script src="/js/admin/special.js?v"></script>
+<script src="/js/admin/special.js?v1"></script>
 @stop

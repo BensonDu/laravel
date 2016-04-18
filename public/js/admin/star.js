@@ -172,24 +172,17 @@
                 var _this = this.$els.image,
                     d = self.vue;
                 if(!_this.files)return pop.error( '浏览器兼容性错误','确定' ).one();
-                imageUploader(
-                    function () {
-                        d.image.progress.active = true;
+                imageCrop(_this.files,{
+                    aspectRatio : 16 / 9,
+                    croppedable : true,
+                    finish : function (url) {
+                        d.image.val = url;
                     },
-                    function (p) {
-                        d.image.progress.percent = p+'%'
-                    },
-                    function (url) {
-                        d.image.val = url+'?imageMogr2/thumbnail/!600x400r';
-                        setTimeout(function(){
-                            d.image.progress.active = false;
-                        },1000);
-                    },
-                    function (t) {
-                        pop.error( t || '上传失败','确定').one();
-                        d.image.progress.active = false;
+                    error : function (text) {
+                        pop.error( text || '上传失败','确定').one();
                     }
-                ).upload(_this.files);
+                });
+                _this.value = '';
             },
             _close : function(){
                 self.display.hide();

@@ -91,15 +91,12 @@
                 <div class="name"><p>文章配图</p></div>
                 <div class="preview">
                     <div class="img" v-bind:class="article.image.progress.active ? 'loading' : ''">
-                        <img v-bind:src="!article.image.val ? 'http://dn-t2ipo.qbox.me/v3/public/img-click-upload-dark.png' : article.image.val">
+                        <img v-bind:src="!article.image.val ? 'http://dn-noman.qbox.me/default-upload-image.png' : article.image.val">
                         <input type="file" accept="image/*" v-on:change="_upload_image" v-el:image>
                         <div class="process">
                             <p v-text="article.image.progress.percent"></p>
                         </div>
                         <a class="close" v-on:click="_del_image">×</a>
-                    </div>
-                    <div class="remark">
-                        <p>文章配图需上传大于800 x 530像素且宽高比为 3:2 的图片,最大尺寸2M.</p>
                     </div>
                 </div>
             </div>
@@ -147,5 +144,5 @@
         }
     }
 </script>
-<script src="/js/admin/article.js?v4"></script>
+<script src="/js/admin/article.js?v5"></script>
 @stop

@@ -29,24 +29,17 @@
     this.methods.upload = function(){
         var _this = this.$els.avatar;
         if(!_this.files)return pop.error( '浏览器兼容性错误','确定' ).one();
-        imageUploader(
-            function () {
-                self.data.avatar.progress.active = true;
+        imageCrop(_this.files,{
+            aspectRatio : 1,
+            croppedable : true,
+            finish : function (url) {
+                self.data.avatar.val = url;
             },
-            function (p) {
-                self.data.avatar.progress.percent = p+'%'
-            },
-            function (url) {
-                self.data.avatar.val = url+'?imageMogr2/thumbnail/!100x100r/gravity/Center/crop/100x100';
-                setTimeout(function(){
-                    self.data.avatar.progress.active = false;
-                },1000);
-            },
-            function (t) {
-                self.data.avatar.progress.active = false;
-                pop.error( t || '上传失败','确定').one();
+            error : function (text) {
+                pop.error( text || '上传失败','确定').one();
             }
-        ).upload(_this.files);
+        });
+        _this.value = '';
     };
     this.methods.submit = function(){
         var data = self.data,

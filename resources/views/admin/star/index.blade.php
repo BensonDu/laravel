@@ -1,5 +1,6 @@
 @extends('layout.admin')
 @section('style')@parent  <link href="/css/admin.star.css" rel="stylesheet">
+    <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
 @stop
 @section('area')
 <div id="box-container" class="box-container">
@@ -88,15 +89,12 @@
                             <div class="name"><p>精选配图</p></div>
                             <div class="preview">
                                 <div class="img" v-bind:class="image.progress.active ? 'loading' : ''">
-                                    <img v-bind:src="!image.val ? 'http://dn-t2ipo.qbox.me/v3/public/img-click-upload-dark.png' : image.val">
+                                    <img v-bind:src="!image.val ? 'http://dn-noman.qbox.me/default-upload-image.png' : image.val">
                                     <input type="file" accept="image/*" v-on:change="_upload_image" v-el:image>
                                     <div class="process">
                                         <p v-text="image.progress.percent"></p>
                                     </div>
                                     <a class="close" v-on:click="_del_image">×</a>
-                                </div>
-                                <div class="remark">
-                                    <p>精选配图需上传大于640 x 360像素且宽高比为 16:9 的图片,最大尺寸2M.</p>
                                 </div>
                             </div>
                         </div>
@@ -138,10 +136,11 @@
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script src="http://static.chuang.pro/imageuploader.min.js"></script>
 <script src="/lib/sortable/js/Sortable.min.js"></script>
+<script src="/lib/cropper/cropper.min.js"></script>
 <script>
     var default_data = {
         list : JSON.parse('{!! json_encode_safe($list) !!}')
     }
 </script>
-<script src="/js/admin/star.js?v"></script>
+<script src="/js/admin/star.js?v1"></script>
 @stop

@@ -3,7 +3,8 @@
     <link href="http://static.chuang.pro/public-default.min.css" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Ffont-awesome.css?" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
-    <link href="/css/user.edit.css" rel="stylesheet">
+    <link href="/css/user.edit.css?" rel="stylesheet">
+    <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
     <link href="/css/public.content.css?v1" rel="stylesheet">
 @stop
 @section('body')
@@ -79,13 +80,11 @@
                 <div class="image">
                     <div class="preview">
                         <div class="img-container" v-bind:class="image.progress.active ? 'loading' : ''">
-                            <img v-bind:src="!image.val ? 'http://dn-t2ipo.qbox.me/v3/public/img-click-upload-dark.png' : image.val">
+                            <img v-bind:src="!image.val ? 'http://dn-noman.qbox.me/default-upload-image.png' : image.val">
                             <span><p v-text="image.progress.percent"></p></span>
                             <input type="file" v-on:change="upload" accept="image/*" v-el:image>
+                            <a class="close" v-on:click="_del_image">×</a>
                         </div>
-                    </div>
-                    <div class="desc">
-                        <p>文章配图需上传大于500 x 200像素且宽高比为 5:2 的图片,最大尺寸2M.</p>
                     </div>
                 </div>
                 <div class="tag">
@@ -115,6 +114,7 @@
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.center.min.js"></script>
 <script src="http://static.chuang.pro/medium-plugin.min.js?"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
+<script src="/lib/cropper/cropper.min.js"></script>
 <script>var default_data = {list : JSON.parse('{!! $list !!}'),route : '{{isset($route)?$route:null}}'}</script>
-<script src="/js/user.edit.js?v6"></script>
+<script src="/js/user.edit.js?v7"></script>
 @stop

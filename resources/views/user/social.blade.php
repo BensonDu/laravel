@@ -1,5 +1,6 @@
 @extends('layout.user')
 @section('style')@parent  <link href="/css/user.profile.css" rel="stylesheet">
+    <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
 @stop
 @section('body')
 @parent
@@ -64,7 +65,8 @@
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script src="http://static.chuang.pro/imageuploader.min.js"></script>
+<script src="/lib/cropper/cropper.min.js"></script>
 <script>var default_data = JSON.parse('{!! $input !!}');</script>
 <script src="/js/user/base.js"></script>
-<script src="/js/user/social.js?v"></script>
+<script src="/js/user/social.js?v1"></script>
 @stop

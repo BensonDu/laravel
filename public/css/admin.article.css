@@ -759,7 +759,7 @@
 .pop-container .article .left .title,
 .pop-container .article .left .summary{
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 .pop-container .article .left .title .name,
 .pop-container .article .left .summary .name{
@@ -850,7 +850,7 @@
 .pop-container .article .left .image .preview .img{
     position: relative;
     height: 90px;
-    width: 135px;
+    width: 160px;
     border-radius: 3px;
     border: 1px dashed #eee;
     float: left;
@@ -914,18 +914,6 @@
 }
 .pop-container .article .left .image .preview .img .close:hover{
     color: #999;
-}
-.pop-container .article .left .image .preview .remark{
-    width: 100px;
-    height: 100%;
-    padding: 10px 0;
-    margin-right: 15px;
-    float: right;
-}
-.pop-container .article .left .image .preview .remark p{
-    text-align: justify;
-    font-size: 12px;
-    color: #ccc;
 }
 .pop-container .article .left .tag{
     width: 100%;
