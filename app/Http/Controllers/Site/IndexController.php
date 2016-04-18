@@ -108,11 +108,13 @@ class IndexController extends SiteController
         foreach($list as $k =>$v){
             $tags = [];
             $tag = tag($v->tags);
-            foreach($tag as $vv){
-                $tags[] = [
-                    'item'  => $vv,
-                    'color' => rand_color()
-                ];
+            if(!empty($tag)){
+                foreach($tag as $vv){
+                    $tags[] = [
+                        'item'  => $vv,
+                        'color' => rand_color()
+                    ];
+                }
             }
             $list[$k]->image    = crop_list($v->image);
             $list[$k]->avatar   = avatar($v->avatar);
