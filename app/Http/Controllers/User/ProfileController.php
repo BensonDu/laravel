@@ -44,7 +44,7 @@ class ProfileController extends UserController
 
         if(empty(trim($nickname)))return self::ApiOut(20001,'昵称为空');
 
-        if ( !preg_match('/[\x4E00-\x9FA5\w]{1,20}/',$nickname) ) return self::ApiOut(20001,'包含非法字符');
+        if ( !preg_match('/^[\x7f-\xffa-zA-Z0-9]+$/',$nickname) ) return self::ApiOut(20001,'昵称包含非法字符');
 
 
         if(UserModel::nickname_exist($_ENV['uid'],$nickname))return self::ApiOut(20001,'昵称已存在');

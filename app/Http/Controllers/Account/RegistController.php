@@ -24,8 +24,8 @@ class RegistController extends AccountController
         $password = $this->request->input('password');
         $redirect = $this->request->input('redirect');
 
-        if(empty(trim($username))){
-            return self::ApiOut(20001,'用户输入为空');
+        if(empty(trim($username)) || preg_match('/^\d+$/',$username) || !preg_match('/^[a-zA-Z0-9_]+$/',$username)){
+            return self::ApiOut(20001,'用户名格式错误');
         }
         if(AccountModel::is_exist($username)){
             return self::ApiOut(20001,'用户已存在');

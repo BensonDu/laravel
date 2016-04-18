@@ -81,7 +81,7 @@
             self.data.nickname.error = '包含非法字符';
             setTimeout(function(){self.data.nickname.error = false},2000);
             return false;
-        }if(self.data.nickname.val.length > 10){
+        }if(self.data.nickname.val.length > 20){
             self.data.nickname.error = '昵称过长';
             setTimeout(function(){self.data.nickname.error = false},2000);
             return false;

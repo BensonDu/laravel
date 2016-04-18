@@ -77,5 +77,5 @@
 <script src="/lib/cropper/cropper.min.js"></script>
 <script>var default_data = JSON.parse('{!! json_encode_safe($input) !!}');</script>
 <script src="/js/user/base.js"></script>
-<script src="/js/user/profile.js?v1"></script>
+<script src="/js/user/profile.js?v2"></script>
 @stop
