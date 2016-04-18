@@ -121,7 +121,7 @@ class SiteCacheModel extends CacheModel
     |--------------------------------------------------------------------------
     */
     public static function clear_article_cache($site_id,$article_id = null){
-        if(!is_null($article_id))CacheModel::del(self::aritcle_del($site_id,$article_id));
+        if(!empty($article_id))self::aritcle_del($site_id,$article_id);
         return  CacheModel::del(self::home_list_key($site_id));
     }
 }
