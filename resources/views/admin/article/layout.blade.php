@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.article.css?" rel="stylesheet">
+@section('style')@parent  <link href="/css/admin.article.css?v" rel="stylesheet">
     <link href="http://static.chuang.pro/public-medium-editor.min.css" rel="stylesheet">
     <link href="/lib/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
     <link href="http://static.chuang.pro/public-default.min.css"rel="stylesheet" >

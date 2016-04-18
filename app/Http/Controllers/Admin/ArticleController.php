@@ -245,7 +245,7 @@ class ArticleController extends AdminController
 
         if(isset($info->id)){
 
-            $info->tags = tag($info->tags);
+            $info->tags = tag(trim($info->tags));
 
             $ret = [
                 'title'     => $info->title,
