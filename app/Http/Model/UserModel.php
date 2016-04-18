@@ -17,9 +17,12 @@ class UserModel extends Model
     }
     public static function nickname_exist($uid,$nickname){
         $info = UserModel::where('nickname',$nickname)->where('deleted',0)->get();
-        if(count($info) ==1 && $info[0]->id == $uid) return false;
-        if(empty($info)) return false;
-        return true;
+
+        if(count($info) > 1)return true;
+        if(count($info) == 1){
+            return !($info[0]->id == $uid);
+        }
+        return false;
     }
     public static function save_profile($id, $avatar, $nickname, $slogan, $introduce)
     {
