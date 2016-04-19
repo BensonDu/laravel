@@ -86,7 +86,7 @@
             return self.error_show(username,'用户名不能为纯数字');
         }
         if(!/^[a-zA-Z0-9_]+$/.test(username.val)){
-            return self.error_show(username,'包含非法字符');
+            return self.error_show(username,'只能为英文、数字组合');
         }
         return request.post('/account/exist',function(ret){
             if(ret.hasOwnProperty('code') && ret.code=='0'){

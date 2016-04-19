@@ -12,6 +12,15 @@ class CaptchaModel{
     private static $session_key = 'captcha';
     /*
     |--------------------------------------------------------------------------
+    | 验证码 DEBUG 模式
+    |--------------------------------------------------------------------------
+    | 每个验证码都为 123456
+    | 且关闭短信发送
+    |
+    */
+    private static $debug = false;
+    /*
+    |--------------------------------------------------------------------------
     | 发送短信验证码 发送
     |--------------------------------------------------------------------------
     | 鉴权:存在 限制发送次数 发送间隔
@@ -106,7 +115,7 @@ class CaptchaModel{
     */
     private static function getRandomCaptcha()
     {
-        return rand(100000,999999);
+        return self::$debug ? '123456' : rand(100000,999999);
     }
     /*
     |--------------------------------------------------------------------------
@@ -115,6 +124,7 @@ class CaptchaModel{
     */
     private static function sendCaptcha($to,$value)
     {
+        if(self::$debug)return true;
         $sms = new \App\Libs\yuntongxun\sms();
         $ret = $sms->sendTemplateSMS($to,[ $value, 5 ]);
         return isset($ret->statusCode) && $ret->statusCode == '000000';
