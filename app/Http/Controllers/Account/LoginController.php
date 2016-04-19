@@ -32,8 +32,10 @@ class LoginController extends AccountController
     private function redirect(){
         $sid = session()->getId();
         $redirect = $this->request->input('redirect');
+        //无回调返回首页
+        if(empty($redirect))return redirect('/');
         //平台自跳转
-        if(get_domain($redirect == $_ENV['SITE_PLATFORM_BASE'])){
+        if(get_domain($redirect) == $_ENV['SITE_PLATFORM_BASE']){
             return redirect(urldecode($redirect));
         }
         //跳转子站
