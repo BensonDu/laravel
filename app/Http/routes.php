@@ -43,19 +43,6 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
     //标签
     Route::get('/tag/{tag}', 'Site\TagController@index');
     Route::get('/tag/{tag}/list', 'Site\TagController@tags');
-
-    //登录页面
-    Route::get('/account/login', function(){
-        return redirect($_ENV['platform']['home'].request()->server('REQUEST_URI'));
-    });
-    //注册页面
-    Route::get('/account/regist', function(){
-        return redirect($_ENV['platform']['home'].request()->server('REQUEST_URI'));
-    });
-    //找回密码页面
-    Route::get('/account/find', function(){
-        return redirect($_ENV['platform']['home'].request()->server('REQUEST_URI'));
-    });
     //注销
     Route::get('/account/logout', 'Account\AccountController@logout');
     //点赞收藏
@@ -66,7 +53,6 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
     Route::get('/feed', 'Feed\IndexController@index');
     Route::get('/feed/toutiao', 'Feed\ToutiaoController@index');
     Route::get('/feed/toutiao/{id}', 'Feed\ToutiaoController@detail');
-
     Route::get('/feed/xiaozhi', 'Feed\XiaozhiController@index');
     Route::get('/feed/xiaozhi/{id}', 'Feed\XiaozhiController@detail');
 

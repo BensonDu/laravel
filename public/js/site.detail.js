@@ -4,7 +4,7 @@
         id = location.pathname.match(/\d{3,10}/)[0],
         $like = $('#like'),
         $favorite = $('#favorite'),
-        login = '/account/login?redirect='+encodeURIComponent(location.href);
+        login = global.platform.home+'/account/login?redirect='+encodeURIComponent(location.href);
 
     this.like = function(){
         request.get('/social/like',function(ret){

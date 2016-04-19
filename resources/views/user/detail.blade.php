@@ -49,5 +49,5 @@
 </div>
 <!--新闻内容end-->
 @stop
-@section('script')@parent<script src="/js/user.detail.js"></script>
+@section('script')@parent<script src="/js/user.detail.js?"></script>
 @stop
