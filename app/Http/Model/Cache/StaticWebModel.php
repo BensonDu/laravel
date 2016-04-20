@@ -60,8 +60,12 @@ class StaticWebModel
     public static function clear($site_id,$article_id){
         $domains = self::get_site_domains($site_id);
         foreach ($domains as  $v){
-            Storage::disk('static-web')->delete($v."/feed/toutiao/".$article_id);
-            Storage::disk('static-web')->delete($v."/feed/xiaozhi/".$article_id);
+            if(Storage::disk('static-web')->exists($v."/feed/toutiao/".$article_id)){
+                Storage::disk('static-web')->delete($v."/feed/toutiao/".$article_id);
+            }
+            if(Storage::disk('static-web')->exists($v."/feed/xiaozhi/".$article_id)){
+                Storage::disk('static-web')->delete($v."/feed/xiaozhi/".$article_id);
+            }
         }
         return true;
     }
