@@ -17,7 +17,7 @@
     <meta name="format-detection" content="telephone=yes" />
     @section('style')<link rel="shortcut icon" href="http://dn-css7.qbox.me/tc.ico" type="image/ico" />
     <link href="/css/public.base.css?" rel="stylesheet">
-    <link href="/css/public.nav.left.css?v" rel="stylesheet">
+    <link href="/css/public.nav.left.css?v1" rel="stylesheet">
     @show
 </head>
 <body>
@@ -37,36 +37,36 @@
     <div class="menu-top"></div>
     <div class="menu entry top-entry">
         <div class="item-top"></div>
-        <a href="/">
+        <a href="/" title="首页">
             <i class="home"></i><span>站点首页</span>
         </a>
         <div class="item-top"></div>
-        <a href="{{$nav['edit']}}">
+        <a href="{{$nav['edit']}}" title="文章管理">
             <i class="article"></i><span>文章管理</span>
         </a>
         <div class="item-top"></div>
-        <a href="{{$nav['favorite']}}">
+        <a href="{{$nav['favorite']}}" title="我的收藏">
             <i class="folder"></i><span>我的收藏</span>
         </a>
         <div class="item-top"></div>
-        <a href="{{$nav['profile']}}">
+        <a href="{{$nav['profile']}}" title="个人设置">
             <i class="setting"></i><span>个人设置</span>
         </a>
         <div class="item-top"></div>
-        <a href="{{$nav['user']}}">
+        <a href="{{$nav['user']}}"  title="个人主页">
             <i class="people"></i><span>个人主页</span>
         </a>
     </div>
     <div class="bottom ">
         <div class="entry">
 @if(isset($_ENV['admin']['role']) && $_ENV['admin']['role'] > 0)
-            <a class="admin" href="/admin">
+            <a class="admin" href="/admin" title="站点管理">
                 <i class="web"></i><span>站点管理</span>
             </a>
 @endif
 @if(!empty($_ENV['uid']))
-            <a class="logout" href="/account/logout">
-                <i class="exit"></i><span>退出</span>
+            <a class="logout" href="/account/logout" title="退出登录">
+                <i class="exit"></i><span>退出登录</span>
             </a>
 @endif
         </div>
