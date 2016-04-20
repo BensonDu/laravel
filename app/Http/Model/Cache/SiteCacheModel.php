@@ -9,7 +9,7 @@
 namespace App\Http\Model\Cache;
 
 
-class SiteCacheModel extends CacheModel
+class SiteCacheModel extends RedisModel
 {
     /*
     |--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ class SiteCacheModel extends CacheModel
     |--------------------------------------------------------------------------
     */
     public static function article_exists($site_id,$id){
-        return CacheModel::exists(self::key($site_id,$id));
+        return self::exists(self::key($site_id,$id));
     }
     /*
     |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ class SiteCacheModel extends CacheModel
     |--------------------------------------------------------------------------
     */
     public static function aritcle_get($site_id,$id){
-        return CacheModel::get(self::key($site_id,$id));
+        return self::get(self::key($site_id,$id));
     }
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ class SiteCacheModel extends CacheModel
     |--------------------------------------------------------------------------
     */
     public static function aritcle_set($site_id,$id,$data){
-        return CacheModel::set(self::key($site_id,$id),$data,600);
+        return self::set(self::key($site_id,$id),$data,600);
     }
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ class SiteCacheModel extends CacheModel
     |--------------------------------------------------------------------------
     */
     public static function aritcle_del($site_id,$id){
-        return CacheModel::del(self::key($site_id,$id));
+        return self::del(self::key($site_id,$id));
     }
     /*
     |--------------------------------------------------------------------------
@@ -57,7 +57,7 @@ class SiteCacheModel extends CacheModel
     |--------------------------------------------------------------------------
     */
     public static function hot_get($site_id){
-        return CacheModel::get(self::hot_key($site_id));
+        return self::get(self::hot_key($site_id));
     }
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ class SiteCacheModel extends CacheModel
     |--------------------------------------------------------------------------
     */
     public static function hot_set($site_id,$data){
-        return CacheModel::set(self::hot_key($site_id),$data,300);
+        return self::set(self::hot_key($site_id),$data,300);
     }
     /*
     |--------------------------------------------------------------------------
@@ -81,7 +81,7 @@ class SiteCacheModel extends CacheModel
     |--------------------------------------------------------------------------
     */
     public static function home_list_exists($site_id,$skip,$take,$category){
-        return CacheModel::hexists(self::home_list_key($site_id),self::home_list_field($skip,$take,$category));
+        return self::hexists(self::home_list_key($site_id),self::home_list_field($skip,$take,$category));
     }
     /*
     |--------------------------------------------------------------------------
@@ -89,7 +89,7 @@ class SiteCacheModel extends CacheModel
     |--------------------------------------------------------------------------
     */
     public static function home_list_get($site_id,$skip,$take,$category){
-        return CacheModel::hget(self::home_list_key($site_id),self::home_list_field($skip,$take,$category));
+        return self::hget(self::home_list_key($site_id),self::home_list_field($skip,$take,$category));
     }
     /*
     |--------------------------------------------------------------------------
@@ -97,7 +97,7 @@ class SiteCacheModel extends CacheModel
     |--------------------------------------------------------------------------
     */
     public static function home_list_set($site_id,$skip,$take,$category,$data){
-        return CacheModel::hset(self::home_list_key($site_id),self::home_list_field($skip,$take,$category),$data,600);
+        return self::hset(self::home_list_key($site_id),self::home_list_field($skip,$take,$category),$data,600);
     }
     /*
     |--------------------------------------------------------------------------
@@ -117,11 +117,10 @@ class SiteCacheModel extends CacheModel
     }
     /*
     |--------------------------------------------------------------------------
-    | 文章缓存刷新
+    | 获取首页文章列表 缓存清除
     |--------------------------------------------------------------------------
     */
-    public static function clear_article_cache($site_id,$article_id = null){
-        if(!empty($article_id))self::aritcle_del($site_id,$article_id);
-        return  CacheModel::del(self::home_list_key($site_id));
+    public static function home_list_clear($site_id){
+        return self::del(self::home_list_key($site_id));
     }
 }

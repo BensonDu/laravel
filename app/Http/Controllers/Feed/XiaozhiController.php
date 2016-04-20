@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Feed;
 
 use App\Http\Model\ArticleSiteModel;
+use App\Http\Model\Cache\StaticWebModel;
 use \App\Libs\rss;
+use Illuminate\Support\Facades\View;
 
 /**
  * Created by PhpStorm.
@@ -52,8 +54,13 @@ class XiaozhiController extends FeedController
         $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
 
         if(empty($data['article'])) abort(404);
+        $view = View::make('feed.xiaozhi', $data);
+        $ret = $view->render();
 
-        return view('/feed.xiaozhi',$data);
+        StaticWebModel::create_xiaozhi($_ENV['site_id'],$id,$ret);
+
+        return $ret;
+
     }
 
 }

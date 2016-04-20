@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Feed;
 
 use App\Http\Model\ArticleSiteModel;
+use App\Http\Model\Cache\StaticWebModel;
 use \App\Libs\rss;
-use Illuminate\Support\Facades\Storage;
 use PRedis;
 use Illuminate\Support\Facades\View;
 
@@ -50,21 +50,6 @@ class ToutiaoController extends FeedController
         }
         return self::rss_out(htmlspecialchars_decode(utf8_safe($feed)));
     }
-    public function detail_($id){
-        if(empty($id))abort(404);
-        $key = 'laravel:view:feed:toutiao:'.$id;
-        if(PRedis::exists($key)){
-            $ret = PRedis::get($key);
-        }
-        else{
-            $data['site'] = $this->info;
-            $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
-            $view = View::make('feed.toutiao', $data);
-            $ret = $view->render();
-            PRedis::setex($key,600,$ret);
-        }
-        return $ret;
-    }
     public function detail($id){
         if(empty($id)) abort(404);
 
@@ -75,8 +60,8 @@ class ToutiaoController extends FeedController
 
         $view = View::make('feed.toutiao', $data);
         $ret = $view->render();
-        Storage::disk('toutiao')->put($id, $ret);
 
+        StaticWebModel::create_toutiao($_ENV['site_id'],$id,$ret);
 
         return $ret;
     }

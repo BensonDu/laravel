@@ -48,9 +48,9 @@ return [
             'root'   => storage_path('app'),
         ],
 
-        'toutiao' => [
+        'static-web' => [
             'driver' => 'local',
-            'root'   => public_path() . '/feed/toutiao',
+            'root'   => public_path() . '/static-web',
         ],
 
         'ftp' => [
