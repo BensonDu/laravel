@@ -811,7 +811,7 @@
     border-radius: 50%;
     background: #fff;
     cursor: pointer;
-    z-index: 4;
+    z-index: 1;
 }
 .pop-container .special .left .image .preview .img .close:hover{
     color: #999;
@@ -826,6 +826,7 @@
     border-top: 1px solid #eee;
     float: left;
     text-align: center;
+    z-index: 1;
 }
 .pop-container .special .confirm div{
     display: inline-block;

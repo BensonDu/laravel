@@ -9,19 +9,15 @@
 namespace App\Http\Controllers\Qiniu;
 
 use App\Http\Controllers\Controller;
-use Qiniu\Auth;
+use App\Http\Model\QiniuModel;
 
 
 class UploadController extends Controller{
 
-    private $auth;
 
-    public function __construct(){
-        $this->auth = new Auth(config('qiniu.accesskey'), config('qiniu.secretkey'));
-    }
     public function token(){
         return [
-            'token' => $this->auth->uploadToken('noman')
+            'token' => QiniuModel::get_upload_token()
         ];
     }
 

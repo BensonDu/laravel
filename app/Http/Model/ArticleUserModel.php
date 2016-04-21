@@ -174,7 +174,7 @@ class ArticleUserModel extends Model
         $article->user_id       = $user_id;
         $article->title         = $info['title'];
         $article->summary       = $info['summary'];
-        $article->content       = $info['content'];
+        $article->content       = ArticleBaseModel::filter_base64_image($info['content']);
         $article->image         = $info['image'];
         $article->tags          = tag($info['tags']);
         $article->post_status   = isset($info['post_status']) ? $info['post_status'] : 1;
@@ -204,7 +204,7 @@ class ArticleUserModel extends Model
 
         $article->title         = $info['title'];
         $article->summary       = $info['summary'];
-        $article->content       = $info['content'];
+        $article->content       = ArticleBaseModel::filter_base64_image($info['content']);
         $article->image         = $info['image'];
         $article->tags          = tag($info['tags']);
         if(isset($info['post_status'])){
@@ -236,7 +236,7 @@ class ArticleUserModel extends Model
             $article_site->author_id        = $article_user->user_id;
             $article_site->title            = $article_user->title;
             $article_site->summary          = $article_user->summary;
-            $article_site->content          = $article_user->content;
+            $article_site->content          = ArticleBaseModel::filter_base64_image($article_user->content);
             $article_site->image            = $article_user->image;
             $article_site->tags             = $article_user->tags;
             $article_site->post_status      = 0;

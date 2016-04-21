@@ -588,7 +588,7 @@
     border-radius: 50%;
     background: #fff;
     cursor: pointer;
-    z-index: 4;
+    z-index: 1;
 }
 .content .summary-container .modules .image .preview .img-container .close:hover{
     color: #999;

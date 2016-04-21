@@ -478,7 +478,7 @@
     border-radius: 50%;
     background: #fff;
     cursor: pointer;
-    z-index: 4;
+    z-index: 1;
 }
 .pop-container .common .content .left .image .preview .img .close:hover{
     color: #999;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Model\Admin;
 
+use App\Http\Model\ArticleBaseModel;
 use App\Http\Model\Cache\CacheModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -203,7 +204,7 @@ class ArticleModel extends Model
         $info = [
             'title'     => $data['title'],
             'summary'   => $data['summary'],
-            'content'   => $data['content'],
+            'content'   => ArticleBaseModel::filter_base64_image($data['content']),
             'tags'      => $data['tags'],
             'image'     => $data['image'],
             'contribute_status' => 1,
