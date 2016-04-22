@@ -29,6 +29,24 @@ class PlatformCacheModel extends RedisModel
     }
     /*
     |--------------------------------------------------------------------------
+    | 清除文章定时发布
+    |--------------------------------------------------------------------------
+    | 文章ID  string     $id
+    | 发布时间 timestamp $time
+    */
+    public static function timing_clear($id){
+        $list =  self::get(self::timing_article_key());
+        if(is_array($list) && isset($list[$id])){
+            $new = [];
+            foreach ($list as $k => $v){
+                if( $k != $id )$new[$k] = $v;
+            }
+            self::set(self::timing_article_key(),$new,null);
+        }
+        return true;
+    }
+    /*
+    |--------------------------------------------------------------------------
     | 获得到期 待发布 文章列表
     |--------------------------------------------------------------------------
     */

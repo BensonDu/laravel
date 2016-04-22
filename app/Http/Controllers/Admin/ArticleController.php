@@ -277,8 +277,16 @@ class ArticleController extends AdminController
             return $this->ApiOut(40003,'权限不足');
         }
         $post_status = $type == 'cancel' ? 0 : (time() > strtotime($time) ? 1 : 2);
+        
         //如果定时发布 推到 任务
-        if($post_status == 2)PlatformCacheModel::timing_article($site_id,$article_id,$time);
+        if($post_status == 2){
+            PlatformCacheModel::timing_article($site_id,$article_id,$time);
+        }
+        //如果非定时发布 清除定时发布
+        else{
+            PlatformCacheModel::timing_clear($article_id);
+        }
+            
         ArticleModel::save_article_post($site_id,$article_id,$category,$post_status,$time);
         return $this->ApiOut(0,'Save Sussess');
     }
