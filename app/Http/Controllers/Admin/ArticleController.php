@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Model\Admin\ArticleModel;
 use App\Http\Model\ArticleSiteModel;
+use App\Http\Model\Cache\PlatformCacheModel;
 
 class ArticleController extends AdminController
 {
@@ -275,13 +276,10 @@ class ArticleController extends AdminController
         if(empty($article_id) || ($type !='cancel' && empty($category)) || empty($type) || empty($info)){
             return $this->ApiOut(40003,'权限不足');
         }
-        //TODO 处理通知
-        if($info->contribute_status == 0){
-
-        }
-        $post_status = $type == 'cancel' ? 0 : 1;
-        $post_time = date('Y-m-d H:i:s', strtotime($time));
-        ArticleModel::save_article_post($site_id,$article_id,$category,$post_status,$post_time);
+        $post_status = $type == 'cancel' ? 0 : (time() > strtotime($time) ? 1 : 2);
+        //如果定时发布 推到 任务
+        if($post_status == 2)PlatformCacheModel::timing_article($site_id,$article_id,$time);
+        ArticleModel::save_article_post($site_id,$article_id,$category,$post_status,$time);
         return $this->ApiOut(0,'Save Sussess');
     }
     /*
@@ -294,9 +292,8 @@ class ArticleController extends AdminController
         $info = $this->check_article_auth($article_id,null,'array');
         if(empty($info))return $this->ApiOut(40003,'No permission');
         $ret['category'] = $info->category;
-        $ret['type'] = $info->post_status == 1 ? (time()>strtotime($info->post_time) ? 'now' : 'time') : 'cancel';
+        $ret['type'] = $info->post_status == 1 ? 'now' : ($info->post_status == 2 ? 'time' : 'cancel');
         $ret['time'] = ($ret['type'] == 'time' || $ret['type'] == 'now')  ? date('Y-m-d H:i',strtotime($info->post_time)) : null;
-        //$ret['min'] = time()-strtotime($info->post_time);
         return $this->ApiOut(0,$ret);
     }
     /*
@@ -388,23 +385,12 @@ class ArticleController extends AdminController
                 $ret[$k]['article_id']  = $this->check_article_auth($v->article_id,$v->user_id) ? $v->article_id : null;
                 $ret[$k]['title']       = $v->title;
                 $ret[$k]['nickname']    = $v->nickname;
-                $ret[$k]['post_status'] = $this->post_status_format($v->post_status,$v->post_time);
+                $ret[$k]['post_status'] = ($v->post_status == 1) ? 'now' : ($v->post_status == 2 ? 'time' : 'cancel');
                 $ret[$k]['role']        = admin_role_map($v->role);
                 $ret[$k]['new']         = $v->contribute_status < 1;
             }
         }
         return $ret;
-    }
-    /*
-     |--------------------------------------------------------------------------
-     | 获得文章发布状态
-     |--------------------------------------------------------------------------
-     */
-    private function post_status_format($status, $time){
-        return $status == 1 ? (time()>strtotime($time) ? 'now' : 'time') : 'cancel';
-    }
-    public function test(){
-        return $this->get_list(0,10,'asc');
     }
 
 }

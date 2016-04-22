@@ -29,7 +29,7 @@ class RedisModel
     |--------------------------------------------------------------------------
     */
     public static function set($key,$data = [],$ttl = 300){
-        return PRedis::setex($key,$ttl,serialize($data));
+        return !empty($ttl) ? PRedis::setex($key,$ttl,serialize($data)) : PRedis::set($key,serialize($data));
     }
     /*
     |--------------------------------------------------------------------------

@@ -58,7 +58,12 @@ class ArticleModel extends Model
            $query->where('articles_site.site_id' ,$site_id)
                ->where('articles_site.deleted',$deleted);
            if(!is_null($post_status)){
-               $query->where('articles_site.post_status' ,$post_status);
+               if($post_status != 0){
+                   $query->where('articles_site.post_status' ,'>',0);
+               }
+               else{
+                   $query->where('articles_site.post_status' ,0);
+               }
            }
        }
        else{
@@ -71,7 +76,12 @@ class ArticleModel extends Model
                    ->where('articles_site.deleted',$deleted)
                    ->where('articles_site.title', 'LIKE', '%'.$keyword.'%');
                if(!is_null($post_status)){
-                   $query->where('articles_site.post_status' ,$post_status);
+                   if($post_status != 0){
+                       $query->where('articles_site.post_status' ,'>',0);
+                   }
+                   else{
+                       $query->where('articles_site.post_status' ,0);
+                   }
                }
            })
            ->orWhere(function($query) use($site_id,$keyword,$post_status,$uid,$deleted){
@@ -83,7 +93,13 @@ class ArticleModel extends Model
                    ->where('articles_site.deleted',$deleted)
                    ->where('users.nickname', 'LIKE', '%'.$keyword.'%');
                if(!is_null($post_status)){
-                   $query->where('articles_site.post_status' ,$post_status);
+                   if($post_status != 0){
+                       $query->where('articles_site.post_status' ,'>',0);
+                   }
+                   else{
+                       $query->where('articles_site.post_status' ,0);
+                   }
+
                }
            });
        }
@@ -116,7 +132,12 @@ class ArticleModel extends Model
             $query->where('articles_site.site_id' ,$site_id)
                 ->where('articles_site.deleted',$deleted);
             if(!is_null($post_status)){
-                $query->where('articles_site.post_status' ,$post_status);
+                if($post_status != 0){
+                    $query->where('articles_site.post_status' ,'>',0);
+                }
+                else{
+                    $query->where('articles_site.post_status' ,0);
+                }
             }
         }
         else{
@@ -130,7 +151,12 @@ class ArticleModel extends Model
                     ->where('articles_site.title', 'LIKE', '%'.$keyword.'%');
 
                 if(!is_null($post_status)){
-                    $query->where('articles_site.post_status' ,$post_status);
+                    if($post_status != 0){
+                        $query->where('articles_site.post_status' ,'>',0);
+                    }
+                    else{
+                        $query->where('articles_site.post_status' ,0);
+                    }
                 }
 
             })
@@ -143,7 +169,12 @@ class ArticleModel extends Model
                         ->where('articles_site.deleted',$deleted)
                         ->where('users.nickname', 'LIKE', '%'.$keyword.'%');
                     if(!is_null($post_status)){
-                        $query->where('articles_site.post_status' ,$post_status);
+                        if($post_status != 0){
+                            $query->where('articles_site.post_status' ,'>',0);
+                        }
+                        else{
+                            $query->where('articles_site.post_status' ,0);
+                        }
                     }
                 });
         }
@@ -187,6 +218,16 @@ class ArticleModel extends Model
             'contribute_status' => 1
         ];
         return  DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->update($update);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 批量发布文章
+    |--------------------------------------------------------------------------
+    | @param array $article_ids;
+    |
+    */
+    public static function batch_article_post($ids){
+        return (!empty($ids) && is_array($ids)) ? DB::table('articles_site')->whereIn('id',$ids)->where('deleted',0)->update(['post_status' => 1,'post_time'=>now()]) : null;
     }
     /*
     |--------------------------------------------------------------------------
