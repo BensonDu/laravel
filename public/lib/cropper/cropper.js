@@ -3683,9 +3683,12 @@
       });
     };
     this.finish = function (url) {
-      self.cancel();
-      option.finish(url);
-      container.removeClass('active');
+      self.imageLoad(url,function () {
+        self.cancel();
+        option.finish(url);
+        container.removeClass('active');
+      });
+
     }
   })();
 
