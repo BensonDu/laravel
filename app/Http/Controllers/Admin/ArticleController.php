@@ -305,6 +305,29 @@ class ArticleController extends AdminController
         return $this->ApiOut(0,$ret);
     }
     /*
+    |--------------------------------------------------------------------------
+    | 过滤文章中Base64图片
+    |--------------------------------------------------------------------------
+    */
+    public function filter($id){
+        if(empty($id))return self::ApiOut(40001,'Bad Request');
+        $info = ArticleModel::get_artcile_brief_info($_ENV['site_id'],$id);
+        if(!isset($info->id))return self::ApiOut(40001,'Bad Request');
+        $article_id = $info->id;
+        $title      = $info->title;
+        $summary    = $info->summary;
+        $content    = $info->content;
+        $image      = $info->image;
+        $tags       = $info->tags;
+        $ret = ArticleModel::update_article($_ENV['site_id'],$article_id,compact('title', 'summary', 'content', 'image', 'tags'));
+        if($ret){
+            return self::ApiOut(0,'保存成功');
+        }
+        else{
+            return self::ApiOut(10001,'保存失败');
+        }
+    }
+    /*
      |--------------------------------------------------------------------------
      | 检查是否有权限处理该文章
      |--------------------------------------------------------------------------
