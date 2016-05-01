@@ -45,7 +45,7 @@ class IndexController extends FeedController
                 ->pubDate(strtotime($v->post_time))
                 ->appendTo($channel);
         }
-        return self::rss_out(htmlspecialchars_decode(utf8_safe($feed)));
+        return self::rss_out($feed);
     }
 
 }

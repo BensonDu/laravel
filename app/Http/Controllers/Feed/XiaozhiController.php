@@ -46,7 +46,7 @@ class XiaozhiController extends FeedController
                 ->tags(str_replace(" ",",",$v->tags))
                 ->appendTo($channel);
         }
-        return self::rss_out(htmlspecialchars_decode(utf8_safe($feed)));
+        return self::rss_out($feed);
     }
     public function detail($id){
         if(empty($id))abort(404);

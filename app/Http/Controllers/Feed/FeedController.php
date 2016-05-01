@@ -44,7 +44,7 @@ class FeedController extends Controller
     |--------------------------------------------------------------------------
     */
     protected static function rss_out($feed){
-        return response($feed)->header('Content-Type',"text/xml");
+        return response( iconv("UTF-8","UTF-8//IGNORE",$feed))->header('Content-Type',"text/xml");
     }
 
 }
