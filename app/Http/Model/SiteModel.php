@@ -53,5 +53,48 @@ class SiteModel extends Model
         }
         return $info;
     }
+    /*
+     |--------------------------------------------------------------------------
+     | 获取站点信息
+     |--------------------------------------------------------------------------
+     |
+     | @param  array $site_ids
+     | @return array
+     |
+     */
+    public static function get_site_info_list($ids,$select = ['*']){
+        return (is_array($ids) && !empty($ids)) ? SiteModel::whereIn('id',$ids)->get($select) : [];
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 用户是否有站点权限
+     |--------------------------------------------------------------------------
+     |
+     | @param  array $user_id
+     | @param  array $site_id
+     | @return bool
+     |
+     */
+    public static function check_user_site_auth($site_id, $user_id){
+        $auth = DB::table('site_auth_map')->where('user_id',$user_id)->where('site_id',$site_id)->where('deleted',0)->first(['role']);
+        return (isset($auth->role) && $auth->role > 0);
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 获取站点列表
+     |--------------------------------------------------------------------------
+     |
+     | @param  array $keyword
+     | @return array
+     |
+     */
+    public static function get_site_list($skip = 0, $take = 10,$keyword = null,$except = [],$select = ['*']){
+        $query =  DB::table('site_info')->whereNotIn('id',$except);
+        if(!is_null($keyword)){
+            $query->where('name', 'LIKE', '%'.$keyword.'%');
+        }
+        return $query->take($take)->skip($skip)->get($select);
+    }
+
 
 }

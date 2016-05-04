@@ -161,33 +161,31 @@
     };
     //绑定Vue content model;
     this.vue = new Vue(self.model);
-}).call(define('controller_vue'));
-
+}).call(define('controller_info'));
+//文章顶部操作
 (function(){
     var self = this;
-
     //当前文章ID;
     this.article_id = 0;
     //获取当前文章信息
     this.get_editing_article = function(){
         return {
             id : self.article_id,
-            title : controller_vue.model.data.title,
-            summary : controller_vue.model.data.summary,
-            image : controller_vue.model.data.image.val,
-            tags : JSON.stringify(controller_vue.model.data.tag.items),
+            title : controller_info.model.data.title,
+            summary : controller_info.model.data.summary,
+            image : controller_info.model.data.image.val,
+            tags : JSON.stringify(controller_info.model.data.tag.items),
             content : plugin_editor.content.serialize()['content-editor'].value
         }
     };
     //设置文章信息
     this.set_article = function(info){
-        if(info.hasOwnProperty("title"))controller_vue.model.data.title = info.title;
-        if(info.hasOwnProperty("summary"))controller_vue.model.data.summary = info.summary;
-        if(info.hasOwnProperty("image"))controller_vue.model.data.image.val = info.image;
-        if(info.hasOwnProperty("tags"))controller_vue.model.data.tag.items = info.tags;
+        if(info.hasOwnProperty("title"))controller_info.model.data.title = info.title;
+        if(info.hasOwnProperty("summary"))controller_info.model.data.summary = info.summary;
+        if(info.hasOwnProperty("image"))controller_info.model.data.image.val = info.image;
+        if(info.hasOwnProperty("tags"))controller_info.model.data.tag.items = info.tags;
         if(info.hasOwnProperty("content"))plugin_editor.content.setContent(info.content);
         if(info.hasOwnProperty("lastmodify"))self.vue.lastmodify = info.lastmodify;
-        if(info.hasOwnProperty("ispost"))self.vue.ispost = info.ispost;
         if(info.hasOwnProperty("id"))self.article_id = info.id;
     };
     //新建文章 产生垃圾数据
@@ -201,11 +199,10 @@
                 tags : [],
                 content : '',
                 lastmodify : helper.now(),
-                ispost : 0,
                 id : 0
             });
             controller_save.start();
-            request.post('/user/save',function(ret){
+            request.post('/user/article/save',function(ret){
                 if(ret.hasOwnProperty('code') && ret.code == 0){
                     self.vue.lastmodify = ret.data.time;
                     self.article_id = ret.data.id;
@@ -222,17 +219,39 @@
             pop.error('请填写标题','确认').one();
             return false;
         }
+        return true;
+    };
+    //发布检查文章
+    this.post_check = function () {
+        var info = self.get_editing_article();
+        if(!info.title || info.title == ''){
+            pop.error('请填写标题','确认').one();
+            return false;
+        }
         if(!info.summary || info.summary == ''){
             pop.error('请填写摘要','确认').one();
             return false;
         }
+        if(!info.content || info.content == ''){
+            pop.error('请输入正文','确认').one();
+            return false;
+        }
+        if(!info.tags || info.tags == '[]'){
+            pop.error('请设置标签','确认').one();
+            return false;
+        }
+        if(!controller_save.check()){
+            pop.error('当前文章未保存','确定').one();
+            return false;
+        }
+
         return true;
     };
     //保存当前文章
     this.save_article = function(){
         if(self.check_article()){
             self.vue.handle_sta.save = 'loading';
-            request.post('/user/save',function(ret){
+            request.post('/user/article/save',function(ret){
 
                 if(ret.hasOwnProperty('code') && ret.code == 0){
                     controller_save.end();
@@ -256,7 +275,7 @@
     //保存文章 公共方法
     this.update_article_common = function(call){
         if(self.check_article()){
-            request.post('/user/save',function(ret){
+            request.post('/user/article/save',function(ret){
 
                 if(ret.hasOwnProperty('code') && ret.code == 0 && ret.data.id){
                     self.vue.lastmodify = ret.data.time;
@@ -270,145 +289,290 @@
             },self.get_editing_article());
         }
     };
-    //发布到个人主页
-    this.post_article = function(){
-        if(self.check_article()){
-            self.vue.handle_sta.post = 'loading';
-            request.post('/user/post',function(ret){
-
-                if(ret.hasOwnProperty('code') && ret.code == 0){
-                    controller_save.end();
-                    self.vue.lastmodify = ret.data.time;
-                    self.article_id = ret.data.id;
-                    self.vue.ispost = true;
-                    setTimeout(function(){
-                        self.vue.handle_sta.post = 'success';
-                    },600);
-                    controller_list.update_list(self.article_id);
-                }
-                else{
-                    pop.error('发布失败','确定').one();
-                }
-                setTimeout(function(){
-                    self.vue.handle_sta.post = '';
-                },1500);
-
-            },self.get_editing_article());
-        }
-    };
-    //取消发布
-    this.cancel_post_article = function(){
-        if(self.article_id != 0){
-            request.post('/user/post/cancel',function(ret){
-
-                if(ret.hasOwnProperty('code') && ret.code == 0){
-                    controller_save.end();
-                    self.vue.lastmodify = ret.data.time;
-                    self.vue.ispost = false;
-                    controller_list.update_list(self.article_id);
-                }
-                else{
-                    pop.error('操作失败','确定').one();
-                }
-
-            },self.get_editing_article());
-        }
-    };
-    //投稿到站点
-    this.contribute_article = function(){
-        if(!self.article_id){
-            pop.error('网络错误','确定').one();
-        }
-        else{
-            self.update_article_common(function(){
-                self.contribute();
-            });
-        }
-    };
-    //投稿
-    this.contribute = function(){
-        var site_list = [];
-
-        for(var i in self.vue.site_list.items){
-            if(self.vue.site_list.items[i].active){
-                site_list.push(self.vue.site_list.items[i].id);
-            }
-        }
-        if(site_list.length>0){
-            request.get('/user/contribute',function(ret){
-                if(ret.hasOwnProperty('code') && ret.code == 0){
-                    controller_save.end();
-                    self.vue.lastmodify = ret.data.time;
-                    pop.success('投稿成功','确定').one();
-                    self.vue.site_list.display = false;
-                    self.vue.ispost = true;
-                    controller_list.update_list(self.article_id);
-                }
-                else{
-                    pop.error(ret.msg || '投稿失败','确定').one();
-                }
-
-            }, {sites:JSON.stringify(site_list),id:self.article_id});
-        }
-    };
     //VUE Model
     this.model = {
         el : '#article-handle',
         data : {
             lastmodify : '',
-            ispost : false,
             handle_sta : {
                 save : '',
-                post : '',
                 contribute : ''
-            },
-            site_list : {
-                display : false,
-                items : [
-                    {
-                        id : 1,
-                        name : 'TECH2IPO',
-                        active : true
-                    }
-                ],
-                confirm : true
             }
         },
         methods : {
             save : function(){
                 self.save_article();
             },
-            post : function(){
-                this.ispost ? self.cancel_post_article() : self.post_article();
-            },
             contribute : function(){
-                this.site_list.display = true;
-            },
-            select : function(index){
-                var confirm = false;
-                this.site_list.items[index].active = !this.site_list.items[index].active;
-                for(var i in this.site_list.items){
-                    if(this.site_list.items[i].active){
-                        confirm = true;
-                        break;
-                    }
+                if(self.post_check()){
+                    controller_pop.show(self.article_id);
                 }
-                this.site_list.confirm = confirm;
-            },
-            select_cancle : function(){
-                this.site_list.display = false;
-            },
-            confirm_contribute : function(){
-                self.contribute_article();
             }
         }
     };
     //绑定Vue content model;
     this.vue = new Vue(self.model);
 }).call(define('controller_handle'));
+//弹窗部分
+(function () {
+    var self = this,
+        $bk  = $('#pop-background'),
+        $pop = $('#pop-container');
 
+    this.article_id = '';
+    this.show = function (id) {
+        //投稿管理按钮 Loading 状态
+        controller_handle.model.data.handle_sta.contribute = 'loading';
+        self.get_article_post(id,function () {
+            $pop.addClass('post');
+            $bk.addClass('show');
+        });
+    };
+    this.hide = function () {
+        $pop.removeClass('post');
+        $bk.removeClass('show');
+        self.article_id = '';
+        self.vue.slider = '';
+    };
+    //获取站点
+    this.get_article_post = function (id,call) {
+        self.article_id = id;
+        request.get('/user/post/list',function (ret) {
+            if(ret.hasOwnProperty('code') && ret.code == 0){
+                typeof call == 'function' && call();
+                if(!!ret.data.auth){
+                    self.vue.auth = ret.data.auth
+                }
+                else{
+                    self.vue.auth = [];
+                }
+                if(!!ret.data.contribute){
+                    self.vue.contribute = ret.data.contribute;
+                }
+                else{
+                    self.vue.contribute = [];
+                }
+            }
+            else{
+                pop.error('获取发布信息失败','确定').one();
+            }
+            //投稿管理按钮 Loading 结束
+            controller_handle.model.data.handle_sta.contribute = '';
+        },{id:id});
+    };
+    //获得站点分类列表
+    this.get_site_category = function (id) {
+        request.get('/site/category',function (ret) {
+            if(ret.hasOwnProperty('code') && ret.code == 0){
+                self.vue.post.category.list = ret.data;
+                self.vue.post.category.text = self.get_category_name(self.vue.post.category.val);
+            }
+            else{
+                pop.error('获得分类列表失败','确定').one();
+            }
+        },{
+            site_id : id
+        });
+    };
+    //获得分类名称
+    this.get_category_name = function(id){
+        var r = '',l = self.vue.post.category.list;
+        for(var i in l){
+            if(l[i].id == id){
+                r = l[i].name;
+            }
+        }
+        return r;
+    };
+    //投稿
+    this.contribute = function (id) {
+        if(self.lock) return false;
+        self.lock = true;
+      request.get('/user/post/contribute',function (ret) {
+          if(ret.hasOwnProperty('code') && ret.code == 0){
+              self.get_article_post(self.article_id);
+          }
+          else{
+              pop.error('更新发布信息失败','确定').one();
+          }
+          self.lock = false
+      },{
+          id:self.article_id,
+          site_id : id
+      });
+    };
+    //搜索站点
+    this.search = function (keyword) {
+        var k = keyword || '';
+        request.get('/user/site/search',function (ret) {
+            if(ret.hasOwnProperty('code') && ret.code == 0){
+                self.vue.search.list = ret.data;
+            }
+        },{
+            keyword : k
+        })
+    };
+    //添加站点
+    this.add_site = function (id) {
+        var l, n = [];
+        request.get('/user/site/add',function (ret) {
+            if(ret.hasOwnProperty('code') && ret.code == 0){
+                self.get_article_post(self.article_id);
+                for(var i = 0; i < self.vue.search.list;i++){
+                    if(self.vue.search.list[i].id != id)n.push(self.vue.search.list[i]) ;
+                }
+                self.vue.search.list = n;
+            }
+        },{
+            site_id : id
+        })
+    };
+    //移除站点
+    this.remove_site = function (id,name) {
+        request.get('/user/site/remove',function (ret) {
+            if(ret.hasOwnProperty('code') && ret.code == 0){
+                self.get_article_post(self.article_id,function () {
+                    self.vue.search.list.push({
+                        id:id,
+                        name:name
+                    });
+                });
+            }
+        },{
+            site_id : id
+        })  
+    };
+    //操作互斥锁
+    this.lock = false;
+    this.vue = new Vue({
+        el : '#pop-container',
+        data : {
+            slider : '',
+            auth:[],
+            contribute : [],
+            //分类
+            post : {
+                site_id : '',
+                category: {
+                    val : '',
+                    active :false,
+                    text : '',
+                    list : []
+                },
+                type : {
+                    val : '',
+                    time : ''
+                }
+            },
+            search : {
+                keyword:'',
+                list : []
+            }
+
+        },
+        methods : {
+            _close : function () {
+                self.hide();
+            },
+            _fold : function () {
+                this.slider = '';
+            },
+            _add : function () {
+                this.slider = this.slider == 'add-site' ? '' : 'add-site';
+                this._search();
+            },
+            _post_admin:function (site_id,category,post_status,post_time) {
+                this.slider = 'post-admin';
+                this.post.site_id = site_id;
+                this.post.type.val  = post_status == 'start' ? 'cancel' : post_status;
+                this.post.type.time = post_time;
+                this.post.category.val = category;
+                self.get_site_category(site_id);
+            },
+            _push_admin : function (id,enable) {
+                if(enable != 'enable')return false;
+                request.get('/user/push/site',function(ret){
+                        if(ret.hasOwnProperty('code') && ret.code ==0){
+                            self.get_article_post(self.article_id);
+                        }
+                        else{
+                            pop.error(ret.msg || '推送更新失败','确定').one();
+                        }
+                    },
+                    {
+                        id:self.article_id,
+                        site_id:id
+                    }
+                );
+            },
+            _confirm_post_admin : function () {
+                var d = self.vue.post,
+                    data = {
+                        id : self.article_id,
+                        site_id:d.site_id,
+                        category : d.category.val,
+                        type : d.type.val,
+                        time : d.type.time
+                    };
+                //发布必须选择分类
+                if((data.type == 'now' || data.type=='time') && (data.category == '0' || data.category == ''))return pop.error('请选择分类','确定').one();
+                if(self.lock) return false;
+                self.lock = true;
+                request.post('/user/post/site',function(ret){
+                        if(ret.hasOwnProperty('code') && ret.code ==0){
+                            self.get_article_post(self.article_id);
+                            self.vue.slider = '';
+                        }
+                        else{
+                            pop.error(ret.msg || '设置失败','确定').one();
+                        }
+                        self.lock = false
+                    },
+                    data
+                );
+            },
+            _contribute : function (id,status) {
+                if(status != 'disable')self.contribute(id);
+            },
+            _category_display : function () {
+                this.post.category.active = !this.post.category.active;
+            },
+            _category_select : function (c, n) {
+                this.post.category.val = c;
+                this.post.category.text = n;
+            },
+            _type_select : function (t) {
+                this.post.type.val = t;
+                t == 'time' && (this.post.type.time = moment().format('YYYY-MM-DD HH:mm'));
+            },
+            _add_site : function (id) {
+                self.add_site(id);
+            },
+            _remove_site : function (id,name) {
+                self.remove_site(id,name);
+            },
+            _search : function () {
+                if(this.slider == 'add-site')self.search(this.search.keyword);
+            }
+
+        }
+    });
+}).call(define('controller_pop'));
+//时间选择插件
 (function(){
-    var self = this;
+    $('#datetimepicker').datetimepicker({
+        inline: true,
+        sideBySide: true
+    }).on('changeDate', function(){
+        controller_pop.vue.post.type.time = $(this).data('date');
+    });
+}).call(define('controller_timerpicker'));
+//文章列表
+(function(){
+    var self = this,
+        index= 1,
+        size = 20,
+        total = parseInt(data.total);
 
     this.cur_article = 0;
     //打开文章
@@ -426,7 +590,6 @@
                         image : data.image,
                         tags : data.tags,
                         id : data.id,
-                        ispost : data.post_status == 2,
                         content : data.content,
                         lastmodify : data.update_time
                     });
@@ -482,8 +645,8 @@
     this.open_first = function(){
         var find = false;
         for(var i in self.vue.list){
-            if(self.vue.list[i].length > 0 && self.vue.list[i][0].hasOwnProperty('id')){
-                self.open_article(self.vue.list[i][0].id);
+            if(self.vue.list.length > 0 && self.vue.list[i].hasOwnProperty('id')){
+                self.open_article(self.vue.list[i].id);
                 find = true;
                 break;
             }
@@ -494,10 +657,20 @@
     this.update_list = function(id){
        request.get('/user/article/list', function(ret){
            if(ret.hasOwnProperty('code') && ret.code == 0 ){
-               self.fill_list(ret.data);
+               self.fill_list(ret.data.list);
+               total = parseInt(ret.data.total);
                //刷新列表之后,默认打开文章
-               return typeof id == 'undefined' ?  self.open_first() : self.open_article(id);
+               typeof id == 'undefined' ?  self.open_first() : self.open_article(id);
+               self.btn_sta();
            }
+           else{
+               pop.error('数据请求错误','确定').one();
+           }
+       },{
+           index:1,
+           size : index*size,
+           keyword : self.vue.search,
+           type : self.vue.type
        });
     };
     //填充列表,缓存
@@ -508,7 +681,10 @@
     this.model = {
         el : '#mid',
         data : {
-            list : []
+            list : [],
+            load : 'more',
+            search : '',
+            type : 'all'
         },
         methods : {
             open : function(id){
@@ -519,12 +695,41 @@
             },
             create : function(){
                 controller_handle.create_article();
+            },
+            _type : function (t) {
+                this.type = t;
+                index = 1;
+                size = 20;
+                self.update_list();
+            },
+            _search : function () {
+                index = 1;
+                size = 20;
+                self.update_list();
+            },
+            _load : function () {
+                if(self.has_more()){
+                    index = index+1;
+                    self.vue.load = 'loading';
+                    self.update_list();
+                }
             }
         }
     };
+    //是否有更多条目
+    this.has_more = function(){
+        return (index+1)*size<total;
+    };
+    //按钮状态
+    this.btn_sta = function () {
+       return self.has_more() ? (self.vue.load = 'more') : (self.vue.load = 'end');
+    };
     this.vue = new Vue(self.model);
-    //默认数据渲染列表
-    self.fill_list(default_data.list);
+
+    //初始化数据渲染列表
+    self.fill_list(data.list);
+    //初始化加载按钮状态
+    self.btn_sta();
 }).call(define('controller_list'));
 //文章编辑器状态控制
 (function(){
@@ -558,7 +763,7 @@
         }
     }
 }).call(define('controller_sta'));
-//是否文章变动未保存
+//文章保存状态
 (function(){
     var self = this,
         can = true,
@@ -589,12 +794,12 @@
     });
 
 }).call(define('controller_save'));
-//页面起始
+//页面初始化
 (function(){
     var self = this;
 
     (function(r){
         return r == '' ? controller_list.open_first() : (r == 'create' ? controller_handle.create_article() : controller_list.open_article(r))
-    })(default_data.route);
+    })(data.route);
 
 }).call(define('controller_route'));

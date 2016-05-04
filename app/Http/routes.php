@@ -123,6 +123,8 @@ else{
     //点赞收藏
     Route::get('/social/like', 'Common\SocialController@like');
     Route::get('/social/favorite', 'Common\SocialController@favorite');
+    //站点分类列表
+    Route::get('/site/category', 'Common\SiteController@category');
     //登录页面
     Route::get('/account/login', 'Account\LoginController@index');
     Route::post('/account/login', 'Account\LoginController@post');
@@ -161,25 +163,33 @@ else{
         Route::get('/user/edit/{id}', 'User\EditController@open');
         Route::get('/user/edit/create', 'User\EditController@create');
         //保存文章
-        Route::post('/user/save', 'User\EditController@save');
+        Route::post('/user/article/save', 'User\EditController@save');
         //删除文章
         Route::get('/user/article/delete', 'User\EditController@delete');
         //获取文章信息
         Route::get('/user/article', 'User\EditController@article');
         //获取文章列表
         Route::get('/user/article/list', 'User\EditController@articles');
-        //发布个人主页
-        Route::post('/user/post', 'User\EditController@post');
-        Route::post('/user/post/cancel', 'User\EditController@cancel');
+
+        //推送更新到站点
+        Route::get('/user/push/site', 'User\ApiController@pushsite');
         //投稿到站点
-        Route::get('/user/contribute', 'User\EditController@contribute');
+        Route::get('/user/post/contribute', 'User\ApiController@contribute');
+        //发布到站点
+        Route::post('/user/post/site', 'User\ApiController@postsite');
+        //文章发布列表
+        Route::get('/user/post/list', 'User\ApiController@postlist');
+        //移除常用站点
+        Route::get('/user/site/remove', 'User\ApiController@removesite');
+        //添加常用站点
+        Route::get('/user/site/add', 'User\ApiController@addsite');
+        //搜索站点
+        Route::get('/user/site/search', 'User\ApiController@searchsite');
     });
     //用户主页
     Route::get('/user/{id}', 'User\IndexController@index');
     //用户首页文章列表
     Route::get('/user/index/list', 'User\IndexController@articles');
-    //用户文章详情
-    Route::get('/user/{id}/{articleid}', 'User\DetailController@index');
 }
 //临时 && 测试
 Route::get('/test', 'Temp\TempController@test');

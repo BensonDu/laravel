@@ -249,6 +249,7 @@ class ArticleModel extends Model
             'tags'      => $data['tags'],
             'image'     => $data['image'],
             'contribute_status' => 1,
+            'site_lock' => 1,
             'update_time'=> now()
         ];
         return  DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->update($info);

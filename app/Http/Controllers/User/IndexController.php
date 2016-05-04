@@ -33,7 +33,7 @@ class IndexController extends UserController
 
         $data['list']   = self::get_list($id);
 
-        $data['total']  = ArticleUserModel::get_article_count($id);
+        $data['total']  = ArticleUserModel::get_home_article_list_count($id);
 
         return self::view('/user/index',$data);
     }
@@ -78,8 +78,9 @@ class IndexController extends UserController
                     ];
                 }
             }
-            $list[$k]->tags = $tags;
-            $list[$k]->post_time = time_down(strtotime($v->create_time));
+            $list[$k]->tags     = $tags;
+            $list[$k]->domain   = !empty($v->custom_domain) ? 'http://'.$v->custom_domain : 'http://'.$v->platform_domain.'.'.$_ENV['platform']['home'];
+            $list[$k]->post_time= time_down(strtotime($v->post_time));
         }
         return $list;
     }

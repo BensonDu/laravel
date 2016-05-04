@@ -20,55 +20,102 @@ class ArticleUserModel extends Model
     |--------------------------------------------------------------------------
     | 获取用户文章列表
     |--------------------------------------------------------------------------
-    |
-    | @param  string $user_id
-    | @return array  $article_list
-    |
     */
-    public static function get_article($user_id,$select = ['*']){
-        return ArticleUserModel::where('user_id' ,$user_id)->where('deleted',0)->orderBy('update_time', 'desc')->get($select);
+    public static function get_articles($user_id,$skip,$take,$keyword = null,$filter,$all_post){
+        $select = [
+            'articles_user.id',
+            'articles_user.title',
+            'articles_user.update_time',
+            'articles_user.create_time'
+        ];
+        $query = ArticleUserModel::where('articles_user.deleted',0)
+            ->where('articles_user.user_id',$user_id);
+        if(!is_null($keyword)){
+            $query->where('articles_user.title', 'LIKE', '%'.$keyword.'%');
+        }
+        if($filter == '1'){
+            $query->whereIn('articles_user.id', $all_post);
+        }
+        if($filter == '0'){
+            $query->whereNotIn('articles_user.id', $all_post);
+        }
+        return $query->take($take)->skip($skip)->orderBy('articles_user.create_time', 'desc')->get($select);
     }
     /*
-    |--------------------------------------------------------------------------
-    | 获取用户文章总数
-    |--------------------------------------------------------------------------
-    |
-    | @param  string $user_id
-    | @return array  $article_list
-    |
-    */
-    public static function get_article_count($user_id){
-        return ArticleUserModel::where('user_id' ,$user_id)->where('deleted',0)->where('post_status',2)->count();
+     |--------------------------------------------------------------------------
+     | 获取用户文章列表总数
+     |--------------------------------------------------------------------------
+     */
+    public static function get_articles_count($user_id,$keyword = null,$filter,$all_post){
+
+        $query = ArticleUserModel::where('articles_user.deleted',0)
+            ->where('articles_user.user_id',$user_id);
+        if(!is_null($keyword)){
+            $query->where('articles_user.title', 'LIKE', '%'.$keyword.'%');
+        }
+        if($filter == '1'){
+            $query->whereIn('articles_user.id', $all_post);
+        }
+        if($filter == '0'){
+            $query->whereNotIn('articles_user.id', $all_post);
+        }
+        return $query->count();
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 获取用户在站点所有发布的ID
+     |--------------------------------------------------------------------------
+     */
+    public static function get_user_site_post_article_list($user_id){
+        $list = DB::table('articles_site')->where('author_id',$user_id)->where('deleted',0)->where('post_status',1)->get(['source_id']);
+        $ret = [];
+        if(!empty($list)){
+            foreach ($list as $v){
+                if(!in_array($v->source_id,$ret)){
+                    $ret[] = $v->source_id;
+                }
+            }
+        }
+        return $ret;
     }
     /*
     |--------------------------------------------------------------------------
     | 获取用户主页文章
     |--------------------------------------------------------------------------
-    |
-    | @param  string $user_id
-    | @param  string $skip
-    | @param  string $select
-    | @return array  $article_list
-    |
     */
     public static function get_home_article_list($user_id,$skip = 0){
         $select = '
-        articles_user.id,
-        articles_user.title,
-        articles_user.summary,
-        articles_user.tags,
-        articles_user.image,
-        articles_user.create_time,
-        articles_user.favorites,
-        articles_user.likes
+        articles_site.id,
+        articles_site.title,
+        articles_site.summary,
+        articles_site.tags,
+        articles_site.image,
+        articles_site.post_time,
+        articles_site.favorites,
+        articles_site.likes,
+        site_routing.custom_domain,
+        site_routing.platform_domain
         ';
-        $list = ArticleUserModel::select(DB::raw($select))
-            ->where('articles_user.user_id' ,$user_id)
-            ->where('articles_user.deleted',0)
-            ->where('articles_user.post_status',2)
-            ->orderBy('articles_user.update_time', 'desc')
+        $list = DB::table('articles_site')->leftJoin('site_routing','articles_site.site_id','=','site_routing.site_id')->select(DB::raw($select))
+            ->where('articles_site.author_id' ,$user_id)
+            ->where('articles_site.deleted',0)
+            ->where('articles_site.post_status','1')
+            ->orderBy('articles_site.post_time', 'desc')
             ->take(10)->skip($skip)->get();
 
+        return $list;
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取用户主页文章总数
+    |--------------------------------------------------------------------------
+    */
+    public static function get_home_article_list_count($user_id){
+        $list = DB::table('articles_site')->leftJoin('site_routing','articles_site.site_id','=','site_routing.site_id')
+            ->where('articles_site.author_id' ,$user_id)
+            ->where('articles_site.deleted',0)
+            ->where('articles_site.post_status','1')
+            ->count();
         return $list;
     }
     /*
@@ -145,17 +192,20 @@ class ArticleUserModel extends Model
         return DB::table('user_favorite')->where('user_favorite.valid', 1)->where('user_favorite.user_id', $user_id)->count();
     }
     /*
-   |--------------------------------------------------------------------------
-   | 获取用户文章信息
-   |--------------------------------------------------------------------------
-   |
-   | @param  string $user_id
-   | @param  string $ariticle_id
-   | @return array  $article_list
-   |
+    |--------------------------------------------------------------------------
+    | 获取用户文章信息
+    |--------------------------------------------------------------------------
    */
-    public static function get_artilce_info($user_id, $id, $select = ['*']){
-        return ArticleUserModel::where('user_id' ,$user_id)->where('id',$id)->where('deleted',0)->first($select);
+    public static function get_artilce_info($user_id, $article_id){
+        return ArticleUserModel::where('deleted',0)->where('id',$article_id)->where('user_id',$user_id)->first(['id','title','image','summary','content','tags','update_time']);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取用户文章在站点的发布状态
+    |--------------------------------------------------------------------------
+   */
+    public static function get_article_site_post_info($article_id){
+        return DB::table('articles_site')->where('source_id',$article_id)->get(['post_status','hash','deleted','site_lock']);
     }
    /*
     |--------------------------------------------------------------------------
@@ -177,10 +227,7 @@ class ArticleUserModel extends Model
         $article->content       = ArticleBaseModel::filter_base64_image($info['content']);
         $article->image         = $info['image'];
         $article->tags          = tag($info['tags']);
-        $article->post_status   = isset($info['post_status']) ? $info['post_status'] : 1;
-        if(isset($info['post_time'])){
-            $article->post_time     = $info['post_time'];
-        }
+        $article->hash          = md5($article->title.$article->summary.$article->content.$article->tags.$article->image);
         $article->create_time   = now();
         $article->update_time   = now();
         $article->save();
@@ -207,57 +254,10 @@ class ArticleUserModel extends Model
         $article->content       = ArticleBaseModel::filter_base64_image($info['content']);
         $article->image         = $info['image'];
         $article->tags          = tag($info['tags']);
-        if(isset($info['post_status'])){
-            $article->post_status   = $info['post_status'];
-        }
-        if(isset($info['post_time'])){
-            $article->post_time     = $info['post_time'];
-        }
+        $article->hash          = md5($article->title.$article->summary.$article->content.$article->tags.$article->image);
         $article->update_time   = now();
 
         return $article->save();
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 投稿文章到站点
-    |--------------------------------------------------------------------------
-    |
-    | @param  string $article_id 用户文章ID
-    | @prarm  array  $site list  站点ID列表
-    | @return bool
-    |
-    */
-    public static function contribute_article($article_id,$sites){
-        $article_user = ArticleUserModel::where('id' ,$article_id)->first();
-        foreach($sites as $v){
-            $article_site = new ArticleSiteModel;
-            $article_site->site_id          = $v;
-            $article_site->source_id        = $article_user->id;
-            $article_site->author_id        = $article_user->user_id;
-            $article_site->title            = $article_user->title;
-            $article_site->summary          = $article_user->summary;
-            $article_site->content          = ArticleBaseModel::filter_base64_image($article_user->content);
-            $article_site->image            = $article_user->image;
-            $article_site->tags             = $article_user->tags;
-            $article_site->post_status      = 0;
-            $article_site->create_time      = now();
-            $article_site->update_time      = now();
-            $article_site->save();
-        }
-        return true;
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 投稿文章是否已经投稿
-    |--------------------------------------------------------------------------
-    |
-    | @param  string $article_id 用户文章ID
-    | @prarm  array  $site list  站点ID列表
-    | @return bool
-    |
-    */
-    public static function has_contributed($article_id,$site_id){
-        return ArticleSiteModel::where('site_id',$site_id)->where('source_id',$article_id)->count();
     }
     /*
    |--------------------------------------------------------------------------
@@ -287,18 +287,4 @@ class ArticleUserModel extends Model
         $article->deleted   = 1;
         return $article->save();
     }
-    /*
-    |--------------------------------------------------------------------------
-    | 发布文章
-    |--------------------------------------------------------------------------
-    |
-    | @param  string $article_id
-    | @param  string $user_id
-    | @return bool
-    |
-    */
-    public static function post_article($user_id, $article_id,$post_status = 2){
-        return ArticleUserModel::where('user_id' ,$user_id)->where('id',$article_id)->where('deleted',0)->update(['post_status'=>$post_status,'post_time'=>now()]);
-    }
-
 }

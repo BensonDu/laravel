@@ -7,7 +7,7 @@
 <div id="user-nav" class="user-nav">
     <div class="user-nav-container">
         <div class="left">
-            <a class="active" href="#">最新文章</a>
+            <a class="active" href="#">文章归档</a>
 @if(!empty($self))
             <a href="/user/favorite">我的收藏</a>
 @endif
@@ -22,11 +22,11 @@
                 <div class="info">
                     <div class="tags">
 @foreach ($article->tags as $tag)
-                        <a style="color: {{$tag['color']}}">{{$tag['item']}}</a>
+                        <a href="{{$article->domain}}/tag/{{$tag['item']}}" target="_blank" style="color: {{$tag['color']}}">{{$tag['item']}}</a>
 @endforeach
                     </div>
                     <div class="title">
-                        <a href="/user/{{$id}}/{{$article->id}}">{{$article->title}}</a>
+                        <a target="_blank" href="{{$article->domain}}/{{$article->id}}">{{$article->title}}</a>
                     </div>
                     <div class="summary">
                         <h5>{{$article->summary}}</h5>
@@ -52,10 +52,10 @@
             <div class="list" v-bind:class="visible" v-for="article in list">
                 <div class="info">
                     <div class="tags">
-                        <a v-for="tag in article.tags" v-bind:style="'color:'+tag.color" v-text="tag.item"></a>
+                        <a target="_blank"  v-for="tag in article.tags" v-bind:href="article.domain+'/tag/'+tag.item" v-bind:style="'color:'+tag.color" v-text="tag.item"></a>
                     </div>
                     <div class="title">
-                        <a v-bind:href="'/user/{{$id}}/'+article.id" v-text="article.title"></a>
+                        <a target="_blank" v-bind:href="article.domain+'/'+article.id" v-text="article.title"></a>
                     </div>
                     <div class="summary">
                         <h5 v-text="article.summary"></h5>
