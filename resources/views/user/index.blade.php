@@ -7,7 +7,7 @@
 <div id="user-nav" class="user-nav">
     <div class="user-nav-container">
         <div class="left">
-            <a class="active" href="#">文章归档</a>
+            <a class="active">文章归档</a>
 @if(!empty($self))
             <a href="/user/favorite">我的收藏</a>
 @endif

@@ -7,8 +7,8 @@
 <div id="user-nav" class="user-nav">
     <div class="user-nav-container">
         <div class="left">
-            <a href="/user/{{$_ENV['uid']}}">最新文章</a>
-            <a class="active" href="/user/favorite">我的收藏</a>
+            <a href="/user/{{$_ENV['uid']}}">文章归档</a>
+            <a class="active">我的收藏</a>
         </div>
     </div>
 </div>
