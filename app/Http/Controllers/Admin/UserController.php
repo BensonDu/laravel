@@ -22,6 +22,7 @@ class UserController extends AdminController
         ]]);
     }
     public function index(){
+        $data['base']['title'] = '用户管理';
         $data['users']   = $this->get_list(0,10);
         return self::view('admin.user.index',$data);
     }

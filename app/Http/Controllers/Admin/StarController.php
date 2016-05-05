@@ -29,6 +29,7 @@ class StarController extends AdminController
     |--------------------------------------------------------------------------
     */
     public function index(){
+        $data['base']['title'] = '精选管理';
         $data['list'] = StarModel::get_star_list($_ENV['site_id']);
         return self::view('admin.star.index',$data);
     }

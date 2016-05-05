@@ -19,7 +19,7 @@ class TagController extends SiteController
             'list'      => !empty($tag) ? json_encode_safe($this->get_list($tag)) : '[]',
             'total'     => !empty($tag) ? ArticleSiteModel::tag_article_count($_ENV['site_id'],$tag) : 0
         ];
-
+        $data['base']['title'] = '标签-'.$tag;
         return self::view('site.tag',$data);
     }
     public function tags($tag = null){

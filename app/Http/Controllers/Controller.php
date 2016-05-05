@@ -13,8 +13,7 @@ abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct()
-    {
+    public function __construct(){
 
     }
     /*
@@ -89,14 +88,4 @@ abstract class Controller extends BaseController
         $data['nav']['user']     = $_ENV['platform']['home'].'/user/';
         view()->share($data);
     }
-    /*
-    |--------------------------------------------------------------------------
-    | 获取站点信息
-    |--------------------------------------------------------------------------
-    */
-    public static function get_site_info(){
-        $info = SiteModel::get_site_info($_ENV['site_id']);
-        return view()->share(['site'=>$info]);
-    }
-
 }

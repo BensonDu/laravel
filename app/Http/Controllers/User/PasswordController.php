@@ -17,6 +17,7 @@ class PasswordController extends UserController
     public function index()
     {
         $data['active'] = 'password';
+        $data['base']['title'] = '密码重置-创之';
         return self::view('/user/password',$data);
     }
     /*

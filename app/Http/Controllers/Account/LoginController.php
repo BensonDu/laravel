@@ -21,8 +21,9 @@ class LoginController extends AccountController
         if(!empty($uid)){
             return $this->redirect();
         }
+        $data['base']['title'] = '登录-创之';
         //没有登录
-        return self::view('/account/login');
+        return self::view('/account/login',$data);
     }
     /*
      |--------------------------------------------------------------------------

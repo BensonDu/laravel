@@ -24,6 +24,7 @@ class SocialController extends UserController
             'email'     => self::$info->email,
             'weibo'     => self::$info->weibo
         ]);
+        $data['base']['title'] = '社交资料-创之';
         return self::view('/user/social',$data);
     }
     /*

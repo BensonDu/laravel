@@ -26,9 +26,9 @@ class CategoryController extends AdminController
     |--------------------------------------------------------------------------
     */
     public function index(){
-        return self::view('admin.category.index',[
-            'list' => $this->listformat()
-        ]);
+        $data['base']['title'] = '分类管理';
+        $data['list']          = $this->listformat();
+        return self::view('admin.category.index',$data);
     }
     /*
     |--------------------------------------------------------------------------

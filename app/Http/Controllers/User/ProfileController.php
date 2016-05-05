@@ -27,6 +27,8 @@ class ProfileController extends UserController
                             'avatar'    => avatar(self::$info->avatar),
                             'username'  => self::$info->username
                          ];
+
+        $data['base']['title'] = '个人资料-创之';
         return self::view('/user/profile',$data);
     }
     /*

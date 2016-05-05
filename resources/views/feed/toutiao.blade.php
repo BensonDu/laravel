@@ -13,7 +13,7 @@
 <!--背景色,背景图片,logo图片-->
 <div id="TouTiaoBar" style="background:#eee;">
     <a href="#" id="logo" class="logo">
-        <img src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2FLogo-mobile-tech2ipo.png?v" onerror="TouTiao.hideBar()" alt="">
+        <img src="{{$site->thirdparty_logo}}" onerror="TouTiao.hideBar()" alt="">
     </a>
 </div>
 

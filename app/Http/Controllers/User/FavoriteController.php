@@ -20,7 +20,7 @@ class FavoriteController extends UserController
         $data['active'] = 'home';
         $data['list']   = self::get_list($_ENV['uid']);
         $data['total']  = ArticleUserModel::get_favorite_article_count($_ENV['uid']);
-
+        $data['base']['title'] = '我的收藏-创之';
         return self::view('/user/favorite',$data);
     }
     /*

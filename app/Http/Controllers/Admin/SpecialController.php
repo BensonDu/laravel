@@ -23,7 +23,9 @@ class SpecialController extends AdminController
         ]]);
     }
     public function index(){
-        return self::view('admin.special.index',$this->getlist(0,10));
+        $data = $this->getlist(0,10);
+        $data['base']['title'] = '专题管理';
+        return self::view('admin.special.index',$data);
     }
     /*
      |--------------------------------------------------------------------------

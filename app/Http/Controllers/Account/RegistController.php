@@ -14,7 +14,8 @@ class RegistController extends AccountController
     }
 
     public function index(){
-        return self::view('/account/regist');
+        $data['base']['title'] = '注册-创之';
+        return self::view('/account/regist',$data);
     }
     public function post(){
 

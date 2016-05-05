@@ -12,7 +12,7 @@
 <!--背景色,背景图片,logo图片-->
 <div class="headbar" style="background:#eee;" >
     <a href="#" class="logo">
-        <img src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2FLogo-mobile-tech2ipo.png?v">
+        <img src="{{$site->thirdparty_logo}}">
     </a>
 </div>
 

@@ -22,7 +22,9 @@ class DetailController extends SiteController
         $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
 
         if(empty($info))abort(404);
-        $data['base']['title'] = $info->title;
+        $tag = tag($info->tags);
+        $data['base']['title']      = $info->title;
+        $data['base']['keywords']   = implode(', ',$tag);
         $data['user'] = [
             'id'    => $info->user_id,
             'name'  => $info->nickname,
@@ -35,7 +37,7 @@ class DetailController extends SiteController
             'title'     => $info->title,
             'summary'   => $info->summary,
             'content'   => $info->content,
-            'tags'      => tag($info->tags),
+            'tags'      => $tag,
             'time'      => date('Y年m月d日',strtotime($info->post_time)),
             'category'  => $info->category_name,
             'image'     => isset($image[0]) ? $image[0] : $info->image,
@@ -48,8 +50,9 @@ class DetailController extends SiteController
         $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
 
         if(empty($info))abort(404);
-
+        $tag = tag($info->tags);
         $data['base']['title'] = $info->title;
+        $data['base']['keywords']   = implode(', ',$tag);
 
         $data['user'] = [
             'id'    => $info->user_id,

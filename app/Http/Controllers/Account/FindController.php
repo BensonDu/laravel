@@ -16,7 +16,8 @@ class FindController extends AccountController
 
     public function index()
     {
-        return self::view('/account/find');
+        $data['base']['title'] = '找回密码-创之';
+        return self::view('/account/find',$data);
     }
 
     public function post()

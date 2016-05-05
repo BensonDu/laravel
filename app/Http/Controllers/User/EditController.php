@@ -23,8 +23,12 @@ class EditController extends UserController
     public function index(){
         $route = session(self::$route_session_key);
         session()->forget(self::$route_session_key);
-        $data = ApiController::get_list(0,20,null);
-        return self::view('/user/edit',['list'=>$data['list'],'total'=>$data['total'],'route'=>$route]);
+        $article = ApiController::get_list(0,20,null);
+        $data['list']   = $article['list'];
+        $data['total']  = $article['total'];
+        $data['route']  = $route;
+        $data['base']['title'] = '个人文章管理-创之';
+        return self::view('/user/edit',$data);
     }
     /*
     |--------------------------------------------------------------------------

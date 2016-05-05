@@ -19,7 +19,7 @@ class SearchController extends SiteController
             'list'      => !empty($keyword) ? json_encode_safe($this->get_list($keyword)) : '[]',
             'total'     => !empty($keyword) ? ArticleSiteModel::search_article_count($_ENV['site_id'],$keyword) : 0
         ];
-
+        $data['base']['title'] = '搜索-'.$keyword;
         return self::view('site.search',$data);
     }
     public function results($keyword = null){

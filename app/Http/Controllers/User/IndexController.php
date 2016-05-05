@@ -29,7 +29,7 @@ class IndexController extends UserController
         /*当前 Active 菜单*/
         $data['active'] = 'home';
         /*设置页面 title*/
-        $data['base']['title'] = $data['profile']['nickname'].'的个人主页';
+        $data['base']['title'] = $data['self'] ? '我的个人主页-创之' : $data['profile']['nickname'].'的个人主页-创之';
 
         $data['list']   = self::get_list($id);
 
