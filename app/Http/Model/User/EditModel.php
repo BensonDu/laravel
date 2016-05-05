@@ -94,8 +94,6 @@ class EditModel extends Model
         if(isset($site->id)){
             //管理员已锁定
             if($site->deleted == '1' || $site->site_lock) return false;
-            //清除缓存
-            CacheModel::clear_article_cache($site_id,$site->id);
             DB::table('articles_site')->where('id',$site->id)->update(
                 [
                     'category'          => $category,
@@ -104,6 +102,8 @@ class EditModel extends Model
                     'contribute_status' => 1
                 ]
             );
+            //清除缓存
+            CacheModel::clear_article_cache($site_id,$site->id);
             $last_id = $site->id;
         }
         //不存在 新建站点文章
@@ -127,6 +127,8 @@ class EditModel extends Model
                     'update_time'       => $now
                 ]
             );
+            //清除缓存
+            CacheModel::clear_article_cache($site_id);
         }
         return $last_id;
     }
