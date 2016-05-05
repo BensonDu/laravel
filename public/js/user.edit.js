@@ -544,7 +544,9 @@
             },
             _type_select : function (t) {
                 this.post.type.val = t;
-                t == 'time' && (this.post.type.time = moment().format('YYYY-MM-DD HH:mm'));
+                if(t == 'time'){
+                    this.post.type.time = moment().format('YYYY-MM-DD HH:mm')
+                }
             },
             _add_site : function (id) {
                 self.add_site(id);

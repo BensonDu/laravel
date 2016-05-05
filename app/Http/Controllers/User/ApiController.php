@@ -214,7 +214,7 @@ class ApiController  extends Controller
         //检查文章分类
         if(CategoryModel::category_exist($site_id,$category)) return self::ApiOut(40004,'分类不存在');
 
-        $post_status = $type == 'cancel' ? 0 : (time() > strtotime($time) ? 1 : 2);
+        $post_status = $type == 'cancel' ? 0 : (($type == 'time' && strtotime($time)>time()) ? 2 : 1);
 
         //发布文章 返回 站点文章 ID
         $new_id = EditModel::post($site_id,$_ENV['uid'],$user_article_id,$category,$post_status,$time);
