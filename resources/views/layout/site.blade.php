@@ -38,7 +38,7 @@
 @if($site['special'] > 0)
             <a href="/special" class="{{isset($active) && $active =='special' ? 'active' : ''}}"><span>专题聚光</span></a>
 @endif
-@if($site['site_id'] == '1')
+@if($site['id'] == '1')
             <a href="http://tech2ipo.com/10028495" class="{{isset($active) && $active =='joinus' ? 'active' : ''}}"><span>关于我们</span></a>
 @endif
         </div>
