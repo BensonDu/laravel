@@ -10,7 +10,37 @@ use DB;
 class TempController extends Controller
 {
     public function test(){
-        return 'Here';
+        $vr = DB::table('articles_site')->where('deleted',0)->where('post_status',1)->where('author_id','10003617')->get();
+        $new = [];
+        foreach ($vr as $v){
+            $n['site_id']           = 2;
+            $n['source_id']         = $v->source_id;
+            $n['author_id']         = '10003617';
+            $n['title']             = $v->title;
+            $n['summary']           = $v->summary;
+            $n['content']           = $v->content;
+            $n['image']             = $v->image;
+            $n['tags']              = $v->tags;
+            $n['hash']              = md5($v->title.$v->summary.$v->content.$v->tags.$v->image);
+            $n['category']          = 6;
+            $n['post_status']       = 1;
+            $n['contribute_status'] = 1;
+            $n['site_lock']         = 0;
+            $n['likes']             = 0;
+            $n['favorites']         = 0;
+            $n['views']             = 0;
+            $n['deleted']           = 0;
+            $n['post_time']         = date('Y-m-d H:i:s',strtotime($v->post_time)-60);
+            $n['update_time']       = $v->update_time;
+            $n['create_time']       = $v->create_time;
+            $new[] = $n;
+        }
+        if(DB::table('articles_site')->where('site_id',2)->count() < 2){
+            foreach ($new as $v){
+                DB::table('articles_site')->insert($v);
+            }
+        }
+        return $new;
     }
     public function device(){
         $data['type'] = is_mobile() ? '移动设备' : '桌面设备';
