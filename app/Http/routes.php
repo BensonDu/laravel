@@ -163,14 +163,13 @@ else{
         Route::get('/user/edit/{id}', 'User\EditController@open');
         Route::get('/user/edit/create', 'User\EditController@create');
         //保存文章
-        Route::post('/user/article/save', 'User\EditController@save');
+        Route::post('/user/article/save', 'User\ApiController@save');
         //删除文章
-        Route::get('/user/article/delete', 'User\EditController@delete');
+        Route::get('/user/article/delete', 'User\ApiController@delete');
         //获取文章信息
-        Route::get('/user/article', 'User\EditController@article');
+        Route::get('/user/article', 'User\ApiController@article');
         //获取文章列表
-        Route::get('/user/article/list', 'User\EditController@articles');
-
+        Route::get('/user/article/list', 'User\ApiController@articles');
         //推送更新到站点
         Route::get('/user/push/site', 'User\ApiController@pushsite');
         //投稿到站点

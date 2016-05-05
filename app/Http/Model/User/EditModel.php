@@ -146,7 +146,8 @@ class EditModel extends Model
         $site = DB::table('articles_site')->where('source_id',$user_article_id)->where('site_id',$site_id)->where('deleted',0)->first(['id','hash','site_lock']);
 
         if(!isset($site->id) || ($site->site_lock) || $site->hash == $info->hash)return false;
-
+        //清除缓存
+        CacheModel::clear_article_cache($site_id,$site->id);
         $now = now();
         
         return DB::table('articles_site')->where('id',$site->id)->update(

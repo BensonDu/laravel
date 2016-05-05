@@ -1082,6 +1082,13 @@
     content: '已经推送';
     cursor: not-allowed;
 }
+.pop-container .post .table table tbody tr td a.btn-push.start{
+    opacity: .3;
+}
+.pop-container .post .table table tbody tr td a.btn-push.start:after{
+    content: '无法推送';
+    cursor: not-allowed;
+}
 .pop-container .post .table table tbody tr td a.btn-push.lock em{
     display: none;
 }
