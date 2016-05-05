@@ -4,7 +4,7 @@
     <link href="/lib/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Ffont-awesome.css?" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
-    <link href="/css/user.edit.css?v2" rel="stylesheet" charset="utf-8">
+    <link href="/css/user.edit.css?v3" rel="stylesheet" charset="utf-8">
     <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
     <link href="/css/public.content.css?v1" rel="stylesheet">
 @stop
@@ -65,8 +65,8 @@
             <p><span>最后保存时间:</span> <span v-text="lastmodify"></span></p>
         </div>
         <div class="right">
-            <a class="save" v-bind:class="handle_sta.save" v-on:click="save"><em></em><p>保存草稿</p></a>
-            <a class="contribute" v-bind:class="handle_sta.contribute"v-on:click="contribute"><em></em><p></p></a>
+            <a class="save" v-bind:class="save" v-on:click="_save"><em></em><p>保存草稿</p></a>
+            <a class="contribute" v-bind:class="{'loading':contribute,'update':post_status}"v-on:click="_contribute"><em></em><p></p></a>
         </div>
     </div>
     <!--文章操作end-->
@@ -245,5 +245,5 @@
         this.route  = '{{isset($route)?$route:null}}';
     }).call(define('data'));
 </script>
-<script src="/js/user.edit.js?v8"></script>
+<script src="/js/user.edit.js?v9"></script>
 @stop

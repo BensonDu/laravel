@@ -55,6 +55,7 @@ class ApiController  extends Controller
             $ret['content']     = $info->content;
             $ret['tags']        = empty($info->tags) ? [] : tag($info->tags);
             $ret['update_time'] = $info->update_time;
+            $ret['post_status'] = !!EditModel::article_existed_in_site($article_id) ? 1 : 0;
             return self::ApiOut(0,$ret);
         }
         return self::ApiOut(40004,'Not found');

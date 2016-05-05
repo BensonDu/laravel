@@ -132,7 +132,6 @@ class EditModel extends Model
         }
         return $last_id;
     }
-
     /*
     |--------------------------------------------------------------------------
     | 推送更新到站点
@@ -164,6 +163,14 @@ class EditModel extends Model
             ]
         );
 
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 用户文章 在站点文章中是否存在
+    |--------------------------------------------------------------------------
+    */
+    public static function article_existed_in_site($user_article_id){
+        return DB::table('articles_site')->where('source_id',$user_article_id)->count();
     }
 
 }

@@ -186,6 +186,7 @@
         if(info.hasOwnProperty("tags"))controller_info.model.data.tag.items = info.tags;
         if(info.hasOwnProperty("content"))plugin_editor.content.setContent(info.content);
         if(info.hasOwnProperty("lastmodify"))self.vue.lastmodify = info.lastmodify;
+        if(info.hasOwnProperty("post_status"))self.vue.post_status = info.post_status;
         if(info.hasOwnProperty("id"))self.article_id = info.id;
     };
     //新建文章 产生垃圾数据
@@ -199,6 +200,7 @@
                 tags : [],
                 content : '',
                 lastmodify : helper.now(),
+                post_status : 0,
                 id : 0
             });
             controller_save.start();
@@ -250,7 +252,7 @@
     //保存当前文章
     this.save_article = function(){
         if(self.check_article()){
-            self.vue.handle_sta.save = 'loading';
+            self.vue.save = 'loading';
             request.post('/user/article/save',function(ret){
 
                 if(ret.hasOwnProperty('code') && ret.code == 0){
@@ -259,14 +261,14 @@
                     self.article_id = ret.data.id;
                     controller_list.update_list(self.article_id);
                     setTimeout(function(){
-                        self.vue.handle_sta.save = 'success';
+                        self.vue.save = 'success';
                     },600);
                 }
                 else{
                     pop.error('保存失败','确定').one();
                 }
                 setTimeout(function(){
-                    self.vue.handle_sta.save = '';
+                    self.vue.save = '';
                 },1500);
 
             },self.get_editing_article());
@@ -294,16 +296,15 @@
         el : '#article-handle',
         data : {
             lastmodify : '',
-            handle_sta : {
-                save : '',
-                contribute : ''
-            }
+            save : '',
+            contribute : 0,
+            post_status : 0
         },
         methods : {
-            save : function(){
+            _save : function(){
                 self.save_article();
             },
-            contribute : function(){
+            _contribute : function(){
                 if(self.post_check()){
                     controller_pop.show(self.article_id);
                 }
@@ -322,7 +323,7 @@
     this.article_id = '';
     this.show = function (id) {
         //投稿管理按钮 Loading 状态
-        controller_handle.model.data.handle_sta.contribute = 'loading';
+        controller_handle.model.data.contribute = 1;
         self.get_article_post(id,function () {
             $pop.addClass('post');
             $bk.addClass('show');
@@ -357,7 +358,7 @@
                 pop.error('获取发布信息失败','确定').one();
             }
             //投稿管理按钮 Loading 结束
-            controller_handle.model.data.handle_sta.contribute = '';
+            controller_handle.model.data.contribute = 0;
         },{id:id});
     };
     //获得站点分类列表
@@ -591,6 +592,7 @@
                         tags : data.tags,
                         id : data.id,
                         content : data.content,
+                        post_status : data.post_status,
                         lastmodify : data.update_time
                     });
                 }

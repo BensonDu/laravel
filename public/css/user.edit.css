@@ -461,13 +461,22 @@
     background: #000;
 }
 .article-handle .right a.contribute{
-    background: #ff4081;
+    background: #3D5AFE;
 }
 .article-handle .right a.contribute:hover{
-     background: #CC1C58;
- }
+    background: #2639A7;
+}
 .article-handle .right a.contribute p:before{
     content: '发布';
+}
+.article-handle .right a.contribute.update{
+    background: #ff4081;
+}
+.article-handle .right a.contribute.update:hover{
+     background: #CC1C58;
+ }
+.article-handle .right a.contribute.update p:before{
+    content: '更新发布';
 }
 /*文章操作end*/
 /*主体部分start*/
@@ -808,6 +817,7 @@
     right: -100%;
     height: 100%;
     z-index: 10;
+    white-space: nowrap;
     box-shadow: -4px 43px 10px rgba(0,0,0,.07);
     -webkit-transition: right 0.4s ease-out;
     -moz-transition: right 0.4s ease-out;
