@@ -883,6 +883,7 @@
     height: 100%;
     padding: 20px 40px;
     background: rgba(255,255,255,1);
+    white-space: normal;
     overflow: auto;
 }
 .pop-container .post::-webkit-scrollbar-track-piece{background-color:#fff;}
@@ -1152,6 +1153,7 @@
     margin-left: -4px;
     background: #fff;
     overflow-x: hidden;
+    white-space: normal;
     transition: width .4s;
     -moz-transition: width .4s; /* Firefox 4 */
     -webkit-transition: width .4s; /* Safari 和 Chrome */
