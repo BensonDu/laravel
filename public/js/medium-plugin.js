@@ -1467,7 +1467,8 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 maxFileSizeError: 'This file is too big: '
             }
             // uploadCompleted: function ($el, data) {}
-        };
+        },
+        imageWidth = 0;
 
     /**
      * Images object
@@ -1585,10 +1586,9 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
         var that = this,
             $file = $(this.templates['src/js/templates/images-fileupload.hbs']()),
             uploader = simple.uploader({}),
-            size = 0,
             get_img_url = function(id, option){
-                //尺寸超过 640k 压缩尺寸..
-                return 'http://dn-noman.qbox.me/' + id + (size>640*1024 ? '?imageMogr2/thumbnail/900000@' : '');
+                //宽度超过 800px 压缩
+                return 'http://dn-noman.qbox.me/' + id + (imageWidth > 800 ? '?imageView2/2/w/800' : '');
             },
             submit_data = {};
         $file.prop("accept","image/*").removeAttr('multiple');
@@ -1627,7 +1627,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                     files : this,
                     submit : function(after_submit_data){
                         submit_data = after_submit_data;
-                        if(_this.files && _this.files && _this.files[0].size) size = _this.files[0].size;
                         uploader.upload(_this.files);
                     }
                 };
@@ -1681,6 +1680,11 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
         reader = new FileReader();
 
         reader.onload = function (e) {
+            var img = new Image();
+            img.src =  e.target.result;
+            img.onload = function () {
+                imageWidth = img.width;
+            };
             $.proxy(that, 'showImage', e.target.result, data)();
         };
         reader.readAsDataURL(file);
