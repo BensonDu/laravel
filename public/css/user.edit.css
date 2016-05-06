@@ -467,7 +467,7 @@
     background: #2639A7;
 }
 .article-handle .right a.contribute p:before{
-    content: '发布';
+    content: '发布到';
 }
 .article-handle .right a.contribute.update{
     background: #ff4081;
