@@ -100,6 +100,7 @@ class ArticleUserModel extends Model
             ->where('articles_site.author_id' ,$user_id)
             ->where('articles_site.deleted',0)
             ->where('articles_site.post_status','1')
+            ->groupBy('articles_site.source_id')
             ->orderBy('articles_site.post_time', 'desc')
             ->take(10)->skip($skip)->get();
 
@@ -111,12 +112,13 @@ class ArticleUserModel extends Model
     |--------------------------------------------------------------------------
     */
     public static function get_home_article_list_count($user_id){
-        $list = DB::table('articles_site')->leftJoin('site_routing','articles_site.site_id','=','site_routing.site_id')
-            ->where('articles_site.author_id' ,$user_id)
-            ->where('articles_site.deleted',0)
-            ->where('articles_site.post_status','1')
-            ->count();
-        return $list;
+        $list = DB::table('articles_site')
+            ->where('author_id' ,$user_id)
+            ->where('deleted',0)
+            ->where('post_status','1')
+            ->groupBy('source_id')
+            ->get(['id']);
+        return count($list);
     }
     /*
     |--------------------------------------------------------------------------
