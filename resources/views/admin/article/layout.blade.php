@@ -55,7 +55,7 @@
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery-sortable-min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.min.js"></script>
 <script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.center.min.js"></script>
-<script src="http://static.chuang.pro/medium-plugin.min.new.js"></script>
+<script src="http://static.chuang.pro/medium-plugin.min.850.js"></script>
 <script src="/lib/cropper/cropper.min.js"></script>
 @section('script-article')
 @show

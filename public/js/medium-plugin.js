@@ -1587,8 +1587,8 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             $file = $(this.templates['src/js/templates/images-fileupload.hbs']()),
             uploader = simple.uploader({}),
             get_img_url = function(id, option){
-                //宽度超过 800px 压缩
-                return 'http://dn-noman.qbox.me/' + id + (imageWidth > 800 ? '?imageView2/2/w/800' : '');
+                //宽度超过 850px 压缩
+                return 'http://dn-noman.qbox.me/' + id + (imageWidth > 850 ? '?imageView2/2/w/850' : '');
             },
             submit_data = {};
         $file.prop("accept","image/*").removeAttr('multiple');
