@@ -1,6 +1,6 @@
 @extends('layout.base')
 @section('style')
-@parent<link href="/css/admin.base.css" rel="stylesheet">
+@parent<link href="/css/admin.base.css?" rel="stylesheet">
 @stop
 @section('nav')
     @parent
