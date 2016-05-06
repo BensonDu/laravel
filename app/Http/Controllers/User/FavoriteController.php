@@ -57,6 +57,7 @@ class FavoriteController extends UserController
             }
             $list[$k]->jump = $v->type == 1 ? 'http://'.$v->jump.'/'.$v->id : '/user/'.$v->jump.'/'.$v->id;
             $list[$k]->tags = $tags;
+            $list[$k]->image= image_crop($v->image,200);
             $list[$k]->create_time = date('Y年m月d日',strtotime($v->create_time));
         }
         return $list;

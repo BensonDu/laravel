@@ -69,7 +69,7 @@ abstract class Controller extends BaseController
         $data = [
             'uid'       => $uid,
             'nickname'  => isset($info->nickname) ? $info->nickname : '',
-            'avatar'    => isset($info->avatar) ? avatar($info->avatar) : '',
+            'avatar'    => isset($info->avatar) ? avatar($info->avatar,200) : '',
             //用户未登录,登录回调地址,过滤登录页;
             'url' => !empty($uid) ? user_url($uid) : $_ENV['platform']['home'].'/account/login'.((request()->path() != 'account/login' ? '?redirect='.urlencode(request()->url()) : ''))
         ];

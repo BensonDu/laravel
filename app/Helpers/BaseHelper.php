@@ -6,8 +6,13 @@ if (! function_exists('avatar')) {
      * @param  string
      * @return saved avatar | default avatar
      */
-    function avatar($url){
-        return !empty($url) ? $url : 'https://dn-t2ipo.qbox.me/v3%2Fpublic%2Fdefault-avatar.png';
+    function avatar($url, $width = 100){
+        $ret = $url;
+        if(strripos($url,".qbox.me")){
+            $base = explode("?" ,$url)[0];
+            $ret = $base.'?imageView2/2/w/'.$width;
+        }
+        return !empty($ret) ? $ret : 'https://dn-t2ipo.qbox.me/v3%2Fpublic%2Fdefault-avatar.png';
     }
 }
 if (! function_exists('now')) {
@@ -182,33 +187,17 @@ if (! function_exists('get_domain')) {
     }
 
 }
-if (! function_exists('crop_star')) {
+if (! function_exists('image_crop')) {
     /**
-     * 精选图裁剪 | 针对七牛
+     * 图片裁剪 | 针对七牛
      * @param  string $url
-     * @return string $start_url
+     * @return string $url
      */
-    function crop_star($url){
+    function image_crop($url,$width = 500){
         $ret = $url;
         if(strripos($url,".qbox.me")){
             $base = explode("?" ,$url)[0];
-            $ret = $base.'?imageMogr2/thumbnail/!800x530r/gravity/Center/crop/800x530';
-        }
-        return $ret;
-    }
-
-}
-if (! function_exists('crop_list')) {
-    /**
-     *  PC文章列表图裁剪 | 针对七牛
-     * @param  string $url
-     * @return string $start_url
-     */
-    function crop_list($url){
-        $ret = $url;
-        if(strripos($url,".qbox.me")){
-            $base = explode("?" ,$url)[0];
-            $ret = $base.'?imageMogr2/thumbnail/!228x130r/gravity/Center/crop/228x130';
+            $ret = $base.'?imageView2/2/w/'.$width;
         }
         return $ret;
     }

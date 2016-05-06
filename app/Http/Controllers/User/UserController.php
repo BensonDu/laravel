@@ -38,7 +38,7 @@ class UserController extends Controller
             'id'        => self::$info->id,
             'profile'   => [
                 'id'        => self::$info->id,
-                'avatar'    => avatar(self::$info->avatar),
+                'avatar'    => avatar(self::$info->avatar,200),
                 'nickname'  => self::$info->nickname,
                 'slogan'    => self::$info->slogan,
                 'introduce' => self::$info->introduce,
@@ -63,7 +63,7 @@ class UserController extends Controller
             $data['id'] = $id;
             $data['profile'] = [
                 'id'        => $info->id,
-                'avatar'    => avatar($info->avatar),
+                'avatar'    => avatar($info->avatar,200),
                 'nickname'  => $info->nickname,
                 'slogan'    => $info->slogan,
                 'introduce' => $info->introduce,

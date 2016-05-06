@@ -116,7 +116,7 @@ class IndexController extends SiteController
                     ];
                 }
             }
-            $list[$k]->image    = crop_list($v->image);
+            $list[$k]->image    = image_crop($v->image,200);
             $list[$k]->avatar   = avatar($v->avatar);
             $list[$k]->user_url = user_url($v->user_id);
             $list[$k]->tags = $tags;
@@ -134,7 +134,7 @@ class IndexController extends SiteController
             $ret[$i]->article_id    = $v->article_id;
             $ret[$i]->title         = $v->title;
             $ret[$i]->summary       = $v->summary;
-            $ret[$i]->image         = $v->image;
+            $ret[$i]->image         = image_crop($v->image, 500);
             $ret[$i]->category_name = $v->category_name;
             $ret[$i]->time   = time_down(strtotime($v->post_time));
             $i++;
