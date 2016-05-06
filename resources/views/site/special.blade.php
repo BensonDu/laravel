@@ -8,6 +8,7 @@
         <div class="filter"></div>
     </div>
     <div id="site-content" class="site-content">
+@if(!empty($list))
         <div class="all">
             <a href="#" class="btn">
                 <p>全部专题</p>
@@ -22,6 +23,7 @@
 @endforeach
             </div>
         </div>
+@endif
         <div class="container">
             <div class="image">
                 <img src="{{$info['image']}}">
