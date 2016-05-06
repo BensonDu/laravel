@@ -48,6 +48,7 @@ class Init
         $c_base   = config('site.platform_base');
         $c_prefix = config('site.platform_prefix_home');
         $prefix = is_null($c_prefix) ? '' : $c_prefix.'.';
-        $_ENV['platform']['home'] = 'http://'.$prefix.$c_base;
+        $_ENV['platform']['home']   = 'http://'.$prefix.$c_base;
+        $_ENV['platform']['domain'] = $c_base;
     }
 }

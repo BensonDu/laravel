@@ -79,7 +79,7 @@ class IndexController extends UserController
                 }
             }
             $list[$k]->tags     = $tags;
-            $list[$k]->domain   = !empty($v->custom_domain) ? 'http://'.$v->custom_domain : 'http://'.$v->platform_domain.'.'.$_ENV['platform']['home'];
+            $list[$k]->domain   = !empty($v->custom_domain) ? 'http://'.$v->custom_domain : 'http://'.$v->platform_domain.'.'.$_ENV['platform']['domain'];
             $list[$k]->post_time= time_down(strtotime($v->post_time));
         }
         return $list;
