@@ -40,6 +40,24 @@ class FeedController extends Controller
     }
     /*
     |--------------------------------------------------------------------------
+    | 文章中图片裁剪压缩显示
+    |--------------------------------------------------------------------------
+    */
+    protected static function article_img_crop($content){
+        preg_match_all("/(?<=src=\")(http:\/\/|\/\/)dn-noman\.qbox\.me\/.*?(?=\")/",$content,$match);
+        if(!empty($match[0])){
+            $m = [];
+            $c = [];
+            foreach ($match[0] as $v){
+                $m[] = $v;
+                $c[] = explode("?",$v)[0]."?imageView2/2/w/500";
+            }
+            $content = str_replace($m,$c,$content);
+        }
+        return $content;
+    }
+    /*
+    |--------------------------------------------------------------------------
     | RSS 输出
     |--------------------------------------------------------------------------
     */

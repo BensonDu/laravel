@@ -53,11 +53,11 @@ class ToutiaoController extends FeedController
     public function detail($id){
         if(empty($id)) abort(404);
 
-        $data['site'] = $this->info;
+        $data['site']   = $this->info;
         $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
-
-        if(empty($data['article'])) abort(404);
-
+        if(!isset($data['article']->content)) abort(404);
+        $data['article']->content   = self::article_img_crop($data['article']->content);
+        $data['article']->image     = image_crop($data['article']->image,500);
         $view = View::make('feed.toutiao', $data);
         $ret = $view->render();
 
