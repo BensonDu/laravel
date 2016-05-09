@@ -6,6 +6,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>{{$article->title}}</title>
     <link href="/css/feed.xiaozhi.css" rel="stylesheet" type="text/css">
+    <style>figure{margin: 0;padding: 0}</style>
 </head>
 
 <body>

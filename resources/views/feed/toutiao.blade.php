@@ -7,6 +7,7 @@
     <title>{{$article->title}}</title>
     <!--头条css-->
     <link href="http://s2.pstatp.com/inapp/TTDefaultCSS.css" rel="stylesheet" type="text/css">
+    <style>figure{margin: 0;padding: 0}</style>
 </head>
 
 <body>

@@ -16,7 +16,7 @@
             </a>
             <div class="list-container">
 @foreach ($list as $special)
-                <a href="/special/{{$special->id}}" class="list">
+                <a href="/special/{{$special->id}}" target="_blank" class="list">
                     <h5>{{$special->title}}</h5>
                     <p>{{$special->time}}</p>
                 </a>
@@ -37,7 +37,7 @@
             <div class="list">
                 <div class="list-container">
 @foreach ($article_list as $article)
-                    <a href="/{{$article->id}}">
+                    <a href="/{{$article->id}}" target="_blank">
                         <div class="text">
                             <h5>{{$article->title}}</h5>
                             <p>{{$article->summary}}</p>
