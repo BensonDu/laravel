@@ -79,4 +79,37 @@ class PlatformCacheModel extends RedisModel
     public static function timing_article_key(){
         return config('cache.prefix').':'. config('cache.platform.timing.article.site');
     }
+    /*
+    |--------------------------------------------------------------------------
+    | 文章浏览次数 +1
+    |--------------------------------------------------------------------------
+    */
+    public static function article_view_increase($id){
+        return self::hincrby(self::article_view_count_key(),$id);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 返回文章缓存的浏览次数 列表
+    |--------------------------------------------------------------------------
+    */
+    public static function article_view_list(){
+        $key = self::article_view_count_key();
+        $list = self::hgetall($key);
+        self::del($key);
+        $ret = [];
+        if(!empty($list)){
+            foreach ($list as $k => $v){
+                if(!empty($v))$ret[$k] = $v;
+            }
+        }
+        return $ret;
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 文章浏览计数 KEY
+    |--------------------------------------------------------------------------
+    */
+    public static function article_view_count_key(){
+        return config('cache.prefix').':'.config('cache.platform.article.view');
+    }
 }

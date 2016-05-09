@@ -103,6 +103,10 @@ return [
             'article'=>[
                 'site' => 'platform:timing:article:site'
             ]
+        ],
+        //文章浏览计数
+        'article' => [
+            'view' => 'platform:article:view'
         ]
     ]
 

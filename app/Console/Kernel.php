@@ -24,6 +24,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //定时发布文章
-        $schedule->call('App\Http\Controllers\Schedule\ArticleController@PostArticle')->everyMinute();;
+        $schedule->call('App\Http\Controllers\Schedule\ArticleController@PostArticle')->everyMinute();
+        //文章浏览次数落地
+        $schedule->call('App\Http\Controllers\Schedule\ArticleController@ArticleViewCount')->everyTenMinutes();;
     }
 }
