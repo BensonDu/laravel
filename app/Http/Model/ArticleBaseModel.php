@@ -17,12 +17,12 @@ class ArticleBaseModel
     */
     public static function filter_base64_image($content){
         if(strrpos($content,'src="data:image')){
-            preg_match_all("/data:image\/.+?[\"']/",$content,$match);
+            preg_match_all("/data:image\/.*\"/",$content,$match);
             if(!empty($match[0])){
                 $m = [];
                 $u = [];
                 foreach ($match[0] as  $v){
-                    $src = substr($v,0,-1);
+                    $src = explode("\"",$v)[0];
                     $url = QiniuModel::upload_base64_image(substr(strstr($src,","),1));
                     if(!empty($url)){
                         $m[] = $src;
