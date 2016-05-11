@@ -397,22 +397,25 @@
     max-width: 210px;
     height: auto;
 }
-.site-content .news .rank-container{
+.site-content .news .right-side{
     width: 25%;
     max-width: 380px;
-    padding: 45px 0 20px 30px;
+    padding: 25px 0 20px 30px;
     float: left;
 }
-.site-content .news .rank-container .parent{
+.site-content .news .right-side .rank-container{
+    width: 100%;
+}
+.site-content .news .right-side .rank-container .parent{
     padding: 0 15px 30px;
     width: 100%;
     background: #fafafa;
 }
-.site-content .news .rank-container .title{
+.site-content .news .right-side .rank-container .title{
     width: 100%;
     text-align: center;
 }
-.site-content .news .rank-container .title h3{
+.site-content .news .right-side .rank-container .title h3{
     display: inline-block;
     width: 100%;
     font-size: 14px;
@@ -420,7 +423,7 @@
     margin-top: 24px;
     letter-spacing: 2px;
 }
-.site-content .news .rank-container .title span{
+.site-content .news .right-side .rank-container .title span{
     display: inline-block;
     width: 30px;
     line-height: 0;
@@ -428,39 +431,53 @@
     margin-top: 4px;
     border-bottom: 2px solid #999;
 }
-.site-content .news .rank-container .item{
+.site-content .news .right-side .rank-container .item{
     margin: 10px 0 20px;
 }
-.site-content .news .rank-container .item .rank{
+.site-content .news .right-side .rank-container .item .rank{
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 2px;
 }
-.site-content .news .rank-container .item .rank b{
+.site-content .news .right-side .rank-container .item .rank b{
     font-weight: 900;
     font-size: 18px;
     border-bottom: 2px solid #000;
 }
-.site-content .news .rank-container .item h6{
+.site-content .news .right-side .rank-container .item h6{
     line-height: 22px;
     margin-top: 5px;
 }
-.site-content .news .rank-container .item h6 .author{
+.site-content .news .right-side .rank-container .item h6 .author{
     color: #999;
     font-size: 12px;
 }
-.site-content .news .rank-container .item h6 .author:hover{
+.site-content .news .right-side .rank-container .item h6 .author:hover{
     border-bottom: 1px dotted #999;
 }
-.site-content .news .rank-container .item h6 .time{
+.site-content .news .right-side .rank-container .item h6 .time{
     margin-left: 8px;
     color: #999;
     font-size: 12px;
 }
-.site-content .news .rank-container .item .summary{
+.site-content .news .right-side .rank-container .item .summary{
     font-size: 13px;
     line-height: 20px;
     color: #666;
 }
-
 /*新闻列表end*/
+/*广告start*/
+.site-content .news .right-side .ad-sitehome-right{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.site-content .news .right-side .ad-sitehome-right a{
+    display: inline-block;
+    width: 100%;
+    border-radius: 3px;
+}
+.site-content .news .right-side .ad-sitehome-right a img{
+    display: inline-block;
+    width: 100%;
+}
+/*广告end*/

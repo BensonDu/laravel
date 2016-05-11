@@ -112,6 +112,13 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
         Route::get('/admin/special/save', 'Admin\SpecialController@save');
         Route::get('/admin/special/add', 'Admin\SpecialController@add');
         Route::get('/admin/special/post', 'Admin\SpecialController@post');
+        //广告管理
+        Route::get('/admin/ad', 'Admin\AdController@index');
+        Route::get('/admin/ad/ads', 'Admin\AdController@ads');
+        Route::get('/admin/ad/del', 'Admin\AdController@del');
+        Route::post('/admin/ad/add', 'Admin\AdController@add');
+        Route::post('/admin/ad/update', 'Admin\AdController@update');
+        Route::get('/admin/ad/info', 'Admin\AdController@info');
     });
 }
 //平台部分

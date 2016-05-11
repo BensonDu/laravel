@@ -123,7 +123,7 @@
 }
 .page-content .container .tag{
     width: 100%;
-    margin: 0 auto;
+    margin: 30px auto 0;
     max-width: 900px;
     padding: 0 5%;
     text-align: left;
@@ -153,9 +153,68 @@
     display: inline-block;
     max-width: 900px;
     text-align: left;
-    margin: 30px 0 70px 0;
+    margin: 30px 0 0;
     padding: 0 5%;
 }
+/*广告 start*/
+
+.page-content .container .ad-article-image{
+    display: inline-block;
+    max-width: 900px;
+    width: 100%;
+    text-align: left;
+    margin: 10px 0;
+    padding: 0 5%;
+}
+
+.page-content .container .ad-article-image a{
+    display: inline-block;
+    width: 100%;
+}
+.page-content .container .ad-article-image img{
+    display: inline-block;
+    width: 100%;
+}
+.page-content .container .ad-article-text{
+    display: inline-block;
+    max-width: 900px;
+    width: 100%;
+    text-align: left;
+    white-space: nowrap;
+    margin: 10px 0;
+    padding: 0 5%;
+}
+
+.page-content .container .ad-article-text span{
+    display: inline-block;
+    line-height: 25px;
+    padding: 0 7px;
+    background: #ff4081;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    float: left;
+}
+.page-content .container .ad-article-text a{
+     display: inline;
+     text-decoration: underline;
+     overflow: hidden;
+ }
+.page-content .container .ad-article-text p{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 26px;
+    letter-spacing: 1px;
+    text-overflow: ellipsis;
+    white-space: normal;
+    color: #666;
+}
+.page-content .container .ad-article-text a:hover{
+    color: #6e8cfb;
+}
+/*广告 end*/
 /*点赞 收藏 start*/
 .page-content .container .action{
     display: inline-block;

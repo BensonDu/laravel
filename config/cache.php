@@ -107,6 +107,13 @@ return [
         //文章浏览计数
         'article' => [
             'view' => 'platform:article:view'
+        ],
+        //平台总访问量
+        'view' => [
+            //子站首页访问总量
+            'home'      =>  'platform:view:home',
+            //子站文章页访问总量
+            'article'   =>  'platform:view:artcile'
         ]
     ]
 

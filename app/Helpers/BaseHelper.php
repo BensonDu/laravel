@@ -112,6 +112,21 @@ if (! function_exists('admin_role_map')) {
         return isset($map[$id]) ? $map[$id] : '访客';
     }
 }
+if (! function_exists('ad_type_map')) {
+    /**
+     * 广告位类型 ID 名称 转换
+     * @param  string $type_id
+     * @return string $name
+     */
+    function ad_type_map($id){
+        $map = [
+            1 => '首页侧栏',
+            2 => '文章底部文字',
+            3 => '文章底部图片'
+        ];
+        return isset($map[$id]) ? $map[$id] : '';
+    }
+}
 if (! function_exists('url_fix')) {
     /**
      * URL 修复

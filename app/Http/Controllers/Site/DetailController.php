@@ -9,8 +9,10 @@
 namespace App\Http\Controllers\Site;
 
 
+use App\Http\Model\AdModel;
 use App\Http\Model\ArticleSiteModel;
 use App\Http\Model\ArticleSocialModel;
+use App\Http\Model\Cache\PlatformCacheModel;
 
 class DetailController extends SiteController
 {
@@ -32,7 +34,8 @@ class DetailController extends SiteController
         ];
 
         $image = explode('?',$info->image);
-
+        //广告
+        $data['ad'] = AdModel::get_article_ad($_ENV['site_id']);
         $data['article'] = [
             'title'     => $info->title,
             'summary'   => $info->summary,
@@ -44,6 +47,8 @@ class DetailController extends SiteController
             'like'      => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_like($id,$_ENV['uid']) : false,
             'favorite'  => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_favorite($id,$_ENV['uid']) : false
         ];
+        //子站文章浏览总量+1
+        PlatformCacheModel::site_article_view_increase($_ENV['site_id']);
         return self::view('site.detail',$data);
     }
     public function mobile($id){

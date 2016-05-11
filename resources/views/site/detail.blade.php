@@ -1,7 +1,7 @@
 @extends('layout.site')
 @section('style')@parent  <link href="/css/public.content.css?v2" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
-    <link href="/css/public.detail.css?v4" rel="stylesheet">
+    <link href="/css/public.detail.css?v5" rel="stylesheet">
 @stop
 @section('body')
 @parent
@@ -34,6 +34,18 @@
         <div class="content medium">
             {!! $article['content'] !!}
         </div>
+        <!--广告start-->
+@if(isset($ad->type) && $ad->type == '3')
+        <div class="ad-article-image">
+            <a href="{{$ad->link}}" target="_blank"><img src="{{$ad->image}}"></a>
+        </div>
+@endif
+@if(isset($ad->type) && $ad->type == '2')
+        <div class="ad-article-text">
+            <span>推广</span>{!! $ad->text !!}
+        </div>
+@endif
+        <!--广告end-->
         <div class="tag">
             <em>标签:</em>
 @foreach ($article['tags'] as $tag)

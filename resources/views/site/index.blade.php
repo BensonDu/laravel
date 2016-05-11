@@ -1,5 +1,5 @@
 @extends('layout.site')
-@section('style')@parent  <link href="css/site.index.css?" rel="stylesheet">
+@section('style')@parent  <link href="css/site.index.css?v" rel="stylesheet">
 @stop
 @section('body')
 @parent
@@ -104,25 +104,36 @@
 
         </div>
         <!--新闻列表end-->
-@if(!empty($hot))
-        <!--热榜start-->
-        <div class="rank-container">
-            <div class="parent">
-                <div class="title">
-                    <h3>热榜</h3>
-                    <span></span>
-                </div>
-@foreach ($hot as $k => $article)
-                <div class="item">
-                    <a href="#" class="rank"><b>N</b>o.0{{$k+1}}</a>
-                    <h6><a href="{{$_ENV['platform']['home']}}/user/{{$article['user_id']}}"class="author">{{$article['author']}}</a><span class="time">{{$article['time']}}</span></h6>
-                    <a href="/{{$article['article_id']}}" class="summary">{{$article['title']}}</a>
-                </div>
-@endforeach
+        <div class="right-side">
+@if(isset($ad->image) && $ad->type == 1)
+            <!--广告start-->
+            <div class="ad-sitehome-right">
+                <a href="{{$ad->link}}" target="_blank">
+                    <img src="{{$ad->image}}">
+                </a>
             </div>
-        </div>
-        <!--热榜end-->
+            <!--广告end-->
 @endif
+@if(!empty($hot))
+            <!--热榜start-->
+            <div class="rank-container">
+                <div class="parent">
+                    <div class="title">
+                        <h3>热榜</h3>
+                        <span></span>
+                    </div>
+@foreach ($hot as $k => $article)
+                    <div class="item">
+                        <a href="#" class="rank"><b>N</b>o.0{{$k+1}}</a>
+                        <h6><a href="{{$_ENV['platform']['home']}}/user/{{$article['user_id']}}"class="author">{{$article['author']}}</a><span class="time">{{$article['time']}}</span></h6>
+                        <a href="/{{$article['article_id']}}" class="summary">{{$article['title']}}</a>
+                    </div>
+@endforeach
+                </div>
+            </div>
+            <!--热榜end-->
+@endif
+        </div>
     </div>
 
 </div>

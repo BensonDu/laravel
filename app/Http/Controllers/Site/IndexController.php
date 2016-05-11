@@ -9,7 +9,9 @@
 namespace App\Http\Controllers\Site;
 
 
+use App\Http\Model\AdModel;
 use App\Http\Model\ArticleSiteModel;
+use App\Http\Model\Cache\PlatformCacheModel;
 use App\Http\Model\StarModel;
 
 class IndexController extends SiteController
@@ -35,7 +37,10 @@ class IndexController extends SiteController
             'total' => $this->get_articles_count($id),
             'list'  => $this->get_articles($id)
         ];
-
+        //广告
+        $data['ad'] = AdModel::get_home_ad($id);
+        //浏览总量+1
+        PlatformCacheModel::site_home_view_increase($_ENV['site_id']);
         return self::view('/site/index',$data);
     }
     /*

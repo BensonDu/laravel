@@ -8,6 +8,7 @@
 
 namespace App\Http\Model\Cache;
 
+use PRedis;
 
 class PlatformCacheModel extends RedisModel
 {
@@ -111,5 +112,53 @@ class PlatformCacheModel extends RedisModel
     */
     public static function article_view_count_key(){
         return config('cache.prefix').':'.config('cache.platform.article.view');
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 子站首页浏览总量 +1
+    |--------------------------------------------------------------------------
+    */
+    public static function site_home_view_increase($id){
+        return self::incrby(self::site_home_view_count_key($id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获得子站首页浏览总量
+    |--------------------------------------------------------------------------
+    */
+    public static function site_home_view($id){
+        return PRedis::get(self::site_home_view_count_key($id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 子站首页浏览总量 KEY
+    |--------------------------------------------------------------------------
+    */
+    public static function site_home_view_count_key($site_id){
+        return config('cache.prefix').':'.config('cache.platform.view.home').':'.$site_id;
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 子站文章浏览总量 +1
+    |--------------------------------------------------------------------------
+    */
+    public static function site_article_view_increase($id){
+        return self::incrby(self::site_article_view_count_key($id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获得子站文章浏览总量
+    |--------------------------------------------------------------------------
+    */
+    public static function site_article_view($id){
+        return PRedis::get(self::site_article_view_count_key($id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 子站文章浏览总量 KEY
+    |--------------------------------------------------------------------------
+    */
+    public static function site_article_view_count_key($site_id){
+        return config('cache.prefix').':'.config('cache.platform.view.article').':'.$site_id;
     }
 }
