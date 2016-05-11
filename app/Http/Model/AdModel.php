@@ -131,21 +131,23 @@ class AdModel extends Model
         $now    = now();
         $ad     = AdModel::where('site_id',$site_id)->where('type','>','1')->where('deleted',0)->where('start','<',$now)->where('end','>',$now)->orderBy('id','desc')->get();
         $ret    = [];
-        if(!empty($ad)){
-            $weight = 1;
-            $start  = 0;
+        if(count($ad) > 0){
+            $weight = 0;
             foreach ($ad as $v){
                 $weight += $v->weight;
             }
-            $current = PlatformCacheModel::site_article_view($site_id);
-            $offset = $current%$weight;
-            foreach ($ad as $v){
-                $start+=$v->weight;
-                if ($offset <= $start){
-                    if($v->type == 2){
-                        $v->text = self::article_ad_text_highlight($v->text,$v->link);
+            if($weight > 0){
+                $start  = 0;
+                $current = PlatformCacheModel::site_article_view($site_id);
+                $offset = $current%$weight;
+                foreach ($ad as $v){
+                    $start+=$v->weight;
+                    if ($offset <= $start){
+                        if($v->type == 2){
+                            $v->text = self::article_ad_text_highlight($v->text,$v->link);
+                        }
+                        return $v;
                     }
-                    return $v;
                 }
             }
         }
@@ -160,17 +162,19 @@ class AdModel extends Model
         $now    = now();
         $ad     = AdModel::where('site_id',$site_id)->where('type','1')->where('deleted',0)->where('start','<',$now)->where('end','>',$now)->orderBy('id','desc')->get();
         $ret    = [];
-        if(!empty($ad)){
-            $weight = 1;
-            $start  = 0;
+        if(count($ad) > 0){
+            $weight = 0;
             foreach ($ad as $v){
                 $weight += $v->weight;
             }
-            $current = PlatformCacheModel::site_home_view($site_id);
-            $offset = $current%$weight;
-            foreach ($ad as $v){
-                $start+=$v->weight;
-                if ($offset <= $start)return $v;
+            if($weight > 0){
+                $start  = 0;
+                $current = PlatformCacheModel::site_home_view($site_id);
+                $offset = $current%$weight;
+                foreach ($ad as $v){
+                    $start+=$v->weight;
+                    if ($offset <= $start)return $v;
+                }
             }
         }
         return $ret;
