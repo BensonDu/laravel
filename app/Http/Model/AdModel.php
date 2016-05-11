@@ -132,7 +132,7 @@ class AdModel extends Model
         $ad     = AdModel::where('site_id',$site_id)->where('type','>','1')->where('deleted',0)->where('start','<',$now)->where('end','>',$now)->orderBy('id','desc')->get();
         $ret    = [];
         if(!empty($ad)){
-            $weight = 0;
+            $weight = 1;
             $start  = 0;
             foreach ($ad as $v){
                 $weight += $v->weight;
@@ -161,7 +161,7 @@ class AdModel extends Model
         $ad     = AdModel::where('site_id',$site_id)->where('type','1')->where('deleted',0)->where('start','<',$now)->where('end','>',$now)->orderBy('id','desc')->get();
         $ret    = [];
         if(!empty($ad)){
-            $weight = 0;
+            $weight = 1;
             $start  = 0;
             foreach ($ad as $v){
                 $weight += $v->weight;
