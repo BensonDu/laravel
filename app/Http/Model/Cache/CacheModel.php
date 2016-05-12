@@ -20,6 +20,7 @@ class CacheModel
     public static function clear_article_cache($site_id,$article_id = null){
         SiteCacheModel::home_list_clear($site_id);
         if(!empty($article_id)){
+            SiteCacheModel::m_article_view_clear($site_id,$article_id);
             SiteCacheModel::aritcle_del($site_id,$article_id);
             StaticWebModel::clear($site_id,$article_id);
         }

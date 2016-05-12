@@ -13,6 +13,7 @@ use App\Http\Model\AdModel;
 use App\Http\Model\ArticleSiteModel;
 use App\Http\Model\ArticleSocialModel;
 use App\Http\Model\Cache\PlatformCacheModel;
+use App\Http\Model\Cache\SiteCacheModel;
 
 class DetailController extends SiteController
 {
@@ -33,9 +34,9 @@ class DetailController extends SiteController
             'avatar'=>avatar($info->avatar)
         ];
 
-        $image = explode('?',$info->image);
         //广告
         $data['ad'] = AdModel::get_article_ad($_ENV['site_id']);
+
         $data['article'] = [
             'title'     => $info->title,
             'summary'   => $info->summary,
@@ -43,7 +44,7 @@ class DetailController extends SiteController
             'tags'      => $tag,
             'time'      => date('Y年m月d日',strtotime($info->post_time)),
             'category'  => $info->category_name,
-            'image'     => isset($image[0]) ? $image[0] : $info->image,
+            'image'     => image_crop($info->image,950),
             'like'      => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_like($id,$_ENV['uid']) : false,
             'favorite'  => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_favorite($id,$_ENV['uid']) : false
         ];
@@ -52,6 +53,10 @@ class DetailController extends SiteController
         return self::view('site.detail',$data);
     }
     public function mobile($id){
+        //调取缓存
+        $cache = SiteCacheModel::m_article_view($_ENV['site_id'],$id);
+        if(!empty($cache))return $cache;
+
         $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
 
         if(empty($info))abort(404);
@@ -68,11 +73,15 @@ class DetailController extends SiteController
         $data['article'] = [
             'title'     => $info->title,
             'summary'   => $info->summary,
-            'content'   => $info->content,
+            'content'   => content_image_crop($info->content),
             'time'      => time_down(strtotime($info->post_time)),
             'category'  => $info->category_name,
-            'image'     => $info->image
+            'image'     => image_crop($info->image,500)
         ];
-        return self::view('mobile.site.detail',$data);
+
+        $view = self::make('mobile.site.detail',$data);
+        SiteCacheModel::m_article_view_set($_ENV['site_id'],$id,$view);
+
+        return $view;
     }
 }

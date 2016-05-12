@@ -89,7 +89,14 @@ return [
         //文章 article:site:id
         'article'=>'article',
         //文章列表缓存
-        'home'=>'home'
+        'home'=>'home',
+        //视图缓存
+        'view' => [
+            'm' => [
+                //M站文章页视图缓存 key:site_id:article_id
+                'article' => 'site:view:m:article'
+            ]
+        ]
     ],
 
     /*

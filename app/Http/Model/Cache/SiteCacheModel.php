@@ -8,7 +8,6 @@
 
 namespace App\Http\Model\Cache;
 
-
 class SiteCacheModel extends RedisModel
 {
     /*
@@ -122,5 +121,37 @@ class SiteCacheModel extends RedisModel
     */
     public static function home_list_clear($site_id){
         return self::del(self::home_list_key($site_id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 子站M站文章视图缓存 获取
+    |--------------------------------------------------------------------------
+    */
+    public static function m_article_view($site_id,$article_id){
+        return self::pget(self::m_article_view_key($site_id,$article_id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 子站M站文章视图缓存 设置
+    |--------------------------------------------------------------------------
+    */
+    public static function m_article_view_set($site_id,$article_id,$view){
+        return self::pset(self::m_article_view_key($site_id,$article_id),$view,3000);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 子站M站文章视图缓存 删除
+    |--------------------------------------------------------------------------
+    */
+    public static function m_article_view_clear($site_id,$article_id){
+        return self::del(self::m_article_view_key($site_id,$article_id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 子站M站文章视图缓存 KEY
+    |--------------------------------------------------------------------------
+    */
+    public static function m_article_view_key($site_id,$article_id){
+        return config('cache.prefix').':'.config('cache.site.view.m.article').':'.$site_id.':'.$article_id;
     }
 }

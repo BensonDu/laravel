@@ -57,7 +57,7 @@ class ToutiaoController extends FeedController
         $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
         if(!isset($data['article']->content)) abort(404);
         //查找替换文章中图片 添加裁剪参数
-        $data['article']->content   = self::article_img_crop($data['article']->content);
+        $data['article']->content   = content_image_crop($data['article']->content);
         //设置图片裁剪参数
         $data['article']->image     = image_crop($data['article']->image,500);
         //视图渲染
