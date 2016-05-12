@@ -8,6 +8,8 @@
 
 namespace App\Http\Model\Cache;
 
+use PRedis;
+
 class SiteCacheModel extends RedisModel
 {
     /*
@@ -128,7 +130,7 @@ class SiteCacheModel extends RedisModel
     |--------------------------------------------------------------------------
     */
     public static function m_article_view($site_id,$article_id){
-        return self::pget(self::m_article_view_key($site_id,$article_id));
+        return PRedis::hget(self::m_article_view_key($site_id),$article_id);
     }
     /*
     |--------------------------------------------------------------------------
@@ -136,7 +138,10 @@ class SiteCacheModel extends RedisModel
     |--------------------------------------------------------------------------
     */
     public static function m_article_view_set($site_id,$article_id,$view){
-        return self::pset(self::m_article_view_key($site_id,$article_id),$view,3000);
+        $key = self::m_article_view_key($site_id);
+        $ttl = !self::exists($key) ? 300 : 0;
+        PRedis::hset($key,$article_id,$view);
+        return $ttl ? self::expire($key,$ttl) : true;
     }
     /*
     |--------------------------------------------------------------------------
@@ -144,14 +149,14 @@ class SiteCacheModel extends RedisModel
     |--------------------------------------------------------------------------
     */
     public static function m_article_view_clear($site_id,$article_id){
-        return self::del(self::m_article_view_key($site_id,$article_id));
+        return PRedis::hdel(self::m_article_view_key($site_id),$article_id);
     }
     /*
     |--------------------------------------------------------------------------
     | 子站M站文章视图缓存 KEY
     |--------------------------------------------------------------------------
     */
-    public static function m_article_view_key($site_id,$article_id){
-        return config('cache.prefix').':'.config('cache.site.view.m.article').':'.$site_id.':'.$article_id;
+    public static function m_article_view_key($site_id){
+        return config('cache.prefix').':'.config('cache.site.view.m.article').':'.$site_id;
     }
 }
