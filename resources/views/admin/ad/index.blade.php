@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <div class="text" v-if="ad.type == 2">
-                    <div class="name"><p>文案 &nbsp;&nbsp;注: #高亮文字#</p></div>
+                    <div class="name"><p>文案 &nbsp;&nbsp;注：使用##来标记超链接选择文字</p></div>
                     <div class="textarea">
                         <textarea maxlength="100" placeholder="输入广告文案" v-model="ad.text"></textarea>
                     </div>
