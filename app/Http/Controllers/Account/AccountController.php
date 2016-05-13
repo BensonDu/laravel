@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Account;
 use App\Http\Model\AccountModel;
 use App\Http\Model\CaptchaModel;
 use App\Http\Controllers\Controller;
+use App\Http\Model\GeetestModel;
 
 class AccountController extends Controller
 {
@@ -73,6 +74,16 @@ class AccountController extends Controller
     {
         $username = $this->request->input('username');
         $phone    = $this->request->input('phone');
+
+        //是否通过极验
+        $gtaccess = session('gtaccess');
+        if(!empty($gtaccess) && $gtaccess){
+            session()->put('gtaccess',false);
+        }
+        else{
+            return $this->ApiOut(10004,'图片验证码错误');
+        }
+
         if(empty($phone) && !empty($username)){
             $info = AccountModel::get_user_info_by_username_or_mobilephone($username);
             if(isset($info->mobilephone) && strlen(trim($info->mobilephone)) == 11){
@@ -94,6 +105,27 @@ class AccountController extends Controller
     {
         $ret = CaptchaModel::verify($phone,$captcha);
         return $ret['code'] == '0';
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 极验验证码起始
+    |--------------------------------------------------------------------------
+    */
+    public function gtstart(){
+        return GeetestModel::getToken();
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 极验验证码验证
+    |--------------------------------------------------------------------------
+    */
+    public function gtverify(){
+        $challenge   = request()->input('geetest_challenge');
+        $validate    = request()->input('geetest_validate');
+        $seccode     = request()->input('geetest_seccode');
+        $ret = GeetestModel::validate($challenge,$validate,$seccode);
+        session()->put('gtaccess',$ret);
+        return self::ApiOut($ret ? 0 : 10001,'验证完成');
     }
     /*
     |--------------------------------------------------------------------------

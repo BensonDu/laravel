@@ -146,6 +146,9 @@ else{
     Route::post('/account/exist', 'Account\AccountController@exist');
     //发送验证码
     Route::post('/account/captcha', 'Account\AccountController@captcha');
+    //极验验证码
+    Route::get('/account/geetest/start', 'Account\AccountController@gtstart');
+    Route::post('/account/geetest/verify', 'Account\AccountController@gtverify');
     //找回密码页面
     Route::get('/account/find', 'Account\FindController@index');
     Route::post('/account/find', 'Account\FindController@post');

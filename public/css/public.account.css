@@ -23,7 +23,6 @@
     position: relative;
     width: 100%;
     padding-left: 60px;
-    z-index: 1;
     overflow: hidden;
     transition: padding-left .4s;
     -moz-transition: padding-left .4s; /* Firefox 4 */
@@ -355,3 +354,9 @@
     visibility: visible;
     opacity: 1;
 }
+
+/*极验start*/
+.gt_holder.popup .gt_mask{
+    z-index: 10;
+}
+/*极验end*/
