@@ -283,7 +283,9 @@ class geetest {
         }
 
         for ($j = 0; $j < strlen($string); $j++) {
-            $res += $key[$array_value[$j]];
+            if(isset($array_value[$j]) && isset($key[$array_value[$j]])){
+                $res += $key[$array_value[$j]];
+            }
         }
         $res = $res - $this->decodeRandBase($challenge);
 
