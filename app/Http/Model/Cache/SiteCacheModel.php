@@ -139,7 +139,7 @@ class SiteCacheModel extends RedisModel
     */
     public static function m_article_view_set($site_id,$article_id,$view){
         $key = self::m_article_view_key($site_id);
-        $ttl = !self::exists($key) ? 300 : 0;
+        $ttl = PRedis::ttl($key) < 0 ? 300 : 0;
         PRedis::hset($key,$article_id,$view);
         return $ttl ? self::expire($key,$ttl) : true;
     }

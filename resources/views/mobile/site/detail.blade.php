@@ -53,7 +53,7 @@
             },
             methods : {}
         });
-        this.render = function (data) {console.log(data);
+        this.render = function (data) {
             var l = data.length,ret = [];
             for(var i = 0; i < l ; i++){
                 ret[i] = {
