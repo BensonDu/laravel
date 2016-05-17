@@ -65,9 +65,10 @@
                 already_hide--;
                 move = -already_hide*(width);
             }
-            self.move(move);
-            self.btn_display_syn();
+
         }
+        self.move(move);
+        self.btn_display_syn();
     };
 
     this.keep_right_full = function(){

@@ -141,5 +141,5 @@
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script>var default_data = {article : {total : '{{$articles['total']}}'}}</script>
-<script src="/js/site.index.js?"></script>
+<script src="/js/site.index.js?v1"></script>
 @stop
