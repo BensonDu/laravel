@@ -8,6 +8,7 @@
 
 namespace App\Http\Model;
 
+use App\Http\Model\Cache\SiteCacheModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -92,8 +93,12 @@ class SiteSpecialModel extends Model
     | @return array
     |
     */
-    public static function get_special_count($site_id,$deleted = 0){
-        return SiteSpecialModel::where('site_id' ,$site_id)->where('deleted',$deleted)->count();
+    public static function get_special_count($site_id,$deleted = 0,$post_status = null){
+        $query = SiteSpecialModel::where('site_id' ,$site_id)->where('deleted',$deleted);
+        if(!is_null($post_status)){
+            $query->where('post_status',$post_status);
+        }
+        return $query->count();
     }
     /*
     |--------------------------------------------------------------------------
@@ -105,7 +110,8 @@ class SiteSpecialModel extends Model
     |
     */
     public static function special_delete($site_id,$id){
-        return SiteSpecialModel::where('site_id' ,$site_id)->where('id',$id)->update(['deleted' => 1]);
+        SiteSpecialModel::where('site_id' ,$site_id)->where('id',$id)->update(['deleted' => 1]);
+        return SiteCacheModel::site_nav_clear($site_id);
     }
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +123,8 @@ class SiteSpecialModel extends Model
     |
     */
     public static function special_update($site_id,$id,$data){
-        return SiteSpecialModel::where('site_id' ,$site_id)->where('id',$id)->update($data);
+        SiteSpecialModel::where('site_id' ,$site_id)->where('id',$id)->update($data);
+        return SiteCacheModel::site_nav_clear($site_id);
     }
     /*
     |--------------------------------------------------------------------------
@@ -138,7 +145,8 @@ class SiteSpecialModel extends Model
         $special->list          = $data['list'];
         $special->create_time   = now();
         $special->update_time   = now();
-        return $special->save();
+        $special->save();
+        return SiteCacheModel::site_nav_clear($site_id);
     }
     /*
     |--------------------------------------------------------------------------

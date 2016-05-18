@@ -1,6 +1,6 @@
 @extends('layout.base')
 @section('style')
-@parent<link href="/css/admin.base.css?" rel="stylesheet">
+@parent<link href="/css/admin.base.css?v" rel="stylesheet">
 @stop
 @section('nav')
     @parent
@@ -26,6 +26,7 @@
 @if(isset($_ENV['admin']['role']) && ($_ENV['admin']['role'] > 2))
             <a href="/admin/ad" ><span>广告管理</span></a>
             <a href="/admin/user" ><span>用户管理</span></a>
+            <a href="/admin/site" ><span>站点管理</span></a>
 @endif
         </div>
     </div>

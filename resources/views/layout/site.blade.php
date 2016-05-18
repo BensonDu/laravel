@@ -28,19 +28,17 @@
             </a>
 @endif
         </div>
+@if($site['contribute'])
         <div class="post">
             <a href="{{$_ENV['platform']['home']}}/user/edit">投稿</a>
         </div>
+@endif
     </div>
     <div class="mid">
         <div class="container">
-            <a href="/" class="{{isset($active) && $active =='home' ? 'active' : ''}}"><span>最近更新</span></a>
-@if($site['special'] > 0)
-            <a href="/special" class="{{isset($active) && $active =='special' ? 'active' : ''}}"><span>专题聚光</span></a>
-@endif
-@if($site['id'] == '1')
-            <a href="http://tech2ipo.com/10028495" class="{{isset($active) && $active =='joinus' ? 'active' : ''}}"><span>关于我们</span></a>
-@endif
+@foreach($site['nav'] as $v)
+            <a href="{{$v['link']}}" target="{{!empty($v['id']) ? '_self' : '_blank'}}" class="{{isset($active) && $active == $v['id'] ? 'active' : ''}}"><span>{{$v['name']}}</span></a>
+@endforeach
         </div>
     </div>
     <div class="bottom">

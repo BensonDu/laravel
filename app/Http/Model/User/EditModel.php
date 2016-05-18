@@ -98,7 +98,7 @@ class EditModel extends Model
                 [
                     'category'          => $category,
                     'post_status'       => $post_status,
-                    'post_time'         => $time,
+                    'post_time'         => $post_status == 1 ? $now : $time,
                     'contribute_status' => 1
                 ]
             );

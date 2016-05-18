@@ -159,4 +159,68 @@ class SiteCacheModel extends RedisModel
     public static function m_article_view_key($site_id){
         return config('cache.prefix').':'.config('cache.site.view.m.article').':'.$site_id;
     }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取站点信息缓存
+    |--------------------------------------------------------------------------
+    */
+    public static function site_info_get($site_id){
+        return self::get(self::site_info_key($site_id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 设置站点信息缓存
+    |--------------------------------------------------------------------------
+    */
+    public static function site_info_set($site_id,$data){
+        return self::set(self::site_info_key($site_id),$data,600);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 清除站点信息缓存
+    |--------------------------------------------------------------------------
+    */
+    public static function site_info_clear($site_id){
+        return self::del(self::site_info_key($site_id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 站点信息缓存 KEY
+    |--------------------------------------------------------------------------
+    */
+    public static function site_info_key($site_id){
+        return config('cache.prefix').':'.config('cache.site.info').':'.$site_id;
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取站点导航缓存
+    |--------------------------------------------------------------------------
+    */
+    public static function site_nav_get($site_id){
+        return self::get(self::site_nav_key($site_id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 设置站点导航缓存
+    |--------------------------------------------------------------------------
+    */
+    public static function site_nav_set($site_id,$data){
+        return self::set(self::site_nav_key($site_id),$data,600);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 清除站点导航缓存
+    |--------------------------------------------------------------------------
+    */
+    public static function site_nav_clear($site_id){
+        return self::del(self::site_nav_key($site_id));
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 站点导航缓存 KEY
+    |--------------------------------------------------------------------------
+    */
+    public static function site_nav_key($site_id){
+        return config('cache.prefix').':'.config('cache.site.nav').':'.$site_id;
+    }
 }

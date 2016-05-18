@@ -1,0 +1,1286 @@
+.list-header{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #eee;
+}
+.list-header .nav{
+    height: 100%;
+    float: left;
+}
+.list-header .nav a{
+    display: inline-block;
+    height: 100%;
+    margin-right: 28px;
+    line-height: 50px;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+}
+.list-header .nav a.active{
+    font-weight: 900;
+    border-bottom: 2px solid #6e8cfb;
+}
+.list-header .nav a:hover{
+    color: #999;
+}
+.list-header .add{
+    height: 100%;
+    padding: 14px 0 0;
+    float: right;
+}
+.list-header .add a{
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0 14px;
+    transition: background .4s;
+    -moz-transition: background .4s;
+    -webkit-transition: background .4s;
+}
+.list-header .add a span{
+    line-height: 34px;
+    font-size: 14px;
+    color: inherit;
+    vertical-align: top;
+    margin-left: 4px;
+}
+.list-header .add a em{
+    line-height: 14px;
+    font-size: 20px;
+    color: inherit;
+}
+.list-header .add a:hover{
+    opacity: .7;
+}
+
+.site-form{
+    width: 100%;
+    padding: 30px 0;
+}
+.site-form .item{
+    width: 100%;
+    margin-bottom: 16px;
+}
+.site-form .item .name{
+    width: 100%;
+    height: 40px;
+}
+.site-form .item .name h3{
+    display: inline-block;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 40px;
+    margin-right: 10px;
+    float: left;
+}
+.site-form .item .name span{
+    display: inline-block;
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    color: #999;
+    float: left;
+}
+.site-form .item .input{
+    position: relative;
+    width: 100%;
+}
+.site-form .item .input input{
+    display: inline-block;
+    background: #f5f5f5;
+    color: #666;
+    height: 40px;
+    width: 100%;
+    max-width: 400px;
+    padding: 0 20px;
+    font-size: 16px;
+    line-height: 40px;
+    border: none;
+    border-radius: 3px;
+}
+.site-form .item .input textarea:focus,
+.site-form .item .input input:focus{
+    outline: none;
+}
+.site-form .item .input .disable{
+    position: absolute;
+    display: none;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    cursor: not-allowed;
+}
+.site-form .item .input.disable .disable{
+    display: block;
+}
+.site-form .item .input.disable input{
+    color: #999;
+}
+.site-form .item .input textarea{
+    display: inline-block;
+    color: #666;
+    padding: 10px 20px;
+    margin-top: 10px;
+    width: 400px;
+    font-size: 16px;
+    line-height: 28px;
+    height: 100px;
+    background: #f5f5f5;
+    border-radius: 3px;
+    overflow: hidden;
+    resize: none;
+    border: none;
+}
+.site-form .btn-group{
+    width: 400px;
+    height: 40px;
+    margin-top: 40px;
+}
+.site-form .btn-group a{
+    display: inline-block;
+    width: 49%;
+    height: 100%;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+.site-form .btn-group a em{
+    display: none;
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+}
+.site-form .btn-group a.done em,
+.site-form .btn-group a.loading em{
+    display: inline-block;
+}
+.site-form .btn-group a.done span,
+.site-form .btn-group a.loading span{
+    display: none;
+}
+.site-form .btn-group a.loading em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fslim-circle.png) no-repeat center;
+    background-size: 20px;
+    animation: rotating 2s infinite linear;
+    -webkit-animation: rotating 2s infinite linear;
+    -moz-animation: rotating 2s infinite linear;
+}
+.site-form .btn-group a.done em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fmark-white.png) no-repeat center;
+    background-size: 20px;
+}
+.site-form .btn-group a span{
+    display: inline-block;
+    line-height: 40px;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+.site-form .btn-group a.save{
+     background: #444;
+ }
+.site-form .btn-group a.save span{
+    color: #fff;
+}
+.site-form .btn-group a.clear{
+    border: 1px solid #444;
+    background: #fff;
+ }
+.site-form .btn-group a.clear span{
+    color: #444;
+}
+
+.site-logo{
+    width: 400px;
+    padding: 30px 0;
+    overflow: visible;
+}
+.site-logo .item{
+    display: inline-block;
+    width: 50%;
+    float: left;
+    margin-bottom: 16px;
+}
+.site-logo .item .name{
+    position: relative;
+    width: 100%;
+    height: 40px;
+}
+.site-logo .item .name h3{
+    display: inline-block;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 40px;
+    margin-right: 10px;
+    float: left;
+}
+.site-logo .item .name span{
+    display: inline-block;
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    color: #999;
+    float: left;
+}
+.site-logo .item .name a{
+    display: inline-block;
+    height: 40px;
+    font-size: 12px;
+    line-height: 40px;
+    color: #6e8cfb;
+    cursor: pointer;
+    float: left;
+}
+.site-logo .item .name a img{
+    position: absolute;
+    display: none;
+    right: -100%;
+    top: 33px;
+    width: 300px;
+    height: auto;
+    padding: 12px;
+    background: #ccc;
+    border-radius: 3px;
+    box-shadow: 0 0 8px 0 #666;
+    z-index: 10;
+}
+.site-logo .item .name a:hover img{
+    display: block;
+}
+.site-logo .item .preview{
+    width: 100%;
+    height: 120px;
+    padding: 15px 0;
+}
+.site-logo .item .preview .img{
+    position: relative;
+    height: 90px;
+    min-width: 90px;
+    max-width: 270px;
+    border-radius: 3px;
+    border: 1px dashed #eee;
+    float: left;
+}
+.site-logo .item .preview .img .img-wrap{
+    width: 100%;
+    height: 100%;
+    background: #fafafa;
+    overflow: hidden;
+}
+.site-logo .item .preview .img img{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    max-width: 520px;
+}
+.site-logo .item .preview .img input{
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.001;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    cursor: pointer;
+}
+.site-logo .item .preview .img .close{
+    display: inline-block;
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    width: 16px;
+    height: 16px;
+    line-height: 12px;
+    font-size: 14px;
+    border: 1px dotted #ccc;
+    color: #ccc;
+    text-align: center;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    z-index: 1;
+}
+.site-logo .item .preview .img .close:hover{
+    color: #999;
+}
+.site-logo .btn-group{
+    width: 400px;
+    height: 40px;
+    margin-top: 40px;
+    float: left;
+}
+.site-logo .btn-group a{
+    display: inline-block;
+    width: 70%;
+    height: 100%;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+.site-logo .btn-group a em{
+    display: none;
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+}
+.site-logo .btn-group a.done em,
+.site-logo .btn-group a.loading em{
+    display: inline-block;
+}
+.site-logo .btn-group a.done span,
+.site-logo .btn-group a.loading span{
+    display: none;
+}
+.site-logo .btn-group a.loading em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fslim-circle.png) no-repeat center;
+    background-size: 20px;
+    animation: rotating 2s infinite linear;
+    -webkit-animation: rotating 2s infinite linear;
+    -moz-animation: rotating 2s infinite linear;
+}
+.site-logo .btn-group a.done em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fmark-white.png) no-repeat center;
+    background-size: 20px;
+}
+.site-logo .btn-group a span{
+    display: inline-block;
+    line-height: 40px;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+.site-logo .btn-group a.save{
+    background: #444;
+}
+.site-logo .btn-group a.save span{
+    color: #fff;
+}
+
+.site-social{
+    width: 400px;
+    padding: 30px 0;
+    overflow: visible;
+}
+.site-social .item{
+    display: inline-block;
+    width: 100%;
+    float: left;
+    margin-bottom: 16px;
+}
+.site-social .item .name{
+    position: relative;
+    width: 100%;
+    height: 40px;
+}
+.site-social .item .name h3{
+    display: inline-block;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 40px;
+    margin-right: 10px;
+    float: left;
+}
+.site-social .item .name span{
+    display: inline-block;
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px;
+    color: #999;
+    float: left;
+}
+.site-social .item .preview{
+    width: 100%;
+    height: 120px;
+    padding: 15px 0;
+}
+.site-social .item .preview .img{
+    position: relative;
+    height: 90px;
+    min-width: 90px;
+    border-radius: 3px;
+    border: 1px dashed #eee;
+    float: left;
+}
+.site-social .item .preview .img .img-wrap{
+    width: 100%;
+    height: 100%;
+    background: #fafafa;
+    overflow: hidden;
+}
+.site-social .item .preview .img img{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    max-width: 520px;
+}
+.site-social .item .preview .img input{
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    opacity: 0.001;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    cursor: pointer;
+}
+.site-social .item .preview .img .close{
+    display: inline-block;
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    width: 16px;
+    height: 16px;
+    line-height: 12px;
+    font-size: 14px;
+    border: 1px dotted #ccc;
+    color: #ccc;
+    text-align: center;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    z-index: 1;
+}
+.site-social .item .preview .img .close:hover{
+    color: #999;
+}
+.site-social .item .input{
+    position: relative;
+    width: 100%;
+}
+.site-social .item .input input{
+    display: inline-block;
+    background: #f5f5f5;
+    color: #666;
+    height: 40px;
+    width: 100%;
+    max-width: 400px;
+    padding: 0 20px;
+    font-size: 16px;
+    line-height: 40px;
+    border: none;
+    border-radius: 3px;
+}
+.site-social .item .input textarea:focus,
+.site-social .item .input input:focus{
+    outline: none;
+}
+.site-social .item .input .disable{
+    position: absolute;
+    display: none;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    cursor: not-allowed;
+}
+.site-social .item .input.disable .disable{
+    display: block;
+}
+.site-social .item .input.disable input{
+    color: #999;
+}
+.site-social .item .input textarea{
+    display: inline-block;
+    color: #666;
+    padding: 10px 20px;
+    margin-top: 10px;
+    width: 400px;
+    font-size: 16px;
+    line-height: 28px;
+    height: 100px;
+    background: #f5f5f5;
+    border-radius: 3px;
+    overflow: hidden;
+    resize: none;
+    border: none;
+}
+.site-social .item .weibo{
+    width: 100%;
+    overflow: hidden;
+}
+.site-social .item .weibo input{
+    display: inline-block;
+    height: 40px;
+    font-size: 16px;
+    line-height: 40px;
+    float: left;
+}
+.site-social .item .weibo input:focus{
+    outline: none;
+}
+.site-social .item .weibo .prefix{
+    width: 38%;
+    text-align: right;
+    border-bottom: 1px solid #f5f5f5;
+    border-top: 1px solid #f5f5f5;
+    border-left: 1px solid #f5f5f5;
+    border-right: none;
+    color: #999;
+    cursor: not-allowed;
+}
+.site-social .item .weibo .suffix{
+    width: 62%;
+    background: #f5f5f5;
+    color: #666;
+    border: none;
+}
+.site-social .btn-group{
+    width: 400px;
+    height: 40px;
+    margin-top: 40px;
+    float: left;
+}
+.site-social .btn-group a{
+    display: inline-block;
+    width: 70%;
+    height: 100%;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+.site-social .btn-group a em{
+    display: none;
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+}
+.site-social .btn-group a.done em,
+.site-social .btn-group a.loading em{
+    display: inline-block;
+}
+.site-social .btn-group a.done span,
+.site-social .btn-group a.loading span{
+    display: none;
+}
+.site-social .btn-group a.loading em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fslim-circle.png) no-repeat center;
+    background-size: 20px;
+    animation: rotating 2s infinite linear;
+    -webkit-animation: rotating 2s infinite linear;
+    -moz-animation: rotating 2s infinite linear;
+}
+.site-social .btn-group a.done em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fmark-white.png) no-repeat center;
+    background-size: 20px;
+}
+.site-social .btn-group a span{
+    display: inline-block;
+    line-height: 40px;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+.site-social .btn-group a.save{
+    background: #444;
+}
+.site-social .btn-group a.save span{
+    color: #fff;
+}
+
+.site-nav{
+    width: 600px;
+    padding: 30px 0;
+    overflow: visible;
+}
+.list-body{
+    position: relative;
+    min-height: 445px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+.list-body table{
+    width: 100%;
+    border-spacing: 0;
+}
+.list-body table thead{
+    width: 100%;
+    line-height: 40px;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    user-select:none;
+}
+.list-body table thead th:nth-child(1){
+    padding: 0 20px;
+}
+.list-body table thead th{
+    text-align: left;
+}
+.list-body table thead th span{
+    font-size: 12px;
+    color: #333;
+}
+.list-body table thead th.orderable{
+    cursor: pointer;
+}
+.list-body table thead th.orderable em{
+    display: inline-block;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficon-button.png) no-repeat;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-right: 5px;
+    background-position: -96px -64px;
+}
+.list-body table thead th.orderable.asc em{
+    background-position: -73px -64px;
+}
+.list-body table thead th.orderable.desc em{
+    background-position: -85px -64px;
+}
+.list-body table tbody tr{
+    animation: fadeIn 0.7s linear 0s normal forwards;
+    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
+    -moz-animation: fadeIn 0.7s linear 0s normal forwards;
+}
+.list-body table tbody tr:nth-child(2n+1){
+    background: #f2f3f5;
+}
+.list-body table tbody tr:hover{
+    background: #eee;
+}
+.list-body table tbody td{
+    font-size: 12px;
+    color: #666;
+    line-height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.list-body table tbody td div{
+    line-height: inherit;
+    white-space: inherit;
+    font-size: inherit;
+}
+.list-body table tbody td a{
+    line-height: inherit;
+    white-space: inherit;
+    font-size: inherit;
+}
+.list-body table tbody td span{
+    font-size: inherit;
+    line-height: inherit;
+}
+.list-body table tbody td.title{
+    padding: 0 20px;
+    max-width: 200px;
+    text-overflow: ellipsis;
+}
+.list-body table tbody td.title.active{
+    cursor: pointer;
+}
+.list-body table tbody td.title.active:hover{
+    opacity: .7;
+}
+.list-body table tbody tr .title.new:before{
+    content: ' ';
+    display: inline-block;
+    height: 7px;
+    width: 7px;
+    vertical-align: 2px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: #6e8cfb;
+}
+.list-body table tbody .title.new{
+    font-weight: 900 ;
+}
+.list-body table tbody td.publish em{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    vertical-align: -7px;
+    margin-right: 5px;
+    background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-size: 90px;
+}
+.list-body table tbody td.publish.now em{
+    background-position:0 1px;
+}
+.list-body table tbody td.publish.cancel em{
+    background-position: 0 -23px;
+    background-size: 92px;
+}
+.list-body table tbody td.publish span{
+    color: #666;
+}
+.list-body table tbody td.publish.now:after{
+    content:'显示';
+    display: inline-block;
+}
+.list-body table tbody td.publish.cancel:after{
+    content:'隐藏';
+    display: inline-block;
+}
+.list-body table tbody td.handle div.hide{
+    visibility: hidden;
+}
+.list-body table tbody td.handle a{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.list-body table tbody td.handle a:hover{
+    opacity: .8;
+}
+.list-body table tbody td.handle a em{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: -5px;
+    margin-right: 5px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-size: 40px;
+}
+.list-body table tbody td.handle a.post em{
+    background-position: -22px 3px;
+    background-size: 90px;
+}
+.list-body table tbody td.handle a.edit em{
+    background-position: -20px -43px;
+    background-size: 88px;
+}
+.list-body table tbody td.handle a.del em{
+    background-position: -19px -20px;
+    background-size: 88px;
+}
+.list-body table tbody td.handle a.preview em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feye.png) no-repeat center;
+    background-size: 18px;
+    background-position: 0 -1px;
+}
+.list-body table tbody td.handle a.recovery em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Frecovery-icon.png) no-repeat center;
+    background-size: 16px;
+    background-position: 2px 1px;
+}
+.list-body table tbody td.handle a.disable{
+    opacity: .3;
+    cursor: not-allowed;
+}
+.list-body table tbody td.handle a span{
+    color: #666;
+}
+.list-body .add{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    border: 1px dashed #999;
+    text-align: center;
+}
+.list-body .add p{
+    display: inline-block;
+    width: 100px;
+    line-height: 46px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 900;
+    cursor: pointer;
+}
+.list-body .add p:hover{
+    opacity: .5;
+}
+
+.question{
+    position: relative;
+    display: inline-block;
+    font-size: 12px;
+    height: 18px;
+    text-align: center;
+    cursor: pointer;
+    overflow: visible;
+}
+.question:before{
+    content: '?';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    margin-right: 8px;
+    padding-left: 1px;
+    color: #999;
+    border: 1px solid #999;
+    border-radius: 50%;
+}
+.question i{
+    position: absolute;
+    display: none;
+    right: -173px;
+    top: 20px;
+    width: 200px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    font-size: 12px;
+    z-index: 6;
+    color: #fff;
+    background: #999;
+    text-align: left;
+    padding: 10px 10px 10px 16px;
+    line-height: 24px;
+    white-space: normal;
+}
+.question i:before{
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -7px;
+    width: 0;
+    height: 0;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom: 6px solid #aaa;
+    vertical-align: -1px;
+    margin-left: 5px;
+}
+.question:hover i{
+    display: inline-block;
+}
+
+.pop-container{
+    position: fixed;
+    top: 0;
+    padding-top: 40px;
+    right: -100%;
+    height: 100%;
+    z-index: 10;
+    box-shadow: -4px 43px 10px rgba(0,0,0,.07);
+    -webkit-transition: right 0.4s ease-out;
+    -moz-transition: right 0.4s ease-out;
+    transition: right 0.4s ease-out;
+}
+.pop-container.edit,
+.pop-container.add{
+    right: 0;
+}
+.pop-container.edit .content,
+.pop-container.add .content{
+    display: block;
+}
+.pop-container .content{
+    display: none;
+    width: 400px;
+    height: 100%;
+    padding: 20px 40px 60px;
+    overflow: auto;
+    background: rgba(255,255,255,1);
+}
+.pop-container .content .header{
+    width: 100%;
+    height: 30px;
+}
+.pop-container .content .header h3{
+    display: inline-block;
+    line-height: 30px;
+    font-size: 16px;
+    height: 30px;
+}
+.pop-container.edit .content .header h3 em{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+    background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-position: -24px -56px;
+    background-size: 116px;
+}
+.pop-container.add .content .header h3 em:before{
+    content: '+';
+    font-size: 18px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+.pop-container .content .header h3 span{
+    vertical-align: top;
+    line-height: inherit;
+    font-size: inherit;
+}
+.pop-container.edit .content .header h3 span:before{
+    content: '导航编辑';
+    display: inline-block;
+    vertical-align: top;
+    line-height: inherit;
+    font-size: inherit;
+}
+.pop-container.add .content .header h3 span:before{
+    content: '导航添加';
+    display: inline-block;
+    vertical-align: top;
+    line-height: inherit;
+    font-size: inherit;
+}
+.pop-container .content::-webkit-scrollbar-track-piece{background-color:#fff;}
+.pop-container .content::-webkit-scrollbar{width:3px;}
+.pop-container .content::-webkit-scrollbar-thumb{background:#fff;}
+.pop-container .content:hover::-webkit-scrollbar-thumb{background:#999;}
+.pop-container .content .header a{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+    -webkit-transition: transform 0.1s ease-in;
+    -moz-transition: transform 0.1s ease-in;
+    transition: transform 0.1s ease-in;
+}
+.pop-container .content .header a:hover{
+    transform: rotate(75deg);
+    -ms-transform: rotate(75deg);		/* IE 9 */
+    -webkit-transform: rotate(75deg);	/* Safari and Chrome */
+    -moz-transform: rotate(75deg);		/* Firefox */
+}
+
+.pop-container .content .section{
+    padding: 0 0 50px;
+}
+.pop-container .content .section>div .name{
+    width: 100%;
+    height: 20px;
+    overflow: visible;
+    border-bottom: 1px solid #eee;
+}
+.pop-container .content .section>div .name p{
+    display: inline-block;
+    float: left;
+    line-height: 20px;
+    font-size: 12px;
+    margin-right: 10px;
+    color: #999;
+}
+.pop-container .content .section>div .name p a{
+    display: inline-block;
+    line-height: 20px;
+    font-size: 12px;
+    vertical-align: top;
+    color: #208AFD;
+}
+.pop-container .content .section .textarea{
+    position: relative;
+    width: 100%;
+    padding: 20px 0;
+}
+.pop-container .content .section input{
+    display: inline-block;
+    color: #666;
+    padding: 0;
+    width: 100%;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: left;
+    resize: none;
+    border: none;
+}
+.pop-container .content .section input:focus{
+    display: inline-block;
+    color: #666;
+    padding: 0;
+    width: 100%;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: left;
+    resize: none;
+    border: none;
+}
+.pop-container .content .section textarea{
+    display: inline-block;
+    color: #666;
+    padding: 0;
+    width: 100%;
+    height: 100px;
+    font-size: 12px;
+    line-height: 28px;
+    text-align: left;
+    resize: none;
+    border: none;
+}
+.pop-container .content .section input:focus,
+.pop-container .content .section textarea:focus{
+    outline: none;
+}
+.pop-container .content .section textarea::-webkit-input-placeholder,
+.pop-container .content .section input::-webkit-input-placeholder{
+    color: #ccc;
+    line-height: 28px;
+    font-size: 12px;
+}
+.pop-container .content .section textarea::-moz-placeholder,
+.pop-container .content .section input::-moz-placeholder{
+    color: #ccc;
+    line-height: 28px;
+    font-size: 12px;
+}
+.pop-container .content .section textarea:-moz-placeholder,
+.pop-container .content .section input:-moz-placeholder{
+    color: #ccc;
+    line-height: 28px;
+    font-size: 12px;
+}
+.pop-container .content .section textarea:-ms-input-placeholder,
+.pop-container .content .section input:-ms-input-placeholder{
+    color: #ccc;
+    line-height: 28px;
+    font-size: 12px;
+}
+
+.pop-container .content .section .title{
+    margin: 50px 0;
+}
+
+.pop-container .content .section .display{
+    margin-bottom: 100px;
+}
+.pop-container .content .section .display .slider{
+    margin-top: 2px;
+    float: right;
+    width: 30px;
+    height: 16px;
+    background: #ddd;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .2s;
+    -moz-transition: background .2s; /* Firefox 4 */
+    -webkit-transition: background .2s; /* Safari 和 Chrome */
+}
+.pop-container .content .section .display .slider span{
+    display: inline-block;
+    width: 18px;
+    height: 16px;
+    padding: 2px;
+    transition: margin .2s ease-out;
+    -moz-transition: margin .2s ease-out; /* Firefox 4 */
+    -webkit-transition: margin .2s ease-out; /* Safari 和 Chrome */
+}
+.pop-container .content .section .display .slider span em{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 1px;
+    font-size: 12px;
+    vertical-align: top;
+    text-align: center;
+}
+.pop-container .content .section .display .slider.true span{
+    margin-left: 12px;
+}
+.pop-container .content .section .display .slider.true{
+    background: #6e8cfb;
+}
+.pop-container .content .section .display .slider.disable{
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.pop-container .content .section .link .textarea .disable{
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0 ;
+    left: 0;
+    cursor: not-allowed;
+    z-index: 1;
+}
+.pop-container .content .section .link .textarea.disable input{
+    color: #ccc;
+}
+.pop-container .content .section .link .textarea.disable .disable{
+    display: block;
+}
+
+.pop-container .content .confirm{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    float: left;
+    text-align: center;
+    z-index: 1;
+}
+.pop-container .content .confirm div{
+    display: inline-block;
+    width: 25%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+.pop-container .content .confirm div a{
+    display: inline-block;
+    width: 40px;
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+}
+.pop-container .content .confirm div a em{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-size: 140px;
+}
+.pop-container .content .confirm div a em.yes{
+    background-position:  8px 8px;;
+}
+.pop-container .content .confirm div a em.no{
+    background-position:  8px -27px;;
+}
+.pop-container .content .confirm div a:hover{
+    opacity: .6;
+}
+.pop-container .content .confirm div a span{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    line-height: 12px;
+    font-size: 12px;
+    color: #999;
+}
+
+.site-contribution{
+    width: 400px;
+    padding: 30px 20px 0 0;
+    overflow: visible;
+}
+.site-contribution .section{
+    width: 100%;
+    min-height: 400px;
+}
+.site-contribution .section .item{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    display: inline-block;
+    margin-bottom: 16px;
+}
+.site-contribution .section .item h3{
+    display: inline-block;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 40px;
+    margin-right: 10px;
+    float: left;
+}
+.site-contribution .section .item .slider{
+    margin-top: 12px;
+    float: right;
+    width: 30px;
+    height: 16px;
+    background: #ddd;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .2s;
+    -moz-transition: background .2s; /* Firefox 4 */
+    -webkit-transition: background .2s; /* Safari 和 Chrome */
+}
+.site-contribution .section .item .slider span{
+    display: inline-block;
+    width: 18px;
+    height: 16px;
+    padding: 2px;
+    transition: margin .2s ease-out;
+    -moz-transition: margin .2s ease-out; /* Firefox 4 */
+    -webkit-transition: margin .2s ease-out; /* Safari 和 Chrome */
+}
+.site-contribution .section .item .slider span em{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 1px;
+    font-size: 12px;
+    vertical-align: top;
+    text-align: center;
+}
+.site-contribution .section .item .slider.true span{
+    margin-left: 12px;
+}
+.site-contribution .section .item .slider.true{
+    background: #6e8cfb;
+}
+.site-contribution .section .item .slider.disable{
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.site-contribution .btn-group{
+    width: 400px;
+    height: 40px;
+    margin-top: 40px;
+    text-align: center;
+    float: left;
+}
+.site-contribution .btn-group a{
+    display: inline-block;
+    width: 70%;
+    height: 100%;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+.site-contribution .btn-group a em{
+    display: none;
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+}
+.site-contribution .btn-group a.done em,
+.site-contribution .btn-group a.loading em{
+    display: inline-block;
+}
+.site-contribution .btn-group a.done span,
+.site-contribution .btn-group a.loading span{
+    display: none;
+}
+.site-contribution .btn-group a.loading em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fslim-circle.png) no-repeat center;
+    background-size: 20px;
+    animation: rotating 2s infinite linear;
+    -webkit-animation: rotating 2s infinite linear;
+    -moz-animation: rotating 2s infinite linear;
+}
+.site-contribution .btn-group a.done em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fmark-white.png) no-repeat center;
+    background-size: 20px;
+}
+.site-contribution .btn-group a span{
+    display: inline-block;
+    line-height: 40px;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+.site-contribution .btn-group a.save{
+    background: #444;
+}
+.site-contribution .btn-group a.save span{
+    color: #fff;
+}
+
+@-webkit-keyframes rotating {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+@keyframes rotating {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes rotating {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}

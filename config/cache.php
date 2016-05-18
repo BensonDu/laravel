@@ -90,6 +90,8 @@ return [
         'article'=>'article',
         //文章列表缓存
         'home'=>'home',
+        //导航缓存 nav:id
+        'nav' => 'nav',
         //视图缓存
         'view' => [
             'm' => [

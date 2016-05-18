@@ -37,7 +37,7 @@ class AdminAuth
 
         //编辑
         if($role == 2){
-            if(isset($path[1]) && ($path[1] == 'user' || $path[1] == 'ad'))abort(403);
+            if(isset($path[1]) && ($path[1] == 'user' || $path[1] == 'ad' || $path[1] == 'site'))abort(403);
         }
         //认证撰稿人
         if($role == 1 ){

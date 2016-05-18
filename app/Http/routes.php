@@ -119,6 +119,21 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
         Route::post('/admin/ad/add', 'Admin\AdController@add');
         Route::post('/admin/ad/update', 'Admin\AdController@update');
         Route::get('/admin/ad/info', 'Admin\AdController@info');
+        //站点管理
+        Route::get('/admin/site', 'Admin\SiteController@index');
+        Route::get('/admin/site/index', 'Admin\SiteController@index');
+        Route::post('/admin/site/base', 'Admin\SiteController@base');
+        Route::get('/admin/site/logo', 'Admin\SiteController@logo');
+        Route::post('/admin/site/logo', 'Admin\SiteController@logosave');
+        Route::get('/admin/site/social', 'Admin\SiteController@social');
+        Route::post('/admin/site/social', 'Admin\SiteController@socialsave');
+        Route::get('/admin/site/nav', 'Admin\SiteController@nav');
+        Route::get('/admin/site/nav/list', 'Admin\SiteController@navlist');
+        Route::post('/admin/site/nav/add', 'Admin\SiteController@navadd');
+        Route::post('/admin/site/nav/update', 'Admin\SiteController@navupdate');
+        Route::get('/admin/site/nav/del', 'Admin\SiteController@navdel');
+        Route::get('/admin/site/contribution', 'Admin\SiteController@contribution');
+        Route::post('/admin/site/contribution', 'Admin\SiteController@contributionsave');
     });
 }
 //平台部分

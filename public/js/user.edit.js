@@ -394,7 +394,7 @@
               self.get_article_post(self.article_id);
           }
           else{
-              pop.error('更新发布信息失败','确定').one();
+              pop.error(ret.msg || '投稿失败','确定').one();
           }
           self.lock = false
       },{
