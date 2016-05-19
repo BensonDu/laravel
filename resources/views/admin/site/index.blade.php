@@ -31,7 +31,7 @@
         </div>
         <div class="item">
             <div class="name">
-                <h3>站点关键词</h3><span>( 用于SE0 )</span>
+                <h3>站点关键词</h3><span>( 用于SEO )</span>
             </div>
             <div class="input">
                 <textarea maxlength="100" v-model="keywords"></textarea>
