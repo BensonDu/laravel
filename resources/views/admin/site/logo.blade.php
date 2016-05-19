@@ -18,20 +18,6 @@
         </div>
         <div class="item">
             <div class="name">
-                <h3>M站 Logo</h3><a>[ 示例 ]<img src="http://static.chuang.pro/m-logo-ep.png"></a>
-            </div>
-            <div class="preview">
-                <div class="img">
-                    <div class="img-wrap">
-                        <img v-bind:src="!mobile_logo ? 'http://dn-noman.qbox.me/default-upload-image-square.png' : mobile_logo">
-                    </div>
-                    <input type="file" accept="image/*" v-on:change="_upload('mobile_logo')" v-el:mobile_logo>
-                    <a class="close" v-on:click="_clear('mobile_logo')">×</a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="name">
                 <h3>站点 icon</h3><a>[ 示例 ]<img src="http://static.chuang.pro/site-favicon-example.png"></a>
             </div>
             <div class="preview">
@@ -44,7 +30,21 @@
                 </div>
             </div>
         </div>
-        <div class="item">
+        <div class="item full">
+            <div class="name">
+                <h3>M站 Logo</h3><a>[ 示例 ]<img src="http://static.chuang.pro/m-logo-ep.png"></a>
+            </div>
+            <div class="preview">
+                <div class="img">
+                    <div class="img-wrap">
+                        <img v-bind:src="!mobile_logo ? 'http://dn-noman.qbox.me/default-upload-image-square.png' : mobile_logo">
+                    </div>
+                    <input type="file" accept="image/*" v-on:change="_upload('mobile_logo')" v-el:mobile_logo>
+                    <a class="close" v-on:click="_clear('mobile_logo')">×</a>
+                </div>
+            </div>
+        </div>
+        <div class="item full">
             <div class="name">
                 <h3>渠道页面 Logo</h3><a>[ 示例 ]<img src="http://static.chuang.pro/feed-logo-example.png"></a>
             </div>

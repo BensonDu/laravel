@@ -1,30 +1,32 @@
 @extends('admin.site.layout')
 
 @section('container')
-    <div class="list-body">
-        <table>
-            <thead>
-            <tr>
-                <th><span>导航名称</span></th>
-                <th><span>显示状态</span></th>
-                <th><span>操作</span></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="a in list">
-                <td class="title active" v-on:click="_edit(a.id,a.name,a.type,a.display,a.link)"><a v-text="a.name"></a></td>
-                <td class="publish" v-bind:class="a.display == '1' ? 'now' : 'cancel'"><em></em></td>
-                <td class="handle">
-                    <div>
-                        <a class="edit" v-on:click="_edit(a.id,a.name,a.type,a.display,a.link)"><em></em><span>修改</span></a>
-                        <a class="del" v-on:click="_del(a.id,a.type,a.display,a.link)" v-bind:class="a.type == 1 ? 'disable' : ''"><em></em><span>删除</span></a>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="add" v-if="list.length < 6">
-            <p v-on:click="_add">+</p>
+    <div class="site-nav">
+        <div class="list-body">
+            <table>
+                <thead>
+                <tr>
+                    <th><span>导航名称</span></th>
+                    <th><span>显示状态</span></th>
+                    <th><span>操作</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="a in list">
+                    <td class="title active" v-on:click="_edit(a.id,a.name,a.type,a.display,a.link)"><a v-text="a.name"></a></td>
+                    <td class="publish" v-bind:class="a.display == '1' ? 'now' : 'cancel'"><em></em></td>
+                    <td class="handle">
+                        <div>
+                            <a class="edit" v-on:click="_edit(a.id,a.name,a.type,a.display,a.link)"><em></em><span>修改</span></a>
+                            <a class="del" v-on:click="_del(a.id,a.type,a.display,a.link)" v-bind:class="a.type == 1 ? 'disable' : ''"><em></em><span>删除</span></a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="add" v-if="list.length < 6">
+                <p v-on:click="_add">+</p>
+            </div>
         </div>
     </div>
 @stop

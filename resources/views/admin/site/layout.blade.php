@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent <link href="/css/admin.site.css" rel="stylesheet">
+@section('style')@parent <link href="/css/admin.site.css?" rel="stylesheet">
 <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
 @stop
 @section('area')
