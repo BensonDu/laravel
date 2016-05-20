@@ -415,11 +415,11 @@
     };
     //添加站点
     this.add_site = function (id) {
-        var l, n = [];
+        var l, n = [],length = self.vue.search.list.length;
         request.get('/user/site/add',function (ret) {
             if(ret.hasOwnProperty('code') && ret.code == 0){
                 self.get_article_post(self.article_id);
-                for(var i = 0; i < self.vue.search.list;i++){
+                for(var i = 0; i < length;i++){
                     if(self.vue.search.list[i].id != id)n.push(self.vue.search.list[i]) ;
                 }
                 self.vue.search.list = n;
