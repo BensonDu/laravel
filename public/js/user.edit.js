@@ -483,12 +483,14 @@
                 this._search();
             },
             _post_admin:function (site_id,category,post_status,post_time) {
-                this.slider = 'post-admin';
-                this.post.site_id = site_id;
-                this.post.type.val  = post_status == 'start' ? 'cancel' : post_status;
-                this.post.type.time = post_time;
-                this.post.category.val = category;
-                self.get_site_category(site_id);
+                if(post_status != 'del'){
+                    this.slider = 'post-admin';
+                    this.post.site_id = site_id;
+                    this.post.type.val  = post_status == 'start' ? 'cancel' : post_status;
+                    this.post.type.time = post_time;
+                    this.post.category.val = category;
+                    self.get_site_category(site_id);
+                }
             },
             _push_admin : function (id,enable) {
                 if(enable != 'enable')return false;

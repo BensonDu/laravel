@@ -4,7 +4,7 @@
     <link href="/lib/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Ffont-awesome.css?" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
-    <link href="/css/user.edit.css?v6" rel="stylesheet" charset="utf-8">
+    <link href="/css/user.edit.css?v7" rel="stylesheet" charset="utf-8">
     <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
     <link href="/css/public.content.css?v1" rel="stylesheet">
 @stop
@@ -145,7 +145,7 @@
                     <td><span class="sta" v-bind:class="p.post_status"><em></em></span></td>
                     <td>
                         <a class="btn-post" v-bind:class="p.post_status" v-on:click="_post_admin(p.site_id,p.category,p.post_status,p.post_time)"><em></em></a>
-                        <a class="btn-push" v-bind:class="p.update" v-on:click="_push_admin(p.site_id,p.update)"><em></em><span class="question"><i>由于该稿件在该站点后台被编辑修改，为了避免你的推送覆盖编辑的修改，请在你自行前往后台对文章进行修改，后台入口位于左侧导航里底部，登出按钮上方。</i></span></a>
+                        <a class="btn-push" v-bind:class="p.update" v-on:click="_push_admin(p.site_id,p.update)"><em></em><span class="question"><i>由于该稿件在该站点后台被编辑修改或删除，为了避免你的推送覆盖编辑的修改，请在你自行前往后台对文章进行修改，后台入口位于左侧导航里底部，登出按钮上方。</i></span></a>
                     </td>
                 </tr>
                 <tr class="sub" v-if="!!contribute.length">
@@ -245,5 +245,5 @@
         this.route  = '{{isset($route)?$route:null}}';
     }).call(define('data'));
 </script>
-<script src="/js/user.edit.js?D2C9B5987"></script>
+<script src="/js/user.edit.js?D2CEB5987"></script>
 @stop

@@ -1027,6 +1027,15 @@
 .pop-container .post .table table tbody tr td span.start:after{
     content: '未投稿';
 }
+.pop-container .post .table table tbody tr td span.del{
+    opacity: .6;
+}
+.pop-container .post .table table tbody tr td span.del em{
+    background-position: 0 -21px;
+}
+.pop-container .post .table table tbody tr td span.del:after{
+    content: '已删除';
+}
 .pop-container .post .table table tbody tr td a{
     vertical-align: top;
     margin-right: 8px;
@@ -1062,6 +1071,13 @@
 }
 .pop-container .post .table table tbody tr td a.btn-contribute:after{
     content: '投稿';
+}
+.pop-container .post .table table tbody tr td a.btn-post.del{
+    opacity: .6;
+    cursor: not-allowed;
+}
+.pop-container .post .table table tbody tr td a.btn-post.del:after{
+    content: '发布';
 }
 .pop-container .post .table table tbody tr td a.btn-contribute.disable{
     opacity: .3;

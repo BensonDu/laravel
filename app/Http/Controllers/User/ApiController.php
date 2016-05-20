@@ -340,8 +340,8 @@ class ApiController  extends Controller
                         'category'      => $v->category,
                         'post_time'     => $v->post_time,
                         //发布状态 : start初始 | time 定时发布 | cancel 未发布 | now 已发布
-                        'post_status'   => ($v->deleted == 0) ? ($v->post_status == 2 ? 'time' : ($v->post_status == 0 ? 'cancel' : 'now')) : 'cancel',
-                        'update'        => ($v->deleted == 1 || ($v->site_lock)) ?  'lock' : (($v->post_status >0 && $v->hash != $hash) ? 'enable' : 'disable')
+                        'post_status'   => ($v->deleted == 0) ? ($v->post_status == 2 ? 'time' : ($v->post_status == 0 ? 'cancel' : 'now')) : 'del',
+                        'update'        => ($v->deleted == 1 || ($v->site_lock)) ?  'lock' : (( $v->hash != $hash) ? 'enable' : 'disable')
                     ];
                 }
                 //常用投稿站点部分
