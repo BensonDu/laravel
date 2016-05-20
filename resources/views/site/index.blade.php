@@ -64,7 +64,7 @@
                     </div>
                     <div class="image">
 @if(!empty($article->image))
-                        <img src="{{$article->image}}">
+                        <img data-lazy-src="{{$article->image}}" src="http://dn-noman.qbox.me/Occupy.png">
 @endif
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="image">
-                        <img v-if="!!article.image" v-bind:src="article.image">
+                        <img v-if="!!article.image" v-bind:data-lazy-src="article.image" src="http://dn-noman.qbox.me/Occupy.png">
                     </div>
                 </div>
             </div>
@@ -142,4 +142,5 @@
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script>var default_data = {article : {total : '{{$articles['total']}}'}}</script>
 <script src="/js/site.index.js?v1"></script>
+<script src="/lib/imagelazyload/imagelazyload.js"></script>
 @stop

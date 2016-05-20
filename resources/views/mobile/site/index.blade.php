@@ -38,7 +38,7 @@
                     <h3>{{$article->title}}</h3>
                 </div>
                 <div class="image">
-                    <img src="{{$article->image}}">
+                    <img data-lazy-src="{{$article->image}}" src="http://dn-noman.qbox.me/Occupy.png">
                     <div class="info">
                         <div class="time">
                             <span>{{$article->category_name}}</span><span> | </span><span>{{$article->time}}</span>
@@ -56,7 +56,7 @@
                     <h3 v-text="article.title"></h3>
                 </div>
                 <div class="image">
-                    <img v-bind:src="article.image">
+                    <img v-bind:data-lazy-src="article.image" src="http://dn-noman.qbox.me/Occupy.png">
                     <div class="info">
                         <div class="time">
                             <span v-text="article.category_name"></span><span> | </span><span v-text="'发布于 '+article.time"></span>
@@ -79,4 +79,5 @@
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <script>var article = {total : '{{$articles['total']}}'}</script>
 <script src="/mobile/js/site.index.js?"></script>
+<script src="/lib/imagelazyload/imagelazyload.js"></script>
 @stop
