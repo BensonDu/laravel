@@ -10,6 +10,11 @@
     background-size: cover;
     background-position: 50% 50%;
 }
+.article-image .img img{
+    width: 100%;
+    height: auto;
+    opacity: .000001;
+}
 .article-image .summary{
     position: absolute;
     bottom: 0;

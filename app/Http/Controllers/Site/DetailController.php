@@ -76,7 +76,9 @@ class DetailController extends SiteController
             'content'   => content_image_crop($info->content),
             'time'      => time_down(strtotime($info->post_time)),
             'category'  => $info->category_name,
-            'image'     => image_crop($info->image,500)
+            'image'     => image_crop($info->image,500),
+            //微信分享头图
+            'weixin'    => image_crop_custom($info->image,'?imageMogr2/gravity/Center/crop/300x300')
         ];
 
         $view = self::make('mobile.site.detail',$data);

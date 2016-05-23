@@ -1,10 +1,12 @@
 @extends('mobile.base')
-@section('style')@parent  <link href="/mobile/css/public.detail.css?v1" rel="stylesheet">
+@section('style')@parent  <link href="/mobile/css/public.detail.css?v2" rel="stylesheet">
 @stop
 @section('body')
 <div class="article-image">
 @if(!empty($article['image']))
-    <div class="img" style="background-image: url({{$article['image']}})"></div>
+    <div class="img" style="background-image: url({{$article['image']}})">
+        <img src="{{$article['weixin']}}">
+    </div>
 @endif
     <div class="summary {{!empty($article['image']) ? 'image' : ''}}">
         <p class="info"><span>{{$article['category']}}</span><span> | </span><span>{{$article['time']}}</span></p>

@@ -218,6 +218,22 @@ if (! function_exists('image_crop')) {
     }
 
 }
+if (! function_exists('image_crop_custom')) {
+    /**
+     * 图片裁剪自定义参数 | 针对七牛
+     * @param  string $url
+     * @return string $url
+     */
+    function image_crop_custom($url,$string = ''){
+        $ret = $url;
+        if(strripos($url,".qbox.me")){
+            $base = explode("?" ,$url)[0];
+            $ret = trim($base).$string;
+        }
+        return $ret;
+    }
+
+}
 if (! function_exists('content_image_crop')) {
     /**
      * 文章中图片裁剪 | 针对七牛
