@@ -129,6 +129,7 @@ class geetest {
     public function fail_validate($challenge, $validate, $seccode) {
         if ($validate) {
             $value   = explode("_", $validate);
+            if(!isset($value['2']))return 0;
             $ans     = $this->decode_response($challenge, $value['0']);
             $bg_idx  = $this->decode_response($challenge, $value['1']);
             $grp_idx = $this->decode_response($challenge, $value['2']);
