@@ -130,8 +130,12 @@
                 self.model.data.image.val = '';
             },
             //标题输入框 如果为默认 无标题 操作清空
-            _default_empty : function () {
-                if(this.title = '无标题') this.title = '';
+            _default_clear : function () {
+                if(this.title == '无标题') this.title = '';
+            },
+            //如果 失去焦点 为空 补全为 无标题
+            _default_fill : function () {
+                if(this.title == '') this.title = '无标题';
             },
             //摘要 配图 标签 输入状态 Tab 光标统一到标题输入框
             default_keydown :function(){
