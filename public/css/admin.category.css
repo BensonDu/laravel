@@ -3,6 +3,9 @@
     min-width: 1060px;
     padding-right: 0;
 }
+.background{
+    z-index: 5;
+}
 .box-mid{
     position: relative;
     height: 445px;
@@ -200,7 +203,7 @@
     margin-bottom: 8px;
     padding: 15px 20px;
     text-align: center;
-    z-index: 3;
+    z-index: 1;
 }
 .box-container .add a{
     display: inline-block;
@@ -281,7 +284,7 @@
     height: 100%;
     visibility: hidden;
     opacity: 0;
-    z-index: 2;
+    z-index: 6;
     -webkit-transition: opacity 0.4s ease-in;
     -moz-transition: opacity 0.4s ease-in;
     transition: opacity 0.4s ease-in;

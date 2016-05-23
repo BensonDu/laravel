@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.category.css" rel="stylesheet">
+@section('style')@parent  <link href="/css/admin.category.css?" rel="stylesheet">
 @stop
 @section('area')
         <div class="box-container" v-bind:class="add?'add':''">
