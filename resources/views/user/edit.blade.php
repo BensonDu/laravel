@@ -102,7 +102,7 @@
         </div>
 
         <div class="title">
-            <input type="text" v-model="title" maxlength="40" placeholder="标题" v-el:title>
+            <input type="text" v-model="title" maxlength="40" placeholder="标题" v-el:title v-on:focus="_default_empty">
         </div>
 
         <div id="content-editor" class="editor medium">
@@ -245,5 +245,5 @@
         this.route  = '{{isset($route)?$route:null}}';
     }).call(define('data'));
 </script>
-<script src="/js/user.edit.js?D2CEB5987"></script>
+<script src="/js/user.edit.js?2E5CEB5987"></script>
 @stop

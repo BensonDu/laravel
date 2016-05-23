@@ -129,6 +129,10 @@
             _del_image : function () {
                 self.model.data.image.val = '';
             },
+            //标题输入框 如果为默认 无标题 操作清空
+            _default_empty : function () {
+                if(this.title = '无标题') this.title = '';
+            },
             //摘要 配图 标签 输入状态 Tab 光标统一到标题输入框
             default_keydown :function(){
                 $(this.$els.title).focus();
