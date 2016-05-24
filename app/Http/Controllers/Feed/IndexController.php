@@ -20,8 +20,8 @@ class IndexController extends FeedController
     }
     public function index(){
         $info = $this->info;
-        $base_url = 'http://'.$info->custom_domain;
-        $base_article_url = 'http://'.$info->custom_domain.'/';
+        $base_url = 'http://'.$_ENV['site_pc_domain'];
+        $base_article_url = $base_url.'/';
         $feed = new \App\Libs\rss\Feed();
         $channel = new \App\Libs\rss\Channel();
         $channel
