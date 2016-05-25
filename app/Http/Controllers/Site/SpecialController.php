@@ -19,7 +19,11 @@ class SpecialController extends SiteController
     }
 
     public function index($id){
-        $info = SiteSpecialModel::get_special_all($_ENV['site_id']);
+
+        //站点管理员 不根据发布状态过滤
+        $post_status = isset($_ENV['admin']['role']) && $_ENV['admin']['role'] > 1 ? null : 1;
+
+        $info = SiteSpecialModel::get_special_all($_ENV['site_id'],$post_status);
         $data['info'] = [];
         $data['list'] = [];
         foreach($info as $v){

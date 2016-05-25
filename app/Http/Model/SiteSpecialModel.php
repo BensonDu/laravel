@@ -27,8 +27,12 @@ class SiteSpecialModel extends Model
      | @return array
      |
      */
-    public static function get_special_all($site_id){
-        return SiteSpecialModel::where('site_id',$site_id)->where('post_status' , 1)->where('deleted' , 0)->orderby('update_time','desc')->get();
+    public static function get_special_all($site_id,$post_status = 1){
+        $query = SiteSpecialModel::where('site_id',$site_id);
+        
+        if(!is_null($post_status))$query->where('post_status' , $post_status);
+
+        return $query->where('deleted' , 0)->orderby('update_time','desc')->get();
     }
     /*
      |--------------------------------------------------------------------------

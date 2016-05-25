@@ -29,6 +29,7 @@
                 <td class="handle">
                     <div>
                         <a class="post" v-on:click="_post(a.id,a.post_status)"><em></em><span>发布状态</span></a>
+                        <a class="preview" v-bind:href="'/special/'+a.id" target="_blank"><em></em><span>预览</span></a>
                         <a class="edit" v-on:click="_edit(a.id)"><em></em><span>修改</span></a>
                         <a class="del" v-on:click="_del(a.id)"><em></em><span>删除</span></a>
                     </div>
