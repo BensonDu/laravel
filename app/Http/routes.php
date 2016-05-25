@@ -77,7 +77,7 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
         Route::get('/admin/article/info', 'Admin\ArticleController@info');
         Route::post('/admin/article/save', 'Admin\ArticleController@save');
         Route::get('/admin/article/filter/{id}', 'Admin\ArticleController@filter');
-        //用户管理
+        //用户管理 成员管理
         Route::get('/admin/user', 'Admin\UserController@index');
         Route::get('/admin/user/users', 'Admin\UserController@users');
         Route::get('/admin/user/delete', 'Admin\UserController@delete');
@@ -85,6 +85,11 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
         Route::get('/admin/user/update', 'Admin\UserController@update');
         Route::get('/admin/user/search', 'Admin\UserController@search');
         Route::get('/admin/user/add', 'Admin\UserController@add');
+        //用户管理 黑名单管理
+        Route::get('/admin/user/blacklist', 'Admin\UserController@blacklist');
+        Route::get('/admin/user/blacklist/users', 'Admin\UserController@blacklistusers');
+        Route::get('/admin/user/blacklist/del', 'Admin\UserController@blacklistdel');
+        Route::get('/admin/user/blacklist/add', 'Admin\UserController@blacklistadd');
         //精选管理
         Route::get('/admin/star', 'Admin\StarController@index');
         Route::get('/admin/star/list', 'Admin\StarController@starlist');

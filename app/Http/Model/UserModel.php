@@ -107,19 +107,7 @@ class UserModel extends Model
         if(isset($info->sites) && !empty($info->sites)){
             $ret = explode(" ",$info->sites);
         }
-        $list = [];
-        //过滤关闭外部投稿站点
-        if(!empty($ret)){
-            $valid = SiteModel::get_site_id_list();
-            if(!empty($valid)){
-                foreach ($ret as $v){
-                    if(in_array($v, $valid)){
-                         $list[] = $v;
-                    }
-                }
-            }
-        }
-        return $list;
+        return $ret;
     }
     /*
     |--------------------------------------------------------------------------

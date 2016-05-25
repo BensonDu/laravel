@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Model\BlacklistModel;
 use App\Http\Model\Admin\UserModel;
 
 class UserController extends AdminController
@@ -16,15 +17,34 @@ class UserController extends AdminController
     public function __construct()
     {
         parent::__construct();
-        view()->share(['admin_nav_top'=>[
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 成员管理
+     |--------------------------------------------------------------------------
+     */
+    public function index(){
+        $data['base']['title']  = '用户管理';
+        $data['users']          = $this->get_list(0,10);
+        $data['admin_nav_top']  = [
             'name' => '用户管理',
             'class'=> 'user'
-        ]]);
-    }
-    public function index(){
-        $data['base']['title'] = '用户管理';
-        $data['users']   = $this->get_list(0,10);
+        ];
         return self::view('admin.user.index',$data);
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 黑名单管理
+     |--------------------------------------------------------------------------
+     */
+    public function blacklist(){
+        $data['base']['title']  = '用户管理';
+        $data['users']          = $this->get_blacklist(0,10);
+        $data['admin_nav_top']  = [
+            'name' => '用户管理',
+            'class'=> 'user'
+        ];
+        return self::view('admin.user.blacklist',$data);
     }
     /*
      |--------------------------------------------------------------------------
@@ -43,7 +63,23 @@ class UserController extends AdminController
         $list = $this->get_list($skip,$size,$order,$keyword,$orderby);
         return $this->ApiOut(0,$list);
     }
-
+    /*
+     |--------------------------------------------------------------------------
+     | 站点管理员列表
+     |--------------------------------------------------------------------------
+     */
+    public function blacklistusers(){
+        $index      = intval(request()->input('index'));
+        $keyword    = request()->input('keyword');
+        $size       = intval(request()->input('size'));
+        $order      = request()->input('order');
+        $orderby    = request()->input('orderby');
+        if(empty($index) || intval($size) > 50 || !in_array($order,['asc','desc']) || !in_array($orderby,['time']))return $this->ApiOut(40001,'Bat request');
+        $keyword = !empty($keyword) ? $keyword : null;
+        $skip = (intval($index)-1)*$size;
+        $list = $this->get_blacklist($skip,$size,$order,$keyword,$orderby);
+        return $this->ApiOut(0,$list);
+    }
     /*
      |--------------------------------------------------------------------------
      | 站点管理员信息
@@ -74,6 +110,39 @@ class UserController extends AdminController
         }
         UserModel::delete_user($site_id,$user_id);
         return $this->ApiOut(0,'删除成功');
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 解除黑名单
+     |--------------------------------------------------------------------------
+     */
+    public function blacklistdel(){
+        $request = request();
+        $site_id    = $_ENV['site_id'];
+        $user_id = $request->input('id');
+        if(empty($user_id)){
+            return $this->ApiOut(40001,'请求错误');
+        }
+        BlacklistModel::delete_user($site_id, $user_id);
+        return $this->ApiOut(0,'删除成功');
+    }
+
+    /*
+     |--------------------------------------------------------------------------
+     | 添加黑名单
+     |--------------------------------------------------------------------------
+     */
+    public function blacklistadd(){
+        $request    = request();
+        $site_id    = $_ENV['site_id'];
+        $user_id    = $request->input('id');
+        if(empty($user_id)){
+            return $this->ApiOut(40001,'请求错误');
+        }
+        //添加黑名单的同时,取消该用户的权限
+        UserModel::delete_user($site_id,$user_id);
+        BlacklistModel::add_user($site_id, $user_id);
+        return $this->ApiOut(0,'添加成功');
     }
     /*
      |--------------------------------------------------------------------------
@@ -123,6 +192,17 @@ class UserController extends AdminController
         }
         UserModel::update_user($site_id,$user_id,$role);
         return $this->ApiOut(0,'设置成功');
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 黑名单列表
+     |--------------------------------------------------------------------------
+     */
+    private function get_blacklist($skip,$take, $order = 'desc' ,$keyword = null, $orderby = 'time'){
+        return [
+            'total' => BlacklistModel::get_site_blacklist_count($_ENV['site_id'],$keyword),
+            'list'  => BlacklistModel::get_site_blacklist($_ENV['site_id'], $skip,$take,$order,$keyword,$orderby)
+        ];
     }
     /*
      |--------------------------------------------------------------------------

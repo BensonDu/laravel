@@ -103,6 +103,7 @@
     width: 100%;
     height: 25px;
     line-height: 25px;
+    white-space: nowrap;
 }
 .user-content .container .list-container .list .info .tags a{
     display: inline-block;

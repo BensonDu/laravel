@@ -10,6 +10,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\ArticleUserModel;
+use App\Http\Model\BlacklistModel;
 use App\Http\Model\Cache\PlatformCacheModel;
 use App\Http\Model\CategoryModel;
 use App\Http\Model\SiteModel;
@@ -188,9 +189,12 @@ class ApiController  extends Controller
         $site_id = $request->input('site_id');
         $uid     = $_ENV['uid'];
         if(empty($id) || empty($site_id) || !SiteModel::check_site($site_id))return self::ApiOut(40001,'请求错误');
+
         //检查站点是否开启外部投稿
         $valid = SiteModel::get_site_id_list();
-        if(!in_array($site_id, $valid))return self::ApiOut(40003,'站点已关闭外部投稿');
+        if(!in_array($site_id, $valid))return self::ApiOut(40003,'此站点不接受投稿');
+        //用户是否被拉黑
+        if(BlacklistModel::in_blacklist($site_id,$uid))return self::ApiOut(40003,'此站点不接受投稿');
 
         $ret = EditModel::contribute($site_id,$id,$uid);
         return !!$ret ? self::ApiOut(0,'投稿成功') :  self::ApiOut(40001,'请求错误');

@@ -1,20 +1,27 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.user.css" rel="stylesheet">
+@section('style')@parent  <link href="/css/admin.user.css?" rel="stylesheet">
 @stop
 @section('area')
     <div class="list-header">
-        <div class="search">
-            <div class="input"><em></em><input v-model="search.keyword" v-on:keyup.enter="_search" type="text" placeholder="用户名、用户 ID"><i></i></div>
-        </div>
         <div class="nav">
+            <a class="active" href="/admin/user">成员管理</a>
+            <a href="/admin/user/blacklist">黑名单</a>
+        </div>
+        <div class="nav-right">
             <a v-on:click="_add"><em>+</em> <span>添加</span></a>
+        </div>
+        <div class="divider">
+            <em></em>
+        </div>
+        <div class="search">
+            <div class="input"><em></em><input v-model="search.keyword" v-on:keyup.enter="_search" type="text" placeholder="搜索成员 "><i></i></div>
         </div>
     </div>
     <div class="list-body">
         <table>
             <thead>
             <tr>
-                <th><span>用户名</span></th>
+                <th><span>用户昵称</span></th>
                 <th class="orderable" v-bind:class="orderby == 'role' ? order : ''" v-on:click="_order('role')"><span>身份</span><em></em></th>
                 <th class="orderable" v-bind:class="orderby == 'create_time' ? order : ''" v-on:click="_order('create_time')"><span>添加时间</span><em></em></th>
                 <th><span>操作</span></th>
