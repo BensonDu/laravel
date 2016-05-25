@@ -376,7 +376,7 @@
     //选择文章
     this.select_article = function(id){
         var info = self.get_article_info(id);
-        if(!!info.id && $.inArray(info.id,self.selected) == -1 && self.selected.length < 20){
+        if(!!info.id && $.inArray(info.id,self.selected) == -1){
             self.vue.special.list.push(info);
             self.selected.push(info.id);
         }

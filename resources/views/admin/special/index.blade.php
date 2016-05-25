@@ -176,5 +176,5 @@
         orderby : 'update_time'
     }
 </script>
-<script src="/js/admin/special.js?v1"></script>
+<script src="/js/admin/special.js?v2"></script>
 @stop

@@ -88,7 +88,7 @@ class SpecialController extends AdminController
         $update_time= now();
         $list       = $request->input('list');
         if(empty($id) || empty($title) || empty($bg_image) || empty($image) || empty($list)) return $this->ApiOut(40001,'请求错误');
-        $list   = trim(implode(' ',$list));
+        $list   = trim(implode(' ',array_unique($list)));
         SiteSpecialModel::special_update($_ENV['site_id'],$id,compact("title","summary","image","bg_image","update_time","list"));
         return $this->ApiOut(0,'更新成功');
     }
@@ -105,7 +105,7 @@ class SpecialController extends AdminController
         $image      = $request->input('image');
         $list       = $request->input('list');
         if( empty($title) || empty($bg_image) || empty($image) || empty($list)) return $this->ApiOut(40001,'请求错误');
-        $list   = trim(implode(' ',$list));
+        $list   =trim(implode(' ', array_unique($list)));
         SiteSpecialModel::special_add($_ENV['site_id'],compact("title","summary","image","bg_image","list"));
         return $this->ApiOut(0,'添加成功');
     }
@@ -120,7 +120,7 @@ class SpecialController extends AdminController
         $info = SiteSpecialModel::get_special_brief_info($_ENV['site_id'],$id,['id','title','summary','image','bg_image','list'],null);
         if(!isset($info->id))return $this->ApiOut(40001,'请求错误');
         $list =explode(' ',$info->list);
-        $info->list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$list,['id','title']);
+        $info->list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$list,['id','title','post_time AS time']);
         return $this->ApiOut(0,$info);
     }
     /*
