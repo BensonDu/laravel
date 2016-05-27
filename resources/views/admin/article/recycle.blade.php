@@ -140,5 +140,4 @@
             }
         }
     </script>
-    <script src="/js/admin/article.js?v5"></script>
 @stop

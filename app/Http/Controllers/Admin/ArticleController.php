@@ -9,8 +9,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Model\Admin\ArticleModel;
-use App\Http\Model\ArticleSiteModel;
 use App\Http\Model\Cache\PlatformCacheModel;
+use App\Http\Model\CategoryModel;
 
 class ArticleController extends AdminController
 {
@@ -30,7 +30,7 @@ class ArticleController extends AdminController
     public function unpub(){
         $data['sub_active'] = 'unpub';
         $data['articles']   = $this->get_unpub_list(0,10);
-        $data['categories'] = ArticleSiteModel::get_article_categories($_ENV['site_id']);
+        $data['categories'] = CategoryModel::get_categories($_ENV['site_id']);
         $data['base']['title'] = '文章管理-未发表';
         return self::view('admin.article.unpub',$data);
     }
@@ -42,7 +42,7 @@ class ArticleController extends AdminController
     public function pub(){
         $data['sub_active'] = 'pub';
         $data['articles']   = $this->get_pub_list(0,10);
-        $data['categories'] = ArticleSiteModel::get_article_categories($_ENV['site_id']);
+        $data['categories'] = CategoryModel::get_categories($_ENV['site_id']);
         $data['base']['title'] = '文章管理-已发表';
         return self::view('admin.article.pub',$data);
     }
@@ -54,7 +54,7 @@ class ArticleController extends AdminController
     public function mine(){
         $data['sub_active'] = 'mine';
         $data['articles']   = $this->get_mine_list(0,10);
-        $data['categories'] = ArticleSiteModel::get_article_categories($_ENV['site_id']);
+        $data['categories'] = CategoryModel::get_categories($_ENV['site_id']);
         $data['base']['title'] = '文章管理-我的文章';
         return self::view('admin.article.mine',$data);
     }
@@ -66,7 +66,7 @@ class ArticleController extends AdminController
     public function recycle(){
         $data['sub_active'] = 'recycle';
         $data['articles']   = $this->get_recycle_list(0,10);
-        $data['categories'] = ArticleSiteModel::get_article_categories($_ENV['site_id']);
+        $data['categories'] = CategoryModel::get_categories($_ENV['site_id']);
         $data['base']['title'] = '文章管理-回收站';
         return self::view('admin.article.recycle',$data);
     }
@@ -272,12 +272,12 @@ class ArticleController extends AdminController
         $request = request();
         $site_id    = $_ENV['site_id'];
         $article_id = $request->input('id');
-        $category   = $request->input('category');
+        $category   = intval($request->input('category'));
         $type       = $request->input('type');
         $time       = $request->input('time');
 
         $info = $this->check_article_auth($article_id, null, 'array');
-        if(empty($article_id) || ($type !='cancel' && empty($category)) || empty($type) || empty($info)){
+        if(empty($article_id) || empty($type) || empty($info)){
             return $this->ApiOut(40003,'权限不足');
         }
         $post_status = $type == 'cancel' ? 0 : (time() > strtotime($time) ? 1 : 2);
@@ -290,7 +290,6 @@ class ArticleController extends AdminController
         else{
             PlatformCacheModel::timing_clear($article_id);
         }
-            
         ArticleModel::save_article_post($site_id,$article_id,$category,$post_status,$time);
         return $this->ApiOut(0,'Save Sussess');
     }

@@ -17,33 +17,81 @@ class CategoryModel extends Model
     public $timestamps = false;
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | 获取站点 文章分类列表 展示端
+    |--------------------------------------------------------------------------
+    | @param string $default
+    |
+   */
+    public static function get_categories($site_id,$default = null){
+        $items =  DB::table('article_category')
+            ->where('site_id' ,$site_id)
+            ->where('deleted' ,0)
+            ->orderBy('order','desc')
+            ->take(5)
+            ->get();
+        $categories = [];
+        //如果传入默认分类名称,则返回分类列表包含默认分类
+        if(!is_null($default)){
+            $categories[] = [
+                'name'  => $default,
+                'id'    => 0
+            ];
+        }
+        //正常逻辑 如果站点没有分类显示默认分类
+        else{
+            if(count($items) == 0){
+                $categories[] = [
+                    'name'  => '默认分类',
+                    'id'    => 0
+                ];
+            }
+        }
+        foreach($items as $v){
+            $categories[] = [
+                'name'  => $v->name,
+                'id'    => $v->id
+            ];
+        }
+        return $categories;
+    }
 
     /*
      |--------------------------------------------------------------------------
-     | 获取站点文章类型列表
+     | 获取站点文章类型列表 管理端
      |--------------------------------------------------------------------------
      |
      | @param  string $site_id
      | @return array  $article_list
      |
     */
-    public static function get_categorie_list($id){
-        $select = '
-        article_category.name,
-        article_category.id,
-        article_category.deleted
-        ';
-        $items =  CategoryModel::select(DB::raw($select))
-            ->where('article_category.site_id' ,$id)
+    public static function get_category_list($site_id){
+
+        $items =  CategoryModel::where('article_category.site_id' ,$site_id)
             ->where('article_category.deleted' ,'<',2)
             ->orderBy('article_category.order','desc')
             ->take(5)
-            ->get();
-        $count_list = self::get_category_related_article_count_list($id);
-        foreach($items as $k => $v){
-            $items[$k]['count'] = isset($count_list[$v->id]) ? $count_list[$v->id] : 0;
+            ->get(['name','id','deleted']);
+
+        $count_list = self::get_category_related_article_count_list($site_id);
+        $ret = [];
+        $ret[] = [
+            'name'      => '默认分类',
+            'id'        => 0,
+            'deleted'   => 0,
+            'count'=> isset($count_list['0']) ? $count_list['0'] : 0
+        ];
+        foreach($items as $v){
+            $ret[] = [
+                'name'    => $v->name,
+                'id'      => $v->id,
+                'deleted' => $v->deleted,
+                'count'   => isset($count_list[$v->id]) ? $count_list[$v->id] : 0
+            ];
         }
-        return $items;
+
+        return $ret;
     }
     /*
     |--------------------------------------------------------------------------
@@ -111,19 +159,15 @@ class CategoryModel extends Model
     | @return bool
     |
     */
-    public static function order_save($site_id,$show,$hide){
-        $s = count($show);
-        $h = count($hide);
-        foreach($show as $k => $v){
-            CategoryModel::where('site_id',$site_id)->where('id' , $v)->update(['order' => $s-$k,'deleted' => 0]);
-        }
-        foreach($hide as $k => $v){
-            CategoryModel::where('site_id',$site_id)->where('id' , $v)->update(['order' => $h-$k,'deleted' => 1]);
+    public static function order_save($site_id,$order){
+        $c = count($order);
+        foreach($order as $k => $v){
+            CategoryModel::where('site_id',$site_id)->where('id' , $v)->update(['order' => $c-$k]);
         }
     }
     /*
     |--------------------------------------------------------------------------
-    | 获取分类最大排序
+    | 获取分类最大排序 用于添加分类 设置 order
     |--------------------------------------------------------------------------
     |
     | @param  string $order
@@ -176,7 +220,7 @@ class CategoryModel extends Model
     }
     /*
     |--------------------------------------------------------------------------
-    | 删除分类
+    | 更改分类删除状态  1 不显示  2 删除
     |--------------------------------------------------------------------------
     |
     | @param  string $site_id
@@ -184,8 +228,8 @@ class CategoryModel extends Model
     | @return bool
     |
     */
-    public static function del_category($site_id,$id){
-        return CategoryModel::where('site_id',$site_id)->where('id' , $id)->update(['deleted' => 2]);
+    public static function del_category($site_id,$id,$deleted = 2){
+        return CategoryModel::where('site_id',$site_id)->where('id' , $id)->update(['deleted' => $deleted]);
     }
     /*
     |--------------------------------------------------------------------------

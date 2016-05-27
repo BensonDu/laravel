@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Model\AdModel;
 use App\Http\Model\ArticleSiteModel;
 use App\Http\Model\Cache\PlatformCacheModel;
+use App\Http\Model\CategoryModel;
 use App\Http\Model\StarModel;
 
 class IndexController extends SiteController
@@ -97,16 +98,11 @@ class IndexController extends SiteController
     }
     /*
      |--------------------------------------------------------------------------
-     | 获得站点文章分类列表 首页增加 [全部] 分类
+     | 获得站点文章分类列表
      |--------------------------------------------------------------------------
      */
     private function get_categories(){
-        $categories = ArticleSiteModel::get_article_categories($_ENV['site_id'],1);
-        array_unshift($categories,[
-            'id'    => 0,
-            'name'  => '全部'
-        ]);
-        return $categories;
+        return CategoryModel::get_categories($_ENV['site_id'],'全部');
     }
     private function get_articles($id, $skip = 0, $category = 0){
         $list = ArticleSiteModel::get_home_article_list($id, $skip,$category);

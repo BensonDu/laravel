@@ -526,7 +526,7 @@
                         time : d.type.time
                     };
                 //发布必须选择分类
-                if((data.type == 'now' || data.type=='time') && (data.category == '0' || data.category == ''))return pop.error('请选择分类','确定').one();
+                if((data.type == 'now' || data.type=='time') && (self.vue.post.category.list[0].id != '0' && (data.category == '0' || data.category == '')))return pop.error('请选择分类','确定').one();
                 if(self.lock) return false;
                 self.lock = true;
                 request.post('/user/post/site',function(ret){

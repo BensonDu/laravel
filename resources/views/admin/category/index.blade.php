@@ -2,70 +2,93 @@
 @section('style')@parent  <link href="/css/admin.category.css?" rel="stylesheet">
 @stop
 @section('area')
-        <div class="box-container" v-bind:class="add?'add':''">
-            <div class="header">
-                <p v-text="'首页显示 '+show.total+'/5'"></p>
+        <div class="box-container" v-bind:class="add && 'add'">
+            <div class="table">
+                <div class="header">
+                    <div class="name">
+                        <p>分类</p>
+                    </div>
+                    <div class="count">
+                        <p>相关文章</p>
+                    </div>
+                    <div class="display">
+                        <p>启用</p>
+                    </div>
+                    <div class="del">
+                        <p>操作</p>
+                    </div>
+                </div>
+                <div id="sort-list" class="list-body">
+                    <div class="item default">
+                        <div class="name">
+                            <p class="normal">
+                                <span>默认分类</span>
+                            </p>
+                        </div>
+                        <div class="count">
+                            <p>共<span v-text="list.default.count"></span>篇</p>
+                        </div>
+                        <div class="display">
+
+                        </div>
+                        <div class="del" v-bind:class="(!list.custom.length || list.default.count == '0') && 'disable'">
+                            <p v-on:click="_transfer">转移</p>
+                        </div>
+                    </div>
+                    <div class="item drag" v-for="a in list.custom" v-bind:data-id="a.id" track-by="$index" >
+                        <div class="name" v-bind:class="!!a.edit && 'edit'">
+                            <p class="normal">
+                                <span v-text="a.name"></span>
+                                <em v-on:click="_edit_show($index)"></em>
+                            </p>
+                            <p class="edit">
+                                <input v-model="a.name" type="text" v-on:keyup.enter="_edit_show_confirm($index)" v-model="a.name"><a class="confirm" v-on:click="_edit_show_confirm($index)"></a><a class="cancel" v-on:click="_edit_show_cancel($index)"></a>
+                            </p>
+                        </div>
+                        <div class="count">
+                            <p>共<span v-text="a.count"></span>篇</p>
+                        </div>
+                        <div class="display"v-on:click="_display(a.id,a.deleted,$index)">
+                            <p class="slider" v-bind:class="a.deleted == '0' && 'true'"><span><em></em></span></p>
+                        </div>
+                        <div class="del">
+                            <p v-on:click="_del(a.id)">删除</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <ul id="sort-list-1">
-                <li v-for="c in show.list" track-by="$index" v-bind:class="!!c.edit ? 'edit' : ''" v-bind:data-id="c.id">
-                    <div class="name"><p v-text="c.name"></p><em v-on:click="_edit_show($index)"></em></div>
-                    <div class="edit"><input type="text" v-on:keyup.enter="_edit_show_confirm($index)" v-model="c.name"><a class="confirm" v-on:click="_edit_show_confirm($index)"></a><a class="cancel" v-on:click="_edit_show_cancel($index)"></a></div>
-                    <div class="count"><p>相关文章</p><span v-text="c.count"></span><p>篇</p></div>
-                    <div class="close"><p v-on:click="_del(c.id)">×</p></div>
-                </li>
-            </ul>
-            <div class="cover"></div>
-        </div>
-        <div class="box-mid">
-            <div class="img">
-                <img src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fexchange.png">
-            </div>
-        </div>
-        <div class="box-container" v-bind:class="add?'add':''">
-            <div class="header">
-                <p>首页隐藏</p>
-            </div>
-            <ul id="sort-list-2">
-                <li v-for="c in hide.list" track-by="$index" v-bind:class="!!c.edit ? 'edit' : ''" v-bind:data-id="c.id">
-                    <div class="name"><p v-text="c.name"></p><em v-on:click="_edit_hide($index)"></em></div>
-                    <div class="edit"><input type="text" v-on:keyup.enter="_edit_hide_confirm($index)" v-model="c.name"><a class="confirm" v-on:click="_edit_hide_confirm($index)"></a><a class="cancel" v-on:click="_edit_hide_cancel($index)"></a></div>
-                    <div class="count"><p>相关文章</p><span v-text="c.count"></span><p>篇</p></div>
-                    <div class="close"><p v-on:click="_del(c.id)">×</p></div>
-                </li>
-            </ul>
-            <div class="add" v-if="(hide.total + show.total) < 5">
+            <div class="add" v-if="list.custom.length < 5">
                 <div class="input">
                     <input type="text" v-on:keyup.enter="_add" v-model="input"><em></em>
                 </div>
                 <a v-on:click="_add_display">+</a>
             </div>
             <div class="cover"></div>
-        </div>
-        <div class="delete-container" v-bind:class="del.display ? 'active' : ''">
+       </div>
+        <div class="delete-container" v-bind:class="del.display && 'active'">
             <div class="wrap">
                 <div class="delete">
-                    <h3>确定删除 ?</h3>
+                    <h3 v-text="!del.transfer ? '确定删除 ?' : '确认转移 ?'">确定删除 ?</h3>
                     <p>当前分类 <span v-text="del.count"></span> 篇文章,全部移入下面所选分类:</p>
                     <div class="list">
                         <div class="content">
-                            <a v-for="c in del.list" v-on:click="_del_select(c.id)" track-by="$index" v-bind:class="del.active == c.id ? 'active' :''"><span v-text="c.name"></span><em></em></a>
+                            <a v-for="a in del.list" v-on:click="_del_select(a.id)" track-by="$index" v-bind:class="del.active == a.id ? 'active' :''"><span v-text="a.name"></span><em></em></a>
                         </div>
                     </div>
                     <div class="btn">
                         <a class="cancel" v-on:click="_del_cancel">取消</a>
-                        <a class="confirm" v-on:click="_del_confirm" v-bind:class="del.active ? 'active' : ''" v-text="del.loading ? '删除中...':'确定'"></a>
+                        <a class="confirm active" v-on:click="_del_confirm" v-text="del.loading ? '删除中...':'确定'"></a>
                     </div>
                 </div>
             </div>
         </div>
 @stop
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script src="http://dn-noman.qbox.me/imageuploader.min.js"></script>
 <script src="/lib/sortable/js/Sortable.min.js"></script>
 <script>
-    var default_data = {
-        list : JSON.parse('{!! json_encode_safe($list) !!}')
-    }
+    (function () {
+        this.list = JSON.parse('{!! json_encode_safe($list) !!}');
+    }).call(define('data'));
 </script>
-<script src="/js/admin/category.js"></script>
+<script src="/js/admin/category.js?0EFB12"></script>
 @stop

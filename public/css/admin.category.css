@@ -1,91 +1,89 @@
-.admin-content .admin-area{
-    overflow: hidden;
-    min-width: 1060px;
-    padding-right: 0;
-}
-.background{
-    z-index: 5;
-}
-.box-mid{
-    position: relative;
-    height: 445px;
-    width: 50px;
-    float: left;
-    margin: 30px 0;
-    padding-bottom: 40px;
-    overflow: hidden;
-}
-.box-mid .img{
-    width: 100%;
-    padding: 0 13px;
-    margin-top: 194px;
-}
-.box-mid .img img{
-    width: 100%;
-    height: auto;
-}
 .box-container{
     position: relative;
-    height: 445px;
-    width: 470px;
-    float: left;
     border: 1px solid #eee;
+    height: 420px;
     margin: 30px 0;
-    padding-bottom: 40px;
     overflow: hidden;
 }
-.box-container .header{
+.box-container .table{
+    width: 100%;
+    height: 350px;
+}
+.box-container .table .name{
+    width: 30%;
+}
+.box-container .table .count{
+    width: 30%;
+}
+.box-container .table .display{
+    width: 25%;
+}
+.box-container .table .del{
+    width: 15%;
+}
+.box-container .table .header{
     width: 100%;
     height: 40px;
-    padding:  0 18px;
     background: #eee;
-    box-shadow: 0 0 7px 0 #ccc;
+    padding: 0 0 0 20px;
 }
-.box-container .header p{
+.box-container .table .header div{
+    float: left;
+    padding:  0 10px;
+}
+.box-container .table .header div p{
     display: inline-block;
+    width: 100%;
     line-height: 40px;
-    font-size: 12px;
-    color: #999;
+    color: #666;
 }
-.box-container ul{
-    display: inline-block;
-    height: 340px;
+.box-container .table .list-body{
+    position: relative;
     width: 100%;
+    padding: 52px 0 0 0;
 }
-.box-container ul li{
-    display: inline-block;
+.box-container .table .list-body .item.default{
+    position: absolute;
+    left: 0;
+    top: 2px;
+    margin: 0;
+    background: #f5f5f5;
+}
+.box-container .table .list-body .item{
     width: 100%;
-    height: 60px;
-    margin-bottom: 8px;
+    height: 50px;
+    overflow: hidden;
+    padding: 0 0 0 10px;
+    margin-top: 2px;
     background: #f9f9f9;
     cursor: pointer;
-    animation: fadeIn 0.7s linear 0s normal forwards;
-    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
-    -moz-animation: fadeIn 0.7s linear 0s normal forwards;
 }
-.box-container ul li>div{
-    height: 100%;
+.box-container .table .list-body .item>div{
     float: left;
+    height: 100%;
+    padding:  0 10px;
 }
-.box-container ul li .name{
-    display: block;
-    padding: 15px 0 15px 15px;
-    width: 258px;
+.box-container .table .list-body .item .name p{
+    display: inline-block;
+    padding: 10px 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
 }
-.box-container ul li .name p{
+.box-container .table .list-body .item .name p.normal{
+    padding-left: 10px;
+}
+.box-container .table .list-body .item .name p.normal span{
     display: inline-block;
     float: left;
     font-size: 14px;
     line-height: 30px;
     color: #666;
     font-weight: 900;
-    max-width: 290px;
-    padding:  0 10px;
 }
-.box-container ul li .name em{
-    float: left;
+.box-container .table .list-body .item .name p.normal em{
     display: none;
+    float: left;
     width: 30px;
     height: 30px;
     vertical-align: top;
@@ -93,16 +91,10 @@
     background-position: -20px -46px;
     background-size: 100px;
 }
-.box-container ul li .name em:hover{
-    opacity: .6;
-}
-.box-container ul li .edit{
+.box-container .table .list-body .item .name p.edit{
     display: none;
-    width: 258px;
-    padding: 15px 0 15px 15px;
-    overflow: hidden;
 }
-.box-container ul li .edit input{
+.box-container .table .list-body .item .name p.edit input{
     display: inline-block;
     float: left;
     font-size: 14px;
@@ -114,10 +106,10 @@
     padding:  0 10px;
     font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif","Microsoft YaHei";
 }
-.box-container ul li .edit input:focus{
+.box-container .table .list-body .item .name p.edit input:focus{
     outline: none;
 }
-.box-container ul li .edit a{
+.box-container .table .list-body .item .name p.edit a{
     float: left;
     display: inline-block;
     width: 30px;
@@ -127,74 +119,93 @@
     background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
     background-size: 100px;
 }
-.box-container ul li .edit a.confirm{
+.box-container .table .list-body .item .name p.edit a.confirm{
     background-position: 10px 8px;
 }
-.box-container ul li .edit a.cancel{
+.box-container .table .list-body .item .name p.edit a.cancel{
     background-position: 7px -17px;
 }
-.box-container ul li .edit a:hover{
+.box-container .table .list-body .item .name p.edit a:hover{
     opacity: .7;
 }
-.box-container ul li .count{
-    width: 160px;
-    padding: 15px 20px 15px 0;
-    text-align: right;
-    overflow: hidden;
-}
-.box-container ul li .count p{
-    display: inline-block;
-    font-size: 12px;
-    line-height: 32px;
-    vertical-align: top;
-    white-space: nowrap;
-    color: #999;
-}
-.box-container ul li .count span{
-    display: inline-block;
-    line-height: 32px;
-    vertical-align: top;
-    font-size: 12px;
-    padding: 0 5px;
-    color: #f06292;
-}
-.box-container ul li .close{
-    width: 30px;
-    padding: 15px 10px;
-}
-.box-container ul li .close p{
-    display: inline-block;
-    width: 100%;
-    line-height: 30px;
-    font-size: 16px;
-    cursor: pointer;
-    color: #999;
-}
-.box-container ul li .close p:hover{
-    color: #000;
-}
-.box-container ul li:hover .name em{
-    display: inline-block;
-}
-.box-container ul li.edit .edit{
+.box-container .table .list-body .item:hover .name .normal em{
     display: block;
 }
-.box-container ul li.edit .name{
+.box-container .table .list-body .item .name.edit .normal{
     display: none;
 }
-.box-container .cover{
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(255,255,255,.8);
-    left: 0;
-    top: 0;
-    -webkit-transition: opacity 0.4s ease-in;
-    -moz-transition: opacity 0.4s ease-in;
-    transition: opacity 0.4s ease-in;
+.box-container .table .list-body .item .name.edit .edit{
+    display: block;
 }
+.box-container .table .list-body .item .count p{
+    display: inline-block;
+    padding: 10px 0;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    line-height: 30px;
+    color: #666;
+    overflow: hidden;
+}
+.box-container .table .list-body .item .count p span{
+    color: #f06292;
+    margin: 0 5px;
+}
+.box-container .table .list-body .item .display{
+
+}
+.box-container .table .list-body .item .display .slider{
+    margin-top: 17px;
+    float: left;
+    width: 30px;
+    height: 16px;
+    background: #ddd;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .2s;
+    -moz-transition: background .2s;
+    -webkit-transition: background .2s;
+}
+.box-container .table .list-body .item .display .slider span{
+    display: inline-block;
+    width: 18px;
+    height: 16px;
+    padding: 2px;
+    transition: margin .2s ease-out;
+    -moz-transition: margin .2s ease-out;
+    -webkit-transition: margin .2s ease-out;
+}
+.box-container .table .list-body .item .display .slider span em{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 1px;
+    font-size: 12px;
+    vertical-align: top;
+    text-align: center;
+}
+.box-container .table .list-body .item .display .slider.true{
+    background: #6e8cfb;
+}
+.box-container .table .list-body .item .display .slider.true span{
+    margin-left: 12px;
+}
+.box-container .table .list-body .item .del.disable{
+    opacity: .6;
+    cursor: not-allowed;
+}
+.box-container .table .list-body .item .del.disable p:hover{
+    text-decoration: none;
+}
+.box-container .table .list-body .item .del p{
+    line-height: 50px;
+    color: #666;
+}
+.box-container .table .list-body .item .del p:hover{
+    text-decoration: underline;
+}
+
 .box-container .add{
     position: relative;
     display: inline-block;
@@ -262,7 +273,26 @@
 .box-container .add input:focus+em{
     visibility: visible;
 }
-.box-container.add ul{
+
+.box-container .cover{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255,255,255,.8);
+    left: 0;
+    top: 0;
+    -webkit-transition: opacity 0.4s ease-in;
+    -moz-transition: opacity 0.4s ease-in;
+    transition: opacity 0.4s ease-in;
+}
+
+.box-container.add .cover{
+    visibility: visible;
+    opacity: 1;
+}
+.box-container.add .table{
     -webkit-filter: blur(2px);
 }
 .box-container.add .cover{
@@ -278,10 +308,13 @@
 .box-container.add .add .input{
     width: 50%;
 }
+
 .delete-container{
     position: absolute;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
     visibility: hidden;
     opacity: 0;
     z-index: 6;
@@ -296,7 +329,7 @@
 .delete-container .wrap{
     width: 400px;
     height: 500px;
-    margin-left: 300px;
+    margin: 0 auto;
 }
 .delete-container .wrap .delete{
     height: 400px;
@@ -341,7 +374,7 @@
     border-top: 1px solid #eee;
 }
 .delete-container .wrap .delete .list .content a{
-    display: inline-block;
+    display: block;
     width: 100%;
     height: 38px;
     overflow: hidden;
@@ -367,7 +400,7 @@
     background-position: 0 10px;
 }
 .delete-container .wrap .delete .list .content a:hover{
-    opacity: .6;
+    background: #f5f5f5;
 }
 .delete-container .wrap .delete .btn{
     width: 100%;

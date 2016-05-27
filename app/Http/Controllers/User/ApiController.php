@@ -208,11 +208,11 @@ class ApiController  extends Controller
         $request = request();
         $site_id            = $request->input('site_id');
         $user_article_id    = $request->input('id');
-        $category           = $request->input('category');
+        $category           = intval($request->input('category'));
         $type               = $request->input('type');
         $time               = $request->input('time');
 
-        if(empty($user_article_id) || ($type !='cancel' && empty($category)) || empty($type) || ($type == 'time' && strtotime($time) <= time())){
+        if(empty($user_article_id) || empty($type) || ($type == 'time' && strtotime($time) <= time())){
             return self::ApiOut(40003,'请求错误');
         }
 

@@ -245,5 +245,5 @@
         this.route  = '{{isset($route)?$route:null}}';
     }).call(define('data'));
 </script>
-<script src="/js/user.edit.js?2F5CEB5987"></script>
+<script src="/js/user.edit.js?2AECEB5987"></script>
 @stop

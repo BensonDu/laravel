@@ -103,11 +103,11 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
         //分类管理
         Route::get('/admin/category', 'Admin\CategoryController@index');
         Route::get('/admin/category/list', 'Admin\CategoryController@categories');
-        Route::get('/admin/category/order/save', 'Admin\CategoryController@ordersave');
-        Route::get('/admin/category/del', 'Admin\CategoryController@del');
-        Route::get('/admin/category/delete', 'Admin\CategoryController@delete');
+        Route::get('/admin/category/display', 'Admin\CategoryController@display');
         Route::get('/admin/category/edit', 'Admin\CategoryController@edit');
         Route::get('/admin/category/add', 'Admin\CategoryController@add');
+        Route::get('/admin/category/order/save', 'Admin\CategoryController@ordersave');
+        Route::get('/admin/category/delete', 'Admin\CategoryController@delete');
         //专题管理
         Route::get('/admin/special', 'Admin\SpecialController@index');
         Route::get('/admin/special/list', 'Admin\SpecialController@specials');

@@ -27,7 +27,7 @@ class CategoryController extends AdminController
     */
     public function index(){
         $data['base']['title'] = '分类管理';
-        $data['list']          = $this->listformat();
+        $data['list']          = self::format();
         return self::view('admin.category.index',$data);
     }
     /*
@@ -36,55 +36,53 @@ class CategoryController extends AdminController
     |--------------------------------------------------------------------------
     */
     public function categories(){
-        return $this->ApiOut(0,$this->listformat());
+        return $this->ApiOut(0,self::format());
     }
     /*
     |--------------------------------------------------------------------------
     | 分类列表格式化
     |--------------------------------------------------------------------------
     */
-    private function listformat(){
-        $list = CategoryModel::get_categorie_list($_ENV['site_id']);
-        $show = [];
-        $hide = [];
+    private static function format(){
+        $list = CategoryModel::get_category_list($_ENV['site_id']);
+        $default    = [];
+        $custom     = [];
         foreach($list as $v){
-            if($v->deleted == 0){
-                $show[] = $v;
+            if($v['id'] == '0'){
+                $default = $v;
             }
-            if($v->deleted == 1){
-                $hide[] = $v;
+            else{
+                $custom[] = $v;
             }
         }
         return [
-            'show' => $show,
-            'hide' => $hide
+            'default'   => $default,
+            'custom'    => $custom
         ];
     }
-
+    /*
+    |--------------------------------------------------------------------------
+    | 分类显示状态 接口
+    |--------------------------------------------------------------------------
+    */
+    public function display(){
+        $id =  request()->input('id');
+        $deleted = request()->input('deleted') == '1' ? 1 : 0;
+        if(empty($id))return $this->ApiOut(40001,'请求错误');
+        CategoryModel::del_category($_ENV['site_id'],$id,$deleted);
+        return $this->ApiOut(0,'操作成功');
+    }
     /*
     |--------------------------------------------------------------------------
     | 分类列表排序保存 接口
     |--------------------------------------------------------------------------
     */
     public function ordersave(){
-        $show =  request()->input('show');
-        $hide =  request()->input('hide');
-        $show = !!$show ? $show : [];
-        $hide = !!$hide ? $hide : [];
-        if((count($show) + count($hide))>5)return $this->ApiOut(40001,'请求错误');
-        CategoryModel::order_save($_ENV['site_id'],$show,$hide);
+        $order =  request()->input('order');
+        $order = !!$order ? $order : [];
+        if((count($order))>5)return $this->ApiOut(40001,'请求错误');
+        CategoryModel::order_save($_ENV['site_id'],$order);
         return $this->ApiOut(0,'保存成功');
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 分类删除 接口
-    |--------------------------------------------------------------------------
-    */
-    public function del(){
-        $id =  request()->input('id');
-        if(empty($id) || !!CategoryModel::get_category_related_article_count($_ENV['site_id'],$id))return $this->ApiOut(40001,'请求错误');
-        CategoryModel::del_category($_ENV['site_id'],$id);
-        return $this->ApiOut(0,'删除成功');
     }
     /*
     |--------------------------------------------------------------------------
@@ -92,16 +90,26 @@ class CategoryController extends AdminController
     |--------------------------------------------------------------------------
     */
     public function delete(){
-        $id     =  request()->input('id');
-        $move   =  request()->input('move');
-        if(empty($id) || empty($move) || !CategoryModel::category_owner($_ENV['site_id'],$move))return $this->ApiOut(40001,'请求错误');
-        CategoryModel::article_transfer($_ENV['site_id'],$id,$move);
-        CategoryModel::del_category($_ENV['site_id'],$id);
+        $id     =  intval(request()->input('id'));
+        $move   =  intval(request()->input('move'));
+
+        if(($id == 0 && !CategoryModel::category_owner($_ENV['site_id'],$move)) || ($move != 0 && !CategoryModel::category_owner($_ENV['site_id'],$move)))return $this->ApiOut(40001,'请求错误');
+
+        //默认分类转移
+        if($id == 0){
+            CategoryModel::article_transfer($_ENV['site_id'],$id,$move);
+        }
+        //常规分类删除
+        else{
+            CategoryModel::article_transfer($_ENV['site_id'],$id,$move);
+            CategoryModel::del_category($_ENV['site_id'],$id);
+        }
+        
         return $this->ApiOut(0,'删除成功');
     }
     /*
     |--------------------------------------------------------------------------
-    | 精选修改 接口
+    | 分类名称修改 接口
     |--------------------------------------------------------------------------
     */
     public function edit(){
@@ -115,7 +123,7 @@ class CategoryController extends AdminController
     }
     /*
     |--------------------------------------------------------------------------
-    | 精选添加 接口
+    | 分类添加 接口
     |--------------------------------------------------------------------------
     */
     public function add(){

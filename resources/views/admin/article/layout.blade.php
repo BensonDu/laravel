@@ -59,4 +59,5 @@
 <script src="/lib/cropper/cropper.min.js"></script>
 @section('script-article')
 @show
+<script src="/js/admin/article.js?v6"></script>
 @stop

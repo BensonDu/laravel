@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Common;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\ArticleSiteModel;
+use App\Http\Model\CategoryModel;
 
 class SiteController extends Controller
 {
@@ -20,7 +21,7 @@ class SiteController extends Controller
      */
    public static function category(){
        $site_id = request('site_id');
-       $list = ArticleSiteModel::get_article_categories($site_id);
+       $list = CategoryModel::get_categories($site_id);
        return self::ApiOut(0,!empty($list) ? $list : []);
    }
 

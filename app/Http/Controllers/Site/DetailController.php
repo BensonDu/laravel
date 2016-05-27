@@ -43,7 +43,7 @@ class DetailController extends SiteController
             'content'   => $info->content,
             'tags'      => $tag,
             'time'      => date('Y年m月d日',strtotime($info->post_time)),
-            'category'  => $info->category_name,
+            'category'  => empty($info->category_name) ? '默认分类' : $info->category_name,
             'image'     => image_crop($info->image,950),
             'like'      => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_like($id,$_ENV['uid']) : false,
             'favorite'  => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_favorite($id,$_ENV['uid']) : false
@@ -75,7 +75,7 @@ class DetailController extends SiteController
             'summary'   => $info->summary,
             'content'   => content_image_crop($info->content),
             'time'      => time_down(strtotime($info->post_time)),
-            'category'  => $info->category_name,
+            'category'  => empty($info->category_name) ? '默认分类' : $info->category_name,
             'image'     => image_crop($info->image,500),
             //微信分享头图
             'weixin'    => image_crop_custom($info->image,'?imageMogr2/thumbnail/x300/gravity/Center/crop/300x300/')
