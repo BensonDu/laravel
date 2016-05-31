@@ -45,6 +45,8 @@ class DetailController extends SiteController
             'time'      => date('Y年m月d日',strtotime($info->post_time)),
             'category'  => empty($info->category_name) ? '默认分类' : $info->category_name,
             'image'     => image_crop($info->image,950),
+            'likes'     => $info->likes,
+            'favorites' => $info->favorites,
             'like'      => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_like($id,$_ENV['uid']) : false,
             'favorite'  => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_favorite($id,$_ENV['uid']) : false
         ];

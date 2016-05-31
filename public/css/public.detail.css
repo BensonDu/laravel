@@ -121,11 +121,18 @@
     margin-top: 18px;
     line-height: 24px;
 }
-.page-content .container .tag{
+
+.page-content .container .handle{
     width: 100%;
-    margin: 30px auto 0;
+    margin: 15px auto 100px;
     max-width: 900px;
     padding: 0 5%;
+    overflow: visible;
+}
+.page-content .container .tag{
+    display: inline-block;
+    padding: 20px 0;
+    float: left;
     text-align: left;
 }
 .page-content .container .tag a{
@@ -218,21 +225,15 @@
 /*点赞 收藏 start*/
 .page-content .container .action{
     display: inline-block;
-    max-width: 900px;
-    text-align: left;
-    margin-top: 20px;
-    padding: 0 5%;
-    width: 100%;
+    padding: 7px 0;
+    float: right;
 }
 .page-content .container .action .wrap{
     width: 100%;
-    border-top: 1px solid #eee;
     height: 50px;
-    padding: 18px 0;
     overflow: visible;
 }
 .page-content .container .action .wrap>div{
-    width: 33%;
     height: 100%;
     float: left;
     text-align: center;
@@ -240,8 +241,8 @@
 .page-content .container .action .wrap>div a{
     position: relative;
     display: inline-block;
-    height: 86px;
-    width: 100px;
+    height: 50px;
+    min-width: 80px;
     padding: 10px 0;
     cursor: pointer;
     text-align: left;
@@ -285,12 +286,6 @@
 .page-content .container .action .wrap .favorite a i{
     color: #FFBF35;
 }
-.page-content .container .action .wrap .favorite a span:after{
-    content: '收藏';
-}
-.page-content .container .action .wrap .favorite.active a span:after{
-    content: '已收藏';
-}
 .page-content .container .action .wrap .favorite a em{
     background-size: 66px;
     background-position: -34px -34px;
@@ -302,12 +297,6 @@
 .page-content .container .action .wrap .like a i{
     color: #FF4081;
 }
-.page-content .container .action .wrap .like a span:after{
-    content: '点赞';
-}
-.page-content .container .action .wrap .like.active a span:after{
-    content: '已点赞';
-}
 .page-content .container .action .wrap .like a em{
     background-size: 65px;
     background-position: 1px -32px;
@@ -316,6 +305,54 @@
     background-size: 65px;
     background-position: 1px 0;
 }
+.page-content .container .action .wrap .weixin{
+    position: relative;
+}
+.page-content .container .action .wrap .weixin a em{
+    background: url(http://dn-noman.qbox.me/weixin.png) no-repeat center;
+    background-position: 0 -32px;
+    background-size: 28px;
+}
+.page-content .container .action .wrap .weixin.active a em{
+    background-position: 0 4px;
+    background-size: 28px;
+}
+.page-content .container .action .wrap .weixin div{
+    display: none;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: -24px;
+    top: -100px;
+    border: 3px solid #ccc;
+    box-shadow: 0 0 5px 0 #000;
+    background: #fff;
+    overflow: visible;
+}
+.page-content .container .action .wrap .weixin div img{
+    width: 100%;
+    height: 100%;
+}
+.page-content .container .action .wrap .weixin b{
+    content: '';
+    position: absolute;
+    display: none;
+    left: 18px;
+    bottom: 42px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #aaa;
+}
+.page-content .container .action .wrap .weixin span{
+    margin-left: 4px;
+}
+.page-content .container .action .wrap .weixin:hover b,
+.page-content .container .action .wrap .weixin:hover div{
+    display: block;
+}
+
 @keyframes floatUp {
     0% {
         opacity: 0;

@@ -8,6 +8,7 @@
 
 namespace App\Http\Model;
 
+use App\Http\Model\Cache\CacheModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -22,15 +23,14 @@ class ArticleSocialModel extends Model
     |
     | @param  string $article_id
     | @param  string $user_id
-    | @param  string $type
     | @return bool
     |
     */
-    public static function check_is_like($article_id ,$user_id, $type = 1){
+    public static function check_is_like($article_id ,$user_id){
         return DB::table('user_like')
             ->where('article_id' ,$article_id)
             ->where('user_id',$user_id)
-            ->where('type',$type)
+            ->where('type','1')
             ->where('valid',1)
             ->count();
     }
@@ -41,15 +41,14 @@ class ArticleSocialModel extends Model
     |
     | @param  string $article_id
     | @param  string $user_id
-    | @param  string $type
     | @return bool
     |
     */
-    public static function check_is_favorite($article_id ,$user_id, $type = 1){
+    public static function check_is_favorite($article_id ,$user_id){
         return DB::table('user_favorite')
             ->where('article_id' ,$article_id)
             ->where('user_id',$user_id)
-            ->where('type',$type)
+            ->where('type','1')
             ->where('valid',1)
             ->count();
     }
@@ -64,34 +63,40 @@ class ArticleSocialModel extends Model
     | @return bool
     |
     */
-    public static function favorite($article_id ,$user_id, $type = 1){
+    public static function favorite($article_id ,$user_id){
         $like = DB::table('user_favorite')
             ->where('article_id' ,$article_id)
             ->where('user_id',$user_id)
-            ->where('type',$type)
+            ->where('type','1')
             ->first();
+
+        //添加||更新 用户收藏表记录
         if(isset($like->id)){
             $valid = !$like->valid;
             DB::table('user_favorite')
                 ->where('article_id' ,$article_id)
                 ->where('user_id',$user_id)
-                ->where('type',$type)
+                ->where('type','1')
                 ->update(['valid' => $valid ? 1 : 0]);
         }
         else{
             $valid = true;
             DB::table('user_favorite')->insert([
-                ['article_id' => $article_id, 'user_id' => $user_id,'type' => $type,'create_time'=>now()]
+                ['article_id' => $article_id, 'user_id' => $user_id,'type' => '1','create_time'=>now()]
             ]);
         }
-        $table = $type == 1 ? 'articles_site' : 'articles_user';
-        if($valid){
-            DB::table($table)->where('id' ,$article_id)->increment('favorites', 1);
-        }
-        else{
-            DB::table($table)->where('id' ,$article_id)->decrement('favorites', 1);
-        }
-        return $valid;
+
+        $query = DB::table('articles_site')->where('id' ,$article_id)->first(['favorites']);
+        $count = isset($query->favorites) ? $query->favorites : 0;
+        $count = $valid ? $count+1 : $count-1;
+        DB::table('articles_site')->where('id' ,$article_id)->update([
+            'favorites' => $count
+        ]);
+        CacheModel::clear_article_cache($_ENV['site_id'],$article_id);
+        return [
+            'valid' => $valid ? 'FAV' : 'DISFAV',
+            'count' => $count
+        ];
     }
     /*
     |--------------------------------------------------------------------------
@@ -104,34 +109,37 @@ class ArticleSocialModel extends Model
     | @return bool
     |
     */
-    public static function like($article_id ,$user_id, $type = 1){
+    public static function like($article_id ,$user_id){
         $like = DB::table('user_like')
             ->where('article_id' ,$article_id)
             ->where('user_id',$user_id)
-            ->where('type',$type)
+            ->where('type','1')
             ->first();
         if(isset($like->id)){
             $valid = !$like->valid;
             DB::table('user_like')
                 ->where('article_id' ,$article_id)
                 ->where('user_id',$user_id)
-                ->where('type',$type)
+                ->where('type','1')
                 ->update(['valid' => $valid ? 1 : 0]);
         }
         else{
             $valid = true;
             DB::table('user_like')->insert([
-                ['article_id' => $article_id, 'user_id' => $user_id,'type' => $type,'create_time'=>now()]
+                ['article_id' => $article_id, 'user_id' => $user_id,'type' => '1','create_time'=>now()]
             ]);
         }
-        $table = $type == 1 ? 'articles_site' : 'articles_user';
-        if($valid){
-            DB::table($table)->where('id' ,$article_id)->increment('likes', 1);
-        }
-        else{
-            DB::table($table)->where('id' ,$article_id)->decrement('likes', 1);
-        }
-        return $valid;
+        $query = DB::table('articles_site')->where('id' ,$article_id)->first(['likes']);
+        $count = isset($query->likes) ? $query->likes : 0;
+        $count = $valid ? $count+1 : $count-1;
+        DB::table('articles_site')->where('id' ,$article_id)->update([
+            'likes' => $count
+        ]);
+        CacheModel::clear_article_cache($_ENV['site_id'],$article_id);
+        return [
+            'valid' => $valid ? 'LIKE' : 'DISLIKE',
+            'count' => $count
+        ];
     }
 
 }
