@@ -1,0 +1,364 @@
+.list-header{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #eee;
+}
+.list-header .nav{
+    height: 100%;
+    float: left;
+}
+.list-header .nav a{
+    display: inline-block;
+    height: 100%;
+    margin-right: 28px;
+    line-height: 50px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.list-header .nav a.active{
+    font-weight: 900;
+    border-bottom: 2px solid #6e8cfb;
+}
+.list-header .nav a:hover{
+    color: #999;
+}
+/*列表size start */
+.list-header .list-size{
+    height: 100%;
+    padding: 9px 0;
+    float: left;
+}
+.list-header .list-size a{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    line-height: 22px;
+    border-radius: 2px;
+    padding: 0 5px;
+    font-weight: 900;
+}
+.list-header .list-size a:hover,
+.list-header .list-size a.active{
+    background: #333;
+    color: #fff;
+}
+/*列表size end */
+.list-body{
+    min-height: 445px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+.list-body table{
+    width: 100%;
+    border-spacing: 0;
+}
+.list-body table thead{
+    width: 100%;
+    line-height: 40px;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    user-select:none;
+}
+.list-body table thead th:nth-child(1){
+    padding: 0 20px;
+}
+.list-body table thead th{
+    text-align: left;
+}
+.list-body table thead th span{
+    font-size: 12px;
+    color: #333;
+}
+.list-body table thead th.orderable{
+    cursor: pointer;
+}
+.list-body table thead th.orderable em{
+    display: inline-block;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficon-button.png) no-repeat;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-right: 5px;
+    background-position: -96px -64px;
+}
+.list-body table thead th.orderable.asc em{
+    background-position: -73px -64px;
+}
+.list-body table thead th.orderable.desc em{
+    background-position: -85px -64px;
+}
+.list-body table tbody tr{
+    animation: fadeIn 0.7s linear 0s normal forwards;
+    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
+    -moz-animation: fadeIn 0.7s linear 0s normal forwards;
+}
+.list-body table tbody tr:nth-child(2n+1){
+    background: #f2f3f5;
+}
+.list-body table tbody tr:hover{
+    background: #eee;
+}
+.list-body table tbody td{
+    font-size: 12px;
+    color: #666;
+    line-height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.list-body table tbody td div{
+    line-height: inherit;
+    white-space: inherit;
+    font-size: inherit;
+}
+.list-body table tbody td a{
+    line-height: inherit;
+    white-space: inherit;
+    font-size: inherit;
+}
+.list-body table tbody td span{
+    font-size: inherit;
+    line-height: inherit;
+}
+.list-body table tbody td.title{
+    padding: 0 20px;
+    max-width: 200px;
+    text-overflow: ellipsis;
+}
+.list-body table tbody td.title.active{
+    cursor: pointer;
+}
+.list-body table tbody td.title.active:hover{
+    opacity: .7;
+}
+.list-body table tbody tr .title.new:before{
+    content: ' ';
+    display: inline-block;
+    height: 7px;
+    width: 7px;
+    vertical-align: 2px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: #6e8cfb;
+}
+.list-body table tbody .title.new{
+    font-weight: 900 ;
+}
+.list-body table tbody td.publish em{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    vertical-align: -7px;
+    margin-right: 5px;
+    background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-size: 90px;
+}
+.list-body table tbody td.publish.now em{
+    background-position:0 1px;
+}
+.list-body table tbody td.publish.cancel em{
+    background-position: 0 -23px;
+    background-size: 92px;
+}
+.list-body table tbody td.publish.time em{
+    background-position:-46px 2px;;
+}
+.list-body table tbody td.publish span{
+    color: #666;
+}
+.list-body table tbody td.publish.now:after{
+    content:'已发布';
+    display: inline-block;
+}
+.list-body table tbody td.publish.cancel:after{
+    content:'未发布';
+    display: inline-block;
+}
+.list-body table tbody td.publish.time:after{
+    content:'定时发布';
+    display: inline-block;
+}
+.list-body table tbody td.handle div.hide{
+    visibility: hidden;
+}
+.list-body table tbody td.handle a{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.list-body table tbody td.handle a:hover{
+   opacity: .8;
+}
+.list-body table tbody td.handle a em{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: -5px;
+    margin-right: 5px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-size: 40px;
+}
+.list-body table tbody td.handle a.post em{
+    background-position: -22px 3px;
+    background-size: 90px;
+}
+.list-body table tbody td.handle a.edit em{
+    background-position: -20px -43px;
+    background-size: 88px;
+}
+.list-body table tbody td.handle a.del em{
+    background-position: -19px -20px;
+    background-size: 88px;
+}
+.list-body table tbody td.handle a.preview em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feye.png) no-repeat center;
+    background-size: 18px;
+    background-position: 0 -1px;
+}
+.list-body table tbody td.handle a.hide em{
+    background: url(https://dn-noman.qbox.me/eye-hidden.png) no-repeat center;
+    background-size: 22px;
+    background-position: 0;
+}
+.list-body table tbody td.handle a.recovery em{
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Frecovery-icon.png) no-repeat center;
+    background-size: 16px;
+    background-position: 2px 1px;
+}
+.list-body table tbody td.handle a span{
+    color: #666;
+}
+
+.list-footer{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+}
+.list-footer .page-info{
+    display: inline-block;
+    float: left;
+    height: 100%;
+    width: 100px;
+    text-align: center;
+}
+.list-footer .page-info p{
+    font-size: 12px;
+    line-height: 40px;
+    color: #333;
+}
+.list-footer .page-info p span{
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+.list-footer .page-size{
+    float: left;
+    height: 100%;
+    width: 160px;
+}
+.list-footer .page-size p{
+    display: inline-block;
+    font-size: 12px;
+    height: 100%;
+    line-height: 40px;
+    color: #333;
+}
+.list-footer .page-size span{
+    display: inline-block;
+    font-size: inherit;
+    vertical-align: top;
+    height: 100%;
+    padding: 7px 5px;
+}
+.list-footer .page-size span a{
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: top;
+    padding: 3px;
+    line-height: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.list-footer .page-size span a:hover{
+    color: #6e8cfb;
+}
+.list-footer .page-size span a.active{
+    background: #333;
+    color: #fff;
+}
+.list-footer .pagination{
+    float: right;
+    height: 100%;
+    min-width: 200px;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    user-select:none;
+}
+.list-footer .pagination a.btn{
+    display: inline-block;
+    height: 100%;
+    width: 40px;
+    padding: 7px;
+}
+.list-footer .pagination a.btn em{
+    display: inline-block;
+    vertical-align: top;
+    line-height: 20px;
+    height: 26px;
+    width: 20px;
+    border-radius: 3px;
+    opacity: .5;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fpagination-icon.png) no-repeat center;
+    background-size: 30px;
+}
+.list-footer .pagination a.btn em.prev{
+    background-position: -14px -14px;;
+}
+.list-footer .pagination a.btn em.next{
+    background-position: 3px 5px;
+}
+.list-footer .pagination a.active.btn em{
+    cursor: pointer;
+    opacity: 1;
+}
+.list-footer .pagination a.btn.active em.prev:hover{
+    background-color: #333;
+    background-position: 3px -14px;
+}
+.list-footer .pagination a.btn.active em.next:hover{
+    background-color: #333;
+    background-position: -12px 5px;
+}
+.list-footer .pagination a.hide{
+    visibility: hidden;
+}
+.list-footer .pagination span{
+    display: inline-block;
+    vertical-align: top;
+    padding: 7px 0;
+    height: 100%;
+    min-width: 270px;
+    text-align: center;
+}
+.list-footer .pagination span a{
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: top;
+    padding: 3px 6px;
+    line-height: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.list-footer .pagination span a:hover{
+    color: #6e8cfb;
+}
+.list-footer .pagination span a.active{
+    background: #333;
+    color: #fff;
+}
+.list-footer .pagination span a.disable:hover{
+    background-color: #fff;
+    color: #333;
+    cursor: default;
+}

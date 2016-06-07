@@ -104,7 +104,13 @@
         this.uid = '{{$_ENV['uid']}}';
         this.platform = {
             home : '{{$_ENV['platform']['home']}}'
-        }
+        };
+        this.user = {
+            id : '{{$_ENV['uid']}}',
+            name : '{{$nickname}}',
+            avatar : '{{$avatar}}',
+            role : '{{isset($_ENV['admin']['role']) ? $_ENV['admin']['role'] : 0}}'
+        };
     }).call(define('global'));
 
     var _hmt = _hmt || [];

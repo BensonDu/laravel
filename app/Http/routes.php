@@ -48,6 +48,13 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
     //点赞收藏
     Route::get('/social/like', 'Common\SocialController@like');
     Route::get('/social/favorite', 'Common\SocialController@favorite');
+    //评论
+    Route::get('/comment/test', 'Comment\CommentController@test');
+    Route::get('/comment/comments', 'Comment\CommentController@comments');
+    Route::get('/comment/like', 'Comment\CommentController@like');
+    Route::get('/comment/hide', 'Comment\CommentController@hide');
+    Route::get('/comment/delete', 'Comment\CommentController@delete');
+    Route::get('/comment/submit', 'Comment\CommentController@submit');
 
     //渠道输出
     Route::get('/feed', 'Feed\IndexController@index');
@@ -124,6 +131,10 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
         Route::post('/admin/ad/add', 'Admin\AdController@add');
         Route::post('/admin/ad/update', 'Admin\AdController@update');
         Route::get('/admin/ad/info', 'Admin\AdController@info');
+        //评论管理
+        Route::get('/admin/comment', 'Admin\CommentController@index');
+        Route::get('/admin/comment/comments', 'Admin\CommentController@comments');
+        Route::get('/admin/comment/del', 'Admin\CommentController@del');
         //站点管理
         Route::get('/admin/site', 'Admin\SiteController@index');
         Route::get('/admin/site/index', 'Admin\SiteController@index');
@@ -139,6 +150,8 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
         Route::get('/admin/site/nav/del', 'Admin\SiteController@navdel');
         Route::get('/admin/site/contribution', 'Admin\SiteController@contribution');
         Route::post('/admin/site/contribution', 'Admin\SiteController@contributionsave');
+        Route::get('/admin/site/comment', 'Admin\SiteController@comment');
+        Route::post('/admin/site/comment', 'Admin\SiteController@commentsave');
     });
 }
 //平台部分

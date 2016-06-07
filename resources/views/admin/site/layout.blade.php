@@ -10,6 +10,7 @@
             <a class="{{$sub_act =='social' ? 'active' : ''}}" href="/admin/site/social">社交资料</a>
             <a class="{{$sub_act =='nav' ? 'active' : ''}}" href="/admin/site/nav">站点导航</a>
             <a class="{{$sub_act =='contribution' ? 'active' : ''}}" href="/admin/site/contribution">稿件相关</a>
+            <a class="{{$sub_act =='comment' ? 'active' : ''}}" href="/admin/site/comment">评论设置</a>
         </div>
     </div>
 @section('container')

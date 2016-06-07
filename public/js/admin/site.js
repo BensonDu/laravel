@@ -372,3 +372,39 @@
         };
     };
 }).call(define('c_contribution'));
+
+(function () {
+    var self = this;
+    if(!data.hasOwnProperty('comment'))return false;
+    this.vue = new Vue({
+        el : '#admin-site-comment',
+        data : {
+            save : '',
+            open : data.comment.open,
+            ex : data.comment.ex
+        },
+        methods : {
+            _slide : function (item) {
+                this[item] = this[item] =='true' ? 'false' : 'true';
+                if(item == 'open' && this[item] != 'true' ){
+                    this.ex = false;
+                }
+            },
+            _save : function () {
+                self.vue.save = 'loading';
+                request.post('/admin/site/comment',function (ret) {
+                    self.vue.save = 'done';
+                    setTimeout(function () {
+                        self.vue.save = '';
+                    },1000);
+                },self.form());
+            }
+        }
+    });
+    this.form = function () {
+        return {
+            comment : self.vue.open,
+            comment_ex : self.vue.ex
+        };
+    };
+}).call(define('c_comment'));

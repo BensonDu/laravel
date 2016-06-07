@@ -22,6 +22,7 @@
             <a href="/admin/special"><span>专题管理</span></a>
             <a href="/admin/star" ><span>精选管理</span></a>
             <a href="/admin/category" ><span>分类管理</span></a>
+        <a href="/admin/comment" ><span>评论管理</span></a>
 @endif
 @if(isset($_ENV['admin']['role']) && ($_ENV['admin']['role'] > 2))
             <a href="/admin/ad" ><span>广告管理</span></a>

@@ -14,6 +14,7 @@ use App\Http\Model\ArticleSiteModel;
 use App\Http\Model\ArticleSocialModel;
 use App\Http\Model\Cache\PlatformCacheModel;
 use App\Http\Model\Cache\SiteCacheModel;
+use App\Http\Model\SiteModel;
 
 class DetailController extends SiteController
 {
@@ -38,6 +39,8 @@ class DetailController extends SiteController
         $data['ad'] = AdModel::get_article_ad($_ENV['site_id']);
 
         $data['article'] = [
+            'id'        => $info->article_id,
+            'source'    => $info->source_id,
             'title'     => $info->title,
             'summary'   => $info->summary,
             'content'   => $info->content,
@@ -50,6 +53,10 @@ class DetailController extends SiteController
             'like'      => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_like($id,$_ENV['uid']) : false,
             'favorite'  => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_favorite($id,$_ENV['uid']) : false
         ];
+
+        //站点设置 是否开启评论
+        $site = SiteModel::get_site_info($_ENV['site_id']);
+        $data['comment'] = empty($site->comment) ? false : true;
         //子站文章浏览总量+1
         PlatformCacheModel::site_article_view_increase($_ENV['site_id']);
         return self::view('site.detail',$data);
@@ -57,7 +64,7 @@ class DetailController extends SiteController
     public function mobile($id){
         //调取缓存
         $cache = SiteCacheModel::m_article_view($_ENV['site_id'],$id);
-        if(!empty($cache))return $cache;
+        if(!empty($cache) && 0)return $cache;
 
         $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
 

@@ -214,6 +214,32 @@ class SiteController extends AdminController
     }
     /*
     |--------------------------------------------------------------------------
+    | 站点管理 评论设置
+    |--------------------------------------------------------------------------
+    */
+    public function comment(){
+        $data['base']['title']  = '站点管理-稿件相关';
+        $data['sub_act']        = 'comment';
+        $data['info'] = self::info();
+        return self::view('admin.site.comment',$data);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 站点管理 评论设置保存
+    |--------------------------------------------------------------------------
+    */
+    public function commentsave(){
+        $comment    = request()->input('comment') == 'true' ? 1 : 0;
+        $comment_ex = request()->input('comment_ex') == 'true' ? 1 : 0;
+        if(!$comment)$comment_ex = 0;
+        SiteModel::update_site_info($_ENV['site_id'],[
+            'comment'   =>$comment,
+            'comment_ex'=>$comment_ex
+        ]);
+        return self::ApiOut(0,'更新成功');
+    }
+    /*
+    |--------------------------------------------------------------------------
     | 获取站点导航列表 私有
     |--------------------------------------------------------------------------
     */

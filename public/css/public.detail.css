@@ -124,10 +124,15 @@
 
 .page-content .container .handle{
     width: 100%;
-    margin: 15px auto 100px;
+    height: 70px;
+    margin: 15px auto 0;
     max-width: 900px;
     padding: 0 5%;
     overflow: visible;
+}
+.page-content .container .handle .handle-wrap{
+    width: 100%;
+    height: 100%;
 }
 .page-content .container .tag{
     display: inline-block;
@@ -222,7 +227,7 @@
     color: #6e8cfb;
 }
 /*广告 end*/
-/*点赞 收藏 start*/
+/*点赞 收藏 微信分享start*/
 .page-content .container .action{
     display: inline-block;
     padding: 7px 0;
@@ -352,7 +357,6 @@
 .page-content .container .action .wrap .weixin:hover div{
     display: block;
 }
-
 @keyframes floatUp {
     0% {
         opacity: 0;
@@ -394,4 +398,341 @@
         top: -40px;
     }
 }
-/*点赞收藏 end*/
+/*点赞收藏 微信分享 end*/
+
+.page-content .container .comment-container{
+    width: 100%;
+    margin: 40px auto 0;
+    max-width: 900px;
+    padding: 0 5% 100px;
+    overflow: visible;
+}
+
+.comment{
+    width: 100%;
+}
+.comment textarea{
+    border-radius: 3px;
+    font-size: 14px;
+    resize: vertical;
+    color: #666;
+}
+.comment .left{
+    float: left;
+}
+.comment .right{
+    float: right;
+}
+.comment .divider{
+    margin:  0 8px;
+}
+.comment .normal{
+    color: #999;
+}
+.comment .right-space{
+    margin-right: 8px;
+}
+.comment .left-space{
+    margin-left: 2px;
+}
+.comment .link{
+    color: #6e8cfb;
+    cursor: pointer;
+}
+.comment .link:hover{
+    color: #335CF5;
+}
+.comment .submit{
+    width: 100%;
+    height: 50px;
+    padding: 10px 0;
+    text-align: right;
+}
+.comment .submit a{
+    display: inline-block;
+    font-size: 12px;
+    background: #999;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    cursor: not-allowed;
+}
+.comment .submit.active a{
+    background: #444;
+    cursor: pointer;
+}
+.comment .submit.active a:hover{
+    background: #000;
+}
+.comment .handle-btn{
+    margin-left: 10px;
+    cursor: pointer;
+    color: #999;
+}
+.comment .handle-btn.active,
+.comment .handle-btn:hover,
+.comment .handle-btn:hover span{
+    color: #000;
+}
+.comment .comment-user {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+.comment .comment-user .comment-input{
+    position: relative;
+    width: 100%;
+    padding: 20px 0 20px 10px;
+}
+.comment .comment-user .comment-input .avatar{
+    position: absolute;
+    left: 0;
+    top:0;
+    padding: 20px 20px 0 0;
+    width: 80px;
+    height: 100%;
+}
+.comment .comment-user .comment-input .avatar img{
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    border: 1px solid #eee;
+}
+.comment .comment-user .comment-input .textarea{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-left: 70px;
+}
+.comment .comment-user .comment-input .textarea textarea{
+    width: 100%;
+    min-height: 140px;
+    max-height: 260px;
+    border: 1px solid #eee;
+    padding: 16px 20px;
+}
+.comment .comment-user .comment-input .textarea textarea:focus{
+    outline: none;
+}
+.comment .comment-user .comment-input .textarea .not-login{
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 90%;
+    left: 70px;
+    top: 0;
+    background: rgba(255,255,255,.5);
+}
+.comment .comment-user .comment-input .textarea .not-login h5{
+    display: inline-block;
+    margin-top: 10%;
+    width: 100%;
+    font-size: 14px;
+    color: #999;
+}
+.comment .comment-user .comment-input .textarea .not-login h5 a{
+    color: #6e8cfb;
+    margin: 0 5px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.comment .comment-user .comment-input .textarea .not-login.active{
+    display: block;
+}
+.comment .comment-sort{
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
+.comment .comment-sort a{
+    display: inline-block;
+    line-height: 34px;
+    font-size: 14px;
+    margin-right: 20px;
+    float: left;
+    color: #666;
+    cursor: pointer;
+}
+.comment .comment-sort a.active{
+    border-bottom: 2px solid #6e8cfb;
+}
+.comment .comment-sort a:hover{
+    opacity: .7;
+}
+.comment .comment-list{
+    width: 100%;
+}
+.comment .comment-list .comment-item{
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
+    animation: fadeIn 0.7s linear 0s normal forwards;
+    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
+    -moz-animation: fadeIn 0.7s linear 0s normal forwards;
+}
+.comment .comment-list .comment-item .avatar{
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 40px;
+    height: 100%;
+}
+.comment .comment-list .comment-item .avatar img{
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    border: 1px solid #eee;
+}
+.comment .comment-list .comment-item .comment-body{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-left: 50px;
+}
+.comment .comment-list .comment-item .comment-body .head{
+    width: 100%;
+    height: 30px;
+}
+.comment .comment-list .comment-item .comment-body .head a,
+.comment .comment-list .comment-item .comment-body .head span{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 30px;
+}
+.comment .comment-list .comment-item .comment-body .text{
+    position: relative;
+    width: 100%;
+    padding: 5px 50px 5px 0;
+    min-height: 50px;
+}
+.comment .comment-list .comment-item .comment-body .text p{
+    font-size: 13px;
+    text-align: left;
+    line-height: 22px;
+    color: #666;
+}
+.comment .comment-list .comment-item .comment-body .text .like{
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 100%;
+    cursor: pointer;
+}
+.comment .comment-list .comment-item .comment-body .text .like em{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 5px 0 0 10px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Flike-fav.png) no-repeat center;
+    background-size: 50px;
+    background-position: 4px -22px;
+    transition: transform .2s;
+    -moz-transition: -moz-transform .2s;
+    -webkit-transition: -webkit-transform .2s;
+}
+.comment .comment-list .comment-item .comment-body .text .like.active em{
+    background-size: 60px;
+    background-position: 1px 0;
+}
+.comment .comment-list .comment-item .comment-body .text .like:hover em{
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+}
+.comment .comment-list .comment-item .comment-body .foot{
+    width: 100%;
+}
+.comment .comment-list .comment-item .comment-body .foot .foot-origin{
+    width: 100%;
+    padding-right: 4px;
+    overflow: hidden;
+}
+.comment .comment-list .comment-item .comment-body .foot .foot-origin a,
+.comment .comment-list .comment-item .comment-body .foot .foot-origin span{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 30px;
+    vertical-align: top;
+}
+.comment .comment-list .comment-item .comment-body .foot .reply{
+    display: none;
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    padding: 30px 4%;
+    background: #f5f5f5;
+}
+.comment .comment-list .comment-item .comment-body .foot .reply.active{
+    display: block;
+}
+.comment .comment-list .comment-item .comment-body .foot .reply:before{
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    right: 6px;
+    top: -6px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #ccc;
+}
+.comment .comment-list .comment-item .comment-body .foot .reply .reply-wrap{
+    position: relative;
+    width: 100%;
+}
+.comment .comment-list .comment-item .comment-body .foot .reply .reply-wrap .textarea{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-left: 70px;
+}
+.comment .comment-list .comment-item .comment-body .foot .reply .reply-wrap .textarea textarea{
+    width: 100%;
+    min-height: 100px;
+    max-height: 160px;
+    border: 1px solid #eee;
+    padding: 16px 20px;
+}
+.comment .comment-list .comment-item .comment-body .foot .reply .reply-wrap .textarea textarea:focus{
+    outline: none;
+}
+.comment .comment-list .comment-item .comment-body .sub-comment-container{
+    display: none;
+    position: relative;
+    width: 100%;
+    margin-top: 3px;
+    background: #f5f5f5;
+    padding: 30px 4%;
+}
+.comment .comment-list .comment-item .comment-body .sub-comment-container:before{
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    right: 45px;
+    top: -6px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #ccc;
+}
+.comment .comment-list .comment-item .comment-body .sub-comment-container.alone:before{
+    right: 15px;
+}
+.comment .comment-list .comment-item .comment-body .sub-comment-container.active{
+    display: block;
+}
+.comment .comment-list .comment-item .comment-body .sub-comment{
+    position: relative;
+    width: 100%;
+}
+.comment .comment-list .comment-item .comment-body .sub-comment-container .foot .reply{
+    background: #eee;
+}
