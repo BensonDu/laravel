@@ -19,5 +19,5 @@
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 @section('script-site')
 @show
-<script src="/js/admin/site.js"></script>
+<script src="/js/admin/site.js?"></script>
 @stop
