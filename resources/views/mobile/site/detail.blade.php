@@ -44,7 +44,7 @@
 @section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
 <!--头条推荐阅读start-->
 <script src="http://dn-noman.qbox.me/tech2ipo.custom.js"></script>
-<script>(readsByToutiao = window.readsByToutiao ||[]).push({  id:'toutiao-container',num:8,openAd:true,theme:false,plugins: { "render": function(data) {controller.render(data);}}});</script>
+<script>(readsByToutiao = window.readsByToutiao ||[]).push({  id:'list-container',num:8,openAd:true,theme:false,plugins: { "render": function(data) {controller.render(data);}}});</script>
 <script>
     (function () {
         var self = this;
