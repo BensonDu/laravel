@@ -89,7 +89,7 @@ class CommentController extends Controller{
         //评论速率限制
         $comments =  CommentModel::getUserLatestComment($_ENV['site_id'],$_ENV['uid']);
         //3分钟内连续评论限制
-        if(!empty($comments)){
+        if(isset($comments[1]->time)){
             $latest = strtotime($comments[1]->time);
             $d = time()-$latest;
             if($d < 60*3) return self::ApiOut(40001,'请在 '.ceil(3-$d/60).' 分钟后评论');
