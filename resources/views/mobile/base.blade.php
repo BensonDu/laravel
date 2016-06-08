@@ -37,6 +37,21 @@
 <script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/mobile/js/public.base.js"></script>
 <script>
+    /*GrowingIO*/
+    var _vds = _vds || [];
+    window._vds = _vds;
+    (function(){
+        _vds.push(['setAccountId', 'a0c6db62ca24ce9c']);
+        (function() {
+            var vds = document.createElement('script');
+            vds.type='text/javascript';
+            vds.async = true;
+            vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(vds, s);
+        })();
+    })();
+    /*百度统计*/
     var _hmt = _hmt || [];
     (function() {
         var hm = document.createElement("script");
