@@ -445,8 +445,8 @@
 .comment .submit{
     width: 100%;
     height: 50px;
-    padding: 10px 0;
-    text-align: right;
+    padding: 10px 0 0 70px;
+    overflow: hidden;
 }
 .comment .submit a{
     display: inline-block;
@@ -459,6 +459,7 @@
     border-radius: 3px;
     text-align: center;
     cursor: not-allowed;
+    float: right;
 }
 .comment .submit.active a{
     background: #444;
@@ -466,6 +467,14 @@
 }
 .comment .submit.active a:hover{
     background: #000;
+}
+.comment .submit p{
+    display: inline-block;
+    font-size: 12px;
+    color: #ccc;
+    height: 30px;
+    line-height: 30px;
+    float: left;
 }
 .comment .handle-btn{
     margin-left: 10px;

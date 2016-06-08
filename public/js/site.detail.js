@@ -156,6 +156,23 @@
                     }
                 });
             },
+            //组合键提交评论
+            _multi_key : function (e,index,deep) {
+                if((e.ctrlKey || e.metaKey) && event.keyCode == 13){
+                    //根评论
+                    if(typeof index == 'undefined'){
+                        return this._submit();
+                    }
+                    //子评论
+                    if(typeof deep == 'undefined'){
+                        return this._reply_submit(index);
+                    }
+                    //子评论回复
+                    if(typeof deep != 'undefined'){
+                        return this._reply_submit(index,deep);
+                    }
+                }
+            },
             //提交根评论
             _submit : function () {
                 self.comment_submit(0,this.input,function () {

@@ -1,7 +1,7 @@
 @extends('layout.site')
 @section('style')@parent  <link href="/css/public.content.css?v2" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
-    <link href="/css/public.detail.css?v7" rel="stylesheet">
+    <link href="/css/public.detail.css?v8" rel="stylesheet">
 @stop
 @section('body')
 @parent
@@ -86,12 +86,13 @@
                             <img v-bind:src="user.avatar">
                         </div>
                         <div class="textarea">
-                            <textarea placeholder="请输入评论..." v-model="input"></textarea>
+                            <textarea placeholder="请输入评论..." v-model="input" v-on:keydown="_multi_key($event)"></textarea>
                             <div class="not-login" v-bind:class="user.id =='' && 'active'">
                                 <h5>请<a v-on:click="_login">登录</a>后参与评论</h5>
                             </div>
                         </div>
                         <div class="submit active">
+                            <p>Ctrl (Command) + Enter 键回复</p>
                             <a class="pub-background-transition" v-on:click="_submit">发表</a>
                         </div>
                     </div>
@@ -127,9 +128,10 @@
                                             <img v-bind:src="user.avatar">
                                         </div>
                                         <div class="textarea">
-                                            <textarea v-bind:placeholder="'@'+c.nickname" v-model="c.reply_input"></textarea>
+                                            <textarea v-bind:placeholder="'@'+c.nickname" v-model="c.reply_input" v-on:keydown="_multi_key($event,$index)"></textarea>
                                         </div>
                                         <div class="submit active">
+                                            <p>Ctrl (Command) + Enter 键回复</p>
                                             <a class="pub-background-transition" v-on:click="_reply_submit($index)">回复</a>
                                         </div>
                                     </div>
@@ -166,9 +168,10 @@
                                                             <img v-bind:src="user.avatar">
                                                         </div>
                                                         <div class="textarea">
-                                                            <textarea v-bind:placeholder="'@'+r.nickname" v-model=r.reply_input></textarea>
+                                                            <textarea v-bind:placeholder="'@'+r.nickname" v-model="r.reply_input" v-on:keydown="_multi_key($event,$parent.$index,$index)"></textarea>
                                                         </div>
                                                         <div class="submit active">
+                                                            <p>Ctrl (Command) + Enter 键回复</p>
                                                             <a class="pub-background-transition" v-on:click="_reply_submit($parent.$index,$index)">回复</a>
                                                         </div>
                                                     </div>
@@ -208,7 +211,7 @@
     }).call(define('data'))
 </script>
 <script src="http://dn-acac.qbox.me/qrcode.js"></script>
-<script src="/js/site.detail.js?v2"></script>
+<script src="/js/site.detail.js?v4"></script>
 <!--苹果分销start-->
 <script type='text/javascript'>var _merchantSettings=_merchantSettings || [];_merchantSettings.push(['AT', '1000lmBS']);(function(){var autolink=document.createElement('script');autolink.type='text/javascript';autolink.async=true; autolink.src= ('https:' == document.location.protocol) ? 'https://autolinkmaker.itunes.apple.com/js/itunes_autolinkmaker.js' : 'http://autolinkmaker.itunes.apple.com/js/itunes_autolinkmaker.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(autolink, s);})();</script>
 <!--苹果分销end-->
