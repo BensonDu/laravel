@@ -211,7 +211,7 @@
     }).call(define('data'))
 </script>
 <script src="http://dn-acac.qbox.me/qrcode.js"></script>
-<script src="/js/site.detail.js?v5"></script>
+<script src="/js/site.detail.js?v6"></script>
 <!--苹果分销start-->
 <script type='text/javascript'>var _merchantSettings=_merchantSettings || [];_merchantSettings.push(['AT', '1000lmBS']);(function(){var autolink=document.createElement('script');autolink.type='text/javascript';autolink.async=true; autolink.src= ('https:' == document.location.protocol) ? 'https://autolinkmaker.itunes.apple.com/js/itunes_autolinkmaker.js' : 'http://autolinkmaker.itunes.apple.com/js/itunes_autolinkmaker.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(autolink, s);})();</script>
 <!--苹果分销end-->

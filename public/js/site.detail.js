@@ -247,7 +247,7 @@
                     {
                         id :  data.article.source,
                         root : info.id,
-                        order : 'desc',
+                        order : 'asc',
                         orderby : 'new'
                     }
                 )

@@ -106,6 +106,16 @@ class IndexController extends SiteController
     }
     private function get_articles($id, $skip = 0, $category = 0){
         $list = ArticleSiteModel::get_home_article_list($id, $skip,$category);
+
+        //获取文章评论数
+        $ids = [];
+
+        foreach ($list as $v){
+            if(!in_array($v->article_id,[])) $ids[] = $v->article_id;
+        }
+
+        $comments = ArticleSiteModel::get_articles_comment_count($_ENV['site_id'],$ids);
+
         foreach($list as $k =>$v){
             $tags = [];
             $tag = tag($v->tags);
@@ -117,6 +127,7 @@ class IndexController extends SiteController
                     ];
                 }
             }
+            $list[$k]->comments = isset($comments[$v->article_id]) ? $comments[$v->article_id] : 0;
             $list[$k]->image    = image_crop($v->image,200);
             $list[$k]->avatar   = avatar($v->avatar);
             $list[$k]->user_url = user_url($v->user_id);

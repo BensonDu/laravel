@@ -60,6 +60,7 @@
                             <p class="time">发布于 {{$article->time}}</p>
                             <a class="inter like"><span>赞 {{$article->likes}}</span></a>
                             <a class="inter collect"><span>收藏 {{$article->favorites}}</span></a>
+                            <a class="inter"><span>评论 {{$article->comments}}</span></a>
                         </div>
                     </div>
                     <div class="image">
@@ -84,6 +85,7 @@
                             <p class="time" v-text="'发布于 '+article.time"></p>
                             <a class="inter like"><span v-text="'赞 '+article.likes"></span></a>
                             <a class="inter collect"><span v-text="'收藏 '+article.favorites"></span></a>
+                            <a class="inter"><span v-text="'评论 '+article.comments"></span></a>
                         </div>
                     </div>
                     <div class="image">
