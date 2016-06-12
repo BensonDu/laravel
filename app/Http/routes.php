@@ -62,6 +62,7 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
     Route::get('/feed/toutiao/{id}', 'Feed\ToutiaoController@detail');
     Route::get('/feed/xiaozhi', 'Feed\XiaozhiController@index');
     Route::get('/feed/xiaozhi/{id}', 'Feed\XiaozhiController@detail');
+    Route::get('/feed/flipboard', 'Feed\FlipboardController@index');
 
     //站点管理
     Route::group(['middleware' => 'AdminAuth'], function () {
