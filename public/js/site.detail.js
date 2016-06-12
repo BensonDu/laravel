@@ -91,6 +91,7 @@
             role : global.user.role
         },
         redirect= global.platform.home+'/account/login?redirect='+encodeURIComponent(location.href),
+        shortcut = navigator.userAgent.indexOf('Mac OS X') != -1 ? 'Command + Enter 键回复' : 'Ctrl + Enter 键回复',
         lock = false;
     //站点关闭评论
     if(data.comment != '1')return false;
@@ -118,7 +119,8 @@
             orderby : 'hot',
             reply : false,
             input : '',
-            list : []
+            list : [],
+            shortcut : shortcut
         },
         methods : {
             _login : function () {
