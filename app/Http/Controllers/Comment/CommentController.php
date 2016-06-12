@@ -173,7 +173,7 @@ class CommentController extends Controller{
             //用户昵称
             $comment['nickname']  = isset($user_map[$v->user_id]['nickname']) ? $user_map[$v->user_id]['nickname'] : '';
             //用户头像
-            $comment['avatar'] = isset($user_map[$v->user_id]['avatar']) ? $user_map[$v->user_id]['avatar'] : '';
+            $comment['avatar'] = isset($user_map[$v->user_id]['avatar']) ? avatar($user_map[$v->user_id]['avatar']) : '';
             //被回复昵称
             $comment['replied_nickname'] = '';
             //被回复主页
