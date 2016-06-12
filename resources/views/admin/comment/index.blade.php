@@ -21,7 +21,7 @@
         <tbody>
         <tr v-for="a in list">
             <td class="title active"><a v-text="a.nickname"></a></td>
-            <td v-text="a.content"></td>
+            <td v-text="a.content" v-bind:title="a.content"></td>
             <td v-text="a.time"></td>
             <td class="handle">
                 <div>
