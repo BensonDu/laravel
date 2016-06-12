@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.comment.css" rel="stylesheet">
+@section('style')@parent  <link href="/css/admin.comment.css?" rel="stylesheet">
 @stop
 @section('area')
 <div class="list-header">
@@ -12,10 +12,10 @@
     <table>
         <thead>
         <tr>
-            <th><span>评论作者</span></th>
-            <th><span>评论内容</span></th>
-            <th class="orderable" v-bind:class="order" v-on:click="_order('start')"><span>评论时间</span><em></em></th>
-            <th><span>操作</span></th>
+            <th width="15%"><span>评论作者</span></th>
+            <th width="45%"><span>评论内容</span></th>
+            <th class="orderable" v-bind:class="order" v-on:click="_order('start')" width="20%"><span>评论时间</span><em></em></th>
+            <th width="20%"><span>操作</span></th>
         </tr>
         </thead>
         <tbody>

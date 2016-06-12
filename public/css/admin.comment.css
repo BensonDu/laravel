@@ -50,6 +50,7 @@
 }
 .list-body table{
     width: 100%;
+    table-layout: fixed;
     border-spacing: 0;
 }
 .list-body table thead{
@@ -104,6 +105,7 @@
     line-height: 40px;
     overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .list-body table tbody td div{
     line-height: inherit;
