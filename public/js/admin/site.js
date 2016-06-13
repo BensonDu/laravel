@@ -344,42 +344,12 @@
 
 (function () {
     var self = this;
-    if(!data.hasOwnProperty('contribution'))return false;
+    if(!data.hasOwnProperty('comment') && !data.hasOwnProperty('contribution'))return false;
     this.vue = new Vue({
-        el : '#admin-site-contribution',
+        el : '#admin-site-others',
         data : {
             save : '',
-            contribute : data.contribution.contribute
-        },
-        methods : {
-            _slide : function (item) {
-                this[item] = ! this[item];
-            },
-            _save : function () {
-                self.vue.save = 'loading';
-                request.post('/admin/site/contribution',function (ret) {
-                    self.vue.save = 'done';
-                    setTimeout(function () {
-                        self.vue.save = '';
-                    },1000);
-                },self.form());
-            }
-        }
-    });
-    this.form = function () {
-        return {
-            contribute : self.vue.contribute
-        };
-    };
-}).call(define('c_contribution'));
-
-(function () {
-    var self = this;
-    if(!data.hasOwnProperty('comment'))return false;
-    this.vue = new Vue({
-        el : '#admin-site-comment',
-        data : {
-            save : '',
+            contribute : data.contribution.contribute,
             open : data.comment.open,
             ex : data.comment.ex
         },
@@ -392,7 +362,7 @@
             },
             _save : function () {
                 self.vue.save = 'loading';
-                request.post('/admin/site/comment',function (ret) {
+                request.post('/admin/site/others',function (ret) {
                     self.vue.save = 'done';
                     setTimeout(function () {
                         self.vue.save = '';
@@ -403,8 +373,9 @@
     });
     this.form = function () {
         return {
+            contribute : self.vue.contribute,
             comment : self.vue.open,
             comment_ex : self.vue.ex
         };
     };
-}).call(define('c_comment'));
+}).call(define('c_others'));

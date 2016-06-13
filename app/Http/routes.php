@@ -149,10 +149,8 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
         Route::post('/admin/site/nav/add', 'Admin\SiteController@navadd');
         Route::post('/admin/site/nav/update', 'Admin\SiteController@navupdate');
         Route::get('/admin/site/nav/del', 'Admin\SiteController@navdel');
-        Route::get('/admin/site/contribution', 'Admin\SiteController@contribution');
-        Route::post('/admin/site/contribution', 'Admin\SiteController@contributionsave');
-        Route::get('/admin/site/comment', 'Admin\SiteController@comment');
-        Route::post('/admin/site/comment', 'Admin\SiteController@commentsave');
+        Route::get('/admin/site/others', 'Admin\SiteController@others');
+        Route::post('/admin/site/others', 'Admin\SiteController@otherssave');
     });
 }
 //平台部分

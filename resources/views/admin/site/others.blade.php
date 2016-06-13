@@ -1,8 +1,20 @@
 @extends('admin.site.layout')
 
 @section('container')
-    <div id="admin-site-comment" class="site-contribution">
+    <div id="admin-site-others" class="site-contribution">
+
         <div class="section">
+            <div class="item">
+                <div class="name">
+                    <h3>开启外部投稿</h3>
+                </div>
+                <div class="slider" v-bind:class="{'true': contribute == 'true'}" v-on:click="_slide('contribute')">
+                            <span>
+                                <em></em>
+                            </span>
+                </div>
+            </div>
+
             <div class="item">
                 <div class="name">
                     <h3>开启评论</h3>
@@ -35,6 +47,9 @@
         this.comment = {
             open : '{{$info->comment ? 'true' : 'false'}}',
             ex :  '{{$info->comment_ex ? 'true' : 'false'}}'
+        };
+        this.contribution = {
+            contribute : '{{$info->contribute ? 'true' : 'false'}}'
         }
     }).call(define('data'));
 </script>
