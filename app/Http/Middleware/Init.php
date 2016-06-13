@@ -26,7 +26,11 @@ class Init
      |--------------------------------------------------------------------------
      */
     private function set_env_public(){
-        $_ENV['uid'] = session()->get('uid');
+        $session = session();
+        $_ENV['uid'] = $session->get('uid');
+        //最近浏览子站ID
+        $recent      = $session->get('recent');
+        if(!empty($_ENV['site_id']) && $recent != $_ENV['site_id'])$session->put('recent',$_ENV['site_id']);
     }
     /*
      |--------------------------------------------------------------------------

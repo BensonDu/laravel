@@ -155,9 +155,7 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
 //平台部分
 else{
     //平台首页
-    Route::get('/', function(){
-        return redirect('http://tech2ipo.com');
-    });
+    Route::get('/','Platform\IndexController@index' );
     //点赞收藏
     Route::get('/social/like', 'Common\SocialController@like');
     Route::get('/social/favorite', 'Common\SocialController@favorite');
