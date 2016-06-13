@@ -69,21 +69,25 @@ class CommentModel extends Model
             'site_routing.custom_domain',
             'site_routing.platform_domain',
         ];
+
         $query = CommentModel::leftJoin('users','comment.user_id','=','users.id')
             ->leftJoin('articles_site','articles_site.source_id','=','comment.article_id')
-            ->leftJoin('site_routing','site_routing.site_id','=','comment.site_id');
+            ->leftJoin('site_routing','site_routing.site_id','=','comment.site_id')
+            ->where('comment.deleted','0');
+        //站内评论限定site_id即可
         if($inside){
-            $query->where('comment.site_id',$site_id)
-                ->where('comment.deleted','0')
-                ->where('articles_site.site_id',$site_id);
+            $query->where('comment.site_id',$site_id);
         }
+        //站外评论 需非隐藏评论 且 评论属于站外 且评论对应源文章ID在本站也有发表
         else{
             $hide = DB::table('comment_hide')->where('site_id',$site_id)->where('valid','1')->get(['id']);
             $ids = [];
             foreach ($hide as $v){
                 $ids[] = $v->id;
             }
-            $query->whereNotIn('comment.id',$ids)->where('comment.site_id','!=',$site_id)->groupBy('comment.id');
+            $query->whereNotIn('comment.id',$ids)
+                ->where('comment.site_id','!=',$site_id)
+                ->where('articles_site.site_id',$site_id);
         }
         return $query->orderBy('comment.time',$order)
             ->take($take)
@@ -98,21 +102,25 @@ class CommentModel extends Model
     public static function getCommentsCount($site_id, $inside = true){
 
         $query = CommentModel::leftJoin('users','comment.user_id','=','users.id')
-            ->leftJoin('articles_site','articles_site.source_id','=','comment.article_id');
+            ->leftJoin('articles_site','articles_site.source_id','=','comment.article_id')
+            ->leftJoin('site_routing','site_routing.site_id','=','comment.site_id')
+            ->where('comment.deleted','0');
+        //站内评论限定site_id即可
         if($inside){
-            $query->where('comment.site_id',$site_id)
-                ->where('comment.deleted','0')
-                ->where('articles_site.site_id',$site_id);;
+            $query->where('comment.site_id',$site_id);
         }
+        //站外评论 需非隐藏评论 且 评论属于站外 且评论对应源文章ID在本站也有发表
         else{
             $hide = DB::table('comment_hide')->where('site_id',$site_id)->where('valid','1')->get(['id']);
             $ids = [];
             foreach ($hide as $v){
                 $ids[] = $v->id;
             }
-            $query->whereNotIn('comment.id',$ids)->where('comment.site_id','!=',$site_id)->groupBy('comment.id');
+            $query->whereNotIn('comment.id',$ids)
+                ->where('comment.site_id','!=',$site_id)
+                ->where('articles_site.site_id',$site_id);
         }
-        return count($query->get(['comment.id']));
+        return $query->count();
     }
     /*
     |--------------------------------------------------------------------------
