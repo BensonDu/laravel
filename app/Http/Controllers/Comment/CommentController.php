@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Comment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\CommentModel;
+use App\Http\Model\GeetestModel;
 use App\Http\Model\SiteModel;
 use App\Http\Model\UserModel;
 
@@ -85,21 +86,18 @@ class CommentController extends Controller{
         $parent         = $request->input('parent');
         $parent         = !empty($parent) ? $parent : 0;
         if(empty($uid) || empty($site_id) || strlen($content) < 5) return self::ApiOut(40001,'请求错误');
-
-        //评论速率限制
+        /*
+         *  评论速率限制
+         *  过滤重复评论内容
+         *  连续评论超过3条 需通过验证码
+         */
         $comments =  CommentModel::getUserLatestComment($_ENV['site_id'],$_ENV['uid']);
-        //3分钟内连续评论限制
-        if(count($comments) > 1 && isset($comments[1]->time)){
-            $latest = strtotime($comments[1]->time);
-            $d = time()-$latest;
-            if($d < 60*3) return self::ApiOut(40001,'请在 '.ceil(3-$d/60).' 分钟后评论');
-        }
-        //一天同一站点评论20条
-        if(count($comments) == 20){
-            $earliest = strtotime($comments[19]->time);
-            if(time()-$earliest < 60*60*24) return self::ApiOut(40001,'超出一天评论限制数量');
-        }
-
+        $count = count($comments);
+        //重复评论
+        if($count>0 && $comments[0]->article_id == $article_id &&$comments[0]->content == $content) return self::ApiOut(40001,'禁止评论重复内容');
+        //一小时内评论已有2条
+        if($count > 2 && ($count+1)%3 == 0 && !GeetestModel::verify()) return self::ApiOut(40003,'请通过验证');
+        /*评论速率限制 end*/
         CommentModel::addArticleComment($site_id,$article_id,$uid,$content,$parent);
         return self::ApiOut(0,'评论成功');
     }

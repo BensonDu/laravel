@@ -74,6 +74,10 @@ body{
     -moz-transition: opacity .4s; /* Firefox 4 */
     -webkit-transition: opacity .4s; /* Safari 和 Chrome */
 }
+/*极验验证码弹窗*/
+.gt_show{
+    z-index: 20;
+}
 /*加载更多按钮*/
 .load-more{
     display: none;

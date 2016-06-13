@@ -49,7 +49,6 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
     Route::get('/social/like', 'Common\SocialController@like');
     Route::get('/social/favorite', 'Common\SocialController@favorite');
     //评论
-    Route::get('/comment/test', 'Comment\CommentController@test');
     Route::get('/comment/comments', 'Comment\CommentController@comments');
     Route::get('/comment/like', 'Comment\CommentController@like');
     Route::get('/comment/hide', 'Comment\CommentController@hide');
@@ -178,9 +177,6 @@ else{
     Route::post('/account/exist', 'Account\AccountController@exist');
     //发送验证码
     Route::post('/account/captcha', 'Account\AccountController@captcha');
-    //极验验证码
-    Route::get('/account/geetest/start', 'Account\AccountController@gtstart');
-    Route::post('/account/geetest/verify', 'Account\AccountController@gtverify');
     //找回密码页面
     Route::get('/account/find', 'Account\FindController@index');
     Route::post('/account/find', 'Account\FindController@post');
@@ -232,6 +228,9 @@ else{
     //用户首页文章列表
     Route::get('/user/index/list', 'User\IndexController@articles');
 }
+//极验验证码
+Route::get('/geetest/start', 'Common\GeetestController@start');
+Route::post('/geetest/verify', 'Common\GeetestController@verify');
 //临时 && 测试
 Route::get('/test', 'Temp\TempController@test');
 Route::get('/temp/device', 'Temp\TempController@device');

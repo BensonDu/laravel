@@ -11,11 +11,27 @@ class GeetestModel{
 
     private static $geetest;
     private static $session = 'gtserver';
+    private static $access  = 'gtaccess';
 
     private static function init(){
         $id  = config('geetest.id');
         $key = config('geetest.key');
         self::$geetest = new \App\Libs\geetest\geetest($id,$key);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    |  检测验证状态 通过-->重置
+    |--------------------------------------------------------------------------
+    */
+    public static function verify(){
+        $gtaccess = session(self::$access);
+        if(!empty($gtaccess) && $gtaccess){
+            session()->put(self::$access,false);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     /*
     |--------------------------------------------------------------------------
@@ -37,11 +53,13 @@ class GeetestModel{
     public static function validate($challenge, $validate, $seccode){
         self::init();
         if(session(self::$session)){
-            return self::$geetest->success_validate($challenge, $validate, $seccode, session()->getId());
+            $ret = self::$geetest->success_validate($challenge, $validate, $seccode, session()->getId());
         }
         else{
-            return self::$geetest->fail_validate($challenge, $validate, $seccode);
+            $ret = self::$geetest->fail_validate($challenge, $validate, $seccode);
         }
+        session()->put(self::$access,$ret);
+        return $ret;
     }
 
 }

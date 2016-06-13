@@ -16,7 +16,7 @@
     <meta name="format-detection" content="email=no" />
     <meta name="format-detection" content="telephone=yes" />
     <link rel="shortcut icon" href="{{isset($base['favicon']) ? $base['favicon'] : 'http://dn-noman.qbox.me/chuang.png'}}" type="image/png">
-    @section('style')<link href="/css/public.base.css?" rel="stylesheet">
+    @section('style')<link href="/css/public.base.css?v1" rel="stylesheet">
     <link href="/css/public.nav.left.css?v1" rel="stylesheet">
     @show
 </head>

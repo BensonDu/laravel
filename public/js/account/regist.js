@@ -1,44 +1,3 @@
-(function () {
-    var self = this;
-    this.start = function (success) {
-        $("#gt-btn").click();
-        self.success = success;
-    };
-    this.success = function () {};
-    this.attach = function (captchaObj) {
-        $("#gt-btn").click(function () {
-            var validate = captchaObj.getValidate();
-            if (!validate) {
-                pop.error('请完成图片验证','确定').one();
-                return;
-            }
-            request.post("/account/geetest/verify",function (ret) {
-                if(ret.hasOwnProperty('code') && ret.code == '0'){
-                    self.success();
-                }
-            },{
-                geetest_challenge: validate.geetest_challenge,
-                geetest_validate: validate.geetest_validate,
-                geetest_seccode: validate.geetest_seccode
-            });
-        });
-        captchaObj.bindOn("#gt-btn");
-        captchaObj.appendTo("#geetest");
-    };
-    this.init = function () {
-        $(document.body).append('<div id="geetest" class="geetest"></div><div id="gt-btn"></div>');
-        request.get('/account/geetest/start',function (data) {
-            initGeetest({
-                gt: data.gt,
-                challenge: data.challenge,
-                product: "popup",
-                offline: !data.success
-            }, self.attach);
-        });
-    };
-    self.init();
-}).call(define('controller_geetest'));
-
 (function(){
     var self = this,
         $success = $('#regist-success');
@@ -85,7 +44,7 @@
     this.methods.get_captcha = function(){
         if(!self.data.captcha.disable){
             self.verify_phone(function(){
-                controller_geetest.start(function () {
+                libGeetest.start(function () {
                     self.captcha_send();
                 });
             });

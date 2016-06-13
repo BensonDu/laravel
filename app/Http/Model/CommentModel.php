@@ -124,11 +124,12 @@ class CommentModel extends Model
     }
     /*
     |--------------------------------------------------------------------------
-    | 获取用户最近评论时间
+    | 获取用户最近一小时评论
     |--------------------------------------------------------------------------
     */
     public static function getUserLatestComment($site_id,$user_id){
-        return CommentModel::where('user_id',$user_id)->where('site_id',$site_id)->orderBy('id','desc')->limit(20)->get();
+        $time = date("Y-m-d H").":00:00";
+        return CommentModel::where('user_id',$user_id)->where('site_id',$site_id)->where('time','>',$time)->orderBy('id','desc')->get();
     }
     /*
     |--------------------------------------------------------------------------

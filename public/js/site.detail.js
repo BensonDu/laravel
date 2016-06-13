@@ -319,6 +319,7 @@
     };
     //提交回复 && 评论
     this.comment_submit = function (parent,content,fun) {
+        var submit;
         if(lock) return false;
         if(user.id == ''){
             return pop.confirm('操作首先需登录','前往登录', function(){
@@ -327,13 +328,18 @@
         }
         if(content.length<5)return pop.error('评论过短','确定').one();
         lock = true;
-        request.get('/comment/submit',function (ret) {
+        submit = function(){
+            request.get('/comment/submit',function (ret) {
                 lock = false;
-                if(ret.hasOwnProperty('code') && ret.code == '0'){
+                if(!ret.hasOwnProperty('code')) return pop.error('评论失败,请重试','确定').one();
+                if(ret.code == '0'){
                     fun();
                 }
+                else if(ret.code == '40003'){
+                    libGeetest.start(submit);
+                }
                 else{
-                    pop.error(ret.msg || '评论失败','确定').one();
+                    pop.error(ret.msg || '评论失败,请重试','确定').one();
                 }
             },
             {
@@ -341,7 +347,10 @@
                 content:content,
                 parent : parent
             }
-        )
+            )
+        };
+        //提交回复
+        submit();
     };
     //滚动到文章底部加载评论内容
     this.timer = setInterval(function () {
