@@ -256,3 +256,15 @@ if (! function_exists('content_image_crop')) {
     }
 
 }
+if (! function_exists('site_home')) {
+    /**
+     * 站点首页
+     * @param  string $custom_domain
+     * @param  string $platform_domain
+     * @return string $url
+     */
+    function site_home($custrom_domain,$platform_domain){
+        return !empty($custrom_domain) ? 'http://'.$custrom_domain.'/' : 'http://'.$platform_domain.'.'.$_ENV['platform']['domain'].'/';
+    }
+
+}

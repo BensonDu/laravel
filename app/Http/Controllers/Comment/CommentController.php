@@ -151,7 +151,7 @@ class CommentController extends Controller{
             //站点ID
             $comment['site_id'] = $v->site_id;
             //站点首页
-            $comment['site_home'] = !empty($v->custom_domain) ? 'http://'.$v->custom_domain.'/' : 'http://'.$v->platform_domain.'.'.$_ENV['platform']['domain'].'/';
+            $comment['site_home'] = site_home($v->custom_domain,$v->platform_domain);
             //站点名称
             $comment['site_name'] = $v->name;
             //是否已删除

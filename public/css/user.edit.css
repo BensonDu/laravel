@@ -1526,27 +1526,31 @@
     padding: 0 3px;
 }
 .pop-container .slider .add-site .item{
+    display: block;
     width: 350px;
     margin-top: 20px;
     white-space: normal;
 }
-.pop-container .slider .add-site .item a{
+.pop-container .slider .add-site .item li{
     display: inline-block;
     height: 46px;
     padding: 14px 10px;
     border-bottom: 1px solid #eee;
 }
-.pop-container .slider .add-site .item a p{
+.pop-container .slider .add-site .item li a{
     display: inline-block;
     width: 220px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 12px;
-    color: #999;
+    color: #888;
     float: left;
 }
-.pop-container .slider .add-site .item a span{
+.pop-container .slider .add-site .item li a:hover{
+    color: #666;
+}
+.pop-container .slider .add-site .item li span{
     display: inline-block;
     width: 240px;
     overflow: hidden;
@@ -1557,7 +1561,7 @@
     margin-top: 8px;
     float: left;
 }
-.pop-container .slider .add-site .item a em{
+.pop-container .slider .add-site .item li em{
     display: inline-block;
     height: 100%;
     width: 30px;
@@ -1568,7 +1572,7 @@
     cursor: pointer;
     color: #999;
 }
-.pop-container .slider .add-site .item a em:hover{
+.pop-container .slider .add-site .item li em:hover{
     color: #333;
 }
 /*弹框end*/

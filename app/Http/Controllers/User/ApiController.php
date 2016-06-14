@@ -269,8 +269,14 @@ class ApiController  extends Controller
         $current = UserModel::current_site($_ENV['uid']);
         $except  = array_merge($auth,$current);
         //获取站点列表
-        $list = SiteModel::get_site_list(0,10,empty($keyword) ? null : $keyword,$except,['id','name']);
-        return self::ApiOut(0,$list);
+        $list = SiteModel::get_site_list(0,10,empty($keyword) ? null : $keyword,$except);
+        $ret = [];
+        foreach ($list as $k => $v){
+            $ret[$k]['id']      =   $v->id;
+            $ret[$k]['name']    =   $v->name;
+            $ret[$k]['link']    =   site_home($v->custom_domain,$v->platform_domain);
+        }
+        return self::ApiOut(0,$ret);
     }
     /*
     |--------------------------------------------------------------------------
@@ -341,6 +347,7 @@ class ApiController  extends Controller
                     $auth_list[] = [
                         'site_id'       => $v->site_id,
                         'name'          => $v->name,
+                        'link'          => site_home($v->custom_domain,$v->platform_domain),
                         'category'      => $v->category,
                         'post_time'     => $v->post_time,
                         //发布状态 : start初始 | time 定时发布 | cancel 未发布 | now 已发布
@@ -355,6 +362,7 @@ class ApiController  extends Controller
                         $cont_list[] = [
                             'site_id'       => $v->site_id,
                             'name'          => $v->name,
+                            'link'          => site_home($v->custom_domain,$v->platform_domain),
                             //投稿状态 : new 新文章 | auth 定时发布 | now 已发布 | refuse 已拒绝
                             'post_status'   => ($v->deleted == 0) ? (($v->contribute_status == 0 || $v->post_status == 2) ? 'auth' : ($v->post_status == 1 ? 'now' : 'refuse')) : 'refuse',
                             'update'        => 'disable'
@@ -366,9 +374,12 @@ class ApiController  extends Controller
         $site_map = [];
         if(!empty($auth) || !empty($cur)){
             $site_ids = array_merge($auth,$cur);
-            $site_info_list = SiteModel::get_site_info_list($site_ids,['id','name']);
+            $site_info_list = SiteModel::get_site_info_list($site_ids);
             foreach ($site_info_list as $v){
-                $site_map[$v->id] = $v->name;
+                $site_map[$v->id] = [
+                    'name' => $v->name,
+                    'link' =>site_home($v->custom_domain,$v->platform_domain)
+                ];
             }
         }
         if(!empty($auth)){
@@ -376,7 +387,8 @@ class ApiController  extends Controller
                 if(!in_array($v,$posted_site) && isset($site_map[$v])){
                     $auth_list[] = [
                         'site_id'       => $v,
-                        'name'          => $site_map[$v],
+                        'name'          => $site_map[$v]['name'],
+                        'link'          => $site_map[$v]['link'],
                         'category'      => '',
                         'post_time'     => now(),
                         'post_status'   => 'start',
@@ -390,7 +402,8 @@ class ApiController  extends Controller
                 if(!in_array($v,$contributed_site) && isset($site_map[$v])){
                     $cont_list[] = [
                         'site_id'       => $v,
-                        'name'          => $site_map[$v],
+                        'name'          => $site_map[$v]['name'],
+                        'link'          => $site_map[$v]['link'],
                         'post_status'   => 'new',
                         'update'        => 'enable'
                     ];

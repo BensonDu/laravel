@@ -213,5 +213,5 @@
 <script src="http://dn-acac.qbox.me/qrcode.js"></script>
 <script src="http://static.geetest.com/static/tools/gt.js"></script>
 <script src="/lib/geetest/geetest.js"></script>
-<script src="/js/site.detail.js?v7"></script>
+<script src="/js/site.detail.js?v8"></script>
 @stop

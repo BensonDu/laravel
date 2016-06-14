@@ -4,7 +4,7 @@
     <link href="/lib/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Ffont-awesome.css?" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
-    <link href="/css/user.edit.css?v8" rel="stylesheet" charset="utf-8">
+    <link href="/css/user.edit.css?v9" rel="stylesheet" charset="utf-8">
     <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
     <link href="/css/public.content.css?v1" rel="stylesheet">
 @stop
@@ -141,7 +141,7 @@
                     <td></td>
                 </tr>
                 <tr v-if="!!auth.length" v-for="p in auth">
-                    <td v-text="p.name"></td>
+                    <td><a v-bind:href="p.link" target="_blank" v-text="p.name"></a></td>
                     <td><span class="sta" v-bind:class="p.post_status"><em></em></span></td>
                     <td>
                         <a class="btn-post" v-bind:class="p.post_status" v-on:click="_post_admin(p.site_id,p.category,p.post_status,p.post_time)"><em></em></a>
@@ -154,11 +154,11 @@
                     <td></td>
                 </tr>
                 <tr v-if="!!contribute.length" v-for="p in contribute">
-                    <td v-text="p.name"></td>
+                    <td><a v-bind:href="p.link" target="_blank" v-text="p.name"></a></td>
                     <td><span class="sta" v-bind:class="p.post_status"><em></em></span></td>
                     <td>
                         <a class="btn-contribute" v-on:click="_contribute(p.site_id,p.update)" v-bind:class="p.update"><em></em></a>
-                        <a class="btn-hide" v-on:click="_remove_site(p.site_id,p.name)">×</a>
+                        <a class="btn-hide" v-on:click="_remove_site(p.site_id,p.name,p.link)">×</a>
                     </td>
                 </tr>
                 </tbody>
@@ -172,12 +172,12 @@
                 <input type="text" placeholder="输入关键词" v-model="search.keyword" v-on:keyup.enter="_search">
                 <a v-on:click="_search">搜索</a>
             </div>
-            <div class="item">
-                <a v-for=" s in search.list">
-                    <p v-text="s.name"></p>
+            <ul class="item">
+                <li v-for=" s in search.list">
+                    <a v-bind:href="s.link" target="_blank" v-text="s.name"></a>
                     <em v-on:click="_add_site(s.id)">+</em>
-                </a>
-            </div>
+                </li>
+            </ul>
             <div class="result">
                 <span>共: </span>
                 <b v-text="search.list.length"></b>
@@ -245,5 +245,5 @@
         this.route  = '{{isset($route)?$route:null}}';
     }).call(define('data'));
 </script>
-<script src="/js/user.edit.js?2AECEB5987"></script>
+<script src="/js/user.edit.js?2A4CEB5987"></script>
 @stop

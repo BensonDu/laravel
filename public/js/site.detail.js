@@ -357,13 +357,13 @@
         var dom = document.getElementById('comment-container'),rect;
         if(dom.getBoundingClientRect){
             rect = dom.getBoundingClientRect();
-            if(rect.top-200 > (window.innerHeight || document.documentElement.clientHeight)){
+            if(rect.top-300 > (window.innerHeight || document.documentElement.clientHeight)){
                 return false;
             }
         }
         //初始评论加载
         self.update_comment();
         clearInterval(self.timer);
-    },500);
+    },300);
 
 }).call(define('comment'));

@@ -437,13 +437,14 @@
         })
     };
     //移除站点
-    this.remove_site = function (id,name) {
+    this.remove_site = function (id,name,link) {
         request.get('/user/site/remove',function (ret) {
             if(ret.hasOwnProperty('code') && ret.code == 0){
                 self.get_article_post(self.article_id,function () {
                     self.vue.search.list.push({
                         id:id,
-                        name:name
+                        name:name,
+                        link:link
                     });
                 });
             }
@@ -561,8 +562,8 @@
             _add_site : function (id) {
                 self.add_site(id);
             },
-            _remove_site : function (id,name) {
-                self.remove_site(id,name);
+            _remove_site : function (id,name,link) {
+                self.remove_site(id,name,link);
             },
             _search : function () {
                 if(this.slider == 'add-site')self.search(this.search.keyword);

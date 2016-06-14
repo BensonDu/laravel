@@ -33,6 +33,8 @@ class EditModel extends Model
     public static function article_site_info($id){
         $select = [
             'site_info.name',
+            'site_routing.custom_domain',
+            'site_routing.platform_domain',
             'articles_site.id',
             'articles_site.site_id',
             'articles_site.post_status',
@@ -44,7 +46,11 @@ class EditModel extends Model
             'articles_site.hash',
             'articles_site.deleted'
         ];
-        return DB::table('articles_site')->leftJoin('site_info', 'site_info.id', '=', 'articles_site.site_id')->where('articles_site.source_id',$id)->get($select);
+        return DB::table('articles_site')
+            ->leftJoin('site_info', 'site_info.id', '=', 'articles_site.site_id')
+            ->leftJoin('site_routing', 'site_routing.site_id', '=', 'site_info.id')
+            ->where('articles_site.source_id',$id)
+            ->get($select);
     }
     /*
     |--------------------------------------------------------------------------

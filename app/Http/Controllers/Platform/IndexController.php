@@ -17,7 +17,7 @@ class IndexController extends PlatformController
         $recent = session('recent');
         $site = !empty($recent) ? $recent : 1;
         $info = SiteModel::get_site_info($site);
-        $domain = !empty($info->custom_domain) ? 'http://'.$info->custom_domain.'/' : 'http://'.$info->platform_domain.'.'.$_ENV['platform']['domain'].'/';
+        $domain = site_home($info->custom_domain,$info->platform_domain);
         return redirect($domain);
     }
 }

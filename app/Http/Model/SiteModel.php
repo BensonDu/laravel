@@ -61,8 +61,8 @@ class SiteModel extends Model
      | @return array
      |
      */
-    public static function get_site_info_list($ids,$select = ['*']){
-        return (is_array($ids) && !empty($ids)) ? SiteModel::whereIn('id',$ids)->get($select) : [];
+    public static function get_site_info_list($ids,$select = ['site_info.id','site_info.name','site_routing.custom_domain','site_routing.platform_domain']){
+        return (is_array($ids) && !empty($ids)) ? SiteModel::leftJoin('site_routing','site_info.id', '=', 'site_routing.site_id')->whereIn('site_info.id',$ids)->get($select) : [];
     }
     /*
      |--------------------------------------------------------------------------
@@ -188,10 +188,10 @@ class SiteModel extends Model
      | @return array
      |
      */
-    public static function get_site_list($skip = 0, $take = 10,$keyword = null,$except = [],$select = ['*']){
-        $query =  DB::table('site_info')->whereNotIn('id',$except);
+    public static function get_site_list($skip = 0, $take = 10,$keyword = null,$except = [],$select = ['site_info.id','site_info.name','site_routing.custom_domain','site_routing.platform_domain']){
+        $query =  DB::table('site_info')->leftJoin('site_routing','site_routing.site_id','=','site_info.id')->whereNotIn('site_info.id',$except);
         if(!is_null($keyword)){
-            $query->where('name', 'LIKE', '%'.$keyword.'%');
+            $query->where('site_info.name', 'LIKE', '%'.$keyword.'%');
         }
         return $query->take($take)->skip($skip)->get($select);
     }
