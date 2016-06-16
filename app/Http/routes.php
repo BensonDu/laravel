@@ -22,6 +22,9 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
             //文章详情
             Route::get('/{id}', 'Site\DetailController@index');
             Route::get('/{id}.html', 'Site\DetailController@index');
+            //站点专题页
+            Route::get('/special', 'Site\SpecialController@index');
+            Route::get('/special/{id}', 'Site\SpecialController@detail');
         }
         //M站
         else{
@@ -31,11 +34,11 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
             //文章详情
             Route::get('/{id}', 'Site\DetailController@mobile');
             Route::get('/{id}.html', 'Site\DetailController@mobile');
+            //站点专题页
+            Route::get('/special', 'Site\SpecialController@mobileindex');
+            Route::get('/special/{id}', 'Site\SpecialController@mobiledetail');
         }
     });
-    //站点专题页
-    Route::get('/special', 'Site\SpecialController@index');
-    Route::get('/special/{id}', 'Site\SpecialController@detail');
     //搜索
     Route::get('/search', 'Site\SearchController@index');
     Route::get('/search/{keyword}', 'Site\SearchController@index');

@@ -55,7 +55,7 @@ class IndexController extends SiteController
         $data['active'] = 'home';
 
         //首页精选
-        $data['stars']  = StarModel::get_mobile_star_list($id);
+        $data['stars']  = StarModel::get_star_list($id);
         //文章分类
         $data['categories'] = $this->get_categories();
         //文章列表
