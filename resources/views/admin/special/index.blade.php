@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.special.css?v1" rel="stylesheet">
+@section('style')@parent  <link href="/css/admin.special.css?v2" rel="stylesheet">
     <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
 @stop
 @section('area')
@@ -87,7 +87,7 @@
             </div>
         </div>
 
-        <div class="preview">
+        <div class="special-preview">
             <div class="header">
                 <h3><em></em><span>预览</span></h3>
                 <a v-on:click="_close">×</a>
@@ -212,5 +212,5 @@
         orderby : 'update_time'
     }
 </script>
-<script src="/js/admin/special.js?v3"></script>
+<script src="/js/admin/special.js?v4"></script>
 @stop

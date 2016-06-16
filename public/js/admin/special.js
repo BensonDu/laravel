@@ -290,7 +290,7 @@
         preview : {
             show : function (id) {
                 controller_admin.model.data.background = true;
-                self.vue.display = 'preview';
+                self.vue.display = 'special-preview';
                 self.special_preview(id);
             }
         },
