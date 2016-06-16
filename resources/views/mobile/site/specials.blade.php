@@ -1,5 +1,5 @@
 @extends('mobile.base')
-@section('style')@parent<link href="/mobile/css/site.special.css" rel="stylesheet">
+@section('style')@parent<link href="/mobile/css/site.special.css?" rel="stylesheet">
 @stop
 @section('body')
     <!--专题列表start-->

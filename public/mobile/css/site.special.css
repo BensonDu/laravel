@@ -304,7 +304,7 @@
     line-height: 30px;
     background: rgba(128,128,128,.5);
     color: #fff;
-    font-size: 14px;
+    font-size: 12px;
     padding: 10px;
     border-radius: 50%;
     text-align: center;
@@ -314,7 +314,7 @@
 /*专题页部分start*/
 .site-content .container{
     width: 100%;
-    padding: 90px 5% 50px;
+    padding: 90px 5% 30px;
     text-align: center;
 }
 .site-content .container .image{
@@ -332,10 +332,10 @@
     display: inline-block;
     height: 50px;
     width: 100%;
-    margin-top: 26px;
+    margin: 26px 0 0 0 ;
 }
 .site-content .container .title h1{
-    font-size: 28px;
+    font-size: 24px;
     letter-spacing: 6px;
     color: rgba(255,255,255,0.75);
     font-weight: 100;
@@ -350,7 +350,7 @@
     height: 130px;
 }
 .site-content .container .summary p{
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
     line-height: 26px;
     color: #aaa;
@@ -379,7 +379,7 @@
     width: 90%;
 }
 .site-content .container .list-container a .text h5{
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     line-height: 20px;
     color: #fff;
