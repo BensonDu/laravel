@@ -68,6 +68,9 @@
             _post : function(id,status){
                 controller_pop.display.post.show(id,status);
             },
+            _preview : function (id) {
+                controller_pop.display.preview.show(id);
+            },
             _add : function(){
                 controller_pop.display.add.show();
             },
@@ -204,6 +207,13 @@
                 list : [],
                 post : ''
             },
+            preview : {
+                title:'',
+                summary : '',
+                image :'',
+                bg_image : '',
+                list : []
+            },
             search :{
                 keyword : '',
                 list : []
@@ -277,6 +287,13 @@
         }
     });
     this.display = {
+        preview : {
+            show : function (id) {
+                controller_admin.model.data.background = true;
+                self.vue.display = 'preview';
+                self.special_preview(id);
+            }
+        },
         add : {
             show:function(){
                 controller_admin.model.data.background = true;
@@ -303,8 +320,27 @@
             controller_admin.model.data.background = false;
             self.vue.display = '';
             self.vue.special.id='';
+            self.vue.preview = {
+                title : '',
+                summray : '',
+                image : '',
+                bg_image : '',
+                list : []
+            };
             self.empty();
         }
+    };
+    //专题预览
+    this.special_preview = function (id) {
+        request.get('/admin/special/info',function(ret){
+                if(ret.hasOwnProperty('code') && ret.code ==0){
+                    self.vue.preview = ret.data;
+                }
+            },
+            {
+                id : id
+            }
+        );
     };
     //填充表单
     this.fill = function(data){

@@ -27,24 +27,12 @@ class SiteSpecialModel extends Model
      | @return array
      |
      */
-    public static function get_special_all($site_id,$post_status = 1){
+    public static function get_special_all($site_id,$post_status = 1,$select = ['id','title','summary','image','bg_image']){
         $query = SiteSpecialModel::where('site_id',$site_id);
         
         if(!is_null($post_status))$query->where('post_status' , $post_status);
 
-        return $query->where('deleted' , 0)->orderby('update_time','desc')->get();
-    }
-    /*
-     |--------------------------------------------------------------------------
-     | 获取站点最近专题
-     |--------------------------------------------------------------------------
-     |
-     | @param  string $site_id
-     | @return string $special_id
-     |
-     */
-    public static function get_first_special($site_id){
-        return SiteSpecialModel::where('deleted' , 0)->where('post_status' , 1)->where('site_id' , $site_id)->orderby('update_time','desc')->first();
+        return $query->where('deleted' , 0)->orderby('update_time','desc')->get($select);
     }
     /*
      |--------------------------------------------------------------------------

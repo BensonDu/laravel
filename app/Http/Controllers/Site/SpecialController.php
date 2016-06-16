@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Site;
 
 
 use App\Http\Model\ArticleSiteModel;
+use App\Http\Model\SiteModel;
 use App\Http\Model\SiteSpecialModel;
 
 class SpecialController extends SiteController
@@ -17,36 +18,38 @@ class SpecialController extends SiteController
     public function __construct(){
         parent::__construct();
     }
-
-    public function index($id){
-
-        //站点管理员 不根据发布状态过滤
-        $post_status = isset($_ENV['admin']['role']) && $_ENV['admin']['role'] > 1 ? null : 1;
-
-        $info = SiteSpecialModel::get_special_all($_ENV['site_id'],$post_status);
-        $data['info'] = [];
-        $data['list'] = [];
-        foreach($info as $v){
-            $v->time = date('Y年m月d日', strtotime($v->update_time));
-            if($v['id'] == $id){
-                $data['info'] = $v;
-            }
-            else{
-                $data['list'][]=$v;
-            }
-        }
-
+    /*
+     |--------------------------------------------------------------------------
+     | 专题首页
+     |--------------------------------------------------------------------------
+     */
+    public function index(){
+        $list = SiteSpecialModel::get_special_all($_ENV['site_id']);
+        if(empty($list))abort(404);
+        $info = SiteModel::get_site_info($_ENV['site_id']);
+        $data['special'] = isset($info->special) ? $info->special : '';
+        $data['list']   = $list;
         $data['active'] = 'special';
+        $data['base']['title'] = $info->special;
+        return self::view('/site/specials',$data);
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 专题详情页
+     |--------------------------------------------------------------------------
+     */
+    public function detail($id){
+        //获取专题信息
+        $data['info'] = SiteSpecialModel::get_special_brief_info($_ENV['site_id'],$id,['id','title','summary','image','bg_image','list']);
         if(empty($data['info']))abort(404);
+        //导航Active
+        $data['active'] = 'special';
+        //获取专题文章列表
         $ids = explode(' ',$data['info']->list);
         $list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$ids);
-        $data['article_list'] = $list;
+        $data['list'] = $list;
+        //专题页标题
         $data['base']['title'] = $data['info']->title;
         return self::view('/site/special',$data);
-    }
-    public function home(){
-        $info = SiteSpecialModel::get_first_special($_ENV['site_id']);
-        if(empty($info))abort(404);
-        return redirect('/special/'.$info->id);
     }
 }

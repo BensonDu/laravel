@@ -1,23 +1,155 @@
-/*专题页部分start*/
 .background{
     position: fixed;
     top: 0;
-    left: 310px;
+    left: 0;
+    padding-left: 310px;
     width: 100%;
     height: 100%;
     z-index: 0;
-    transition: left .4s;
-    -moz-transition: left .4s; /* Firefox 4 */
-    -webkit-transition: left .4s; /* Safari 和 Chrome */
+    transition: padding .4s;
+    -moz-transition: padding .4s; /* Firefox 4 */
+    -webkit-transition: padding .4s; /* Safari 和 Chrome */
 }
-.background .filter{
+.background .background-wrap{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.background .background-wrap .special-background{
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 8s ease-in-out; /* Firefox 4 */
+    -webkit-transition: opacity 1s ease-in-out; /* Safari 鍜� Chrome */
+}
+.background .background-wrap .special-background.active{
+    z-index: 1;
+}
+.background .background-wrap .special-background.disable{
+    opacity: 0;
+}
+.background .background-wrap .filter{
+    position: relative;
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,.63);
+    z-index: 5;
 
 }
+/*Loading页 start*/
+.loading-cover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #333;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    transition: all .3s ease-in;
+    -moz-transition: all .3s ease-in; /* Firefox 4 */
+    -webkit-transition: all .3s ease-in; /* Safari 鍜� Chrome */
+}
+.loading-cover.disable{
+    visibility: hidden;
+    transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    opacity: 0;
+}
+.loading-cover .loading-wrap,
+.loading-cover .loading-circle {
+    height: 100px;
+    position: relative;
+    width: 100px;
+    border-radius: 100%;
+}
+.loading-cover .loading-wrap {
+    margin: 380px auto;
+}
+.loading-cover .loading-circle {
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent #fff transparent #FFF;
+    -moz-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -moz-transform-origin: 50% 50%;
+    -webkit-animation: rotate-loading 1.5s linear 0s infinite normal;
+    -webkit-transform-origin: 50% 50%;
+    animation: rotate-loading 1.5s linear 0s infinite normal;
+    transform-origin: 50% 50%;
+}
+.loading-cover .loading-wrap:hover .loading-circle {
+    border-color: transparent #E45635 transparent #E45635;
+}
+.loading-cover .loading-wrap:hover .loading-circle,
+.loading-cover .loading-wrap .loading-circle {
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.loading-cover .loading-text {
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 45px;
+    opacity: 1;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0;
+    width: 100px;
+}
+@keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+@-moz-keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+@-webkit-keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+@keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+@-moz-keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+@-webkit-keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+@keyframes loading-text-opacity {
+    0%  {opacity: 0}
+    20% {opacity: 0}
+    50% {opacity: 1}
+    100%{opacity: 0}
+}
+@-moz-keyframes loading-text-opacity {
+    0%  {opacity: 0}
+    20% {opacity: 0}
+    50% {opacity: 1}
+    100%{opacity: 0}
+}
+@-webkit-keyframes loading-text-opacity {
+    0%  {opacity: 0}
+    20% {opacity: 0}
+    50% {opacity: 1}
+    100%{opacity: 0}
+}
+/*Loading页 end*/
 .site-content{
     position: relative;
+    visibility: hidden;
     width: 100%;
     min-height: 500px;
     padding-left: 310px;
@@ -26,6 +158,183 @@
     -moz-transition: padding-left .4s; /* Firefox 4 */
     -webkit-transition: padding-left .4s; /* Safari 和 Chrome */
 }
+.site-content.active{
+    visibility: visible;
+}
+/*专题列表start*/
+.site-content .title{
+    width: 600px;
+    margin: 100px auto 50px;
+    text-align: center;
+}
+.site-content .title h1{
+    display: inline-block;
+    text-align: center;
+    font-size: 32px;
+    letter-spacing: 4px;
+    line-height: 60px;
+    color: rgba(255,255,255,.8);
+}
+.site-content .title em{
+    display: inline-block;
+    width: 2px;
+    vertical-align: top;
+    height: 1px;
+    box-shadow: 70px 20px 100px 30px #000;
+}
+.site-content .home{
+    width: 600px;
+    height: 490px;
+    margin: 50px auto 0;
+}
+.site-content .home .special-list{
+    position: relative;
+    width: 100%;
+}
+.site-content .home .special-list .item{
+    display: block;
+    height: 160px;
+    width: 100%;
+    text-align: justify;
+    white-space: nowrap;
+    cursor: pointer;
+    background: rgba(128,128,128,.5);
+    padding: 15px 0;
+    margin-bottom: 5px;
+    animation: fadeIn 0.7s linear 0s normal forwards;
+    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
+    -moz-animation: fadeIn 0.7s linear 0s normal forwards;
+    transition: box-shadow .4s;
+    -moz-transition: box-shadow .4s; /* Firefox 4 */
+    -webkit-transition: box-shadow .4s; /* Safari 和 Chrome */
+}
+.site-content .home .special-list .item:hover{
+    box-shadow: 0 0 10px 0 #fff;
+}
+.site-content .home .special-list .item .image{
+    display: inline-block;
+    padding: 28px 25px;
+    width: 180px;
+    height: 130px;
+}
+.site-content .home .special-list .item .image .image-wrap{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.site-content .home .special-list .item .image img{
+    width: 100%;
+    height: auto;
+}
+.site-content .home .special-list .item .info{
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
+    height: 130px;
+    width: 380px;
+    padding: 8px 0 0;
+}
+.site-content .home .special-list .item .info .info-wrap{
+    width: 100%;
+    height: 90px;
+    overflow: hidden;
+}
+.site-content .home .special-list .item .info .info-wrap h1{
+    font-size: 16px;
+    color: #fff;
+    line-height: 30px;
+    white-space: normal;
+}
+.site-content .home .special-list .item .info .info-wrap p{
+    font-size: 12px;
+    color: #ccc;
+    line-height: 30px;
+    white-space: normal;
+}
+.site-content .home .special-list .item .info .entry{
+    width: 100%;
+    height: 40px;
+    padding: 12px 0;
+}
+.site-content .home .special-list .item .info .entry p{
+    display: inline-block;
+    height: 100%;
+    float: right;
+    opacity: .6;
+}
+.site-content .home .special-list .item .info .entry p span{
+    vertical-align: top;
+    font-size: 12px;
+    color: #ccc;
+}
+.site-content .home .special-list .item .info .entry p em{
+    display: inline-block;
+    vertical-align: top;
+    width: 34px;
+    height: 15px;
+    background: url(http://dn-noman.qbox.me/arrow-circle-right.png) no-repeat center;
+    background-size: 15px;
+}
+.site-content .home .special-list .item .info .entry p:hover{
+    opacity: 1;
+}
+.site-content .pagination{
+    width: 600px;
+    margin: 20px auto;
+    overflow: hidden;
+    text-align: justify;
+}
+.site-content .pagination a{
+    display: inline-block;
+    height: 40px;
+    width: 100px;
+    cursor: pointer;
+    background: rgba(128,128,128,.5);
+}
+.site-content .pagination a.prev{
+    float: left;
+}
+.site-content .pagination a.next{
+    float: right;
+    padding-left: 16px;
+}
+.site-content .pagination a span{
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 40px;
+    color: #ddd;
+    opacity: .8;
+}
+.site-content .pagination a em{
+    display: inline-block;
+    vertical-align: top;
+    width: 40px;
+    height: 40px;
+    opacity: .8;
+}
+.site-content .pagination a.prev em{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-white-left.png) no-repeat center;
+    background-size: 20px;
+}
+.site-content .pagination a.next em{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-white-right.png) no-repeat center;
+    background-size: 20px;
+}
+.site-content .pagination a:hover span,
+.site-content .pagination a:hover em{
+    opacity: 1;
+}
+.site-content .pagination a.disable{
+    cursor: not-allowed;
+}
+.site-content .pagination a.disable span,
+.site-content .pagination a.disable em{
+    opacity: .3 !important;
+}
+/*专题列表end*/
+
+/*专题页部分start*/
+
 .site-content .all{
     position: fixed;
     right: 3%;
@@ -124,9 +433,10 @@
 .site-content .all .list-container a:hover p{
     color: #fff;;
 }
+
 .site-content .container{
     width: 100%;
-    padding: 150px 15% 150px 10%;
+    padding: 150px 15%;
     text-align: center;
 }
 .site-content .container .image{

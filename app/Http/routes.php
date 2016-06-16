@@ -34,8 +34,8 @@ if(request()->server('HTTP_HOST') != config('site.platform_base')) {
         }
     });
     //站点专题页
-    Route::get('/special', 'Site\SpecialController@home');
-    Route::get('/special/{id}', 'Site\SpecialController@index');
+    Route::get('/special', 'Site\SpecialController@index');
+    Route::get('/special/{id}', 'Site\SpecialController@detail');
     //搜索
     Route::get('/search', 'Site\SearchController@index');
     Route::get('/search/{keyword}', 'Site\SearchController@index');

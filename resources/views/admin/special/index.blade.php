@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.special.css?v" rel="stylesheet">
+@section('style')@parent  <link href="/css/admin.special.css?v1" rel="stylesheet">
     <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
 @stop
 @section('area')
@@ -29,7 +29,7 @@
                 <td class="handle">
                     <div>
                         <a class="post" v-on:click="_post(a.id,a.post_status)"><em></em><span>发布状态</span></a>
-                        <a class="preview" v-bind:href="'/special/'+a.id" target="_blank"><em></em><span>预览</span></a>
+                        <a class="preview" v-on:click="_preview(a.id)"><em></em><span>预览</span></a>
                         <a class="edit" v-on:click="_edit(a.id)"><em></em><span>修改</span></a>
                         <a class="del" v-on:click="_del(a.id)"><em></em><span>删除</span></a>
                     </div>
@@ -84,6 +84,41 @@
             <div class="confirm">
                 <div><a v-on:click="_confirm_post"><em class="yes"></em><span>确定</span></a></div>
                 <div><a v-on:click="_close"><em class="no"></em><span>取消</span></a></div>
+            </div>
+        </div>
+
+        <div class="preview">
+            <div class="header">
+                <h3><em></em><span>预览</span></h3>
+                <a v-on:click="_close">×</a>
+            </div>
+            <div class="preview-container">
+                <div class="preview-background" v-bind:style="'background-image: url('+preview.bg_image+')'"></div>
+                <div class="preview-cover"></div>
+                <div class="preview-content">
+                    <div class="wrap">
+                        <div class="image">
+                            <img v-bind:src="preview.image">
+                        </div>
+                        <div class="title">
+                            <h1 v-text="preview.title"></h1>
+                        </div>
+                        <div class="summary">
+                            <p v-text=preview.summary></p>
+                        </div>
+                        <div class="list">
+                            <div class="list-container">
+                                <a v-for="a in preview.list" v-bind:href="'/'+a.id" target="_blank">
+                                    <div class="text">
+                                        <h5 v-text="a.title"></h5>
+                                        <p v-text="a.summary"></p>
+                                    </div>
+                                    <em></em>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -177,5 +212,5 @@
         orderby : 'update_time'
     }
 </script>
-<script src="/js/admin/special.js?v2"></script>
+<script src="/js/admin/special.js?v3"></script>
 @stop

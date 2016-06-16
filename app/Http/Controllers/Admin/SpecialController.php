@@ -120,7 +120,7 @@ class SpecialController extends AdminController
         $info = SiteSpecialModel::get_special_brief_info($_ENV['site_id'],$id,['id','title','summary','image','bg_image','list'],null);
         if(!isset($info->id))return $this->ApiOut(40001,'请求错误');
         $list =explode(' ',$info->list);
-        $info->list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$list,['id','title','post_time AS time']);
+        $info->list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$list,['id','title','post_time AS time','summary']);
         return $this->ApiOut(0,$info);
     }
     /*
