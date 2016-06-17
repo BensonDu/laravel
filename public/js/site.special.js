@@ -112,9 +112,7 @@
             });
         }
         //加载第一页背景图片
-        self.imgPreLoad(0);
-        //加载第二页背景图片
-        self.imgPreLoad(1,
+        self.imgPreLoad(0,
             function () {
                 self.vue.display = false;
                  c_background.vue.loading = true;
@@ -124,6 +122,8 @@
                  c_background.vue.loading = false;
             }
         );
+        //加载第二页背景图片
+        self.imgPreLoad(1);
         //设置默认背景图片
         self.backgound(images[0].url);
         return true;
