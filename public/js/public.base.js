@@ -185,11 +185,7 @@
 }).call(define('helper'));
 
 (function(){
-    var self = this,
-        $pop   = $('#global-pop'),
-        $title = $pop.find('h5'),
-        $vice = $pop.find('.vice'),
-        $btn   = $pop.find('.main');
+    var self = this, $pop, $title, $vice, $btn;
 
     this.one = function(){
        $pop.addClass('one');
@@ -208,6 +204,7 @@
         return self.base('confirm',msg,btn,call,cancel || '取消',function(){});
     };
     this.base = function(type,msg,btn,call,vice,vice_call){
+        self.init();
         $pop.removeClass('error warning success one confirm').addClass('active '+type);
         $title.html(msg);
         $btn.html(btn);
@@ -228,6 +225,18 @@
         }
         return this;
     };
+    this.init = function () {
+       var template = '<div id="global-pop" class="global-pop"> <div class="box"> <div class="img"> <em></em> </div> <div class="title"> <h5></h5> </div> <div class="btn-group"> <a class="vice">返回首页</a> <a class="main"></a> </div> </div> </div>';
+        if(!$pop){
+            $(document.body).append(template);
+            $pop   = $('#global-pop');
+            $title = $pop.find('h5');
+            $vice = $pop.find('.vice');
+            $btn   = $pop.find('.main');
+            $vice.click(self.vice);
+            $btn.click(self.btn);
+        }
+    };
     this.click_hook = function(){};
     this.btn = function(){
         $pop.removeClass('active');
@@ -237,7 +246,4 @@
         $pop.removeClass('active');
         self.vice_hook();
     };
-    this.vice_event  = $vice.click(self.vice);
-    this.click_event = $btn.click(self.btn);
-
 }).call(define('pop'));

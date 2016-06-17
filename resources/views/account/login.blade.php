@@ -1,46 +1,43 @@
 @extends('layout.account')
 @section('body')
     @parent
-    <div class="content">
-        <div class="container">
-            <div class="wrap">
-                <h2>登录</h2>
-                <div id="login-username" class="account">
-                    <em class="username"></em>
-                    <div class="input">
-                        <span></span>
-                        <input type="text"  autocomplete="on" placeholder="用户名/手机号">
-                    </div>
-                    <div class="error">
-                        <p>用户名不存在</p>
-                    </div>
+<div id="login-container" class="content">
+    <div class="container">
+        <div class="wrap">
+            <h2>登录</h2>
+            <div class="account">
+                <em class="username"></em>
+                <div class="input">
+                    <span></span>
+                    <input type="text"  autocomplete="on" placeholder="用户名/手机号" v-model="username.val" v-on:blur="_check">
                 </div>
-                <div id="login-password" class="account">
-                    <em class="password"></em>
-                    <div class="input">
-                        <span></span>
-                        <input type="password"  autocomplete="on" placeholder="密码">
-                    </div>
-                    <div class="error">
-                        <p>用户名不存在</p>
-                    </div>
+                <div class="error" v-bind:class="username.error.active && 'active'">
+                    <p v-text="username.error.text"></p>
                 </div>
-                <div id="login-confirm" class="confirm">
-                    <a class="pub-background-transition">登录</a>
+            </div>
+            <div class="account">
+                <em class="password"></em>
+                <div class="input">
+                    <span></span>
+                    <input type="password"  autocomplete="on" placeholder="密码" v-model="password.val">
                 </div>
-                <div class="entry">
-                    <div class="left">
-                        <em class="forgot"></em>
-                        <a href="/account/find{{$redirect}}">忘记密码</a>
-                    </div>
-                    <div class="right">
-                        <a href="/account/regist{{$redirect}}">立即注册</a>
-                        <em class="arrow"></em>
-                    </div>
+            </div>
+            <div class="confirm">
+                <a class="pub-background-transition" v-on:click="_login">登录</a>
+            </div>
+            <div class="entry">
+                <div class="left">
+                    <em class="forgot"></em>
+                    <a href="/account/find{{$redirect}}">忘记密码</a>
+                </div>
+                <div class="right">
+                    <a href="/account/regist{{$redirect}}">立即注册</a>
+                    <em class="arrow"></em>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @stop
-@section('script')@parent<script src="/js/account/login.js?v1"></script>
+@section('script')@parent<script src="/js/account/login.js?v2"></script>
 @stop

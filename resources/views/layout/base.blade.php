@@ -79,24 +79,10 @@
 @show
 @section('body')
 @show
-<div id="global-pop" class="global-pop">
-    <div class="box">
-        <div class="img">
-            <em></em>
-        </div>
-        <div class="title">
-            <h5></h5>
-        </div>
-        <div class="btn-group">
-            <a class="vice">返回首页</a>
-            <a class="main"></a>
-        </div>
-    </div>
-</div>
 </body>
 @section('script')
 <script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
-<script src="/js/public.base.js"></script>
+<script src="/js/public.base.js?v1"></script>
 <script src="/js/public.nav.left.js"></script>
 <script>
     /*全局变量*/

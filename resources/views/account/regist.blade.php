@@ -9,7 +9,7 @@
                 <em class="username"></em>
                 <div class="input">
                     <span></span>
-                    <input type="text" v-on:blur="check_username" v-model="username.val" placeholder="用户名">
+                    <input type="text" v-on:blur="_check_username" v-model="username.val" placeholder="用户名">
                 </div>
                 <div class="error" v-bind:class="username.error ? 'active' : ''">
                     <p v-text="username.error_tip"></p>
@@ -22,7 +22,7 @@
                     <input type="number" v-model="phone.val" placeholder="手机号码">
                 </div>
                 <div class="send">
-                    <a href="#" v-on:click="get_captcha"  v-bind:class="captcha.disable ? 'disable' : ''" v-text="captcha.text" class="pub-background-transition"></a>
+                    <a href="#" v-on:click="_get_captcha"  v-bind:class="captcha.disable ? 'disable' : ''" v-text="captcha.text" class="pub-background-transition"></a>
                 </div>
                 <div class="error" v-bind:class="phone.error ? 'active' : ''">
                     <p v-text="phone.error_tip"></p>
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="confirm">
-                <a v-on:click="submit" class="pub-background-transition">注册</a>
+                <a v-on:click="_submit" class="pub-background-transition">注册</a>
             </div>
             <div class="entry">
                 <div class="left">
@@ -74,24 +74,9 @@
         </div>
     </div>
 </div>
-<div id="regist-success" class="pop-window">
-    <div class="box">
-        <div class="img">
-            <em></em>
-        </div>
-        <div class="title">
-            <h5>注册成功</h5>
-        </div>
-        <div class="btn-group">
-            <a href="/">返回首页</a>
-            <a href="/user/profile">完善个人资料</a>
-        </div>
-    </div>
-</div>
 <div id="geetest" class="geetest"></div>
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script src="http://static.geetest.com/static/tools/gt.js"></script>
+@section('script')@parent<script src="http://static.geetest.com/static/tools/gt.js"></script>
 <script src="/lib/geetest/geetest.js"></script>
-<script src="/js/account/regist.js?v3"></script>
+<script src="/js/account/regist.js?v4"></script>
 @stop

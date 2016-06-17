@@ -1,5 +1,5 @@
 @extends('layout.base')
-@section('style')@parent  <link href="/css/public.account.css?" rel="stylesheet">
+@section('style')@parent<link href="/css/public.account.css?" rel="stylesheet">
 @stop
 @section('body')
 @parent
@@ -9,5 +9,6 @@
 </div>
 <!--背景end-->
 @stop
-@section('script')@parent<script src="/js/account/base.js"></script>
+@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
+<script src="/js/account/base.js"></script>
 @stop
