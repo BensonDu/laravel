@@ -61,5 +61,5 @@
         this.total  = Math.ceil(self.list.length/3);
     }).call(define('data'));
 </script>
-<script src="/js/site.special.js"></script>
+<script src="/js/site.special.js?v1"></script>
 @stop
