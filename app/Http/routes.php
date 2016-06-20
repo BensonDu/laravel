@@ -10,12 +10,19 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+//设置请求域名 全局变量
+$_ENV['request_is_mobile'] = is_mobile();
+//请求HOST
+$host = request()->server('HTTP_HOST');
+//平台HOST
+$base = config('site.platform_base');
+
 //子站路由
-if(request()->server('HTTP_HOST') != config('site.platform_base')) {
+if(!($host == $base || $host == 'm.'.$base)) {
     //设备跳转
     Route::group(['middleware' => 'Device'], function () {
         //PC站
-        if(!is_mobile()){
+        if(!$_ENV['request_is_mobile']){
             //站点首页
             Route::get('/', 'Site\IndexController@index');
             Route::get('/index/list', 'Site\IndexController@articles');
@@ -164,12 +171,25 @@ else{
     Route::get('/social/favorite', 'Common\SocialController@favorite');
     //站点分类列表
     Route::get('/site/category', 'Common\SiteController@category');
-    //登录页面
-    Route::get('/account/login', 'Account\LoginController@index');
+    //设备跳转
+    Route::group(['middleware' => 'Device'], function () {
+        //登录、注册、找回密码
+        if (!$_ENV['request_is_mobile']) {
+            Route::get('/account/login', 'Account\LoginController@index');
+            Route::get('/account/regist', 'Account\RegistController@index');
+            Route::get('/account/find', 'Account\FindController@index');
+        } else {
+            Route::get('/account/login', 'Account\LoginController@mobileindex');
+            Route::get('/account/regist', 'Account\RegistController@mobileindex');
+            Route::get('/account/find', 'Account\FindController@mobileindex');
+        }
+    });
+    //登录表单
     Route::post('/account/login', 'Account\LoginController@post');
-    //注册页面
-    Route::get('/account/regist', 'Account\RegistController@index');
+    //注册表单
     Route::post('/account/regist', 'Account\RegistController@post');
+    //找回密码表单
+    Route::post('/account/find', 'Account\FindController@post');
     //注销
     Route::get('/account/logout', 'Account\AccountController@logout');
     //平台登录状态
@@ -178,9 +198,7 @@ else{
     Route::post('/account/exist', 'Account\AccountController@exist');
     //发送验证码
     Route::post('/account/captcha', 'Account\AccountController@captcha');
-    //找回密码页面
-    Route::get('/account/find', 'Account\FindController@index');
-    Route::post('/account/find', 'Account\FindController@post');
+
     // 用户
     Route::group(['middleware' => 'User'], function () {
         //个人主页

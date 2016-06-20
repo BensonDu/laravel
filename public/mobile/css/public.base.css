@@ -138,7 +138,7 @@ body{
 .load-more.loading p:hover{
     background: #fff;
 }
-.head{
+.site-head{
     position: fixed;
     top: 0;
     left: 0;
@@ -150,37 +150,201 @@ body{
     -webkit-background-origin: padding;
     -webkit-background-clip: content;
 }
-.head a{
+.site-head a{
     display: inline-block;
     height: 100%;
 }
-.head .logo{
+.site-head .logo{
     padding: 8px 0 4px;
 }
-.head .logo img{
+.site-head .logo img{
     display: inline-block;
     height: 100%;
 }
-.head .back{
+.site-head .back{
     position: absolute;
     left: 0;
     top:0;
 }
-.head .back em{
+.site-head .back em{
     display: inline-block;
     height: 40px;
     width: 40px;
     background: url(http://dn-noman.qbox.me/arrow-white-left.png) no-repeat center;
     background-size: 16px;
 }
-.head .back span{
+.site-head .back span{
     display: inline-block;
     font-size: 12px;
     color: rgba(200,200,200,.7);
     vertical-align: top;
     line-height: 40px;
 }
+.platform-head{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    z-index: 10;
+    background: rgba(64,64,64,0);
+    box-shadow: 0 0 0 0 #000,
+                0 0 0 0 #000,
+                0 0 4px 0 rgba(128, 128, 128, 0.8);
+}
+.platform-head a{
+    display: inline-block;
+    height: 100%;
+}
+.platform-head .logo{
+    padding: 5px 0 4px;
+}
+.platform-head .logo em{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    background: url(http://dn-noman.qbox.me/chuang-logo.png) no-repeat center;
+    background-size: 50px;
+    background-position: -4px -12px;
+}
+.platform-head .logo span{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #fff;
+}
 /*列表fadein keyframes*/
+/*弹窗start*/
+.global-pop{
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background: rgba(243,243,243,.95);
+    transition: opacity .4s;
+    -moz-transition: opacity .4s; /* Firefox 4 */
+    -webkit-transition: opacity .4s; /* Safari 和 Chrome */
+}
+.global-pop .box{
+    position: fixed;
+    width: 320px;
+    height: 200px;
+    border-radius: 5px;
+    border: 1px solid #f3f3f3;
+    background: #fff;
+    margin:auto;
+    left:0;
+    right:0;
+    top:25%;
+    overflow: hidden;
+}
+.global-pop .box .title{
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+.global-pop .box h5{
+    display: inline-block;
+    width: 100%;
+    line-height: 40px;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 4px;
+    float: left;
+}
+.global-pop .box .img{
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+    overflow: hidden;
+}
+.global-pop.error .box .img em{
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fstop-hand.png) no-repeat center;
+    background-size: 50px;
+}
+.global-pop.confirm .box .img em{
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fquestion-red.png) no-repeat center;
+    background-size: 70px;
+}
+.global-pop.warning .box .img em{
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fwarning-mark.png) no-repeat center;
+    background-size: 70px;
+}
+.global-pop.success .box .img em{
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fsucces-outline.png) no-repeat center;
+    background-size: 70px;
+}
+.global-pop .box .btn-group{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    overflow: hidden;
+}
+.global-pop .box .btn-group a{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: 50%;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    float: left;
+    cursor: pointer;
+    transition: background .4s;
+    -moz-transition: background .4s; /* Firefox 4 */
+    -webkit-transition: background .4s; /* Safari 和 Chrome */
+}
+.global-pop .box .btn-group .vice{
+    background: #999;
+}
+.global-pop .box .btn-group .main{
+    background: #666;
+}
+.global-pop .box .btn-group a:nth-child(1){
+    border-right: 1px solid #fff;
+}
+.global-pop .box .btn-group a:nth-child(2){
+    border-left: 1px solid #fff;
+}
+.global-pop .box .btn-group a:hover{
+    background: #757575;
+}
+.global-pop.active {
+    visibility: visible;
+    opacity: 1;
+}
+.global-pop.one .box .btn-group a{
+    border: none;
+}
+.global-pop.one .box .btn-group .vice{
+    display: none;
+}
+.global-pop.one .box .btn-group .main{
+    width: 100%;
+}
+/*弹窗end*/
 @keyframes fadeIn {
     0% {
         opacity: 0;

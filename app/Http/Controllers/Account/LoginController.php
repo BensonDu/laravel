@@ -13,7 +13,11 @@ class LoginController extends AccountController
     public function __construct(){
         parent::__construct();
     }
-
+    /*
+     |--------------------------------------------------------------------------
+     | 登录页
+     |--------------------------------------------------------------------------
+     */
     public function index()
     {
         $uid = session()->get('uid');
@@ -24,6 +28,22 @@ class LoginController extends AccountController
         $data['base']['title'] = '登录-创之';
         //没有登录
         return self::view('/account/login',$data);
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | M登录页
+     |--------------------------------------------------------------------------
+     */
+    public function mobileindex()
+    {
+        $uid = session()->get('uid');
+        //已经登录
+        if(!empty($uid)){
+            return $this->redirect();
+        }
+        $data['base']['title'] = '登录-创之';
+        //没有登录
+        return self::view('mobile.platform.account.login',$data);
     }
     /*
      |--------------------------------------------------------------------------

@@ -19,22 +19,17 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="pragma" content="no-cache" />
     <link rel="shortcut icon" href="{{isset($base['favicon']) ? $base['favicon'] : 'http://dn-noman.qbox.me/chuang.png'}}" type="image/png">
-    @section('style')<link href="/mobile/css/public.base.css?v1" rel="stylesheet">
+    @section('style')<link href="/mobile/css/public.base.css?v3" rel="stylesheet">
     @show
 </head>
 <body>
+
 @section('header')
-<!--全局头部start-->
-<div class="head">
-@if(isset($back['name']))
-    <a href="{{$back['link']}}" class="back"><em></em><span>{{$back['name']}}</span></a>
-@endif
-    <a href="/" class="logo"><img src="{{$site->mobile_logo}}"></a>
-</div>
-<!--全局头部end-->
 @show
+
 @section('body')
 @show
+
 </body>
 @section('script')
 <script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>

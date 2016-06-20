@@ -1,4 +1,4 @@
-@extends('mobile.base')
+@extends('mobile.site.layout')
 @section('style')@parent<link href="/mobile/css/site.special.css?" rel="stylesheet">
 @stop
 @section('body')

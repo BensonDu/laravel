@@ -12,10 +12,23 @@ class RegistController extends AccountController
     public function __construct(){
         parent::__construct();
     }
-
+    /*
+     |--------------------------------------------------------------------------
+     | 注册页
+     |--------------------------------------------------------------------------
+     */
     public function index(){
         $data['base']['title'] = '注册-创之';
         return self::view('/account/regist',$data);
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | M注册页
+     |--------------------------------------------------------------------------
+     */
+    public function mobileindex(){
+        $data['base']['title'] = '注册-创之';
+        return self::view('mobile.platform.account.regist',$data);
     }
     public function post(){
 

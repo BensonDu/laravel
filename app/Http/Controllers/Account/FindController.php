@@ -13,11 +13,25 @@ class FindController extends AccountController
     public function __construct(){
         parent::__construct();
     }
-
+    /*
+     |--------------------------------------------------------------------------
+     | 找回密码页
+     |--------------------------------------------------------------------------
+     */
     public function index()
     {
         $data['base']['title'] = '找回密码-创之';
         return self::view('/account/find',$data);
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | M找回密码页
+     |--------------------------------------------------------------------------
+     */
+    public function mobileindex()
+    {
+        $data['base']['title'] = '找回密码-创之';
+        return self::view('mobile.platform.account.find',$data);
     }
 
     public function post()
