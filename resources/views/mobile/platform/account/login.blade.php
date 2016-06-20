@@ -35,10 +35,10 @@
             <div class="entry">
                 <div class="left">
                     <em class="forgot"></em>
-                    <a href="/account/find?redirect=http://dubaoxing.com/user/edit">忘记密码</a>
+                    <a href="/account/find{{$redirect}}">忘记密码</a>
                 </div>
                 <div class="right">
-                    <a href="/account/regist?redirect=http://dubaoxing.com/user/edit">立即注册</a>
+                    <a href="/account/regist{{$redirect}}">立即注册</a>
                     <em class="arrow"></em>
                 </div>
             </div>

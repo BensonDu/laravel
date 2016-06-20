@@ -71,10 +71,10 @@
             <div class="entry">
                 <div class="left">
                     <em class="forgot"></em>
-                    <a href="/account/find?redirect=">忘记密码</a>
+                    <a href="/account/find{{$redirect}}">忘记密码</a>
                 </div>
                 <div class="right">
-                    <a href="/account/login?redirect=">直接登录</a>
+                    <a href="/account/login{{$redirect}}">直接登录</a>
                     <em class="arrow"></em>
                 </div>
             </div>
