@@ -14,40 +14,65 @@ use App\Http\Model\ArticleSiteModel;
 class SearchController extends SiteController
 {
     public function index($keyword = null){
-        $k = urldecode($keyword);
+        $k = self::keywords($keyword);
         $data['search'] = [
-            'keyword'   => $k,
-            'list'      => !empty($k) ? json_encode_safe($this->get_list($k)) : '[]',
+            'keyword'   => $keyword,
+            'list'      => !empty($k) ? json_encode_safe($this->get_list($k,0,$keyword)) : '[]',
             'total'     => !empty($k) ? ArticleSiteModel::search_article_count($_ENV['site_id'],$k) : 0
         ];
         $data['base']['title'] = '搜索-'.$keyword;
         return self::view('site.search',$data);
     }
     public function results($keyword = null){
-        $k = urldecode($keyword);
+        $k = self::keywords($keyword);
         $index      = request()->input('index');
         $skip =intval($index)*10;
-        $list = empty($k) ? [] : $this->get_list($k,$skip);
+        $list = empty($k) ? [] : $this->get_list($k,$skip,$keyword);
         return self::ApiOut(0,[
             'list'  => $list
         ]);
     }
-    private function get_list($keyword,$skip = 0){
-        return $this->format(ArticleSiteModel::search_article($_ENV['site_id'], $keyword, $skip),$keyword);
+    private function get_list($keyword,$skip = 0,$origin){
+        return $this->format(ArticleSiteModel::search_article($_ENV['site_id'], $keyword, $skip),$origin);
     }
-    private function format($list ,$keyword){
+    private function format($list,$keyword){
         $ret = [];
+        if(strpos($keyword," ")){
+            $keyword = explode(" ",$keyword);
+        }
         if(!empty($list)){
             foreach($list as $k => $v){
                 $ret[$k]['create_time'] = date('Y-m-d',strtotime($v->create_time));
                 $ret[$k]['article_id']   = $v->article_id;
-                $ret[$k]['title']       = str_ireplace($keyword,'<b>'.$keyword.'</b>',$v->title);
-                $ret[$k]['summary']     = str_ireplace($keyword,'<b>'.$keyword.'</b>',$v->summary);
-                $ret[$k]['nickname']    = str_ireplace($keyword,'<b>'.$keyword.'</b>',$v->nickname);
+                if(!is_array($keyword)){
+                    $ret[$k]['title']       = str_ireplace($keyword,'<b>'.$keyword.'</b>',$v->title);
+                    $ret[$k]['summary']     = str_ireplace($keyword,'<b>'.$keyword.'</b>',$v->summary);
+                    $ret[$k]['nickname']    = str_ireplace($keyword,'<b>'.$keyword.'</b>',$v->nickname);
+                }
+                else{
+                    $title      = $v->title;
+                    $summary    = $v->summary;
+                    $nickname   = $v->nickname;
+                    foreach ($keyword as $vv){
+                        $title  = str_ireplace($vv,'<b>'.$vv.'</b>',$title);
+                        $summary = str_ireplace($vv,'<b>'.$vv.'</b>',$summary);
+                        $nickname = str_ireplace($vv,'<b>'.$vv.'</b>',$nickname);
+                    }
+                    $ret[$k]['title']       = $title;
+                    $ret[$k]['summary']     = $summary;
+                    $ret[$k]['nickname']    = $nickname;
+                }
+
                 $ret[$k]['user_url']    = user_url($v->user_id);
             }
         }
         return $ret;
     }
-
+    private static  function keywords($k){
+        $k = urldecode($k);
+        $k = str_ireplace("%","\%",$k);
+        $k = str_ireplace(" ","%",$k);
+        $k = str_ireplace("_","\_",$k);
+        return $k;
+    }
 }
