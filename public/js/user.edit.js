@@ -608,6 +608,7 @@
                         post_status : data.post_status,
                         lastmodify : data.update_time
                     });
+                    self.editor_focus();
                 }
                 else{
                     pop.error('请求数据出错','确定').one();
@@ -616,6 +617,10 @@
                 controller_sta.loading(1);
             },{id:id || ''});
         });
+    };
+    //编辑器获取焦点
+    this.editor_focus = function () {
+        jQuery('#content-editor').focus();
     };
     //列表选中状态
     this.active_article = function(id){
