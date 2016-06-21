@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.user.css?" rel="stylesheet">
+@section('style')@parent  <link href="/css/admin.user.css?v1" rel="stylesheet">
 @stop
 @section('area')
     <div class="list-header">

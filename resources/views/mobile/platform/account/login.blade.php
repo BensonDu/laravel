@@ -26,7 +26,7 @@
                 <em class="password"></em>
                 <div class="input">
                     <span></span>
-                    <input type="password" placeholder="密码" v-model="password.val">
+                    <input type="password" placeholder="密码" v-model="password.val" v-on:keyup.enter="_login">
                 </div>
             </div>
             <div class="confirm">
