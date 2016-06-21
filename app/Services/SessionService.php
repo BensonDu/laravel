@@ -85,7 +85,16 @@ class SessionService implements SessionContract
         $this->ageFlashData();
         $ttl = isset($this->attributes['uid']) ? $this->lifetime : $this->temp_lifetime;
         $this->handler->setex($this->id,$ttl*60,serialize($this->attributes));
-        $response->withCookie($this->name, $this->id, $ttl,  $this->path,  $this->domain,  null, true);
+        if($this->domain == null){
+            $domain = null;
+        }
+        elseif ($this->domain == 'root' && isset($_SERVER['HTTP_HOST'])){
+            $domain = '.'.get_root_domain($_SERVER['HTTP_HOST']);
+        }
+        else{
+            $domain = $this->domain;
+        }
+        $response->withCookie($this->name, $this->id, $ttl,  $this->path,  $domain,  null, true);
         $this->started = false;
     }
     /*

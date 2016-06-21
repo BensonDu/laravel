@@ -134,10 +134,11 @@ return [
     | Here you may change the domain of the cookie used to identify a session
     | in your application. This will determine which domains the cookie is
     | available to in your application. A sensible default has been set.
+    | 功能扩展 : 1 固定域名; 2 null 当前域名;  3 'root' 当前请求域名根域名;
     |
     */
 
-    'domain' => null,
+    'domain' => 'root',
 
     /*
     |--------------------------------------------------------------------------
