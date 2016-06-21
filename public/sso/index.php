@@ -4,6 +4,7 @@ $env = explode("\n",@file_get_contents('../../.env'));
 //Cookie Domain 默认 null
 $domain = null;
 //读取环境配置
+$env_domain = 'MEANLESS_DEFAULT_ENV_DOMAIN';
 foreach ($env as $v){
     if(strpos(' '.$v,'SITE_PLATFORM_BASE')){
         $value = explode("=",$v);
