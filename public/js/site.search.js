@@ -18,7 +18,7 @@
                 self.get_list();
             },
             search : function(){
-                location.href = '/search/'+self.model.data.keyword;
+                location.href = '/search/'+encodeURIComponent(self.model.data.keyword);
             }
         }
     };

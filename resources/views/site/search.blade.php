@@ -45,5 +45,5 @@
         }
     }
 </script>
-<script src="/js/site.search.js?"></script>
+<script src="/js/site.search.js?v1"></script>
 @stop

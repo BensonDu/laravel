@@ -14,18 +14,20 @@ use App\Http\Model\ArticleSiteModel;
 class SearchController extends SiteController
 {
     public function index($keyword = null){
+        $k = urldecode($keyword);
         $data['search'] = [
-            'keyword'   => $keyword,
-            'list'      => !empty($keyword) ? json_encode_safe($this->get_list($keyword)) : '[]',
-            'total'     => !empty($keyword) ? ArticleSiteModel::search_article_count($_ENV['site_id'],$keyword) : 0
+            'keyword'   => $k,
+            'list'      => !empty($k) ? json_encode_safe($this->get_list($k)) : '[]',
+            'total'     => !empty($k) ? ArticleSiteModel::search_article_count($_ENV['site_id'],$k) : 0
         ];
         $data['base']['title'] = '搜索-'.$keyword;
         return self::view('site.search',$data);
     }
     public function results($keyword = null){
+        $k = urldecode($keyword);
         $index      = request()->input('index');
         $skip =intval($index)*10;
-        $list = empty($keyword) ? [] : $this->get_list($keyword,$skip);
+        $list = empty($k) ? [] : $this->get_list($k,$skip);
         return self::ApiOut(0,[
             'list'  => $list
         ]);
