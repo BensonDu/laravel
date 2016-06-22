@@ -363,8 +363,8 @@ class ApiController  extends Controller
                             'site_id'       => $v->site_id,
                             'name'          => $v->name,
                             'link'          => site_home($v->custom_domain,$v->platform_domain),
-                            //投稿状态 : new 新文章 | auth 定时发布 | now 已发布 | refuse 已拒绝
-                            'post_status'   => ($v->deleted == 0) ? (($v->contribute_status == 0 || $v->post_status == 2) ? 'auth' : ($v->post_status == 1 ? 'now' : 'refuse')) : 'refuse',
+                            //投稿状态 : new 新文章 | auth 审核中 | now 已发布 | refuse 已拒绝
+                            'post_status'   => ($v->deleted == 0) ? ($v->post_status == 1 ? 'now' : 'auth') : 'refuse',
                             'update'        => 'disable'
                         ];
                     }
