@@ -6,7 +6,7 @@
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
     <link href="/css/user.edit.css?v9" rel="stylesheet" charset="utf-8">
     <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
-    <link href="/css/public.content.css?v1" rel="stylesheet">
+    <link href="/css/public.content.css?v2" rel="stylesheet">
 @stop
 @section('body')
 <!--文章列表start-->

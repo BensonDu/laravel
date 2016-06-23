@@ -14,6 +14,7 @@
 
 .medium h2,
 .medium h2 span{
+    color: inherit;
     font-size: 24px
 }
 
@@ -24,7 +25,8 @@
 .medium h1,
 .medium h2,
 .medium h3{
-    line-height: 1.875;
+    line-height: 28px;
+    margin: 30px 0 16px;
 }
 
 .medium i{
@@ -43,11 +45,13 @@
 }
 
 .medium a {
-    text-decoration: underline;
+    border-bottom: 1px solid #000;
+    padding-bottom: 1px;
 }
 
 .medium a:hover {
-    color: #304ffe;
+    color: #6e8cfb;
+    border-bottom: 1px solid #6e8cfb;
 }
 
 .medium img {
@@ -79,8 +83,8 @@
 .medium pre,
 .medium blockquote,
 .medium span {
-    font-size: 18px;
-    line-height: 1.875;
+    font-size: 16px;
+    line-height: 32px;
 }
 .medium h2 a,
 .medium h3 a,
@@ -97,7 +101,7 @@
 }
 .medium p,
 .medium ul {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 .medium embed {
