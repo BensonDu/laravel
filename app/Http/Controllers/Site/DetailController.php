@@ -64,7 +64,7 @@ class DetailController extends SiteController
     public function mobile($id){
         //调取缓存
         $cache = SiteCacheModel::m_article_view($_ENV['site_id'],$id);
-        if(!empty($cache))return $cache;
+        if(!empty($cache) && 0)return $cache;
 
         $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
 
