@@ -74,7 +74,6 @@
         </div>
     </div>
 </div>
-<div id="geetest" class="geetest"></div>
 @stop
 @section('script')@parent<script src="http://static.geetest.com/static/tools/gt.js"></script>
 <script src="/lib/geetest/geetest.js"></script>

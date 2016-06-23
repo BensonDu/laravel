@@ -64,7 +64,7 @@ class DetailController extends SiteController
     public function mobile($id){
         //调取缓存
         $cache = SiteCacheModel::m_article_view($_ENV['site_id'],$id);
-        if(!empty($cache) && 0)return $cache;
+        if(!empty($cache))return $cache;
 
         $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
 
@@ -80,15 +80,25 @@ class DetailController extends SiteController
         ];
 
         $data['article'] = [
+            'id'        => $info->article_id,
+            'source'    => $info->source_id,
             'title'     => $info->title,
             'summary'   => $info->summary,
-            'content'   => content_image_crop($info->content),
-            'time'      => time_down(strtotime($info->post_time)),
+            'content'   => $info->content,
+            'tags'      => $tag,
+            'time'      => date('Y年m月d日',strtotime($info->post_time)),
             'category'  => empty($info->category_name) ? '默认分类' : $info->category_name,
-            'image'     => image_crop($info->image,500),
+            'image'     => image_crop($info->image,950),
+            'likes'     => $info->likes,
+            'favorites' => $info->favorites,
+            'like'      => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_like($id,$_ENV['uid']) : false,
+            'favorite'  => !empty($_ENV['uid']) ? !!ArticleSocialModel::check_is_favorite($id,$_ENV['uid']) : false,
             //微信分享头图
             'weixin'    => image_crop_custom($info->image,'?imageMogr2/thumbnail/x300/gravity/Center/crop/300x300/')
         ];
+        //站点设置 是否开启评论
+        $site = SiteModel::get_site_info($_ENV['site_id']);
+        $data['comment'] = empty($site->comment) ? false : true;
 
         $view = self::make('mobile.site.detail',$data);
         SiteCacheModel::m_article_view_set($_ENV['site_id'],$id,$view);

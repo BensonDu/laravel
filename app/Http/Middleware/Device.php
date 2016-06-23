@@ -28,7 +28,10 @@ class Device
             else{
                 $base = $_ENV['site_is_mobile'] ? $_ENV['platform']['domain'] : 'm.'.$_ENV['platform']['domain'];
             }
-            return redirect('http://'.$base.'/'.trim($request->path(),"/"));
+            //保留回调链接
+            $redirect = $request->input('redirect');
+            $redirect = !empty($redirect) ? '?redirect='.$redirect : '';
+            return redirect('http://'.$base.'/'.trim($request->path().$redirect,"/"));
         }
 
         return $next($request);

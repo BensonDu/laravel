@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Model\AccountModel;
-use App\Http\Model\SiteModel;
+use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -53,6 +53,17 @@ abstract class Controller extends BaseController
         self::get_user_info();
         self::get_nav_url();
         return view($path,$data);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 公共view make 方法
+    |--------------------------------------------------------------------------
+    |
+    */
+    public static function make($path,$data = []){
+        self::get_user_info();
+        self::get_nav_url();
+        return View::make($path,$data);
     }
     /*
     |--------------------------------------------------------------------------

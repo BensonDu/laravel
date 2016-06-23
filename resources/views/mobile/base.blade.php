@@ -35,6 +35,19 @@
 <script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/mobile/js/public.base.js"></script>
 <script>
+    /*全局变量*/
+    (function () {
+        this.uid = '{{$_ENV['uid']}}';
+        this.platform = {
+            home : '{{$_ENV['platform']['home']}}'
+        };
+        this.user = {
+            id : '{{$_ENV['uid']}}',
+            name : '{{$nickname}}',
+            avatar : '{{$avatar}}',
+            role : '{{isset($_ENV['admin']['role']) ? $_ENV['admin']['role'] : 0}}'
+        };
+    }).call(define('global'));
     /*百度统计*/
     var _hmt = _hmt || [];
     (function() {

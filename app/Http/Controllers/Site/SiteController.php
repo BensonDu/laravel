@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Model\SiteModel;
 use App\Http\Model\SiteSpecialModel;
-use Illuminate\Support\Facades\View;
 
 /**
  * Created by PhpStorm.
@@ -43,7 +42,7 @@ class SiteController extends Controller
         $data['base']['keywords']    = isset($data['base']['keywords']) ? $data['base']['keywords'].', '.$site->keywords : $site->keywords;
         $data['base']['description'] = $site->description;
         $data['base']['favicon']     = $site->favicon;
-        return View::make($path, $data);
+        return parent::make($path, $data);
     }
 
 }
