@@ -1,5 +1,5 @@
 @extends('mobile.site.layout')
-@section('style')@parent<link href="/mobile/css/public.detail.css?v3" rel="stylesheet">
+@section('style')@parent<link href="/mobile/css/public.detail.css?v4" rel="stylesheet">
 @stop
 @section('body')
 <div class="article-image">
@@ -24,10 +24,10 @@
     </div>
 </div>
 @if($comment)
-<div id="comment-list" class="comment-list">
+<div id="comment-list" class="comment-list" v-bind:class="list.length == 0 ? 'empty' : (list.length >3 ? 'all' : 'normal')">
     <h2>热门评论 :</h2>
-    <div class="comment-empty" v-if="list.length == 0">
-        <p>暂无评论,快来<span v-on:click="_comment">点击</span>抢占沙发</p>
+    <div class="comment-empty">
+        <p>暂无评论,<span v-on:click="_comment">立即</span>抢占沙发</p>
     </div>
     <div class="comment-wrap">
         <div class="comment-item" v-for="c in list" v-if="$index < 3 || all">
@@ -36,7 +36,7 @@
             </div>
             <div class="comment-body">
                 <div class="head">
-                    <a class="left link" v-bind:href="c.user_home" v-text="c.nickname" target="_blank"></a>
+                    <a class="left link" v-text="c.nickname"></a>
                     <span class="right normal right-space" v-text="c.time"></span>
                 </div>
                 <div class="text">
@@ -48,7 +48,7 @@
                 <div class="foot">
                     <div class="foot-origin">
                         <span class="left normal">评论于</span>
-                        <a class="left handle-btn" target="_blank" v-bind:href="c.site_home" v-text="c.site_name"></a>
+                        <a class="left handle-btn"v-bind:href="c.site_home" v-text="c.site_name"></a>
                         <span class="right handle-btn" v-if="c.hide != 1" v-on:click="_reply($event,c.nickname,$index)">回复</span>
                         <span class="right handle-btn" v-on:click="_comment_fold($index)">评论<span class="normal left-space" v-text="c.reply_count"></span></span>
                     </div>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="comment-body">
                                 <div class="head">
-                                    <a class="left link" v-bind:href="r.user_home" v-text="r.nickname" target="_blank"></a>
+                                    <a class="left link" v-text="r.nickname"></a>
                                     <a class="left divider">回复</a>
                                     <a class="left link" v-bind:href="r.replied_home" v-text="r.replied_nickname" target="_blank"></a>
                                     <span class="right normal right-space" v-text="r.time"></span>
@@ -73,7 +73,7 @@
                                 <div class="foot">
                                     <div class="foot-origin">
                                         <span class="left normal">评论于</span>
-                                        <a class="left handle-btn" target="_blank" v-bind:href="r.site_home" v-text="r.site_name"></a>
+                                        <a class="left handle-btn" v-bind:href="r.site_home" v-text="r.site_name"></a>
                                         <span class="right handle-btn" v-if="r.hide != 1" v-on:click="_reply($event,r.nickname,$parent.$index,$index)">回复</span>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    <div class="comment-all" v-if="list.length>3 && !all">
+    <div class="comment-all">
         <p v-on:click="_all">查看全部<span v-text="list.length"></span>条评论</p>
     </div>
 </div>

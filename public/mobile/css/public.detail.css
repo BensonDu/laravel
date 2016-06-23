@@ -98,7 +98,7 @@
 
 .related-reading{
     width: 100%;
-    padding: 10px 0 20px;
+    padding: 10px 0 40px;
 }
 .related-reading h1{
     display: inline-block;
@@ -612,32 +612,44 @@
     color: #000;
 }
 .comment-list .comment-wrap{
+    display: none;
     width: 100%;
     padding: 0 3%;
 }
+.comment-list.all .comment-wrap,
+.comment-list.normal .comment-wrap{
+    display: block;
+}
 .comment-list .comment-empty{
+    display: none;
     width: 100%;
-    height: 160px;
+    height: 100px;
+}
+.comment-list.empty .comment-empty{
+    display: block;
 }
 .comment-list .comment-empty p{
     display: inline-block;
-    margin-top: 16%;
+    margin-top: 50px;
     width: 100%;
     font-size: 14px;
     color: #999;
     text-align: center;
 }
 .comment-list .comment-empty p span{
+    margin: 0 3px;
     color: #6e8cfb;
-    margin: 0 5px;
-    text-decoration: underline;
     cursor: pointer;
 }
 .comment-list .comment-all{
+    display: none;
     width: 100%;
     height: 50px;
     padding: 12px 0;
     text-align: center;
+}
+.comment-list.all .comment-all{
+    display: block;
 }
 .comment-list .comment-all p{
     display: inline-block;
