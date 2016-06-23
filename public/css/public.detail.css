@@ -173,7 +173,7 @@
 
 .page-content .container .ad-article-image{
     display: inline-block;
-    max-width: 900px;
+    max-width: 850px;
     width: 100%;
     text-align: left;
     margin: 10px 0;
@@ -190,7 +190,7 @@
 }
 .page-content .container .ad-article-text{
     display: inline-block;
-    max-width: 900px;
+    max-width: 850px;
     width: 100%;
     text-align: left;
     white-space: nowrap;
