@@ -143,43 +143,260 @@ body{
     top: 0;
     left: 0;
     width: 100%;
-    height: 40px;
     text-align: center;
-    z-index: 10;
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(64,64,64,.8)),color-stop(0.2, rgba(64,64,64,.85)),color-stop(0.6, rgba(64,64,64,.4)), to(rgba(0,0,0,0)));
+    z-index: 30;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(64,64,64,.83)),color-stop(0.2, rgba(64,64,64,.86)),color-stop(0.68, rgba(64,64,64,.55)), to(rgba(0,0,0,0)));
     -webkit-background-origin: padding;
     -webkit-background-clip: content;
+}
+.site-head .top{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    padding: 0 10px 0 18px;
+    text-align: left;
 }
 .site-head a{
     display: inline-block;
     height: 100%;
 }
 .site-head .logo{
+    position: relative;
     padding: 8px 0 4px;
 }
 .site-head .logo img{
     display: inline-block;
     height: 100%;
 }
-.site-head .back{
+.site-head .menu{
+    display: block;
+    height: 100%;
+    width: 40px;
+    padding: 4px;
+    float: right;
+}
+.hamburger{
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.hamburger li{
+    position: absolute;
+    display: block;
+    width: 12px;
+    height: 3px;
+    z-index: 11;
+    background: #fff;
+    transition: transform 0.35s cubic-bezier(0.4, 0.01, 0.165, 0.99),-webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99), background 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+    -webkit-transition: transform 0.35s cubic-bezier(0.4, 0.01, 0.165, 0.99), -webkit-transform 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99), background 0.25s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+}
+.hamburger li:nth-child(1){
+    left: 6px;
+    top:11px;
+}
+.hamburger li:nth-child(2){
+    left: 14px;
+    top: 11px;
+}
+.hamburger li:nth-child(3){
+    left: 6px;
+    top:19px;
+}
+.hamburger li:nth-child(4){
+    left: 14px;
+    top:19px;
+}
+.hamburger.active li:nth-child(1){
+    transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+}
+.hamburger.active li:nth-child(2){
+    transform:rotate(-45deg); ;
+    -webkit-transform:rotate(-45deg); ;
+}
+.hamburger.active li:nth-child(3){
+    transform:rotate(-45deg); ;
+    -webkit-transform:rotate(-45deg); ;
+}
+.hamburger.active li:nth-child(4){
+    transform:rotate(45deg); ;
+    -webkit-transform:rotate(45deg); ;
+}
+.hamburger.active li{
+    background: #666;
+}
+.site-head .nav{
+    position: fixed;
+    width: 0;
+    height: 0;
+    right: 0;
+    top: 0;
+    visibility: hidden;
+    z-index: 10;
+    background: rgba(255,255,255,.96);
+}
+.site-head .nav.active{
+    visibility: visible;
+    animation: CoverSreenIn .3s ease-out 0s normal forwards;
+    -webkit-animation: CoverSreenIn .3s ease-out 0s normal forwards;
+}
+.site-head .nav.negactive{
+    visibility: visible;
+    animation: CoverSreenOut .3s ease-out 0s normal forwards;
+    -webkit-animation: CoverSreenOut .3s ease-out 0s normal forwards;
+}
+.site-head .nav .nav-container{
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 0 5%;
+}
+.site-head .nav .nav-container.active{
+    display: block;
+    animation: fadeIn 0.3s linear 0s normal forwards;
+    -webkit-animation: fadeIn 0.3s linear 0s normal forwards;
+}
+.site-head .nav .account{
+    width: 100%;
+    height: 40px;
+    padding-top: 2px;
+}
+.site-head .nav .account a,
+.site-head .nav .account span{
+    display: inline-block;
+    font-size: 14px;
+    color: #666;
+    vertical-align: top;
+    float: left;
+}
+.site-head .nav .account a{
+    line-height: 40px;
+}
+.site-head .nav .account span{
+    height: 18px;
+    margin: 12px 10px 0;
+    border-left: 1px solid #666;
+}
+.site-head .nav .site-info{
+    position: relative;
+    width: 100%;
+    height: 120px;
+    padding: 20px 0 0;
+}
+.site-head .nav .site-info .big-logo{
+    position: relative;
+    height: 100%;
+    width: 80px;
+    padding: 10px 10px 30px;
+    float: left;
+}
+.site-head .nav .site-info .big-logo img{
+    -webkit-filter:grayscale(1);
+    width: 100%;
+    height: 100%;
+}
+.site-head .nav .site-info .description{
     position: absolute;
     left: 0;
     top:0;
+    width: 100%;
+    height: 100%;
+    padding:22px 0 0 90px;
+    border-bottom: 1px solid #eee;
 }
-.site-head .back em{
+.site-head .nav .site-info .description .text{
+    width: 100%;
+    height: 100px;
+}
+.site-head .nav .site-info .description .text h3{
+    font-size: 16px;
+    color: #666;
+    line-height: 30px;
     display: inline-block;
-    height: 40px;
-    width: 40px;
-    background: url(http://dn-noman.qbox.me/arrow-white-left.png) no-repeat center;
-    background-size: 16px;
+    width: 100%;
+    text-overflow: ellipsis;
 }
-.site-head .back span{
+.site-head .nav .site-info .description .text p{
     display: inline-block;
     font-size: 12px;
-    color: rgba(200,200,200,.7);
-    vertical-align: top;
+    color: #aaa;
+    line-height: 18px;
+    margin-top: 5px;
+    height: 36px;
+    overflow: hidden;
+}
+.site-head .nav .nav-list{
+    width: 100%;
+    min-height: 100px;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+.site-head .nav .nav-list a{
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
     line-height: 40px;
 }
+.site-head .nav .social{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 5%;
+}
+.site-head .nav .social .qr{
+    visibility: hidden;
+    width: 100%;
+    height: 100px;
+    padding: 10px 0;
+    text-align: center;
+}
+.site-head .nav .social .qr.active{
+    visibility: visible;
+}
+.site-head .nav .social .qr img{
+    -webkit-filter:grayscale(1);
+    height: 80px;
+    width: 80px;
+}
+.site-head .nav .social .buttons{
+    width: 100%;
+    text-align: center;
+}
+.site-head .nav .social .buttons .wrap{
+    display: inline-block;
+    padding: 3px 5px;
+    letter-spacing: 5px;
+}
+.site-head .nav .social .buttons a{
+    display: inline-block;
+    padding:  10px 10px;
+    border-radius: 50%;
+}
+.site-head .nav .social .buttons a em{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    opacity: .7;
+    border-radius: 50%;
+}
+.site-head .nav .social .buttons a.weibo em{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/weibo.png) no-repeat center;
+    background-size: 20px 20px
+}
+.site-head .nav .social .buttons a.email em{
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/email-1.png) no-repeat center;
+    background-size: 20px 20px
+}
+.site-head .nav .social .buttons a.weixin em{
+    position: relative;
+    overflow: visible;
+    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/weixin.png) no-repeat center;
+    background-size: 20px 20px
+}
+
 .platform-head{
     position: fixed;
     top: 0;
@@ -354,7 +571,6 @@ body{
         opacity: 1;
     }
 }
-
 @-webkit-keyframes fadeIn {
     0% {
         opacity: 0;
@@ -364,13 +580,87 @@ body{
         opacity: 1;
     }
 }
-
-@-moz-keyframes fadeIn {
+@keyframes CoverSreenIn {
     0% {
-        opacity: 0;
+        border-radius: 50%;
+        width: 0;
+        height: 0;
+        right: 34px;
+        top:16px;
     }
-
+    80%{
+        height: 50%;
+        border-radius: 50%;
+    }
     100% {
-        opacity: 1;
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        right: 0;
+        top:0;
+    }
+}
+@keyframes CoverSreenOut {
+    0% {
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        right: 0;
+        top:0;
+    }
+    20%{
+        height: 50%;
+        border-radius: 50%;
+    }
+    100% {
+        visibility: hidden;
+        border-radius: 50%;
+        width: 0;
+        height: 0;
+        right: 34px;
+        top:16px;
+
+    }
+}
+@-webkit-keyframes CoverSreenIn {
+    0% {
+        border-radius: 50%;
+        width: 0;
+        height: 0;
+        right: 34px;
+        top:16px;
+    }
+    80%{
+        height: 50%;
+        border-radius: 50%;
+    }
+    100% {
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        right: 0;
+        top:0;
+    }
+}
+@-webkit-keyframes CoverSreenOut {
+    0% {
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        right: 0;
+        top:0;
+    }
+    20%{
+        height: 50%;
+        border-radius: 50%;
+    }
+    100% {
+        visibility: hidden;
+        border-radius: 50%;
+        width: 0;
+        height: 0;
+        right: 34px;
+        top:16px;
+
     }
 }

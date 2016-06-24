@@ -78,10 +78,6 @@ class SpecialController extends SiteController
         if(empty($data['info']))abort(404);
         //导航Active
         $data['active'] = 'special';
-        $data['back'] = [
-            'name' => '专题列表',
-            'link' => '/special'
-        ];
         //获取专题文章列表
         $ids = explode(' ',$data['info']->list);
         $list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$ids);

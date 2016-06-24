@@ -25,7 +25,7 @@
 <!--左栏全局导航start-->
 <div id="nav-left" class="nav-left">
 <div class="login-sta{{!empty($uid)?' login':''}}">
-    <a href="{{$url}}">
+    <a href="{{!empty($uid) ? $url : $_ENV['platform']['home'].'/account/login'.$nav['callback']}}">
             <i></i>
             <img src="{{$avatar}}">
             <em>

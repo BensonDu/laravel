@@ -81,18 +81,24 @@ abstract class Controller extends BaseController
             'uid'       => $uid,
             'nickname'  => isset($info->nickname) ? $info->nickname : '',
             'avatar'    => isset($info->avatar) ? avatar($info->avatar,200) : '',
-            //用户未登录,登录回调地址,过滤登录页;
-            'url' => !empty($uid) ? user_url($uid) : $_ENV['platform']['home'].'/account/login'.((request()->path() != 'account/login' ? '?redirect='.urlencode(request()->url()) : ''))
+            'url'       => !empty($uid) ? user_url($uid) : ''
         ];
         view()->share($data);
     }
     /*
     |--------------------------------------------------------------------------
-    | 左全局导航 链接
+    | 全局导航 链接
     |--------------------------------------------------------------------------
     |
     */
     public static function get_nav_url(){
+
+        /*前往登录页回调参数,如果当前页为登录页,为空*/
+        $request = request();
+        $url     = $request->url();
+        $seg     = $request->segment(1);
+        $data['nav']['callback'] = $seg != 'account' ? '?redirect='.urlencode($url) : '';
+
         $data['nav']['edit']     = $_ENV['platform']['home'].'/user/edit';
         $data['nav']['favorite'] = $_ENV['platform']['home'].'/user/favorite';
         $data['nav']['profile']  = $_ENV['platform']['home'].'/user/profile';

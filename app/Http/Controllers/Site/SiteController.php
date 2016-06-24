@@ -42,6 +42,7 @@ class SiteController extends Controller
         $data['base']['keywords']    = isset($data['base']['keywords']) ? $data['base']['keywords'].', '.$site->keywords : $site->keywords;
         $data['base']['description'] = $site->description;
         $data['base']['favicon']     = $site->favicon;
+        $data['site']['nav']         = SiteModel::site_nav_list($_ENV['site_id']);
         return parent::make($path, $data);
     }
 
