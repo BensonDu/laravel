@@ -19,7 +19,7 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="pragma" content="no-cache" />
     <link rel="shortcut icon" href="{{isset($base['favicon']) ? $base['favicon'] : 'http://dn-noman.qbox.me/chuang.png'}}" type="image/png">
-    @section('style')<link href="/mobile/css/public.base.css?v4" rel="stylesheet">
+    @section('style')<link href="/mobile/css/public.base.css?v5" rel="stylesheet">
     @show
 </head>
 <body>
