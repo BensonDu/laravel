@@ -14,7 +14,6 @@ use App\Http\Model\BlacklistModel;
 use App\Http\Model\Cache\PlatformCacheModel;
 use App\Http\Model\CategoryModel;
 use App\Http\Model\SiteModel;
-use App\Http\Model\User\EditModel;
 use App\Http\Model\UserModel;
 
 class ApiController  extends Controller
@@ -28,7 +27,7 @@ class ApiController  extends Controller
     public static function postlist(){
         $id = request()->input('id');
         if(empty($id))return self::ApiOut(40001,'Bad Request');
-        $article = EditModel::article_brief_info($_ENV['uid'],$id);
+        $article = ArticleUserModel::article_brief_info($_ENV['uid'],$id);
         //文章不存在 请求错误
         if(!isset($article->id))return self::ApiOut(40001,'Bad Request');
         $site = self::article_sta_site($id,$article->hash);
@@ -56,7 +55,7 @@ class ApiController  extends Controller
             $ret['content']     = $info->content;
             $ret['tags']        = empty($info->tags) ? [] : tag($info->tags);
             $ret['update_time'] = $info->update_time;
-            $ret['post_status'] = !!EditModel::article_existed_in_site($article_id) ? 1 : 0;
+            $ret['post_status'] = !!ArticleUserModel::article_existed_in_site($article_id) ? 1 : 0;
             return self::ApiOut(0,$ret);
         }
         return self::ApiOut(40004,'Not found');
@@ -196,7 +195,7 @@ class ApiController  extends Controller
         //用户是否被拉黑
         if(BlacklistModel::in_blacklist($site_id,$uid))return self::ApiOut(40003,'此站点不接受投稿');
 
-        $ret = EditModel::contribute($site_id,$id,$uid);
+        $ret = ArticleUserModel::contribute($site_id,$id,$uid);
         return !!$ret ? self::ApiOut(0,'投稿成功') :  self::ApiOut(40001,'请求错误');
     }
     /*
@@ -225,7 +224,7 @@ class ApiController  extends Controller
         $post_status = $type == 'cancel' ? 0 : (($type == 'time' && strtotime($time)>time()) ? 2 : 1);
 
         //发布文章 返回 站点文章 ID
-        $new_id = EditModel::post($site_id,$_ENV['uid'],$user_article_id,$category,$post_status,$time);
+        $new_id = ArticleUserModel::post($site_id,$_ENV['uid'],$user_article_id,$category,$post_status,$time);
         if(empty($new_id)) return self::ApiOut(40004,$new_id);
 
         //如果定时发布 推到 任务
@@ -252,7 +251,7 @@ class ApiController  extends Controller
         //检查是否有站点权限
         if(!SiteModel::check_user_site_auth($site_id,$_ENV['uid'])) return self::ApiOut(40003,'权限不足');
 
-        $push = EditModel::pushsite($site_id,$_ENV['uid'],$user_article_id);
+        $push = ArticleUserModel::pushsite($site_id,$_ENV['uid'],$user_article_id);
 
         return $push ? self::ApiOut(0,'推送更新成功') : self::ApiOut(10001,'推送更新失败');
     }
@@ -321,7 +320,7 @@ class ApiController  extends Controller
     */
     private static function article_sta_site($id,$hash){
         //获取文章在站点文章表中的所有有效列表
-        $info    = EditModel::article_site_info($id);
+        $info    = ArticleUserModel::article_site_info($id);
         //获取该用户有权限的站点列表
         $auth    = UserModel::site_role_list($_ENV['uid']);
         //获取用户常用站点列表
