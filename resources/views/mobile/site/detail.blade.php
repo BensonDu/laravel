@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    <div class="comment-all">
+    <div class="comment-all" v-if="!all">
         <p v-on:click="_all">查看全部<span v-text="list.length"></span>条评论</p>
     </div>
 </div>
