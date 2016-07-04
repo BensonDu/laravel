@@ -123,6 +123,13 @@ return [
             'home'      =>  'platform:view:home',
             //子站文章页访问总量
             'article'   =>  'platform:view:artcile'
+        ],
+        //文章等待首发文章发布队列
+        'start' => [
+            //保鲜期过后执行发布发布队列 key:site_id:article_id
+            'excute' => 'platform:start:excute',
+            //等待保鲜期过后发布的队列 key:site_id
+            'queue' => 'platform:start:queue'
         ]
     ]
 

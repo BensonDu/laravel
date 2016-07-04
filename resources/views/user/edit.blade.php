@@ -4,7 +4,7 @@
     <link href="/lib/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Ffont-awesome.css?" rel="stylesheet">
     <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
-    <link href="/css/user.edit.css?v9" rel="stylesheet" charset="utf-8">
+    <link href="/css/user.edit.css?v11" rel="stylesheet" charset="utf-8">
     <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
     <link href="/css/public.content.css?v2" rel="stylesheet">
 @stop
@@ -144,7 +144,7 @@
                     <td><a v-bind:href="p.link" target="_blank" v-text="p.name"></a></td>
                     <td><span class="sta" v-bind:class="p.post_status"><em></em></span></td>
                     <td>
-                        <a class="btn-post" v-bind:class="p.post_status" v-on:click="_post_admin(p.site_id,p.category,p.post_status,p.post_time)"><em></em></a>
+                        <a class="btn-post" v-bind:class="p.post_status" v-on:click="_post_admin(p.site_id,p.post_status)"><em></em></a>
                         <a class="btn-push" v-bind:class="p.update" v-on:click="_push_admin(p.site_id,p.update)"><em></em><span class="question"><i>由于该稿件在该站点后台被编辑修改或删除，为了避免你的推送覆盖编辑的修改，请在你自行前往后台对文章进行修改，后台入口位于左侧导航里底部，登出按钮上方。</i></span></a>
                     </td>
                 </tr>
@@ -185,6 +185,27 @@
             </div>
         </div>
         <div class="post-admin">
+            <div class="start-container">
+                <div class="cover" v-bind:class="post.start.lock == 'true' && 'active'">
+                    <p v-if="!post.start.site_post && post.start.site_delay != 0">文章已选择在<a v-bind:href="post.start.site_link" target="_blank" v-text="post.start.site_name"></a>首发<br>保鲜期<a v-text="post.start.site_delay"></a>分钟<a class="question"><i>保鲜期内的文章,在后续站点发布或投稿的操作都将在保鲜期过后自动执行;</i></a></p>
+                    <h5 v-if="!post.start.site_post && post.start.site_delay == 0">您的稿件已投稿，不能进行首发设置</h5>
+                    <h5 v-if="post.start.site_post">文章已在<a v-bind:href="post.start.site_link" target="_blank" v-text="post.start.site_name"></a>首发</h5>
+                </div>
+                <div class="start">
+                    <h5>首发</h5>
+                    <div class="slide-btn" v-bind:class="post.start.active == 'true' && 'true'" v-on:click="_slide('post')">
+                        <span>
+                            <em></em>
+                        </span>
+                    </div>
+                </div>
+                <div class="delay-container" v-bind:class="post.start.active == 'true' && 'active'">
+                    <div class="delay">
+                        <h5>首发保鲜时长<span>(分钟)</span></h5>
+                        <div class="number"><em class="sub" v-on:click="_delay_sub('post')"></em><span v-text="post.start.delay"></span><em class="add" v-on:click="_delay_add('post')"></em></div>
+                    </div>
+                </div>
+            </div>
             <div class="category" v-bind:class="{ 'active': post.category.active }" v-on:click="_category_display">
                 <h5>文章分类</h5>
                 <p><span v-text="post.category.text"></span><em></em></p>
@@ -222,6 +243,33 @@
                 <div><a v-on:click="_fold"><em class="no"></em><span>取消</span></a></div>
             </div>
         </div>
+        <div class="contribute-admin">
+            <div class="start-container">
+                <div class="cover" v-bind:class="contribution.start.lock == 'true' && 'active'">
+                    <p v-if="!contribution.start.site_post && contribution.start.site_delay != 0">文章已选择在<a v-bind:href="contribution.start.site_link" target="_blank" v-text="contribution.start.site_name"></a>首发<br>保鲜期<a v-text="contribution.start.site_delay"></a>分钟<a class="question"><i>保鲜期内的文章,在后续站点发布或投稿的操作都将在保鲜期过后自动执行;</i></a></p>
+                    <h5 v-if="!contribution.start.site_post && contribution.start.site_delay == 0">您的稿件已投稿，不能进行首发设置</h5>
+                    <h5 v-if="contribution.start.site_post">文章已在<a v-bind:href="contribution.start.site_link" target="_blank" v-text="contribution.start.site_name"></a>首发</h5>
+                </div>
+                <div class="start">
+                    <h5>首发</h5>
+                    <div class="slide-btn" v-bind:class="contribution.start.active == 'true' && 'true'" v-on:click="_slide('contribution')">
+                        <span>
+                            <em></em>
+                        </span>
+                    </div>
+                </div>
+                <div class="delay-container" v-bind:class="contribution.start.active == 'true' && 'active'">
+                    <div class="delay">
+                        <h5>首发保鲜时长<span>(分钟)</span></h5>
+                        <div class="number"><em class="sub" v-on:click="_delay_sub('contribution')"></em><span v-text="contribution.start.delay"></span><em class="add" v-on:click="_delay_add('contribution')"></em></div>
+                    </div>
+                </div>
+            </div>
+            <div class="confirm">
+                <div><a v-on:click="_confirm_contribute"><em class="yes"></em><span>投稿</span></a></div>
+                <div><a v-on:click="_fold"><em class="no"></em><span>取消</span></a></div>
+            </div>
+        </div>
     </div>
 </div>
 <!--投稿管理部分end-->
@@ -245,5 +293,5 @@
         this.route  = '{{isset($route)?$route:null}}';
     }).call(define('data'));
 </script>
-<script src="/js/user.edit.js?2B4CEB5987"></script>
+<script src="/js/user.edit.js?2BC0CEB5987"></script>
 @stop

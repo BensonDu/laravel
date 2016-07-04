@@ -229,10 +229,14 @@ else{
         Route::get('/user/article/list', 'User\ApiController@articles');
         //推送更新到站点
         Route::get('/user/push/site', 'User\ApiController@pushsite');
-        //投稿到站点
-        Route::get('/user/post/contribute', 'User\ApiController@contribute');
         //发布到站点
         Route::post('/user/post/site', 'User\ApiController@postsite');
+        //发布状态
+        Route::get('/user/post/status', 'User\ApiController@poststatus');
+        //投稿到站点
+        Route::post('/user/contribute', 'User\ApiController@contribute');
+        //投稿状态
+        Route::get('/user/contribute/status', 'User\ApiController@contributestatus');
         //文章发布列表
         Route::get('/user/post/list', 'User\ApiController@postlist');
         //移除常用站点
@@ -251,7 +255,6 @@ else{
 Route::get('/geetest/start', 'Common\GeetestController@start');
 Route::post('/geetest/verify', 'Common\GeetestController@verify');
 //临时 && 测试
-Route::get('/test', 'Temp\TempController@test');
 Route::get('/temp/device', 'Temp\TempController@device');
 //七牛上传
 Route::get('/qiniu/upload/token', 'Qiniu\UploadController@token');

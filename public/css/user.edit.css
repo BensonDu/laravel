@@ -232,6 +232,7 @@
 }
 .mid .list .list-container{
     width: 100%;
+    min-height: 400px;
     margin-top: 4px;
 }
 .mid .list .list-container .item .range{
@@ -1029,6 +1030,12 @@
 .pop-container .post .table table tbody tr td span.start:after{
     content: '未投稿';
 }
+.pop-container .post .table table tbody tr td span.wait em{
+    background-position: 0 -44px;
+}
+.pop-container .post .table table tbody tr td span.wait:after{
+    content: '等待首发';
+}
 .pop-container .post .table table tbody tr td span.del{
     opacity: .6;
 }
@@ -1190,15 +1197,21 @@
     left: 0;
 }
 .pop-container .slider.post-admin,
+.pop-container .slider.contribute-admin,
 .pop-container .slider.add-site{
     width: 400px;
 }
 .pop-container .slider.add-site .add-site,
-.pop-container .slider.post-admin .post-admin{
+.pop-container .slider.post-admin .post-admin,
+.pop-container .slider.contribute-admin .contribute-admin{
     display: inline-block;
+    animation: displayDelay 0s linear .4s normal forwards;
+    -webkit-animation: displayDelay 0s linear .4s normal forwards;
+    -moz-animation: displayDelay 0s linear .4s normal forwards;
 }
 .pop-container .slider .post-admin{
     display: none;
+    visibility: hidden;
     width: 100%;
     height: 100%;
     padding: 20px 40px;
@@ -1252,6 +1265,187 @@
     -webkit-transform: rotate(75deg);	/* Safari and Chrome */
     -moz-transform: rotate(75deg);		/* Firefox */
 }
+.pop-container .slider .post-admin .start-container{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin-top: 100px;
+}
+.pop-container .slider .post-admin .start-container .cover{
+    position: absolute;
+    display: none;
+    z-index: 6;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border: 1px dashed #ccc;
+    background: rgba(255,255,255,.95);
+}
+.pop-container .slider .post-admin .start-container .cover.active{
+    display: block;
+}
+.pop-container .slider .post-admin .start-container .cover p{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 34px;
+    color: #666;
+}
+.pop-container .slider .post-admin .start-container .cover h5{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 42px;
+    color: #666;
+}
+.pop-container .slider .post-admin .start-container .cover h5 a,
+.pop-container .slider .post-admin .start-container .cover p a{
+    font-size: 12px;
+    color: #5A70ED;
+    margin: 0 4px;
+}
+.pop-container .slider .post-admin .start-container .question:before{
+    color: #aaa;
+    border: 1px solid #aaa;
+}
+.pop-container .slider .post-admin .start-container .question i{
+    right: -100px;
+}
+.pop-container .slider .post-admin .start-container .question i:before{
+    left: 72px;
+}
+.pop-container .slider .post-admin .start{
+    position: relative;
+    width: 100%;
+    height: 20px;
+    font-size: 12px;
+    border-bottom: 1px solid #eee;
+    z-index: 5;
+}
+.pop-container .slider .post-admin .start h5{
+    display: inline-block;
+    color: #333;
+    font-size: inherit;
+    line-height: 20px;
+    float: left;
+}
+.pop-container .slider .post-admin .start h5 .question{
+    margin-left: 4px;
+}
+.pop-container .slider .post-admin .start .slide-btn{
+    margin: 2px 2px 0 0;
+    float: right;
+    width: 30px;
+    height: 16px;
+    background: #ddd;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .2s;
+    -moz-transition: background .2s; /* Firefox 4 */
+    -webkit-transition: background .2s; /* Safari 和 Chrome */
+}
+.pop-container .slider .post-admin .start .slide-btn span{
+    display: inline-block;
+    width: 18px;
+    height: 16px;
+    padding: 2px;
+    transition: margin .2s ease-out;
+    -moz-transition: margin .2s ease-out; /* Firefox 4 */
+    -webkit-transition: margin .2s ease-out; /* Safari 和 Chrome */
+}
+.pop-container .slider .post-admin .start .slide-btn span em{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 1px;
+    font-size: 12px;
+    vertical-align: top;
+    text-align: center;
+}
+.pop-container .slider .post-admin .start .slide-btn.true span{
+    margin-left: 12px;
+}
+.pop-container .slider .post-admin .start .slide-btn.true{
+    background: #6e8cfb;
+}
+.pop-container .slider .post-admin .start .slide-btn.disable{
+    opacity: .5;
+    cursor: not-allowed;
+}
+.pop-container .slider .post-admin .delay-container{
+    display: none;
+    width: 100%;
+    background: #f5f5f5;
+    padding: 30px 14px;
+}
+.pop-container .slider .post-admin .delay-container.active{
+    display: block;
+}
+.pop-container .slider .post-admin .delay{
+    position: relative;
+    width: 100%;
+    height: 20px;
+    font-size: 12px;
+    border-bottom: 1px solid #eee;
+    z-index: 1;
+}
+.pop-container .slider .post-admin .delay h5{
+    display: inline-block;
+    color: #333;
+    font-size: inherit;
+    line-height: 20px;
+    float: left;
+}
+.pop-container .slider .post-admin .delay h5 span{
+    color: #ccc;
+    font-size: 12px;
+    margin-left: 10px;
+    vertical-align: top;
+}
+.pop-container .slider .post-admin .delay .number{
+    display: inline-block;
+    height: 100%;
+    width: 70px;
+    overflow: hidden;
+    float: right;
+}
+.pop-container .slider .post-admin .delay .number em{
+    display: block;
+    width: 20px;
+    height: 100%;
+    background: #999;
+    text-align: center;
+    cursor: pointer;
+    float: left;
+}
+.pop-container .slider .post-admin .delay .number em:hover{
+    background: #666;
+}
+.pop-container .slider .post-admin .delay .number em.add:before{
+    content: '+';
+    font-size: 12px;
+    color: #fff;
+}
+.pop-container .slider .post-admin .delay .number em.sub:before{
+    content: '-';
+    font-size: 12px;
+    color: #fff;
+}
+.pop-container .slider .post-admin .delay .number span{
+    display: block;
+    height: 20px;
+    width: 30px;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+    float: left;
+}
 .pop-container .slider .post-admin .category{
     position: relative;
     width: 100%;
@@ -1259,7 +1453,7 @@
     margin-top: 50px;
     font-size: 12px;
     border-bottom: 1px solid #eee;
-    z-index: 1;
+    z-index: 10;
 }
 .pop-container .slider .post-admin .category h5{
     display: inline-block;
@@ -1462,6 +1656,287 @@
     font-size: 12px;
     color: #999;
 }
+
+.pop-container .slider .contribute-admin{
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 20px 40px;
+    background: rgba(255,255,255,1);
+    overflow: auto;
+    visibility: hidden;
+}
+.pop-container .slider .contribute-admin::-webkit-scrollbar-track-piece{background-color:#fff;}
+.pop-container .slider .contribute-admin::-webkit-scrollbar{width:3px;}
+.pop-container .slider .contribute-admin::-webkit-scrollbar-thumb{background:#fff;}
+.pop-container .slider .contribute-admin:hover::-webkit-scrollbar-thumb{background:#999;}
+.pop-container .slider .contribute-admin .header{
+    width: 100%;
+    height: 30px;
+}
+.pop-container .slider .contribute-admin .header h3{
+    display: inline-block;
+    line-height: 30px;
+    font-size: 16px;
+    height: 30px;
+}
+.pop-container .slider .contribute-admin .header h3 em{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+    background: url(https://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-position: -22px 2px;
+    background-size: 110px;
+}
+.pop-container .slider .contribute-admin .header h3 span{
+    vertical-align: top;
+    line-height: inherit;
+    font-size: inherit;
+}
+.pop-container .slider .contribute-admin .header a{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+    -webkit-transition: transform 0.1s ease-in;
+    -moz-transition: transform 0.1s ease-in;
+    transition: transform 0.1s ease-in;
+}
+.pop-container .slider .contribute-admin .header a:hover{
+    transform: rotate(75deg);
+    -ms-transform: rotate(75deg);		/* IE 9 */
+    -webkit-transform: rotate(75deg);	/* Safari and Chrome */
+    -moz-transform: rotate(75deg);		/* Firefox */
+}
+.pop-container .slider .contribute-admin .start-container{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin-top: 100px;
+}
+.pop-container .slider .contribute-admin .start-container .cover{
+    position: absolute;
+    display: none;
+    z-index: 6;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border: 1px dashed #ccc;
+    background: rgba(255,255,255,.85);
+}
+.pop-container .slider .contribute-admin .start-container .cover.active{
+    display: block;
+}
+.pop-container .slider .contribute-admin .start-container .cover p{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 34px;
+    color: #666;
+}
+.pop-container .slider .contribute-admin .start-container .cover h5{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 42px;
+    color: #666;
+}
+.pop-container .slider .contribute-admin .start-container .cover h5 a,
+.pop-container .slider .contribute-admin .start-container .cover p a{
+    font-size: 12px;
+    color: #5A70ED;
+    margin: 0 4px;
+}
+.pop-container .slider .contribute-admin .start-container .question:before{
+    color: #aaa;
+    border: 1px solid #aaa;
+}
+.pop-container .slider .contribute-admin .start-container .question i{
+    right: -100px;
+}
+.pop-container .slider .contribute-admin .start-container .question i:before{
+    left: 72px;
+}
+.pop-container .slider .contribute-admin .start{
+    position: relative;
+    width: 100%;
+    height: 20px;
+    font-size: 12px;
+    border-bottom: 1px solid #eee;
+    z-index: 5;
+}
+.pop-container .slider .contribute-admin .start h5{
+    display: inline-block;
+    color: #333;
+    font-size: inherit;
+    line-height: 20px;
+    float: left;
+}
+.pop-container .slider .contribute-admin .start h5 .question{
+    margin-left: 4px;
+}
+.pop-container .slider .contribute-admin .start .slide-btn{
+    margin: 2px 2px 0 0;
+    float: right;
+    width: 30px;
+    height: 16px;
+    background: #ddd;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .2s;
+    -moz-transition: background .2s; /* Firefox 4 */
+    -webkit-transition: background .2s; /* Safari 和 Chrome */
+}
+.pop-container .slider .contribute-admin .start .slide-btn span{
+    display: inline-block;
+    width: 18px;
+    height: 16px;
+    padding: 2px;
+    transition: margin .2s ease-out;
+    -moz-transition: margin .2s ease-out; /* Firefox 4 */
+    -webkit-transition: margin .2s ease-out; /* Safari 和 Chrome */
+}
+.pop-container .slider .contribute-admin .start .slide-btn span em{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 1px;
+    font-size: 12px;
+    vertical-align: top;
+    text-align: center;
+}
+.pop-container .slider .contribute-admin .start .slide-btn.true span{
+    margin-left: 12px;
+}
+.pop-container .slider .contribute-admin .start .slide-btn.true{
+    background: #6e8cfb;
+}
+.pop-container .slider .contribute-admin .start .slide-btn.disable{
+    opacity: .5;
+    cursor: not-allowed;
+}
+.pop-container .slider .contribute-admin .delay-container{
+    display: none;
+    width: 100%;
+    background: #f5f5f5;
+    padding: 30px 14px;
+}
+.pop-container .slider .contribute-admin .delay-container.active{
+    display: block;
+}
+.pop-container .slider .contribute-admin .delay{
+    position: relative;
+    width: 100%;
+    height: 20px;
+    font-size: 12px;
+    border-bottom: 1px solid #eee;
+    z-index: 1;
+}
+.pop-container .slider .contribute-admin .delay h5{
+    display: inline-block;
+    color: #333;
+    font-size: inherit;
+    line-height: 20px;
+    float: left;
+}
+.pop-container .slider .contribute-admin .delay h5 span{
+    color: #ccc;
+    font-size: 12px;
+    margin-left: 10px;
+    vertical-align: top;
+}
+.pop-container .slider .contribute-admin .delay .number{
+    display: inline-block;
+    height: 100%;
+    width: 70px;
+    overflow: hidden;
+    float: right;
+}
+.pop-container .slider .contribute-admin .delay .number em{
+    display: block;
+    width: 20px;
+    height: 100%;
+    background: #999;
+    text-align: center;
+    cursor: pointer;
+    float: left;
+}
+.pop-container .slider .contribute-admin .delay .number em:hover{
+    background: #666;
+}
+.pop-container .slider .contribute-admin .delay .number em.add:before{
+    content: '+';
+    font-size: 12px;
+    color: #fff;
+}
+.pop-container .slider .contribute-admin .delay .number em.sub:before{
+    content: '-';
+    font-size: 12px;
+    color: #fff;
+}
+.pop-container .slider .contribute-admin .delay .number span{
+    display: block;
+    height: 20px;
+    width: 30px;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+    float: left;
+}
+.pop-container .slider .contribute-admin .confirm{
+    margin-top: 250px;
+    width: 100%;
+}
+.pop-container .slider .contribute-admin .confirm div{
+    float: left;
+    width: 50%;
+    height: 70px;
+    overflow: hidden;
+    text-align: center;
+}
+.pop-container .slider .contribute-admin .confirm div a{
+    display: inline-block;
+    width: 40px;
+    height: 70px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.pop-container .slider .contribute-admin .confirm div a em{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Ficons.png) no-repeat center;
+    background-size: 140px;
+}
+.pop-container .slider .contribute-admin .confirm div a em.yes{
+    background-position:  8px 8px;;
+}
+.pop-container .slider .contribute-admin .confirm div a em.no{
+    background-position:  8px -27px;;
+}
+.pop-container .slider .contribute-admin .confirm div a:hover{
+    opacity: .6;
+}
+.pop-container .slider .contribute-admin .confirm div a span{
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    line-height: 12px;
+    font-size: 12px;
+    color: #999;
+}
+
 .pop-container .slider .add-site{
     display: none;
     vertical-align: top;
@@ -1470,6 +1945,7 @@
     padding: 50px 10px 20px 40px;
     overflow: auto;
     overflow-x: hidden;
+    visibility: hidden;
 }
 .pop-container .slider .add-site .keyword{
     width: 350px;
@@ -1591,4 +2067,21 @@
 @-ms-keyframes rotating {
     from { -webkit-transform: rotate(0deg);}
     to { -webkit-transform: rotate(360deg);}
+}
+
+@-webkit-keyframes displayDelay{
+    from { visibility: hidden;}
+    to { visibility: visible;}
+}
+@keyframes displayDelay{
+    from { visibility: hidden;}
+    to { visibility: visible;}
+}
+@-moz-keyframes displayDelay{
+    from { visibility: hidden;}
+    to { visibility: visible;}
+}
+@-ms-keyframes displayDelay{
+    from { visibility: hidden;}
+    to { visibility: visible;}
 }

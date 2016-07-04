@@ -393,23 +393,6 @@
         }
         return r;
     };
-    //投稿
-    this.contribute = function (id) {
-        if(self.lock) return false;
-        self.lock = true;
-      request.get('/user/post/contribute',function (ret) {
-          if(ret.hasOwnProperty('code') && ret.code == 0){
-              self.get_article_post(self.article_id);
-          }
-          else{
-              pop.error(ret.msg || '投稿失败','确定').one();
-          }
-          self.lock = false
-      },{
-          id:self.article_id,
-          site_id : id
-      });
-    };
     //搜索站点
     this.search = function (keyword) {
         var k = keyword || '';
@@ -460,7 +443,6 @@
             slider : '',
             auth:[],
             contribute : [],
-            //分类
             post : {
                 site_id : '',
                 category: {
@@ -469,9 +451,30 @@
                     text : '',
                     list : []
                 },
+                start : {
+                    active : 'true',
+                    delay : 30,
+                    lock : '',
+                    site_name : '',
+                    site_link : '',
+                    site_post : false,
+                    site_delay : 0
+                },
                 type : {
                     val : '',
                     time : ''
+                }
+            },
+            contribution : {
+                site_id : '',
+                start : {
+                    active : 'true',
+                    delay : 30,
+                    lock : '',
+                    site_name : '',
+                    site_post : false,
+                    site_link : '',
+                    site_delay: 0
                 }
             },
             search : {
@@ -491,14 +494,44 @@
                 this.slider = this.slider == 'add-site' ? '' : 'add-site';
                 this._search();
             },
-            _post_admin:function (site_id,category,post_status,post_time) {
+            _slide : function (obj) {
+                this[obj].start.active = this[obj].start.active == 'true' ? 'false' : 'true';
+            },
+            _delay_sub : function (obj) {
+                if(this[obj].start.delay > 30)this[obj].start.delay-=30;
+            },
+            _delay_add : function (obj) {
+                if(this[obj].start.delay < 120)this[obj].start.delay+=30;
+            },
+            _post_admin:function (site_id,post_status) {
+                var v = self.vue.post;
                 if(post_status != 'del'){
                     this.slider = 'post-admin';
-                    this.post.site_id = site_id;
-                    this.post.type.val  = post_status == 'start' ? 'cancel' : post_status;
-                    this.post.type.time = post_time;
-                    this.post.category.val = category;
-                    self.get_site_category(site_id);
+                    request.get('/user/post/status',function (ret) {
+                        if(ret.hasOwnProperty('code') && ret.code == '0'){
+                            v.site_id = site_id;
+                            v.type.val  = ret.data.post_status;
+                            v.type.time = ret.data.post_time;
+                            v.start.active = ret.data.start == '1' ? 'true' : '';
+                            v.start.delay = ret.data.start_delay;
+                            v.start.lock = ret.data.start_lock ? 'true' : '';
+                            v.start.site_link = ret.data.site_link;
+                            v.start.site_name = ret.data.site_name;
+                            v.start.site_post = ret.data.site_post;
+                            v.start.site_delay = ret.data.site_delay;
+                            v.category.val = ret.data.category;
+                            self.get_site_category(site_id);
+                        }
+                        else{
+                            pop.error(ret.msg || '请求发布信息错误','确定').one();
+                        }
+                    },
+                        {
+                            id : self.article_id,
+                            site_id:site_id
+                        }
+                    );
+                    
                 }
             },
             _push_admin : function (id,enable) {
@@ -524,7 +557,9 @@
                         site_id:d.site_id,
                         category : d.category.val,
                         type : d.type.val,
-                        time : d.type.time
+                        time : d.type.time,
+                        start: d.start.active,
+                        delay: d.start.delay
                     };
                 //发布必须选择分类
                 if((data.type == 'now' || data.type=='time') && (self.vue.post.category.list[0].id != '0' && (data.category == '0' || data.category == '')))return pop.error('请选择分类','确定').one();
@@ -544,7 +579,52 @@
                 );
             },
             _contribute : function (id,status) {
-                if(status != 'disable')self.contribute(id);
+                var v = self.vue.contribution;
+                if(status == 'disable')return false;
+                self.vue.slider = 'contribute-admin';
+                request.get('/user/contribute/status',function (ret) {
+                        if(ret.hasOwnProperty('code') && ret.code == '0'){
+                            v.site_id = id;
+                            v.start.active = ret.data.start == '1' ? 'true' : '';
+                            v.start.delay = ret.data.start_delay;
+                            v.start.lock = ret.data.start_lock ? 'true' : '';
+                            v.start.site_link = ret.data.site_link;
+                            v.start.site_name = ret.data.site_name;
+                            v.start.site_post = ret.data.site_post;
+                            v.start.site_delay = ret.data.site_delay;
+                        }
+                        else{
+                            pop.error(ret.msg || '请求投稿信息错误','确定').one();
+                        }
+                    },
+                    {
+                        id : self.article_id,
+                        site_id:id
+                    }
+                );
+            },
+            _confirm_contribute : function () {
+                var v = self.vue.contribution,
+                    data = {
+                        id : self.article_id,
+                        site_id:v.site_id,
+                        start: v.start.active,
+                        delay: v.start.delay
+                    };
+                if(self.lock) return false;
+                self.lock = true;
+                request.post('/user/contribute',function(ret){
+                        if(ret.hasOwnProperty('code') && ret.code ==0){
+                            self.get_article_post(self.article_id);
+                            self.vue.slider = '';
+                        }
+                        else{
+                            pop.error(ret.msg || '投稿失败','确定').one();
+                        }
+                        self.lock = false
+                    },
+                    data
+                );
             },
             _category_display : function () {
                 this.post.category.active = !this.post.category.active;

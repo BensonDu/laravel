@@ -27,5 +27,7 @@ class Kernel extends ConsoleKernel
         $schedule->call('App\Http\Controllers\Schedule\ArticleController@PostArticle')->everyMinute();
         //文章浏览次数落地
         $schedule->call('App\Http\Controllers\Schedule\ArticleController@ArticleViewCount')->everyTenMinutes();;
+        //文章首发保鲜期过后文章发布
+        $schedule->call('App\Http\Controllers\Schedule\ArticleController@ExcuteArticle')->everyMinute();
     }
 }

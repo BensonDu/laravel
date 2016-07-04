@@ -9,9 +9,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Model\ArticlePostModel;
 use App\Http\Model\ArticleUserModel;
 use App\Http\Model\BlacklistModel;
-use App\Http\Model\Cache\PlatformCacheModel;
+use App\Http\Model\Cache\StartCacheModel;
 use App\Http\Model\CategoryModel;
 use App\Http\Model\SiteModel;
 use App\Http\Model\UserModel;
@@ -186,16 +187,20 @@ class ApiController  extends Controller
         $request = request();
         $id      = $request->input('id');
         $site_id = $request->input('site_id');
+        $start   = $request->input('start');
+        $delay   = $request->input('delay');
+        $start              = $start == 'true' ? '1' : '0';
+        $delay              = in_array($delay,[30,60,90,120]) ? $delay : 30;
         $uid     = $_ENV['uid'];
         if(empty($id) || empty($site_id) || !SiteModel::check_site($site_id))return self::ApiOut(40001,'请求错误');
-
         //检查站点是否开启外部投稿
         $valid = SiteModel::get_site_id_list();
         if(!in_array($site_id, $valid))return self::ApiOut(40003,'此站点不接受投稿');
         //用户是否被拉黑
         if(BlacklistModel::in_blacklist($site_id,$uid))return self::ApiOut(40003,'此站点不接受投稿');
-
-        $ret = ArticleUserModel::contribute($site_id,$id,$uid);
+        //文章所有权检查
+        if(!ArticleUserModel::own_article($_ENV['uid'],$id)) return self::ApiOut(40004,'用户权限不足');
+        $ret = ArticlePostModel::contribute($id,$site_id,$start,$delay);
         return !!$ret ? self::ApiOut(0,'投稿成功') :  self::ApiOut(40001,'请求错误');
     }
     /*
@@ -210,7 +215,12 @@ class ApiController  extends Controller
         $category           = intval($request->input('category'));
         $type               = $request->input('type');
         $time               = $request->input('time');
+        $start              = $request->input('start');
+        $delay              = $request->input('delay');
+        $start              = $start == 'true' ? '1' : '0';
+        $delay              = in_array($delay,[30,60,90,120]) ? $delay : 30;
 
+        //表单验证
         if(empty($user_article_id) || empty($type) || ($type == 'time' && strtotime($time) <= time())){
             return self::ApiOut(40003,'请求错误');
         }
@@ -221,22 +231,44 @@ class ApiController  extends Controller
         //检查文章分类
         if(CategoryModel::category_exist($site_id,$category)) return self::ApiOut(40004,'分类不存在');
 
+        //文章所有权检查
+        if(!ArticleUserModel::own_article($_ENV['uid'],$user_article_id)) return self::ApiOut(40004,'用户权限不足');
+
+        //文章发布类型转换
         $post_status = $type == 'cancel' ? 0 : (($type == 'time' && strtotime($time)>time()) ? 2 : 1);
 
-        //发布文章 返回 站点文章 ID
-        $new_id = ArticleUserModel::post($site_id,$_ENV['uid'],$user_article_id,$category,$post_status,$time);
-        if(empty($new_id)) return self::ApiOut(40004,$new_id);
+        //发布操作
+        $action = ArticlePostModel::userpost($user_article_id,$site_id,$post_status,$time,$category,$start,$delay);
 
-        //如果定时发布 推到 任务
-        if($post_status == 2){
-            PlatformCacheModel::timing_article($site_id,$new_id,$time);
-        }
-        //如果非定时发布 清除定时发布
-        else{
-            PlatformCacheModel::timing_clear($new_id);
-        }
+        if(!$action)return self::ApiOut(40003,'文章被管理员锁定');
 
         return self::ApiOut(0,'发布成功');
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 文章投稿状态 API
+    |--------------------------------------------------------------------------
+    */
+    public static function contributestatus(){
+        $request = request();
+        $id      = $request->input('id');
+        $site_id = $request->input('site_id');
+        $ret     = ArticlePostModel::status($id,$site_id,true);
+        if(!$ret)return self::ApiOut(40003,'文章被管理员锁定');
+        return self::ApiOut('0',$ret);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 文章发布状态 API
+    |--------------------------------------------------------------------------
+    */
+    public static function poststatus(){
+        $request = request();
+        $id      = $request->input('id');
+        $site_id = $request->input('site_id');
+        $ret  = ArticlePostModel::status($id,$site_id);
+        if(!$ret)return self::ApiOut(40003,'文章被管理员锁定');
+        return self::ApiOut('0',$ret);
     }
     /*
     |--------------------------------------------------------------------------
@@ -370,9 +402,17 @@ class ApiController  extends Controller
                 }
             }
         }
+        //获取文章全部处于缓存队列列表
+        $queue = StartCacheModel::get_queue_list($id);
+        $wait  = [];
+        if(!empty($queue)){
+            foreach ($queue as $k => $v){
+                $wait[] = $k;
+            }
+        }
         $site_map = [];
-        if(!empty($auth) || !empty($cur)){
-            $site_ids = array_merge($auth,$cur);
+        if(!empty($auth) || !empty($cur) || !empty($wait)){
+            $site_ids = array_merge($auth,$cur,$wait);
             $site_info_list = SiteModel::get_site_info_list($site_ids);
             foreach ($site_info_list as $v){
                 $site_map[$v->id] = [
@@ -381,9 +421,25 @@ class ApiController  extends Controller
                 ];
             }
         }
+        //无站点文章记录
         if(!empty($auth)){
             foreach ($auth as $v){
-                if(!in_array($v,$posted_site) && isset($site_map[$v])){
+                if(!isset($site_map[$v]))continue;
+                //发布等待首发队列中
+                if(in_array($v,$wait)){
+                    $auth_list[] = [
+                        'site_id'       => $v,
+                        'name'          => $site_map[$v]['name'],
+                        'link'          => $site_map[$v]['link'],
+                        'category'      => '',
+                        'post_time'     => now(),
+                        'post_status'   => 'wait',
+                        'update'        => 'start'
+                    ];
+                    continue;
+                }
+                //无发布操作记录
+                if(!in_array($v,$posted_site)){
                     $auth_list[] = [
                         'site_id'       => $v,
                         'name'          => $site_map[$v]['name'],
@@ -398,7 +454,20 @@ class ApiController  extends Controller
         }
         if(!empty($cur)){
             foreach ($cur as $v){
-                if(!in_array($v,$contributed_site) && isset($site_map[$v])){
+                if(!isset($site_map[$v]))continue;
+                //投稿等待首发队列中
+                if(in_array($v,$wait)){
+                    $cont_list[] = [
+                        'site_id'       => $v,
+                        'name'          => $site_map[$v]['name'],
+                        'link'          => $site_map[$v]['link'],
+                        'post_status'   => 'wait',
+                        'update'        => 'disable'
+                    ];
+                    continue;
+                }
+                //无投稿操作记录
+                if(!in_array($v,$contributed_site)){
                     $cont_list[] = [
                         'site_id'       => $v,
                         'name'          => $site_map[$v]['name'],
@@ -407,11 +476,23 @@ class ApiController  extends Controller
                         'update'        => 'enable'
                     ];
                 }
+
             }
         }
         $ret = [];
-        if(!empty($auth_list))$ret['auth'] = $auth_list;
-        if(!empty($cont_list))$ret['contribute'] = $cont_list;
+        //按照站点ID固定站点列表排序
+        if(!empty($auth_list)){
+            usort($auth_list, function($a, $b) {
+                return $a['site_id'] - $b['site_id'] ;
+            });
+            $ret['auth'] = $auth_list;
+        }
+        if(!empty($cont_list)){
+            usort($cont_list, function($a, $b) {
+                return $a['site_id'] - $b['site_id'] ;
+            });
+            $ret['contribute'] = $cont_list;
+        }
         return $ret;
     }
 }

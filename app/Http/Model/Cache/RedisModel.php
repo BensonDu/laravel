@@ -137,5 +137,13 @@ class RedisModel
     public static function hexists($key,$field){
         return PRedis::hexists($key,$field);
     }
+    /*
+    |--------------------------------------------------------------------------
+    | HASH 删除域
+    |--------------------------------------------------------------------------
+    */
+    public static function hdel($key,$field){
+        return PRedis::hdel($key,$field);
+    }
 
 }

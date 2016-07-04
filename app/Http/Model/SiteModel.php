@@ -62,7 +62,13 @@ class SiteModel extends Model
      |
      */
     public static function get_site_info_list($ids,$select = ['site_info.id','site_info.name','site_routing.custom_domain','site_routing.platform_domain']){
-        return (is_array($ids) && !empty($ids)) ? SiteModel::leftJoin('site_routing','site_info.id', '=', 'site_routing.site_id')->whereIn('site_info.id',$ids)->get($select) : [];
+        $query =  SiteModel::leftJoin('site_routing','site_info.id', '=', 'site_routing.site_id');
+        if(is_array($ids)){
+            return $query->whereIn('site_info.id',$ids)->get($select);
+        }
+        else{
+            return $query->where('site_info.id',$ids)->first($select);
+        }
     }
     /*
      |--------------------------------------------------------------------------

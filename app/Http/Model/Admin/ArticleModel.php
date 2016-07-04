@@ -4,6 +4,7 @@ namespace App\Http\Model\Admin;
 
 use App\Http\Model\ArticleBaseModel;
 use App\Http\Model\Cache\CacheModel;
+use App\Http\Model\Cache\StartCacheModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -198,39 +199,6 @@ class ArticleModel extends Model
     }
     /*
     |--------------------------------------------------------------------------
-    | 设置文章发布信息
-    |--------------------------------------------------------------------------
-    |
-    | @param  string $site_id
-    | @param  string $article_id
-    | @param  string $category
-    | @param  string $type
-    | @param  string $time Optional
-    | @return object
-    |
-    */
-    public static function save_article_post($site_id, $article_id, $category, $post_status, $time = 0){
-        CacheModel::clear_article_cache($site_id,$article_id);
-        $update = [
-            'category'=>$category,
-            'post_status'=>$post_status,
-            'post_time'=>$time,
-            'contribute_status' => 1
-        ];
-        return  DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->update($update);
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 批量发布文章
-    |--------------------------------------------------------------------------
-    | @param array $article_ids;
-    |
-    */
-    public static function batch_article_post($ids){
-        return (!empty($ids) && is_array($ids)) ? DB::table('articles_site')->whereIn('id',$ids)->where('deleted',0)->update(['post_status' => 1,'post_time'=>now()]) : null;
-    }
-    /*
-    |--------------------------------------------------------------------------
     | 更新文章
     |--------------------------------------------------------------------------
     |
@@ -265,6 +233,14 @@ class ArticleModel extends Model
     */
     public static function delete_article($site_id, $article_id, $deleted = 1){
         CacheModel::clear_article_cache($site_id,$article_id);
+        //文章删除 如果文章未被首发 清除首发保鲜期过后缓冲队列延时执行任务队列
+        if($deleted == '1'){
+            $info = DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->first(['source_id','start','start_time']);
+            if(isset($info->source_id) && $info->start != '1' && strtotime($info->start_time) <= 0){
+                StartCacheModel::clear_queue_list($info->source_id);
+                StartCacheModel::del_excute_delay($info->source_id);
+            }
+        }
         return  DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->update(['deleted' => $deleted]);
     }
     /*

@@ -9,7 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Model\Admin\ArticleModel;
-use App\Http\Model\Cache\PlatformCacheModel;
+use App\Http\Model\ArticlePostModel;
 use App\Http\Model\CategoryModel;
 
 class ArticleController extends AdminController
@@ -280,18 +280,10 @@ class ArticleController extends AdminController
         if(empty($article_id) || empty($type) || empty($info)){
             return $this->ApiOut(40003,'权限不足');
         }
-        $post_status = $type == 'cancel' ? 0 : (time() > strtotime($time) ? 1 : 2);
-        
-        //如果定时发布 推到 任务
-        if($post_status == 2){
-            PlatformCacheModel::timing_article($site_id,$article_id,$time);
-        }
-        //如果非定时发布 清除定时发布
-        else{
-            PlatformCacheModel::timing_clear($article_id);
-        }
-        ArticleModel::save_article_post($site_id,$article_id,$category,$post_status,$time);
-        return $this->ApiOut(0,'Save Sussess');
+        $post_status = $type == 'cancel' ? 0 : (time()+60 > strtotime($time) ? 1 : 2);
+
+        ArticlePostModel::sitepost($article_id,$site_id,$category,$post_status,$time);
+        return $this->ApiOut(0,'发布成功');
     }
     /*
      |--------------------------------------------------------------------------

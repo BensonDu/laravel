@@ -9,12 +9,14 @@
 namespace App\Http\Controllers\Schedule;
 
 
-use App\Http\Model\Admin\ArticleModel;
+use App\Http\Controllers\Controller;
+use App\Http\Model\ArticlePostModel;
 use App\Http\Model\Cache\CacheModel;
 use App\Http\Model\Cache\PlatformCacheModel;
+use App\Http\Model\Cache\StartCacheModel;
 use Illuminate\Support\Facades\DB;
 
-class ArticleController
+class ArticleController extends Controller
 {
     /*
      |--------------------------------------------------------------------------
@@ -23,15 +25,13 @@ class ArticleController
      */
     public static function PostArticle(){
         $list = PlatformCacheModel::timed_article();
-        $ids = [];
         //清除缓存
         if(!empty($list)){
             foreach ($list as $v){
                 CacheModel::clear_article_cache($v['site'],$v['id']);
-                $ids[] = $v['id'];
+                ArticlePostModel::timepost($v['id']);
             }
         }
-        return ArticleModel::batch_article_post($ids);
     }
     /*
      |--------------------------------------------------------------------------
@@ -45,5 +45,29 @@ class ArticleController
         }
         return true;
     }
-
+    /*
+     |--------------------------------------------------------------------------
+     | 执行保鲜期到期相关文章列表操作
+     |--------------------------------------------------------------------------
+     */
+    public static function ExcuteArticle(){
+        $list = StartCacheModel::get_excute_delay();
+        if(!empty($list)){
+            foreach ($list as $v){
+                //等待保鲜期后发布的文章
+                $articles = StartCacheModel::get_queue_list($v);
+                if(!empty($articles)){
+                    foreach ($articles as $kk => $vv){
+                        if(!$vv['contribute']){
+                            ArticlePostModel::normalpost($v,$kk,$vv['post_status'],$vv['post_time'],$vv['category']);
+                        }
+                        else{
+                            ArticlePostModel::normalpost($v,$kk,0,now(),0);
+                        }
+                    }
+                    StartCacheModel::clear_queue_list($v);
+                }
+            }
+        }
+    }
 }
