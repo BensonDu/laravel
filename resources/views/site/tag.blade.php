@@ -1,5 +1,5 @@
 @extends('layout.site')
-@section('style')@parent  <link href="/css/site.tag.css" rel="stylesheet">
+@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/css/site.tag.css" rel="stylesheet">
 @stop
 @section('body')
 @parent

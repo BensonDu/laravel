@@ -1,9 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.ad.css?v1" rel="stylesheet">
-    <link href="/lib/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
-    <link href="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Ffont-awesome.css?" rel="stylesheet">
-    <link href="http://dn-t2ipo.qbox.me/v3/public/editor/medium-editor-insert-plugin.min.css" rel="stylesheet">
-    <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
+@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/css/admin.ad.css" rel="stylesheet">
 @stop
 @section('area')
 <div class="list-header">

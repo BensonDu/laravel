@@ -51,8 +51,10 @@ class Init
     private function set_env_platform(){
         $c_base   = config('site.platform_base');
         $c_prefix = config('site.platform_prefix_home');
+        $c_cdn    = config('site.platform_cdn_domain');
         $prefix = is_null($c_prefix) ? '' : $c_prefix.'.';
         $_ENV['platform']['home']   = 'http://'.$prefix.$c_base;
         $_ENV['platform']['domain'] = $c_base;
+        $_ENV['platform']['cdn']    = $c_cdn;
     }
 }

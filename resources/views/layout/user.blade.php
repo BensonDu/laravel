@@ -1,9 +1,9 @@
 @extends('layout.base')
-@section('style')@parent<link href="/css/user.mid.css?" rel="stylesheet">
-@stop
+
 @section('nav')
 @parent
 @stop
+
 @section('body')
 <!--用户中栏start-->
 <div id="mid" class="user-mid">

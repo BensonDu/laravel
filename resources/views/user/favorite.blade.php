@@ -1,5 +1,5 @@
 @extends('layout.user')
-@section('style')@parent  <link href="/css/user.index.css" rel="stylesheet">
+@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/css/user.index.css" rel="stylesheet">
 @stop
 @section('body')
 @parent

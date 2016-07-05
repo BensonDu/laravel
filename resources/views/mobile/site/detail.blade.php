@@ -1,5 +1,5 @@
 @extends('mobile.site.layout')
-@section('style')@parent<link href="/mobile/css/public.detail.css?v5" rel="stylesheet">
+@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/mobile/css/site.detail.css" rel="stylesheet">
 @stop
 @section('body')
 <div class="article-image">

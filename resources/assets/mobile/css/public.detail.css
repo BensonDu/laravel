@@ -1,0 +1,847 @@
+.article-image{
+    position: relative;
+    min-height: 100px;
+}
+.article-image .img{
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.article-image .img img{
+    width: 100%;
+    height: auto;
+    opacity: .000001;
+}
+.article-image .summary{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px solid #aaa;
+    z-index: 1;
+    overflow: visible;
+}
+.article-image .summary .info{
+    display: inline-block;
+    margin-top: 14px;
+    float: right;
+    text-align: right;
+    padding: 0 12px;
+}
+.article-image .summary .info span{
+    font-size: 12px;
+    font-weight: 100;
+    color: #999;
+    vertical-align: top;
+    line-height: 20px;
+}
+.article-image .summary.image{
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)),color-stop(0.5, rgba(0,0,0,.4)), to(rgba(0,0,0,.8)));
+    -webkit-background-origin: padding;
+    -webkit-background-clip: content;
+    border: none;
+}
+.article-image .summary.image .info span{
+    color: #f0f0f0;
+}
+.author{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    z-index: 5;
+    margin-top: -25px;
+    padding: 0 20px;
+}
+.author .avatar{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #aaa;
+}
+.author .avatar img{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+.author .name{
+    width: 100%;
+    padding:25px 0 0 0;
+    height: 60px;
+}
+.author .name p{
+    display: inline-block;
+    font-size: 12px;
+    color: #999;
+    line-height: 30px;
+    padding: 0 60px;
+}
+.article{
+    width: 100%;
+    padding: 20px 20px;
+}
+.article h3{
+    font-size: 18px;
+    line-height: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+.article h5{
+    font-size: 14px;
+    color: #999;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+.related-reading{
+    width: 100%;
+    padding: 10px 0 40px;
+}
+.related-reading h1{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    height: 30px;
+    font-size: 14px;
+    padding-left: 10px;
+    color: #999;
+}
+.related-reading h2{
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    height: 24px;
+    line-height: 24px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    font-weight: 900;
+    padding-left: 10px;
+    border-left: 5px solid #666;
+    color: #666;
+}
+.related-reading .list-container{
+    width: 100%;
+}
+.related-reading .list-container a{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 1px;
+}
+.related-reading .list-container a .image{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+.related-reading .list-container a .wrap{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding: 8px 5%;
+    z-index: 1;
+    background: rgba(0,0,0,.6);
+}
+.related-reading .list-container a .wrap .info{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding: 8px 5%;
+    z-index: 1;
+}
+.related-reading .list-container a .wrap .info .time{
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 26px;
+    letter-spacing: 2px;
+}
+.related-reading .list-container a .wrap .info h3{
+    font-size: 18px;
+    color: #fff;
+    margin-top: 4px;
+}
+.related-reading .list-container a.sta .wrap .info{
+    width: 76%;
+}
+.related-reading .list-container a .wrap .sta{
+    display: none;
+    width: 23%;
+    height: 100%;
+}
+.related-reading .list-container a.sta .wrap .sta{
+    display: block;
+}
+.related-reading .list-container a .wrap .sta .type{
+    position: absolute;
+    display: inline-block;
+    right: 3%;
+    top: 40px;
+    font-size: 12px;
+    padding: 2px 10px;
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 2px;
+    line-height: 20px;
+    color: rgba(255,255,255,.9);
+    -webkit-transform: scale(.9);
+}
+
+.medium {
+    font-size: 16px;
+    line-height: 1.875
+}
+.medium h1,
+.medium h1 span {
+    font-size: 28px
+}
+.medium h2 {
+    font-size: 20px
+}
+.medium h2 span {
+    font-size: 20px
+}
+.medium h3,
+.medium h3 span {
+    font-size: 16px
+}
+.medium h1,
+.medium h2,
+.medium h3{
+    margin: 30px 0 16px;
+}
+.medium embed {
+    display: block;
+    width: 100%;
+    min-height: 503px
+}
+.medium i{
+    font-style: italic;
+}
+.medium blockquote {
+    top: 6px;
+    position: relative;
+    margin: 0;
+    margin-bottom: 30px;
+    padding-left: 16px;
+    color: #666
+}
+.medium blockquote p {
+    margin-bottom: 14px
+}
+.medium blockquote:after {
+    content: '';
+    position: absolute;
+    top: 9px;
+    bottom: 4px;
+    left: 0;
+    width: 5px;
+    background-color: #EAEEF1
+}
+.medium a {
+    border-bottom: 1px solid #000;
+    padding-bottom: 1px;
+}
+.medium a:hover {
+    color: #6e8cfb;
+    border-bottom: 1px solid #6e8cfb;
+}
+.medium img {
+    display: block;
+    max-width: 100%;
+    margin: 20px auto
+}
+.medium li{
+    float: none;
+    display: list-item;
+    list-style-position: inside;
+}
+.medium ol,
+.medium ul{
+    display: list-item;
+    list-style-type: none;
+}
+.medium ol li{
+    list-style-type:  decimal;
+}
+.medium ul li{
+    list-style-type: square;
+}
+.medium p,
+.medium p a,
+.medium ul,
+.medium li,
+.medium pre,
+.medium blockquote,
+.medium span {
+    font-size: 16px;
+}
+.medium p,
+.medium ul {
+    margin-bottom: 25px;
+}
+.medium .author .name {
+    float: right;
+}
+.medium .author .name u {
+    display: inline-block;
+    width: 28px;
+    border-bottom: 1px solid #000;
+    height: 17px;
+    vertical-align: 6px;
+    margin-right: 12px
+}
+.medium .author .name i {
+    font-style: normal;
+}
+
+.social-bar{
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    background: #f5f5f5;
+    box-shadow: 0 0 3px 0 #ccc;
+    padding: 0 5% 10px;
+    left: 0;
+    bottom: -10px;
+    z-index: 20;
+}
+.social-bar .wrap{
+    width: 100%;
+    height: 100%;
+}
+.social-bar .wrap .input{
+    width: 55%;
+    height: 100%;
+    padding: 8px 0;
+    float: left;
+}
+.social-bar .wrap .input p{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0 8px;
+    font-size: 12px;
+    background: #fff;
+}
+.social-bar .wrap .input p span{
+    display: inline-block;
+    width: 100%;
+    line-height: 24px;
+    font-size: 12px;
+    color: #999;
+}
+.social-bar .wrap .social{
+    width: 45%;
+    height: 100%;
+    padding-left: 10%;
+    float: right;
+}
+.social-bar .wrap .social .favorite{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+.social-bar .wrap .social .like{
+    width: 50%;
+    height: 100%;
+    float: right;
+}
+.social-bar .wrap .social>div a{
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    padding: 4px 0;
+    cursor: pointer;
+    text-align: left;
+    overflow: visible;
+}
+.social-bar .wrap .social>div a i{
+    position: absolute;
+    font-size: 16px;
+    width: 30px;
+    left: 15px;
+    opacity: 0;
+}
+.social-bar .wrap .social>div a em{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Flike-fav.png) no-repeat center;
+    transition: transform .2s;
+    -moz-transition: -moz-transform .2s; /* Firefox 4 */
+    -webkit-transition: -webkit-transform .2s; /* Safari 和 Chrome */
+}
+.social-bar .wrap .social>div a span{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    height: 30px;
+    line-height: 40px;
+    margin-left: 6px;
+    color: #999;
+}
+.social-bar .wrap .social div.active a i{
+    animation: floatUp 0.6s ease-out 0s normal forwards;
+    -webkit-animation: floatUp 0.6s ease-out 0s normal forwards;
+    -moz-animation: floatUp 0.6s ease-out 0s normal forwards;
+}
+.social-bar .wrap .social .favorite a i{
+    color: #FFBF35;
+}
+.social-bar .wrap .social .favorite a em{
+    background-size: 50px;
+    background-position: -23px -21px;
+}
+.social-bar .wrap .social .favorite.active a em{
+    background-size: 60px;
+    background-position: -31px 3px;
+}
+.social-bar .wrap .social .like a i{
+    color: #FF4081;
+}
+.social-bar .wrap .social .like a em{
+    background-size: 50px;
+    background-position: 4px -21px;
+}
+.social-bar .wrap .social .like.active a em{
+    background-size: 50px;
+    background-position: 4px 4px;
+}
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        top: 10px;
+    }
+    80%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        top: -40px;
+    }
+}
+@-webkit-keyframes floatUp {
+    0% {
+        opacity: 0;
+        top: 10px;
+    }
+    80%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        top: -40px;
+    }
+}
+
+.comment-textarea{
+    position: fixed;
+    bottom:-180px;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    background: #f5f5f5;
+    padding: 20px 5% 10px;
+    z-index: 30;
+    border-top: 1px solid #ddd;
+    visibility: hidden;
+    -webkit-transition: bottom 0.2s ease-out;
+    transition: bottom 0.2s ease-out;
+}
+.comment-textarea .login{
+    position: absolute;
+    width: 100%;
+    height: 120px;
+    left: 0;
+    top: 0;
+    background: rgba(255,255,255,.65);
+}
+.comment-textarea .login p{
+    display: inline-block;
+    margin-top: 16%;
+    width: 100%;
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+}
+.comment-textarea .login p span{
+    color: #6e8cfb;
+    margin: 0 5px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.comment-textarea.active{
+    visibility: visible;
+    bottom:-10px;
+}
+.comment-textarea .wrap{
+    width: 100%;
+    height: 100%;
+}
+.comment-textarea .wrap textarea{
+    display: inline-block;
+    width: 100%;
+    height: 100px;
+    padding: 10px 12px;
+    color: #666;
+    border: none;
+    background: #fff;
+    resize: none;
+}
+.comment-textarea .wrap textarea:focus{
+    outline: none;
+}
+.comment-textarea .wrap .btn{
+    width: 100%;
+    height: 40px;
+    padding: 5px 0;
+    text-align: right;
+}
+.comment-textarea .wrap .btn a{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 26px;
+    color: #fff;
+    padding: 0 12px;
+    border-radius: 3px;
+    text-align: center;
+}
+.comment-textarea .wrap .btn .submit{
+    background: #666;
+    margin-left: 5%;
+}
+.comment-textarea .wrap .btn .cancel{
+    background: #aaa;
+}
+
+.comment-list{
+    width: 100%;
+    padding: 10px 0 20px;
+    min-height: 150px;
+}
+.comment-list h2{
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    height: 24px;
+    line-height: 24px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    font-weight: 900;
+    padding-left: 10px;
+    border-left: 5px solid #666;
+    color: #666;
+}
+.comment-list  textarea{
+    border-radius: 3px;
+    font-size: 14px;
+    resize: vertical;
+    color: #666;
+}
+.comment-list  .left{
+    float: left;
+}
+.comment-list  .right{
+    float: right;
+}
+.comment-list  .divider{
+    margin:  0 8px;
+}
+.comment-list  .normal{
+    color: #999;
+}
+.comment-list  .right-space{
+    margin-right: 8px;
+}
+.comment-list  .left-space{
+    margin-left: 2px;
+}
+.comment-list  .link{
+    color: #6e8cfb;
+    cursor: pointer;
+}
+.comment-list  .link:hover{
+    color: #335CF5;
+}
+.comment-list  .submit{
+    width: 100%;
+    height: 50px;
+    padding: 10px 0 0 70px;
+    overflow: hidden;
+}
+.comment-list  .submit a{
+    display: inline-block;
+    font-size: 12px;
+    background: #999;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    cursor: not-allowed;
+    float: right;
+}
+.comment-list  .submit.active a{
+    background: #444;
+    cursor: pointer;
+}
+.comment-list  .submit.active a:hover{
+    background: #000;
+}
+.comment-list  .submit p{
+    display: inline-block;
+    font-size: 12px;
+    color: #ccc;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+}
+.comment-list  .handle-btn{
+    margin-left: 10px;
+    cursor: pointer;
+    color: #999;
+}
+.comment-list  .handle-btn.active,
+.comment-list  .handle-btn:hover,
+.comment-list  .handle-btn:hover span{
+    color: #000;
+}
+.comment-list .comment-wrap{
+    display: none;
+    width: 100%;
+    padding: 0 3%;
+}
+.comment-list.all .comment-wrap,
+.comment-list.normal .comment-wrap{
+    display: block;
+}
+.comment-list .comment-empty{
+    display: none;
+    width: 100%;
+    height: 100px;
+}
+.comment-list.empty .comment-empty{
+    display: block;
+}
+.comment-list .comment-empty p{
+    display: inline-block;
+    margin-top: 50px;
+    width: 100%;
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+}
+.comment-list .comment-empty p span{
+    margin: 0 3px;
+    color: #6e8cfb;
+    cursor: pointer;
+}
+.comment-list .comment-all{
+    display: none;
+    width: 100%;
+    height: 50px;
+    padding: 12px 0;
+    text-align: center;
+}
+.comment-list.all .comment-all{
+    display: block;
+}
+.comment-list .comment-all p{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 26px;
+    padding: 0 10px;
+    background: #fff;
+    color: #999;
+    border: 1px solid #999;
+    border-radius: 3px;
+    text-align: center;
+}
+.comment-list .comment-all p span{
+    display: inline-block;
+    color: #000;
+    font-size: 12px;
+    line-height: 26px;
+    vertical-align: top;
+    margin: 0 5px;
+}
+.comment-list .comment-item{
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
+    animation: fadeIn 0.7s linear 0s normal forwards;
+    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
+    -moz-animation: fadeIn 0.7s linear 0s normal forwards;
+}
+.comment-list .comment-item .avatar{
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 40px;
+    height: 100%;
+}
+.comment-list .comment-item .avatar img{
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    border: 1px solid #eee;
+}
+.comment-list .comment-item .comment-body{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-left: 50px;
+}
+.comment-list .comment-item .comment-body .head{
+    width: 100%;
+    min-height: 30px;
+    overflow: hidden
+}
+.comment-list .comment-item .comment-body .head a,
+.comment-list .comment-item .comment-body .head span{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 30px;
+}
+.comment-list .comment-item .comment-body .text{
+    position: relative;
+    width: 100%;
+    padding: 5px 50px 5px 0;
+    min-height: 50px;
+}
+.comment-list .comment-item .comment-body .text p{
+    font-size: 13px;
+    text-align: left;
+    line-height: 22px;
+    color: #666;
+}
+.comment-list .comment-item .comment-body .text .like{
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 100%;
+    cursor: pointer;
+}
+.comment-list .comment-item .comment-body .text .like em{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 5px 0 0 10px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Flike-fav.png) no-repeat center;
+    background-size: 50px;
+    background-position: 4px -22px;
+    transition: transform .2s;
+    -moz-transition: -moz-transform .2s;
+    -webkit-transition: -webkit-transform .2s;
+}
+.comment-list .comment-item .comment-body .text .like.active em{
+    background-size: 56px;
+    background-position: 2px 1px;
+}
+.comment-list .comment-item .comment-body .foot{
+    width: 100%;
+}
+.comment-list .comment-item .comment-body .foot .foot-origin{
+    width: 100%;
+    padding-right: 4px;
+    overflow: hidden;
+}
+.comment-list .comment-item .comment-body .foot .foot-origin a,
+.comment-list .comment-item .comment-body .foot .foot-origin span{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 30px;
+    vertical-align: top;
+}
+.comment-list .comment-item .comment-body .foot .reply{
+    display: none;
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    padding: 30px 4%;
+    background: #f5f5f5;
+}
+.comment-list .comment-item .comment-body .foot .reply.active{
+    display: block;
+}
+.comment-list .comment-item .comment-body .foot .reply:before{
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    right: 6px;
+    top: -6px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #ccc;
+}
+.comment-list .comment-item .comment-body .foot .reply .reply-wrap{
+    position: relative;
+    width: 100%;
+}
+.comment-list .comment-item .comment-body .foot .reply .reply-wrap .textarea{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-left: 70px;
+}
+.comment-list .comment-item .comment-body .foot .reply .reply-wrap .textarea textarea{
+    width: 100%;
+    min-height: 100px;
+    max-height: 160px;
+    border: 1px solid #eee;
+    padding: 16px 20px;
+}
+.comment-list .comment-item .comment-body .foot .reply .reply-wrap .textarea textarea:focus{
+    outline: none;
+}
+.comment-list .comment-item .comment-body .sub-comment-container{
+    display: none;
+    position: relative;
+    width: 100%;
+    margin-top: 3px;
+    background: #f5f5f5;
+    padding: 30px 4%;
+}
+.comment-list .comment-item .comment-body .sub-comment-container:before{
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    right: 45px;
+    top: -6px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #ccc;
+}
+.comment-list .comment-item .comment-body .sub-comment-container.alone:before{
+    right: 15px;
+}
+.comment-list .comment-item .comment-body .sub-comment-container.active{
+    display: block;
+}
+.comment-list .comment-item .comment-body .sub-comment{
+    position: relative;
+    width: 100%;
+}
+.comment-list .comment-item .comment-body .sub-comment-container .foot .reply{
+    background: #eee;
+}

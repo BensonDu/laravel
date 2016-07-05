@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.comment.css?" rel="stylesheet">
+@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/css/admin.comment.css" rel="stylesheet">
 @stop
 @section('area')
 <div class="list-header">

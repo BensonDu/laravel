@@ -1,0 +1,11 @@
+.header {
+  border: 1px solid #ccc;
+  width: 100px;
+  height: 100px;
+}
+
+.header p {
+  display: inline-block;
+  width: 100%;
+  font-size: 24px;
+}

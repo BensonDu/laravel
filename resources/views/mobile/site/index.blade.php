@@ -1,5 +1,5 @@
 @extends('mobile.site.layout')
-@section('style')@parent<link href="/mobile/css/site.index.css?" rel="stylesheet">
+@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/mobile/css/site.index.css" rel="stylesheet">
 @stop
 @section('body')
 @if(!empty($stars))

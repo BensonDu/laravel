@@ -1,10 +1,9 @@
 @extends('layout.base')
-@section('style')
-@parent<link href="/css/site.mid.css?" rel="stylesheet">
-@stop
+
 @section('nav')
     @parent
 @stop
+
 @section('body')
 <!--站点中栏start-->
 <div id="mid" class="site-mid">

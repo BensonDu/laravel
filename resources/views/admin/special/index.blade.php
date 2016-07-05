@@ -1,6 +1,5 @@
 @extends('layout.admin')
-@section('style')@parent  <link href="/css/admin.special.css?v2" rel="stylesheet">
-    <link href="/lib/cropper/cropper.min.css" rel="stylesheet">
+@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/css/admin.special.css" rel="stylesheet">
 @stop
 @section('area')
     <div class="list-header">
