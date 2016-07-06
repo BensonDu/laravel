@@ -107,8 +107,7 @@ class CommentModel extends Model
             })
             ->whereIn('articles_site.source_id',$sources)
             ->whereNotIn('comment.id',$ids)
-            ->where('comment.site_id','!=',$site_id)
-            ->where('articles_site.site_id',$site_id);
+            ->where('comment.site_id','!=',$site_id);
         }
 
         return $query->where('comment.deleted','0')
@@ -161,8 +160,7 @@ class CommentModel extends Model
             })
                 ->whereIn('articles_site.source_id',$sources)
                 ->whereNotIn('comment.id',$ids)
-                ->where('comment.site_id','!=',$site_id)
-                ->where('articles_site.site_id',$site_id);
+                ->where('comment.site_id','!=',$site_id);
         }
 
         return $query->where('comment.deleted','0')
