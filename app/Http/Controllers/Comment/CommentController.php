@@ -121,17 +121,17 @@ class CommentController extends Controller{
         //父级对应用户表
         $id_user_map = [];
         foreach ($list as $v){
-            //遍历出所有用户 ID 及父级评论 ID
-            if($v->parent != '0' && !in_array($v->parent,$users))$users[] = $v->parent;
+
+            //遍历出所有用户ID
             if($v->user_id != '0' && !in_array($v->user_id,$users))$users[] = $v->user_id;
 
-            //建立ID对应用户信息映射数组
-            $id_user_map['id_'.$v->id] = $v->user_id;
+            //建立评论ID对应用户信息映射数组
+            $id_user_map[$v->id] = $v->user_id;
 
-            //筛选出拥有回复的评论ID及数量
-            if(!isset($count['id_'.$v->root])) $count['id_'.$v->root] = 0;
-            //根评论ID不为空
-            if(!empty($v->root))$count['id_'.$v->root]++;
+            //建立跟评论ID对应评论数映射数组 筛选出拥有回复的评论ID及数量
+            if(!isset($count[$v->root])) $count[$v->root] = 0;
+            if(!empty($v->root))$count[$v->root]++;
+
         }
         //用户信息映射
         $user_map = [];
@@ -143,13 +143,18 @@ class CommentController extends Controller{
                 $user_map[$v->id]['nickname']   = $v->nickname;
             }
         }
-        $ret = [];
+
+        //根评论映射
+        $comment_map = [];
+
+        $all = [];
         foreach ($list as $k => $v){
-            if($v->root != $root)continue;
             $comment =[];
             $comment['id'] = $v->id;
             //站点ID
             $comment['site_id'] = $v->site_id;
+            //根ID
+            $comment['root']    =  $v->root;
             //站点首页
             $comment['site_home'] = site_home($v->custom_domain,$v->platform_domain);
             //站点名称
@@ -165,20 +170,28 @@ class CommentController extends Controller{
             //点赞数
             $comment['like_count'] = $v->likes;
             //回复数
-            $comment['reply_count'] = isset($count['id_'.$v->id]) ? $count['id_'.$v->id] : 0;
+            $comment['reply_count'] = isset($count[$v->id]) ? $count[$v->id] : 0;
             //用户主页
             $comment['user_home'] = empty($v->hide) && isset($user_map[$v->user_id]['id']) ? $_ENV['platform']['home'].'/user/'.$user_map[$v->user_id]['id'] : '';
             //用户昵称
             $comment['nickname']  = isset($user_map[$v->user_id]['nickname']) ? $user_map[$v->user_id]['nickname'] : '';
             //用户头像
             $comment['avatar'] = isset($user_map[$v->user_id]['avatar']) ? avatar($user_map[$v->user_id]['avatar']) : '';
+            //评论回复列表
+            $comment['replies'] = [];
+            //评论回复是否展开
+            $comment['comment_fold'] = false;
+            //回复文本框展开
+            $comment['reply_fold'] = false;
+            //回复文本内容
+            $comment['reply_input'] = '';
             //被回复昵称
             $comment['replied_nickname'] = '';
             //被回复主页
             $comment['replied_home'] = '';
-            if(isset($id_user_map['id_'.$v->parent]) && isset($user_map[$id_user_map['id_'.$v->parent]])){
-                $comment['replied_nickname'] = $user_map[$id_user_map['id_'.$v->parent]]['nickname'];
-                $comment['replied_home'] = $_ENV['platform']['home'].'/user/'.$user_map[$id_user_map['id_'.$v->parent]]['id'];
+            if(isset($id_user_map[$v->parent]) && isset($user_map[$id_user_map[$v->parent]])){
+                $comment['replied_nickname'] = $user_map[$id_user_map[$v->parent]]['nickname'];
+                $comment['replied_home'] = $_ENV['platform']['home'].'/user/'.$user_map[$id_user_map[$v->parent]]['id'];
             };
             //评论已删除 或 被站点管理员隐藏 或关闭站外评论
             if(!empty($v->hide) || !empty($v->deleted) || (!$ex && $v->site_id != $_ENV['site_id'])){
@@ -190,8 +203,27 @@ class CommentController extends Controller{
             //如果评论被删除 且 没有回复不显示
             if($comment['hide'] && empty($comment['reply_count']))continue;
             $comment['rank'] = intval($comment['like_count'])*5+intval($comment['reply_count'])*10;
-            $ret[] = $comment;
+            //添加根评论映射
+            if(!empty($v->root)){
+                if(!isset($comment_map[$v->root]))$comment_map[$v->root] = [];
+                $comment_map[$v->root][] = $comment;
+            }
+            $all[] = $comment;
         }
+        $ret = [];
+
+        foreach ($all as $v){
+            if($root != $v['root'])continue;
+            //文章根评论
+            if(empty($root)){
+                if(isset($comment_map[$v['id']]) && count($comment_map[$v['id']]) > 0){
+                    $v['replies'] = $comment_map[$v['id']];
+                    $v['comment_fold'] = true;
+                }
+            }
+            $ret[] = $v;
+        }
+
         if($orderby =='hot'){
             usort($ret, function($a, $b) {
                 return $b['rank'] - $a['rank'] ;

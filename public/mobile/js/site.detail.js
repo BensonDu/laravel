@@ -155,17 +155,6 @@
         lock = false;
     //站点关闭评论
     if(data.comment != '1')return false;
-    //评论列表初始化
-    this.init = function (list) {
-        var l = list.length;
-        for(var i = 0; i < l; i ++){
-            //数据结构增加回复列表
-            list[i].replies = [];
-            //评论展开
-            list[i].comment_fold = false;
-        }
-        return list;
-    };
     this.save = [];
     this.vue = new Vue({
         el : '#comment-list',
@@ -205,7 +194,7 @@
                         if (ret.hasOwnProperty('code') && ret.code == '0'){
                             list = ret.data;
                             if(list.length > 0){
-                                self.vue.list[index].replies = self.init(list);
+                                self.vue.list[index].replies = list;
                                 self.vue.list[index].comment_fold = 1;
                             }
 
@@ -253,7 +242,7 @@
     this.update_comment = function () {
         request.get('/comment/comments',function (ret) {
                 if(ret.hasOwnProperty('code') && ret.code == '0'){
-                    self.vue.list= self.save = self.init(ret.data);
+                    self.vue.list= self.save = ret.data;
                 }
             },
             {

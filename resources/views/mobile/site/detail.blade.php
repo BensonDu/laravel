@@ -158,7 +158,7 @@
         this.comment = '{{$comment ? '1' : '0'}}';
     }).call(define('data'))
 </script>
-<script src="/mobile/js/site.detail.js"></script>
+<script src="/mobile/js/site.detail.js?"></script>
 <script src="http://static.geetest.com/static/tools/gt.js"></script>
 <script src="/lib/geetest/geetest.js"></script>
 @stop
