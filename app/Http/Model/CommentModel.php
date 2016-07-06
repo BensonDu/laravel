@@ -71,25 +71,48 @@ class CommentModel extends Model
         ];
 
         $query = CommentModel::leftJoin('users','comment.user_id','=','users.id')
-            ->leftJoin('articles_site','articles_site.source_id','=','comment.article_id')
-            ->leftJoin('site_routing','site_routing.site_id','=','comment.site_id')
-            ->where('comment.deleted','0');
+            ->leftJoin('site_routing','site_routing.site_id','=','comment.site_id');
+
         //站内评论限定site_id即可
         if($inside){
-            $query->where('comment.site_id',$site_id);
+            $query->leftJoin('articles_site',function ($join) use ($site_id){
+                $join->on('articles_site.source_id','=','comment.article_id');
+                $join->on('articles_site.site_id','=',DB::raw($site_id));
+            })
+            ->where('comment.site_id',$site_id);
         }
-        //站外评论 需非隐藏评论 且 评论属于站外 且评论对应源文章ID在本站也有发表
+        //站外评论 且 评论属于站外 且评论对应源文章ID在本站也有发表
         else{
+            //过滤隐藏评论
             $hide = DB::table('comment_hide')->where('site_id',$site_id)->where('valid','1')->get(['id']);
             $ids = [];
             foreach ($hide as $v){
                 $ids[] = $v->id;
             }
-            $query->whereNotIn('comment.id',$ids)
-                ->where('comment.site_id','!=',$site_id)
-                ->where('articles_site.site_id',$site_id);
+            //当前站点有评论的文章;
+            $articles = DB::table('comment')
+                ->leftJoin('articles_site','articles_site.source_id','=','comment.article_id')
+                ->where('articles_site.site_id',$site_id)
+                ->where('comment.deleted','0')
+                ->groupBy('articles_site.source_id')
+                ->get(['articles_site.source_id']);
+            $sources = [];
+            foreach ($articles as $v){
+                $sources[] = $v->source_id;
+            }
+
+            $query->leftJoin('articles_site',function ($join) use ($site_id){
+                $join->on('articles_site.source_id','=','comment.article_id');
+                $join->on('articles_site.site_id','!=',DB::raw($site_id));
+            })
+            ->whereIn('articles_site.source_id',$sources)
+            ->whereNotIn('comment.id',$ids)
+            ->where('comment.site_id','!=',$site_id)
+            ->where('articles_site.site_id',$site_id);
         }
-        return $query->orderBy('comment.time',$order)
+
+        return $query->where('comment.deleted','0')
+            ->orderBy('comment.time',$order)
             ->take($take)
             ->skip($skip)
             ->get($select);
@@ -102,25 +125,48 @@ class CommentModel extends Model
     public static function getCommentsCount($site_id, $inside = true){
 
         $query = CommentModel::leftJoin('users','comment.user_id','=','users.id')
-            ->leftJoin('articles_site','articles_site.source_id','=','comment.article_id')
-            ->leftJoin('site_routing','site_routing.site_id','=','comment.site_id')
-            ->where('comment.deleted','0');
+            ->leftJoin('site_routing','site_routing.site_id','=','comment.site_id');
+
         //站内评论限定site_id即可
         if($inside){
-            $query->where('comment.site_id',$site_id);
+            $query->leftJoin('articles_site',function ($join) use ($site_id){
+                $join->on('articles_site.source_id','=','comment.article_id');
+                $join->on('articles_site.site_id','=',DB::raw($site_id));
+            })
+                ->where('comment.site_id',$site_id);
         }
-        //站外评论 需非隐藏评论 且 评论属于站外 且评论对应源文章ID在本站也有发表
+        //站外评论 且 评论属于站外 且评论对应源文章ID在本站也有发表
         else{
+            //过滤隐藏评论
             $hide = DB::table('comment_hide')->where('site_id',$site_id)->where('valid','1')->get(['id']);
             $ids = [];
             foreach ($hide as $v){
                 $ids[] = $v->id;
             }
-            $query->whereNotIn('comment.id',$ids)
+            //当前站点有评论的文章;
+            $articles = DB::table('comment')
+                ->leftJoin('articles_site','articles_site.source_id','=','comment.article_id')
+                ->where('articles_site.site_id',$site_id)
+                ->where('comment.deleted','0')
+                ->groupBy('articles_site.source_id')
+                ->get(['articles_site.source_id']);
+            $sources = [];
+            foreach ($articles as $v){
+                $sources[] = $v->source_id;
+            }
+
+            $query->leftJoin('articles_site',function ($join) use ($site_id){
+                $join->on('articles_site.source_id','=','comment.article_id');
+                $join->on('articles_site.site_id','!=',DB::raw($site_id));
+            })
+                ->whereIn('articles_site.source_id',$sources)
+                ->whereNotIn('comment.id',$ids)
                 ->where('comment.site_id','!=',$site_id)
                 ->where('articles_site.site_id',$site_id);
         }
-        return $query->count();
+
+        return $query->where('comment.deleted','0')
+            ->count();
     }
     /*
     |--------------------------------------------------------------------------
