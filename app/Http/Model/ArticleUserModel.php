@@ -128,6 +128,8 @@ class ArticleUserModel extends Model
     |--------------------------------------------------------------------------
     */
     public static function get_home_article_list($user_id,$skip = 0){
+
+        //选择字段
         $select = '
         articles_site.id,
         articles_site.title,
@@ -140,29 +142,45 @@ class ArticleUserModel extends Model
         site_routing.custom_domain,
         site_routing.platform_domain
         ';
-        $list = DB::table('articles_site')->leftJoin('site_routing','articles_site.site_id','=','site_routing.site_id')->select(DB::raw($select))
-            ->where('articles_site.author_id' ,$user_id)
-            ->where('articles_site.deleted',0)
-            ->where('articles_site.post_status','1')
-            ->groupBy('articles_site.source_id')
-            ->orderBy('articles_site.post_time', 'desc')
-            ->take(10)->skip($skip)->get();
 
-        return $list;
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 获取用户主页文章总数
-    |--------------------------------------------------------------------------
-    */
-    public static function get_home_article_list_count($user_id){
         $list = DB::table('articles_site')
             ->where('author_id' ,$user_id)
             ->where('deleted',0)
             ->where('post_status','1')
             ->groupBy('source_id')
+            ->orderBy('post_time', 'asc')
             ->get(['id']);
-        return count($list);
+
+        //总数
+        $total  = count($list);
+        //反转数组
+        $desc   = array_reverse($list);
+        //获取所需位置文章
+        $need    = array_slice($desc,$skip,10);
+        //文章IDS
+        $ids = [];
+        foreach ($need as $v){
+            $ids[] = $v->id;
+        }
+        //文章详情
+        $article = DB::table('articles_site')
+            ->leftJoin('site_routing','articles_site.site_id','=','site_routing.site_id')
+            ->select(DB::raw($select))
+            ->whereIn('articles_site.id',$ids)
+            ->get();
+        //顺序校准
+        $ret = [];
+        foreach($ids as $k => $v){
+            foreach($article as $vv){
+                if($vv->id == $v){
+                    $ret[$k] = $vv;
+                }
+            }
+        }
+        return [
+            'total' => $total,
+            'list'  => $ret
+        ];
     }
     /*
     |--------------------------------------------------------------------------

@@ -31,9 +31,13 @@ class IndexController extends UserController
         /*设置页面 title*/
         $data['base']['title'] = $data['self'] ? '我的个人主页-创之' : $data['profile']['nickname'].'的个人主页-创之';
 
-        $data['list']   = self::get_list($id);
 
-        $data['total']  = ArticleUserModel::get_home_article_list_count($id);
+        //文章列表
+        $articles = ArticleUserModel::get_home_article_list($id);
+
+        $data['list']   = self::get_list($articles['list']);
+
+        $data['total']  = $articles['total'];
 
         return self::view('/user/index',$data);
     }
@@ -57,7 +61,9 @@ class IndexController extends UserController
             return self::ApiOut(40001,'请求错误');
         }
         $skip =intval($index)*10;
-        $list = self::get_list($id,$skip);
+        //文章列表
+        $articles = ArticleUserModel::get_home_article_list($id,$skip);
+        $list = self::get_list($articles['list']);
         return self::ApiOut(0,$list);
     }
     /*
@@ -65,8 +71,8 @@ class IndexController extends UserController
      | 私有方法 获取格式化文章列表
      |--------------------------------------------------------------------------
      */
-    private static function get_list($id, $skip=0){
-        $list = ArticleUserModel::get_home_article_list($id, $skip);
+    private static function get_list($list){
+
         foreach($list as $k =>$v){
             $tags = [];
             $tag = tag($v->tags);
@@ -83,6 +89,7 @@ class IndexController extends UserController
             $list[$k]->domain   = !empty($v->custom_domain) ? 'http://'.$v->custom_domain : 'http://'.$v->platform_domain.'.'.$_ENV['platform']['domain'];
             $list[$k]->post_time= time_down(strtotime($v->post_time));
         }
+
         return $list;
     }
 
