@@ -202,7 +202,7 @@ class ArticlePostModel extends Model
    */
     public static function normalpost($id,$site_id,$post_status,$post_time,$category = null,$start = null,$start_delay = null){
 
-        $site = DB::table('articles_site')->where('source_id',$id)->where('site_id',$site_id)->first(['id','start','start_time']);
+        $site = DB::table('articles_site')->where('source_id',$id)->where('site_id',$site_id)->first(['id','start','start_delay','start_time']);
         $now  = now();
 
         //首发相关
