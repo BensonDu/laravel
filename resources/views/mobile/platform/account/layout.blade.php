@@ -1,6 +1,6 @@
 @extends('mobile.platform.layout')
 
-@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/mobile/css/platform.account.css" rel="stylesheet">
+@section('style')<link href="{{ $_ENV['platform']['cdn'].elixir("mobile/css/platform.account.css") }}" rel="stylesheet">
 @stop
 
 @section('body')

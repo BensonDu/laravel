@@ -5,7 +5,7 @@
     <meta id="viewport" name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
     <meta name="format-detection" content="telephone=no">
     <title>{{$article->title}}</title>
-    <link href="{{$_ENV['platform']['cdn']}}/dist/css/feed.xiaozhi.css" rel="stylesheet" type="text/css">
+    <link href="{{ $_ENV['platform']['cdn'].elixir("css/feed.xiaozhi.css") }}" rel="stylesheet" type="text/css">
     <style>figure{margin: 0;padding: 0}</style>
 </head>
 

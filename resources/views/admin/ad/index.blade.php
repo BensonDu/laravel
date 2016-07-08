@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/css/admin.ad.css" rel="stylesheet">
+@section('style')<link href="{{ $_ENV['platform']['cdn'].elixir("css/admin.ad.css") }}" rel="stylesheet">
 @stop
 @section('area')
 <div class="list-header">

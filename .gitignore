@@ -2,3 +2,4 @@
 .idea
 .gitignore
 /public/robots.txt
+/node_modules/

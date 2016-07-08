@@ -1,5 +1,5 @@
 @extends('layout.site')
-@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/css/site.detail.css" rel="stylesheet">
+@section('style')<link href="{{ $_ENV['platform']['cdn'].elixir("css/site.detail.css")}}" rel="stylesheet">
 @stop
 @section('body')
 @parent

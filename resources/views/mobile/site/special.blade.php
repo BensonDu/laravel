@@ -1,5 +1,5 @@
 @extends('mobile.site.layout')
-@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/mobile/css/site.special.css" rel="stylesheet">
+@section('style')<link href="{{ $_ENV['platform']['cdn'].elixir("mobile/css/site.special.css") }}" rel="stylesheet">
 @stop
 @section('body')
     <!--专题列表start-->

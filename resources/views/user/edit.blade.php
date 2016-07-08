@@ -1,5 +1,5 @@
 @extends('layout.user')
-@section('style')<link href="{{$_ENV['platform']['cdn']}}/dist/css/user.edit.css" rel="stylesheet" charset="utf-8">
+@section('style')<link href="{{ $_ENV['platform']['cdn'].elixir("css/user.edit.css")}}" rel="stylesheet" charset="utf-8">
 @stop
 @section('body')
 <!--文章列表start-->
