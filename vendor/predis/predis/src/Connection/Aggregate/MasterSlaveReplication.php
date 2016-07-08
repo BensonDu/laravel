@@ -23,9 +23,24 @@ use Predis\Replication\ReplicationStrategy;
  */
 class MasterSlaveReplication implements ReplicationInterface
 {
+    /**
+     * @var ReplicationStrategy
+     */
     protected $strategy;
+
+    /**
+     * @var NodeConnectionInterface
+     */
     protected $master;
-    protected $slaves;
+
+    /**
+     * @var NodeConnectionInterface[]
+     */
+    protected $slaves = array();
+
+    /**
+     * @var NodeConnectionInterface
+     */
     protected $current;
 
     /**
@@ -33,7 +48,6 @@ class MasterSlaveReplication implements ReplicationInterface
      */
     public function __construct(ReplicationStrategy $strategy = null)
     {
-        $this->slaves = array();
         $this->strategy = $strategy ?: new ReplicationStrategy();
     }
 
@@ -144,6 +158,7 @@ class MasterSlaveReplication implements ReplicationInterface
         if (!$connection instanceof NodeConnectionInterface) {
             $connection = $this->getConnectionById($connection);
         }
+
         if ($connection !== $this->master && !in_array($connection, $this->slaves, true)) {
             throw new \InvalidArgumentException('Invalid connection or connection not found.');
         }
@@ -192,7 +207,9 @@ class MasterSlaveReplication implements ReplicationInterface
      */
     protected function pickSlave()
     {
-        return $this->slaves[array_rand($this->slaves)];
+        if ($this->slaves) {
+            return $this->slaves[array_rand($this->slaves)];
+        }
     }
 
     /**

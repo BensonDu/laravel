@@ -11,10 +11,12 @@
 
 namespace Predis\Connection\Aggregate;
 
+use Predis\ClientException;
 use Predis\Cluster\RedisStrategy as RedisClusterStrategy;
 use Predis\Cluster\StrategyInterface;
 use Predis\Command\CommandInterface;
 use Predis\Command\RawCommand;
+use Predis\Connection\ConnectionException;
 use Predis\Connection\FactoryInterface;
 use Predis\Connection\NodeConnectionInterface;
 use Predis\NotSupportedException;
@@ -51,6 +53,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
     private $slotsMap;
     private $strategy;
     private $connections;
+    private $retryLimit = 5;
 
     /**
      * @param FactoryInterface  $connections Optional connection factory.
@@ -62,6 +65,20 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
     ) {
         $this->connections = $connections;
         $this->strategy = $strategy ?: new RedisClusterStrategy();
+    }
+
+    /**
+     * Sets the maximum number of retries for commands upon server failure.
+     *
+     * -1 = unlimited retry attempts
+     *  0 = no retry attempts (fails immediatly)
+     *  n = fail only after n retry attempts
+     *
+     * @param int $retry Number of retry attempts.
+     */
+    public function setRetryLimit($retry)
+    {
+        $this->retryLimit = (int) $retry;
     }
 
     /**
@@ -118,6 +135,8 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
                 $this->slotsMap
             );
 
+            $this->slots = array_diff($this->slots, array($connection));
+
             return true;
         }
 
@@ -165,9 +184,57 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
                 continue;
             }
 
-            $slots = explode('-', $parameters->slots, 2);
-            $this->setSlots($slots[0], $slots[1], $connectionID);
+            foreach (explode(',', $parameters->slots) as $slotRange) {
+                $slots = explode('-', $slotRange, 2);
+
+                if (!isset($slots[1])) {
+                    $slots[1] = $slots[0];
+                }
+
+                $this->setSlots($slots[0], $slots[1], $connectionID);
+            }
         }
+    }
+
+    /**
+     * Queries the specified node of the cluster to fetch the updated slots map.
+     *
+     * When the connection fails, this method tries to execute the same command
+     * on a different connection picked at random from the pool of known nodes,
+     * up until the retry limit is reached.
+     *
+     * @param NodeConnectionInterface $connection Connection to a node of the cluster.
+     *
+     * @return mixed
+     */
+    private function queryClusterNodeForSlotsMap(NodeConnectionInterface $connection)
+    {
+        $retries = 0;
+        $command = RawCommand::create('CLUSTER', 'SLOTS');
+
+        RETRY_COMMAND: {
+            try {
+                $response = $connection->executeCommand($command);
+            } catch (ConnectionException $exception) {
+                $connection = $exception->getConnection();
+                $connection->disconnect();
+
+                $this->remove($connection);
+
+                if ($retries === $this->retryLimit) {
+                    throw $exception;
+                }
+
+                if (!$connection = $this->getRandomConnection()) {
+                    throw new ClientException('No connections left in the pool for `CLUSTER SLOTS`');
+                }
+
+                ++$retries;
+                goto RETRY_COMMAND;
+            }
+        }
+
+        return $response;
     }
 
     /**
@@ -185,8 +252,9 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
             return array();
         }
 
-        $command = RawCommand::create('CLUSTER', 'SLOTS');
-        $response = $connection->executeCommand($command);
+        $this->resetSlotsMap();
+
+        $response = $this->queryClusterNodeForSlotsMap($connection);
 
         foreach ($response as $slots) {
             // We only support master servers for now, so we ignore subsequent
@@ -204,7 +272,17 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
     }
 
     /**
+     * Resets the slots map cache.
+     */
+    public function resetSlotsMap()
+    {
+        $this->slotsMap = array();
+    }
+
+    /**
      * Returns the current slots map for the cluster.
+     *
+     * The order of the returned $slot => $server dictionary is not guaranteed.
      *
      * @return array
      */
@@ -252,6 +330,10 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      */
     protected function guessNode($slot)
     {
+        if (!$this->pool) {
+            throw new ClientException('No connections available in the pool');
+        }
+
         if (!isset($this->slotsMap)) {
             $this->buildSlotsMap();
         }
@@ -447,11 +529,53 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
     }
 
     /**
+     * Ensures that a command is executed one more time on connection failure.
+     *
+     * The connection to the node that generated the error is evicted from the
+     * pool before trying to fetch an updated slots map from another node. If
+     * the new slots map points to an unreachable server the client gives up and
+     * throws the exception as the nodes participating in the cluster may still
+     * have to agree that something changed in the configuration of the cluster.
+     *
+     * @param CommandInterface $command Command instance.
+     * @param string           $method  Actual method.
+     *
+     * @return mixed
+     */
+    private function retryCommandOnFailure(CommandInterface $command, $method)
+    {
+        $failure = false;
+
+        RETRY_COMMAND: {
+            try {
+                $response = $this->getConnection($command)->$method($command);
+            } catch (ConnectionException $exception) {
+                $connection = $exception->getConnection();
+                $connection->disconnect();
+
+                $this->remove($connection);
+
+                if ($failure) {
+                    throw $exception;
+                } elseif ($this->useClusterSlots) {
+                    $this->askSlotsMap();
+                }
+
+                $failure = true;
+
+                goto RETRY_COMMAND;
+            }
+        }
+
+        return $response;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function writeRequest(CommandInterface $command)
     {
-        $this->getConnection($command)->writeRequest($command);
+        $this->retryCommandOnFailure($command, __FUNCTION__);
     }
 
     /**
@@ -459,7 +583,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      */
     public function readResponse(CommandInterface $command)
     {
-        return $this->getConnection($command)->readResponse($command);
+        return $this->retryCommandOnFailure($command, __FUNCTION__);
     }
 
     /**
@@ -467,8 +591,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      */
     public function executeCommand(CommandInterface $command)
     {
-        $connection = $this->getConnection($command);
-        $response = $connection->executeCommand($command);
+        $response = $this->retryCommandOnFailure($command, __FUNCTION__);
 
         if ($response instanceof ErrorResponseInterface) {
             return $this->onErrorResponse($command, $response);
@@ -517,7 +640,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
 
     /**
      * Enables automatic fetching of the current slots map from one of the nodes
-     * using the CLUSTER SLOTS command. This option is disabled by default but
+     * using the CLUSTER SLOTS command. This option is enabled by default as
      * asking the current slots map to Redis upon -MOVED responses may reduce
      * overhead by eliminating the trial-and-error nature of the node guessing
      * procedure, mostly when targeting many keys that would end up in a lot of

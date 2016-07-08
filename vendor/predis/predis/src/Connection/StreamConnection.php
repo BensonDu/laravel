@@ -123,7 +123,7 @@ class StreamConnection extends AbstractConnection
     protected function unixStreamInitializer(ParametersInterface $parameters)
     {
         if (!isset($parameters->path)) {
-            throw new InvalidArgumentException('Missing UNIX domain socket path.');
+            throw new \InvalidArgumentException('Missing UNIX domain socket path.');
         }
 
         $uri = "unix://{$parameters->path}";
@@ -281,8 +281,7 @@ class StreamConnection extends AbstractConnection
 
         $buffer = "*{$reqlen}\r\n\${$cmdlen}\r\n{$commandID}\r\n";
 
-        for ($i = 0, $reqlen--; $i < $reqlen; ++$i) {
-            $argument = $arguments[$i];
+        foreach ($arguments as $argument) {
             $arglen = strlen($argument);
             $buffer .= "\${$arglen}\r\n{$argument}\r\n";
         }
