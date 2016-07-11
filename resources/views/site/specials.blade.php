@@ -53,13 +53,12 @@
 
 @stop
 
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3/public/vue.min.js"></script>
-<script>
+@section('script')@parent<script>
     (function () {
         var self = this;
         this.list   = JSON.parse('{!! json_encode_safe($list) !!}');
         this.total  = Math.ceil(self.list.length/3);
     }).call(define('data'));
 </script>
-<script src="/js/site.special.js?v2"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/site.special.js")}}"></script>
 @stop

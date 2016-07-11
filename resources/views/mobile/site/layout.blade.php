@@ -63,6 +63,3 @@
 </div>
 <!--站点头部end-->
 @stop
-
-@section('script')@parent<script src="/mobile/js/site.base.js"></script>
-@stop

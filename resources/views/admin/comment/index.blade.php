@@ -57,13 +57,12 @@
 </div>
 @stop
 
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script>
+@section('script')@parent<script>
     (function () {
         this.site       = 'insite';
         this.total      = '{{$total}}';
         this.list       = JSON.parse('{!! json_encode_safe($list) !!}');
     }).call(define('data'));
 </script>
-<script src="/js/admin/comment.js"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/admin.comment.js")}}"></script>
 @stop

@@ -39,9 +39,7 @@
     </div>
 @stop
 
-@section('script-site')@parent<script src="http://static.chuang.pro/imageuploader.min.js"></script>
-<script src="/lib/cropper/cropper.min.js"></script>
-<script>
+@section('script-site')@parent<script>
     (function () {
         this.social = {
             weibo : '{{$info->weibo}}',

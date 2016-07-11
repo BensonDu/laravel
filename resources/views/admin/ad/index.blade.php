@@ -156,12 +156,7 @@
     </div>
 @stop
 
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script src="/lib/datetimepicker/js/moment.min.js"></script>
-<script src="/lib/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script src="http://static.chuang.pro/imageuploader.min.js"></script>
-<script src="/lib/cropper/cropper.min.js"></script>
-<script>
+@section('script')@parent<script>
     (function () {
         this.orderby    = 'create_time';
         this.total      = '{{$total}}';
@@ -169,5 +164,5 @@
         this.list       = JSON.parse('{!! json_encode_safe($list) !!}');
     }).call(define('data'));
 </script>
-<script src="/js/admin/ad.js"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/admin.ad.js")}}"></script>
 @stop

@@ -78,7 +78,6 @@
         </div>
     </div>
 @stop
-
 @section('script-site')@parent<script>
     (function () {
         this.nav = {

@@ -268,23 +268,12 @@
 <!--投稿管理部分end-->
 <!--主体部分end-->
 @stop
-@section('script')@parent<script src="http://static.chuang.pro/imageuploader.min.js?"></script>
-<script src="http://static.chuang.pro/public-medium-editor.min.js"></script>
-<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fhandlebars.runtime.min.js"></script>
-<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery-sortable-min.js"></script>
-<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.min.js"></script>
-<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Feditor%2Fjquery.cycle2.center.min.js"></script>
-<script src="http://static.chuang.pro/moment.min.js"></script>
-<script src="http://static.chuang.pro/bootstrap-datetimepicker.min.js"></script>
-<script src="http://static.chuang.pro/medium-plugin.min.850.js"></script>
-<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script src="/lib/cropper/cropper.min.js"></script>
-<script>
+@section('script')@parent<script>
     (function () {
         this.list   = JSON.parse('{!! json_encode_safe($list) !!}');
         this.total  = '{!! $total !!}';
         this.route  = '{{isset($route)?$route:null}}';
     }).call(define('data'));
 </script>
-<script src="/js/user.edit.js?2BC0CEB5987"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/user.edit.js")}}"></script>
 @stop

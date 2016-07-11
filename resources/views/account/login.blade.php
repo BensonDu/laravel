@@ -39,5 +39,5 @@
     </div>
 </div>
 @stop
-@section('script')@parent<script src="/js/account/login.js?v2"></script>
+@section('script')@parent<script src="{{ $_ENV['platform']['cdn'].elixir("js/account.login.js")}}"></script>
 @stop

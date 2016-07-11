@@ -89,13 +89,12 @@
         </div>
     </div>
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script>
+@section('script')@parent<script>
     (function () {
         this.total  = '{{$users['total']}}';
         this.list   = JSON.parse('{!! json_encode_safe($users['list']) !!}');
         this.orderby= 'time';
     }).call(define('data'));
 </script>
-<script src="/js/admin/blacklist.js"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/admin.blacklist.js")}}"></script>
 @stop

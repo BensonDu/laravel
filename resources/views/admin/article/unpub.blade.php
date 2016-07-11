@@ -124,21 +124,21 @@
 @stop
 
 @section('script-article')
-    <script>
-        var default_data = {
-            total : '{{$articles['total']}}',
-            list : JSON.parse('{!! json_encode_safe($articles['list']) !!}'),
-            categories : JSON.parse('{!! json_encode_safe($categories) !!}'),
-            orderby : 'create_time',
-            api : {
-                get_list : '/admin/article/unpubs',
-                del_article : '/admin/article/delete',
-                get_article_info : '/admin/article/info',
-                save_article : '/admin/article/save',
-                recovery_article : '/admin/article/recovery',
-                get_post_info : '/admin/article/post/info',
-                save_post : '/admin/article/post/save'
-            }
-        }
-    </script>
+<script>
+    (function () {
+        this.total      = '{{$articles['total']}}';
+        this.list       = JSON.parse('{!! json_encode_safe($articles['list']) !!}');
+        this.category   = JSON.parse('{!! json_encode_safe($categories) !!}');
+        this.orderby    = 'create_time';
+        this.api        = {
+            get_list : '/admin/article/unpubs',
+            del_article : '/admin/article/delete',
+            get_article_info : '/admin/article/info',
+            save_article : '/admin/article/save',
+            recovery_article : '/admin/article/recovery',
+            get_post_info : '/admin/article/post/info',
+            save_post : '/admin/article/post/save'
+        };
+    }).call(define('data'));
+</script>
 @stop

@@ -80,9 +80,7 @@
 @show
 </body>
 @section('script')
-<script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
-<script src="/js/public.base.js?v1"></script>
-<script src="/js/public.nav.left.js"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/base.js")}}"></script>
 <script>
     /*全局变量*/
     (function(){
@@ -97,14 +95,6 @@
             role : '{{isset($_ENV['admin']['role']) ? $_ENV['admin']['role'] : 0}}'
         };
     }).call(define('global'));
-    /*百度统计*/
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?047eac725727fc206cb8019dc0fb9dc9";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
 </script>
 @show
 </html>

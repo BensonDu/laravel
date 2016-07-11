@@ -46,12 +46,12 @@
 </div>
 <!--主页内容end-->
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script>var default_data = {
-            tag : '{{$tag}}',
-            total : '{{$total}}',
-            list : JSON.parse('{!! $list !!}')
-    }
+@section('script')@parent<script>
+    (function () {
+        this.tag    = '{{$tag}}';
+        this.total  = '{{$total}}';
+        this.list   = JSON.parse('{!! $list !!}')
+    }).call(define('data'));
 </script>
-<script src="/js/site.tag.js?"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/site.tag.js")}}"></script>
 @stop

@@ -136,12 +136,7 @@
     </div>
 </div>
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<!--头条推荐阅读start-->
-<script src="http://dn-noman.qbox.me/tech2ipo.custom.js"></script>
-<script>(readsByToutiao = window.readsByToutiao ||[]).push({  id:'list-container',num:8,openAd:true,theme:false,plugins: { "render": function(data) {controller.render(data);}}});</script>
-<!--头条推荐阅读end-->
-<script>
+@section('script')@parent<script>
     (function () {
         this.like       = '{{$article['like']}}' == '1';
         this.favorite   = '{{$article['favorite']}}' == '1';
@@ -158,7 +153,9 @@
         this.comment = '{{$comment ? '1' : '0'}}';
     }).call(define('data'))
 </script>
-<script src="/mobile/js/site.detail.js?"></script>
-<script src="http://static.geetest.com/static/tools/gt.js"></script>
-<script src="/lib/geetest/geetest.js"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("mobile/js/site.detail.js")}}"></script>
+<!--头条推荐阅读start-->
+<script src="http://dn-noman.qbox.me/tech2ipo.custom.js"></script>
+<script>(readsByToutiao = window.readsByToutiao ||[]).push({  id:'list-container',num:8,openAd:true,theme:false,plugins: { "render": function(data) {controller.render(data);}}});</script>
+<!--头条推荐阅读end-->
 @stop

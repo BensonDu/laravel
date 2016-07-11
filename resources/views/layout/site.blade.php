@@ -46,6 +46,3 @@
 </div>
 <!--站点中栏end-->
 @stop
-
-@section('script')@parent<script src="/js/site.base.js?"></script>
-@stop

@@ -45,34 +45,10 @@
     <!--专题内容end-->
 @stop
 
-@section('script')@parent
-<script>
+@section('script')@parent<script>
     (function () {
-        var self = this,
-            content = jQuery('#site-content'),
-            loading = jQuery('.loading-cover'),
-            background = jQuery('.special-background');
-
-        //背景图加载
-        this.imgLoader = function (url,call) {
-            var img = new Image;
-            img.onload = call;
-            img.onerror = call;
-            img.src = url;
-        };
-
-        this.background = '{{$info['bg_image']}}';
-
-        this.timer = setTimeout(function () {
-            self.imgLoader(self.background,function () {
-                background.css('background-image','url('+self.background+')');
-                setTimeout(function () {
-                    content.addClass('active');
-                    loading.addClass('disable');
-                },800);
-            })
-        },0);
-
+        this.image = '{{$info['bg_image']}}';
     }).call(define('data'));
 </script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/site.special.detail.js")}}"></script>
 @stop

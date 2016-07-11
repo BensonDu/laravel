@@ -136,13 +136,12 @@
         </div>
     </div>
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script>
-    var default_data = {
-        total : '{{$users['total']}}',
-        list : JSON.parse('{!! json_encode_safe($users['list']) !!}'),
-        orderby : 'create_time'
-    }
+@section('script')@parent<script>
+    (function () {
+        this.total  = '{{$users['total']}}';
+        this.list   = JSON.parse('{!! json_encode_safe($users['list']) !!}');
+        this.orderby= 'create_time';
+    }).call(define('data'));
 </script>
-<script src="/js/admin/user.js"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/admin.user.js")}}"></script>
 @stop

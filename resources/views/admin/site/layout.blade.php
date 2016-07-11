@@ -14,8 +14,8 @@
 @section('container')
 @show
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
+@section('script')@parent
 @section('script-site')
 @show
-<script src="/js/admin/site.js?v1"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/admin.site.js")}}"></script>
 @stop

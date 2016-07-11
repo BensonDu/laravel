@@ -65,5 +65,5 @@
 </div>
 @stop
 
-@section('script')@parent<script src="/js/account/find.js?v2"></script>
+@section('script')@parent<script src="{{ $_ENV['platform']['cdn'].elixir("mobile/js/account.find.js")}}"></script>
 @stop

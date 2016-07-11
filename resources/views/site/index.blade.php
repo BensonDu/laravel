@@ -141,8 +141,12 @@
 </div>
 <!--站点内容end-->
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script>var default_data = {article : {total : '{{$articles['total']}}'}}</script>
-<script src="/js/site.index.js?v2"></script>
-<script src="/lib/imagelazyload/imagelazyload.js"></script>
+@section('script')@parent<script>
+    (function () {
+        this.article = {
+            total : '{{$articles['total']}}'
+        }
+    }).call(define('data'));
+</script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/site.index.js")}}"></script>
 @stop

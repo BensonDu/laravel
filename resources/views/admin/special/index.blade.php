@@ -200,16 +200,12 @@
         </div>
     </div>
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script src="http://static.chuang.pro/imageuploader.min.js"></script>
-<script src="/lib/sortable/js/Sortable.min.js"></script>
-<script src="/lib/cropper/cropper.min.js"></script>
-<script>
-    var default_data = {
-        total : '{{$total}}',
-        list : JSON.parse('{!! json_encode_safe($list) !!}'),
-        orderby : 'update_time'
-    }
+@section('script')@parent<script>
+    (function () {
+        this.total      = '{{$total}}';
+        this.list       = JSON.parse('{!! json_encode_safe($list) !!}');
+        this.orderby    = 'update_time';
+    }).call(define('data'));
 </script>
-<script src="/js/admin/special.js?v4"></script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("js/admin.special.js")}}"></script>
 @stop

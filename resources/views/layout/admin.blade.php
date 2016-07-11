@@ -58,5 +58,3 @@
 <!--弹出层end-->
 
 @stop
-@section('script')@parent<script src="/js/admin/base.js"></script>
-@stop

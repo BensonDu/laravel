@@ -76,8 +76,12 @@
         </div>
     </div>
 @stop
-@section('script')@parent<script src="http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fvue.min.js"></script>
-<script>var article = {total : '{{$articles['total']}}'}</script>
-<script src="/mobile/js/site.index.js?"></script>
-<script src="/lib/imagelazyload/imagelazyload.js"></script>
+@section('script')@parent<script>
+    (function () {
+        this.article = {
+            total : '{{$articles['total']}}'
+        };
+    }).call(define('data'));
+</script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("mobile/js/site.index.js")}}"></script>
 @stop

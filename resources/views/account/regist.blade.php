@@ -75,7 +75,5 @@
     </div>
 </div>
 @stop
-@section('script')@parent<script src="http://static.geetest.com/static/tools/gt.js"></script>
-<script src="/lib/geetest/geetest.js"></script>
-<script src="/js/account/regist.js?v4"></script>
+@section('script')@parent<script src="{{ $_ENV['platform']['cdn'].elixir("js/account.regist.js")}}"></script>
 @stop
