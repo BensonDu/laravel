@@ -313,11 +313,11 @@
     opacity: .8;
 }
 .site-content .pagination a.prev em{
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-white-left.png) no-repeat center;
+    background: url(http://dn-noman.qbox.me/arrow-white-left.png) no-repeat center;
     background-size: 20px;
 }
 .site-content .pagination a.next em{
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-white-right.png) no-repeat center;
+    background: url(http://dn-noman.qbox.me/arrow-white-right.png) no-repeat center;
     background-size: 20px;
 }
 .site-content .pagination a:hover span,
@@ -366,7 +366,7 @@
     display: inline-block;
     width: 15px;
     height: 15px;
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-white-down.png) no-repeat center;
+    background: url(http://dn-noman.qbox.me/arrow-white-down.png) no-repeat center;
     background-size: 15px;
     vertical-align: top;
     margin: 3px 0 0 5px;
@@ -518,7 +518,7 @@
     display: inline-block;
     width: 50px;
     height: 50px;
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/arrow-white-right.png) no-repeat center;
+    background: url(http://dn-noman.qbox.me/arrow-white-right.png) no-repeat center;
     background-size: 30px;
     right: -14px;
     top: 12px;

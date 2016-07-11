@@ -384,17 +384,17 @@ body{
     border-radius: 50%;
 }
 .site-head .nav .social .buttons a.weibo em{
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/weibo.png) no-repeat center;
+    background: url(http://dn-noman.qbox.me/weibo.png) no-repeat center;
     background-size: 20px 20px
 }
 .site-head .nav .social .buttons a.email em{
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/email-1.png) no-repeat center;
+    background: url(http://dn-noman.qbox.me/email-1.png) no-repeat center;
     background-size: 20px 20px
 }
 .site-head .nav .social .buttons a.weixin em{
     position: relative;
     overflow: visible;
-    background: url(http://7rflu9.com1.z0.glb.clouddn.com/v3/public/weixin.png) no-repeat center;
+    background: url(http://dn-noman.qbox.me/weixin-1.png) no-repeat center;
     background-size: 20px 20px
 }
 
