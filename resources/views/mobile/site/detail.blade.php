@@ -155,7 +155,7 @@
 </script>
 <script src="{{ $_ENV['platform']['cdn'].elixir("mobile/js/site.detail.js")}}"></script>
 <!--头条推荐阅读start-->
-<script src="http://dn-noman.qbox.me/tech2ipo.custom.js"></script>
+<script src="http://qiniu.cdn-chuang.com//tech2ipo.custom.js"></script>
 <script>(readsByToutiao = window.readsByToutiao ||[]).push({  id:'list-container',num:8,openAd:true,theme:false,plugins: { "render": function(data) {controller.render(data);}}});</script>
 <!--头条推荐阅读end-->
 @stop

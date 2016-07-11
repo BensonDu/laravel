@@ -39,7 +39,7 @@
                 </div>
 @if(!empty($article->image))
                 <div class="image">
-                    <img data-lazy-src="{{$article->image}}" src="http://dn-noman.qbox.me/Occupy.png">
+                    <img data-lazy-src="{{$article->image}}" src="http://qiniu.cdn-chuang.com//Occupy.png">
                 </div>
 @endif
             </div>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="image" v-if="!!article.image">
-                    <img v-bind:data-lazy-src="article.image" src="http://dn-noman.qbox.me/Occupy.png">
+                    <img v-bind:data-lazy-src="article.image" src="http://qiniu.cdn-chuang.com//Occupy.png">
                 </div>
             </div>
             <a class="load-more" v-bind:class="load">

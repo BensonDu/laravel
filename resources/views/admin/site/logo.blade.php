@@ -9,7 +9,7 @@
             <div class="preview">
                 <div class="img">
                     <div class="img-wrap">
-                        <img v-bind:src="!logo ? 'http://dn-noman.qbox.me/default-upload-image-square.png' : logo">
+                        <img v-bind:src="!logo ? 'http://qiniu.cdn-chuang.com//default-upload-image-square.png' : logo">
                     </div>
                     <input type="file" accept="image/*" v-on:change="_upload('logo')" v-el:logo>
                     <a class="close" v-on:click="_clear('logo')">×</a>
@@ -23,7 +23,7 @@
             <div class="preview">
                 <div class="img">
                     <div class="img-wrap">
-                        <img v-bind:src="!favicon ? 'http://dn-noman.qbox.me/default-upload-image-square.png' : favicon">
+                        <img v-bind:src="!favicon ? 'http://qiniu.cdn-chuang.com//default-upload-image-square.png' : favicon">
                     </div>
                     <input type="file" accept="image/*" v-on:change="_upload('favicon')" v-el:favicon>
                     <a class="close" v-on:click="_clear('favicon')">×</a>
@@ -37,7 +37,7 @@
             <div class="preview">
                 <div class="img">
                     <div class="img-wrap">
-                        <img v-bind:src="!mobile_logo ? 'http://dn-noman.qbox.me/default-upload-image-square.png' : mobile_logo">
+                        <img v-bind:src="!mobile_logo ? 'http://qiniu.cdn-chuang.com//default-upload-image-square.png' : mobile_logo">
                     </div>
                     <input type="file" accept="image/*" v-on:change="_upload('mobile_logo')" v-el:mobile_logo>
                     <a class="close" v-on:click="_clear('mobile_logo')">×</a>
@@ -51,7 +51,7 @@
             <div class="preview">
                 <div class="img">
                     <div class="img-wrap">
-                        <img v-bind:src="!thirdparty_logo ? 'http://dn-noman.qbox.me/default-upload-image-square.png' : thirdparty_logo">
+                        <img v-bind:src="!thirdparty_logo ? 'http://qiniu.cdn-chuang.com//default-upload-image-square.png' : thirdparty_logo">
                     </div>
                     <input type="file" accept="image/*" v-on:change="_upload('thirdparty_logo')" v-el:thirdparty_logo>
                     <a class="close" v-on:click="_clear('thirdparty_logo')">×</a>

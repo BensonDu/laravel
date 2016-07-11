@@ -67,21 +67,21 @@
     border-radius: 50%;
 }
 .user-mid .top .social a.weibo{
-    background: url(http://dn-noman.qbox.me/weibo.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/weibo-0.png) no-repeat center;
     background-size: 20px 20px
 }
 .user-mid .top .social a.email{
-    background: url(http://dn-noman.qbox.me/email-1.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/email-0.png) no-repeat center;
     background-size: 20px 20px
 }
 .user-mid .top .social a.twitter{
-    background: url(http://dn-noman.qbox.me/twitter.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/twitter-0.png) no-repeat center;
     background-size: 20px 20px
 }
 .user-mid .top .social a.weixin{
     position: relative;
     overflow: visible;
-    background:#fff url(http://dn-noman.qbox.me/weixin-1.png) no-repeat center;
+    background:#fff url(http://qiniu.cdn-chuang.com/weixin-0.png) no-repeat center;
     background-size: 20px 20px;
     z-index:10;
 }

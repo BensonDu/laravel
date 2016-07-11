@@ -198,7 +198,7 @@ class CommentController extends Controller{
                 $comment['hide']     = 1;
                 $comment['content']  = '评论已被删除';
                 $comment['nickname'] = '用户信息已隐藏';
-                $comment['avatar']   = 'http://dn-noman.qbox.me/question mark.png';
+                $comment['avatar']   = 'http://qiniu.cdn-chuang.com/question mark.png';
             }
             //如果评论被删除 且 没有回复不显示
             if($comment['hide'] && empty($comment['reply_count']))continue;

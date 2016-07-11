@@ -18,7 +18,7 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="pragma" content="no-cache" />
-    <link rel="shortcut icon" href="{{isset($base['favicon']) ? $base['favicon'] : 'http://dn-noman.qbox.me/chuang.png'}}" type="image/png">
+    <link rel="shortcut icon" href="{{isset($base['favicon']) ? $base['favicon'] : 'http://qiniu.cdn-chuang.com//chuang.png'}}" type="image/png">
     @section('style')
     @show
 </head>

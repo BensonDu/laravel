@@ -206,7 +206,7 @@
             err = !!error ? error :alert,
             maxSize = 1024*1024*2,
             self = {},
-            prefix = 'http://dn-noman.qbox.me/';
+            prefix = 'http://qiniu.cdn-chuang.com/';
 
         uploader = simple.uploader({});
 

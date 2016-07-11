@@ -72,7 +72,7 @@
             img.src = url;
         };
 
-        this.background = 'http://dn-noman.qbox.me/FuycdN305ZoUtO7lX9IiAjfBT2Y_?imageMogr2/';
+        this.background = 'http://qiniu.cdn-chuang.com//FuycdN305ZoUtO7lX9IiAjfBT2Y_?imageMogr2/';
 
         this.timer = setTimeout(function () {
             self.imgLoader(self.background,function () {

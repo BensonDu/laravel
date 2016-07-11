@@ -109,7 +109,7 @@
 <body>
 <div class="content">
     <div class="img">
-        <img src="http://dn-noman.qbox.me/FjHi8wUlaVGCHUERTUnDkZDD_8-t" alt="吉祥物">
+        <img src="http://qiniu.cdn-chuang.com//FjHi8wUlaVGCHUERTUnDkZDD_8-t" alt="吉祥物">
     </div>
     <h3>设备类型检测:</h3>
     <p><em>平台检测类型:</em><span>{{$type}}</span></p>

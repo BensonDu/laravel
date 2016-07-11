@@ -80,7 +80,7 @@
                 <div class="image">
                     <div class="preview">
                         <div class="img-container" v-bind:class="image.progress.active ? 'loading' : ''">
-                            <img v-bind:src="!image.val ? 'http://dn-noman.qbox.me/default-upload-image.png' : image.val">
+                            <img v-bind:src="!image.val ? 'http://qiniu.cdn-chuang.com//default-upload-image.png' : image.val">
                             <span><p v-text="image.progress.percent"></p></span>
                             <input type="file" v-on:change="upload" accept="image/*" v-el:image>
                             <a class="close" v-on:click="_del_image">×</a>

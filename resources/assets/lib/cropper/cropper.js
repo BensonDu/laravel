@@ -3549,7 +3549,7 @@
         type,
         container,
         confirm,
-        base = 'http://dn-noman.qbox.me/',
+        base = 'http://qiniu.cdn-chuang.com/',
         option = {
           aspectRatio : 1,
           croppedable : true,

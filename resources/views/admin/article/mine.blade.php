@@ -90,7 +90,7 @@
                     <div class="name"><p>文章配图</p></div>
                     <div class="preview">
                         <div class="img" v-bind:class="article.image.progress.active ? 'loading' : ''">
-                            <img v-bind:src="!article.image.val ? 'http://dn-noman.qbox.me/default-upload-image.png' : article.image.val">
+                            <img v-bind:src="!article.image.val ? 'http://qiniu.cdn-chuang.com//default-upload-image.png' : article.image.val">
                             <input type="file" accept="image/*" v-on:change="_upload_image" v-el:image>
                             <div class="process">
                                 <p v-text="article.image.progress.percent"></p>

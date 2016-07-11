@@ -12,7 +12,7 @@ use Qiniu\Auth;
 
 class QiniuModel
 {
-    private static $base    = 'http://dn-noman.qbox.me/';
+    private static $base    = 'http://qiniu.cdn-chuang.com/';
     private static $bucket  = 'noman';
     /*
     |--------------------------------------------------------------------------

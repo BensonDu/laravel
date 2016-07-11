@@ -27,7 +27,7 @@
     display: inline-block;
     width: 20px;
     height: 100%;
-    background: url(http://dn-noman.qbox.me/search.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/search.png) no-repeat center;
     background-size: 16px;
     background-position: 0 20px;
     margin-top: 2px;
@@ -281,7 +281,7 @@
     background-size: 88px;
 }
 .list-body table tbody td.handle a.unlink em{
-    background: url(http://dn-noman.qbox.me/user-remove.png) no-repeat;
+    background: url(http://qiniu.cdn-chuang.com/user-remove.png) no-repeat;
     background-position: 0;
     background-size: 16px;
 }

@@ -272,7 +272,7 @@
     vertical-align: top;
     width: 34px;
     height: 15px;
-    background: url(http://dn-noman.qbox.me/arrow-circle-right.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/arrow-circle-right.png) no-repeat center;
     background-size: 15px;
 }
 .site-content .home .special-list .item .info .entry p:hover{
@@ -313,11 +313,11 @@
     opacity: .8;
 }
 .site-content .pagination a.prev em{
-    background: url(http://dn-noman.qbox.me/arrow-white-left.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/arrow-white-left-0.png) no-repeat center;
     background-size: 20px;
 }
 .site-content .pagination a.next em{
-    background: url(http://dn-noman.qbox.me/arrow-white-right.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/arrow-white-right-0.png) no-repeat center;
     background-size: 20px;
 }
 .site-content .pagination a:hover span,
@@ -366,7 +366,7 @@
     display: inline-block;
     width: 15px;
     height: 15px;
-    background: url(http://dn-noman.qbox.me/arrow-white-down.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/arrow-white-down.png) no-repeat center;
     background-size: 15px;
     vertical-align: top;
     margin: 3px 0 0 5px;
@@ -518,7 +518,7 @@
     display: inline-block;
     width: 50px;
     height: 50px;
-    background: url(http://dn-noman.qbox.me/arrow-white-right.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/arrow-white-right-0.png) no-repeat center;
     background-size: 30px;
     right: -14px;
     top: 12px;

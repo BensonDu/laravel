@@ -9,7 +9,7 @@
             <div class="preview">
                 <div class="img">
                     <div class="img-wrap">
-                        <img v-bind:src="!weixin ? 'http://dn-noman.qbox.me/default-upload-image-square.png' : weixin">
+                        <img v-bind:src="!weixin ? 'http://qiniu.cdn-chuang.com//default-upload-image-square.png' : weixin">
                     </div>
                     <input type="file" accept="image/*" v-on:change="_upload('weixin')" v-el:weixin>
                     <a class="close" v-on:click="_clear('weixin')">×</a>

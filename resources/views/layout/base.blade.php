@@ -15,7 +15,7 @@
     <meta name="author" content="http://chuang.pro" />
     <meta name="format-detection" content="email=no" />
     <meta name="format-detection" content="telephone=yes" />
-    <link rel="shortcut icon" href="{{isset($base['favicon']) ? $base['favicon'] : 'http://dn-noman.qbox.me/chuang.png'}}" type="image/png">
+    <link rel="shortcut icon" href="{{isset($base['favicon']) ? $base['favicon'] : 'http://qiniu.cdn-chuang.com//chuang.png'}}" type="image/png">
     @section('style')
     @show
 </head>

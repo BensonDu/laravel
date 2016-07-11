@@ -86,7 +86,7 @@
         //登录用户信息
         user = {
             id : global.user.id,
-            avatar : global.user.avatar || 'http://dn-noman.qbox.me/question%20mark.png',
+            avatar : global.user.avatar || 'http://qiniu.cdn-chuang.com/question%20mark.png',
             name : global.user.name,
             role : global.user.role
         },

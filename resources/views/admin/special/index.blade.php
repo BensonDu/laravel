@@ -138,7 +138,7 @@
                     <div class="preview">
                         <div class="img" v-bind:class="special.cover.progress.active ? 'loading' : ''">
                             <div class="img-wrap">
-                                <img v-bind:src="!special.cover.val ? 'http://dn-noman.qbox.me/default-upload-image.png' : special.cover.val">
+                                <img v-bind:src="!special.cover.val ? 'http://qiniu.cdn-chuang.com//default-upload-image.png' : special.cover.val">
                             </div>
                             <input type="file" accept="image/*" v-on:change="_upload_cover_image" v-el:cover>
                             <div class="process">
@@ -159,7 +159,7 @@
                     <div class="preview">
                         <div class="img" v-bind:class="special.bk.progress.active ? 'loading' : ''">
                             <div class="img-wrap">
-                                <img v-bind:src="!special.bk.val ? 'http://dn-noman.qbox.me/default-upload-image.png' : special.bk.val">
+                                <img v-bind:src="!special.bk.val ? 'http://qiniu.cdn-chuang.com//default-upload-image.png' : special.bk.val">
                             </div>
                             <input type="file" accept="image/*" v-on:change="_upload_bk_image" v-el:bk>
                             <div class="process">

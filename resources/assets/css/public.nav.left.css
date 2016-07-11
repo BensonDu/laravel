@@ -35,7 +35,7 @@
     line-height: 25px;
     border: 1px solid #999;
     border-radius: 50%;
-    background: url(http://dn-noman.qbox.me/navleft-new.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/navleft-new-0.png) no-repeat center;
     background-size: 160px;
     background-position: -122px -31px;
 }
@@ -107,7 +107,7 @@
     display: inline-block;
     text-align: center;
     line-height: 25px;
-    background: url(http://dn-noman.qbox.me/navleft-new.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/navleft-new-0.png) no-repeat center;
     transition: transform .2s;
     -moz-transition: -moz-transform .2s; /* Firefox 4 */
     -webkit-transition: -webkit-transform .2s; /* Safari 和 Chrome */
@@ -199,7 +199,7 @@
     line-height: 40px;
     width: 20px;
     height: 20px;
-    background: url(http://dn-noman.qbox.me/navleft-new.png) no-repeat center;
+    background: url(http://qiniu.cdn-chuang.com/navleft-new-0.png) no-repeat center;
     background-size: 136px;
     background-position: -116px 0;
     transition: transform .2s;
