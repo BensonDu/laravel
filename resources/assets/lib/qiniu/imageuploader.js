@@ -121,7 +121,48 @@
                     async: true,
                     success: function(c) {
                         var d, e, f, g;
-                        if (d = new FormData, d.append("file", a.obj), d.append("original_filename", a.name), a.params) {
+                        if (d = new FormData, d.append("file", a.obj), d.append("key", (function (n) {
+                                var f = n.split('.'),l = f.length, c = f[l-1], t = new Date().getTime(), h = (function (input) {
+                                    input = escape(input);
+                                    var output = "";
+                                    var chr1, chr2, chr3 = "";
+                                    var enc1, enc2, enc3, enc4 = "";
+                                    var i = 0;
+                                    var keyStr = "ABCDEFGHIJKLMNOP" +
+                                        "QRSTUVWXYZabcdef" +
+                                        "ghijklmnopqrstuv" +
+                                        "wxyz0123456789+/" +
+                                        "=";
+
+                                    do {
+                                        chr1 = input.charCodeAt(i++);
+                                        chr2 = input.charCodeAt(i++);
+                                        chr3 = input.charCodeAt(i++);
+
+                                        enc1 = chr1 >> 2;
+                                        enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+                                        enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                                        enc4 = chr3 & 63;
+
+                                        if (isNaN(chr2)) {
+                                            enc3 = enc4 = 64;
+                                        } else if (isNaN(chr3)) {
+                                            enc4 = 64;
+                                        }
+
+                                        output = output +
+                                            keyStr.charAt(enc1) +
+                                            keyStr.charAt(enc2) +
+                                            keyStr.charAt(enc3) +
+                                            keyStr.charAt(enc4);
+                                        chr1 = chr2 = chr3 = "";
+                                        enc1 = enc2 = enc3 = enc4 = "";
+                                    } while (i < input.length);
+
+                                    return output;
+                                })(n+t);
+                                return h.substr(0,16)+'.'+c;
+                            })(a.name)), a.params) {
                             g = a.params;
                             for (e in g) f = g[e], d.append(e, f)
                         }

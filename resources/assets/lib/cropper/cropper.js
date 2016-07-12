@@ -3550,6 +3550,7 @@
         container,
         confirm,
         base = 'http://qiniu.cdn-chuang.com/',
+        filename = '',
         option = {
           aspectRatio : 1,
           croppedable : true,
@@ -3561,6 +3562,7 @@
       if(!file.length)return false;
 
       files = file[0];
+      filename = files.name;
       self.domInit();
       self.setOpts(opts);
       self.getImageData(file[0],function (d) {
@@ -3655,6 +3657,7 @@
           confirm.removeClass('loading');
         }
       };
+      url = url+'/key/'+self.serverFilename();
       xhr.open("POST", url, true);
       xhr.setRequestHeader("Content-Type", "application/octet-stream");
       xhr.setRequestHeader("Authorization", "UpToken "+token);
@@ -3673,6 +3676,50 @@
             confirm.removeClass('loading');
           }
       ).maxSize(5).upload(files);
+    };
+    this.serverFilename = function () {
+      var f = filename.split('.'),l = f.length, c = f[l-1], t = new Date().getTime();
+      return self.strBase64(self.strBase64(filename).substr(0,16)+'.'+c);
+    };
+    this.strBase64 = function (input) {
+        if(window.hasOwnProperty('btoa'))return btoa(input);
+        input = escape(input);
+        var output = "";
+        var chr1, chr2, chr3 = "";
+        var enc1, enc2, enc3, enc4 = "";
+        var i = 0;
+        var keyStr = "ABCDEFGHIJKLMNOP" +
+            "QRSTUVWXYZabcdef" +
+            "ghijklmnopqrstuv" +
+            "wxyz0123456789+/" +
+            "=";
+
+        do {
+          chr1 = input.charCodeAt(i++);
+          chr2 = input.charCodeAt(i++);
+          chr3 = input.charCodeAt(i++);
+
+          enc1 = chr1 >> 2;
+          enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+          enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+          enc4 = chr3 & 63;
+
+          if (isNaN(chr2)) {
+            enc3 = enc4 = 64;
+          } else if (isNaN(chr3)) {
+            enc4 = 64;
+          }
+
+          output = output +
+              keyStr.charAt(enc1) +
+              keyStr.charAt(enc2) +
+              keyStr.charAt(enc3) +
+              keyStr.charAt(enc4);
+          chr1 = chr2 = chr3 = "";
+          enc1 = enc2 = enc3 = enc4 = "";
+        } while (i < input.length);
+
+        return output;
     };
     this.uploadBase64 = function (image) {
       var i = image.split(','),b = i[1];

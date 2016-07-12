@@ -133,7 +133,7 @@ elixir(function(mix) {
         '../lib/medium/jquery.cycle2.center.min.js',
         '../lib/datetimepicker/js/moment.min.js',
         '../lib/datetimepicker/js/bootstrap-datetimepicker.min.js',
-        '../lib/medium/medium-plugin.min.js',
+        '../lib/medium/medium-plugin.js',
         '../lib/cropper/cropper.js',
         'admin/article.js'
     ], 'public/js/admin.article.js');
@@ -314,7 +314,7 @@ elixir(function(mix) {
         '../lib/medium/jquery.cycle2.center.min.js',
         '../lib/datetimepicker/js/moment.min.js',
         '../lib/datetimepicker/js/bootstrap-datetimepicker.min.js',
-        '../lib/medium/medium-plugin.min.js',
+        '../lib/medium/medium-plugin.js',
         '../lib/cropper/cropper.js',
         'user.edit.js'
     ],'public/js/user.edit.js');
