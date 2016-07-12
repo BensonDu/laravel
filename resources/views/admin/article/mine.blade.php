@@ -141,6 +141,6 @@
             get_post_info : '/admin/article/post/info',
             save_post : '/admin/article/post/save'
         };
-    }).call(define('data'));
+    }).call(define('preload'));
 </script>
 @stop

@@ -46,16 +46,16 @@
             search : {
                 keyword : ''
             },
-            orderby : data.orderby,
+            orderby : preload.orderby,
             order : 'desc',
             pagination : {
-                total : data.total,
+                total : preload.total,
                 size : 10,
                 index : 1,
                 btns : [],
                 all : 0
             },
-            list : data.list
+            list : preload.list
         },
         methods : {
             _search:function(){
@@ -161,7 +161,7 @@
     //获取数据
     this.get_data = function(){
         var d = self.model.data;
-        request.get(data.api.get_list,function(ret){
+        request.get(preload.api.get_list,function(ret){
                 if(ret.hasOwnProperty('code') && ret.code ==0){
                     self.model.data.pagination.total = ret.data.total;
                     self.model.data.list = ret.data.list;
@@ -179,7 +179,7 @@
     };
     //删除文章
     this.delete_article = function(id){
-        request.get(data.api.del_article, function(ret){
+        request.get(preload.api.del_article, function(ret){
             if(ret.hasOwnProperty('code') && ret.code == 0){
                 self.get_data();
             }
@@ -190,7 +190,7 @@
     };
     //还原文章
     this.recovery_article = function(id){
-        request.get(data.api.recovery_article, function(ret){
+        request.get(preload.api.recovery_article, function(ret){
             if(ret.hasOwnProperty('code') && ret.code == 0){
                 self.get_data();
             }
@@ -217,7 +217,7 @@
                     active : false,
                     text : '',
                     val : '',
-                    list : data.categories
+                    list : preload.categories
                 },
                 type : {
                     val : 'now',/*now | time | cancel*/
@@ -357,7 +357,7 @@
     };
     //请求文章信息
     this.get_article_info = function(id){
-        request.get(data.api.get_article_info,function(ret){
+        request.get(preload.api.get_article_info,function(ret){
             var data;
             if(ret.hasOwnProperty('code') && ret.code == 0){
                 data = ret.data;
@@ -391,7 +391,7 @@
     //保存当前文章
     this.save_article = function(){
         if(self.check_article()){
-            request.post(data.api.save_article,function(ret){
+            request.post(preload.api.save_article,function(ret){
                 if(ret.hasOwnProperty('code') && ret.code == 0){
                     self.display.article.hide();
                     self.update_list();
@@ -428,7 +428,7 @@
     };
     //Get article post info
     this.get_post_info = function(id){
-        request.get(data.api.get_post_info,function(ret){
+        request.get(preload.api.get_post_info,function(ret){
                 if(ret.hasOwnProperty('code') && ret.code ==0){
                     self.set_post(id,ret.data.category,ret.data.type,ret.data.time);
                 }
@@ -471,7 +471,7 @@
             };
         //发布必须选择分类
         if((data.type == 'now' || data.type=='time') && (d.category.list[0].id != '0' && (data.category == '0' || data.category == '')))return pop.error('请选择分类','确定').one();
-        request.get(data.api.save_post,function(ret){
+        request.get(preload.api.save_post,function(ret){
                 if(ret.hasOwnProperty('code') && ret.code ==0){
                     self.update_list();
                     call();
