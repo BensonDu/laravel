@@ -135,6 +135,7 @@ elixir(function(mix) {
         '../lib/datetimepicker/js/bootstrap-datetimepicker.min.js',
         '../lib/medium/js/medium-plugin.js',
         '../lib/cropper/cropper.js',
+        'editor.js',
         'admin/article.js'
     ], 'public/js/admin.article.js');
 
@@ -316,6 +317,7 @@ elixir(function(mix) {
         '../lib/datetimepicker/js/bootstrap-datetimepicker.min.js',
         '../lib/medium/js/medium-plugin.js',
         '../lib/cropper/cropper.js',
+        'editor.js',
         'user.edit.js'
     ],'public/js/user.edit.js');
 

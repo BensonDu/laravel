@@ -53,43 +53,7 @@
     );
 
 }).call('view_article_switch');
-//编辑器配置,插入 图片|视频 插件引入
-(function(){
-    var self =this;
 
-    this.content = new MediumEditor('#content-editor',{
-        placeholder: {
-            text: '输入文章内容'
-        },
-        toolbar: {
-            buttons: ['bold', 'italic', 'underline','h2','h3',
-                {
-                    name: 'anchor',
-                    action: 'createLink',
-                    aria: 'link',
-                    tagNames: ['a'],
-                    contentDefault: '<i class="fa fa-link"></i>',
-                    contentFA: '<i class="fa fa-link"></i>'
-                },
-                'orderedlist','unorderedlist', 'quote']
-        },
-        anchor: {
-            customClassOption: null,
-            customClassOptionText: 'Button',
-            linkValidation: false,
-            placeholderText: '粘贴或输入链接',
-            targetCheckbox: false,
-            targetCheckboxText: 'Open in new window'
-        }
-    });
-    this.insert_plugin = $('#content-editor').mediumInsert({
-        editor: self.content,
-        insertBtnPositionFix : {
-            left : -50
-        }
-    });
-
-}).call(define('plugin_editor'));
 //配图上传,标签添加,摘要填写
 (function(){
     var self = this;
