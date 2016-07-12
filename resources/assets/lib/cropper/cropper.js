@@ -3669,7 +3669,6 @@
           function () {},
           function (url,key) {
             self.finish(base+key);
-            confirm.removeClass('loading');
           },
           function (text) {
             option.error(text);
@@ -3734,6 +3733,7 @@
         self.cancel();
         option.finish(url);
         container.removeClass('active');
+        confirm.removeClass('loading');
       });
 
     }
