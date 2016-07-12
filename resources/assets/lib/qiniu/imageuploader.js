@@ -122,8 +122,9 @@
                     success: function(c) {
                         var d, e, f, g;
                         if (d = new FormData, d.append("file", a.obj), d.append("key", (function (n) {
-                                var f = n.split('.'),l = f.length, c = f[l-1], t = new Date().getTime(), h = (function (input) {
+                                var f = n.split('.'),l = f.length, c = f[l-1], t = new Date().getTime(), base64 = function(input){
                                     input = escape(input);
+                                    if(window.hasOwnProperty('btoa'))return btoa(input);
                                     var output = "";
                                     var chr1, chr2, chr3 = "";
                                     var enc1, enc2, enc3, enc4 = "";
@@ -158,10 +159,9 @@
                                         chr1 = chr2 = chr3 = "";
                                         enc1 = enc2 = enc3 = enc4 = "";
                                     } while (i < input.length);
-
                                     return output;
-                                })(n+t);
-                                return h.substr(0,16)+'.'+c;
+                                },h = base64(n);
+                                return h.substr(0,16)+t+'.'+c;
                             })(a.name)), a.params) {
                             g = a.params;
                             for (e in g) f = g[e], d.append(e, f)
