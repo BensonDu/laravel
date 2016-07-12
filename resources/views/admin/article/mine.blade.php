@@ -130,7 +130,7 @@
     (function () {
         this.total      = '{{$articles['total']}}';
         this.list       = JSON.parse('{!! json_encode_safe($articles['list']) !!}');
-        this.category   = JSON.parse('{!! json_encode_safe($categories) !!}');
+        this.categories = JSON.parse('{!! json_encode_safe($categories) !!}');
         this.orderby    = 'create_time';
         this.api        = {
             get_list : '/admin/article/mines',
