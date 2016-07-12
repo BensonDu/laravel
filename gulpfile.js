@@ -46,7 +46,7 @@ elixir(function(mix) {
         'public.nav.left.css',
         'site.mid.css',
         'public.content.css',
-        'public.medium.editor.insert.plugin.css',
+        '../lib/medium/css/insert.plugin.css',
         'public.detail.css'
     ],'public/css/site.detail.css');
 
@@ -112,12 +112,12 @@ elixir(function(mix) {
         'public.base.css',
         'public.nav.left.css',
         'admin.base.css',
-        'public.medium.editor.css',
-        'public.medium.editor.default.css',
-        'bootstrap.datetimepicker.css',
-        'public.font.awesome.css',
-        'public.medium.editor.insert.plugin.css',
-        'cropper.min.css',
+        '../lib/medium/css/editor.css',
+        '../lib/medium/css/theme.default.css',
+        '../lib/datetimepicker/css/bootstrap-datetimepicker.css',
+        '../lib/datetimepicker/css/font.awesome.css',
+        '../lib/medium/css/insert.plugin.css',
+        '../lib/cropper/cropper.css',
         'public.content.css',
         'admin.article.css'
     ],'public/css/admin.article.css');
@@ -126,14 +126,14 @@ elixir(function(mix) {
     mix.scripts([
         'admin/base.js',
         '../lib/qiniu/imageuploader.js',
-        '../lib/medium/medium-editor.min.js',
-        '../lib/medium/handlebars.runtime.min.js',
-        '../lib/medium/jquery-sortable-min.js',
-        '../lib/medium/jquery.cycle2.min.js',
-        '../lib/medium/jquery.cycle2.center.min.js',
+        '../lib/medium/js/medium-editor.min.js',
+        '../lib/medium/js/handlebars.runtime.min.js',
+        '../lib/medium/js/jquery-sortable-min.js',
+        '../lib/medium/js/jquery.cycle2.min.js',
+        '../lib/medium/js/jquery.cycle2.center.min.js',
         '../lib/datetimepicker/js/moment.min.js',
         '../lib/datetimepicker/js/bootstrap-datetimepicker.min.js',
-        '../lib/medium/medium-plugin.js',
+        '../lib/medium/js/medium-plugin.js',
         '../lib/cropper/cropper.js',
         'admin/article.js'
     ], 'public/js/admin.article.js');
@@ -142,7 +142,7 @@ elixir(function(mix) {
     mix.styles([
         'public.base.css',
         'public.nav.left.css',
-        'cropper.min.css',
+        '../lib/cropper/cropper.css',
         'admin.base.css',
         'admin.special.css'
     ],'public/css/admin.special.css');
@@ -161,7 +161,7 @@ elixir(function(mix) {
         'public.base.css',
         'public.nav.left.css',
         'admin.base.css',
-        'cropper.min.css',
+        '../lib/cropper/cropper.css',
         'admin.star.css'
     ],'public/css/admin.star.css');
 
@@ -208,9 +208,9 @@ elixir(function(mix) {
         'public.base.css',
         'public.nav.left.css',
         'admin.base.css',
-        'bootstrap.datetimepicker.css',
-        'public.font.awesome.css',
-        'cropper.min.css',
+        '../lib/datetimepicker/css/bootstrap-datetimepicker.css',
+        '../lib/datetimepicker/css/font.awesome.css',
+        '../lib/cropper/cropper.css',
         'admin.ad.css'
     ],'public/css/admin.ad.css');
 
@@ -247,7 +247,7 @@ elixir(function(mix) {
     mix.styles([
         'public.base.css',
         'public.nav.left.css',
-        'cropper.min.css',
+        '../lib/cropper/cropper.css',
         'admin.base.css',
         'admin.site.css'
     ],'public/css/admin.site.css');
@@ -294,27 +294,27 @@ elixir(function(mix) {
         'public.base.css',
         'public.nav.left.css',
         'user.mid.css',
-        'public.medium.editor.css',
-        'public.medium.editor.default.css',
-        'bootstrap.datetimepicker.css',
-        'public.font.awesome.css',
-        'public.medium.editor.insert.plugin.css',
+        '../lib/medium/css/editor.css',
+        '../lib/medium/css/theme.default.css',
+        '../lib/datetimepicker/css/bootstrap-datetimepicker.css',
+        '../lib/medium/css/insert.plugin.css',
+        '../lib/datetimepicker/css/font.awesome.css',
         'user.edit.css',
-        'cropper.min.css',
+        '../lib/cropper/cropper.css',
         'public.content.css'
     ],'public/css/user.edit.css');
 
     //用户文章中心JS
     mix.scripts([
         '../lib/qiniu/imageuploader.js',
-        '../lib/medium/medium-editor.min.js',
-        '../lib/medium/handlebars.runtime.min.js',
-        '../lib/medium/jquery-sortable-min.js',
-        '../lib/medium/jquery.cycle2.min.js',
-        '../lib/medium/jquery.cycle2.center.min.js',
+        '../lib/medium/js/medium-editor.min.js',
+        '../lib/medium/js/handlebars.runtime.min.js',
+        '../lib/medium/js/jquery-sortable-min.js',
+        '../lib/medium/js/jquery.cycle2.min.js',
+        '../lib/medium/js/jquery.cycle2.center.min.js',
         '../lib/datetimepicker/js/moment.min.js',
         '../lib/datetimepicker/js/bootstrap-datetimepicker.min.js',
-        '../lib/medium/medium-plugin.js',
+        '../lib/medium/js/medium-plugin.js',
         '../lib/cropper/cropper.js',
         'user.edit.js'
     ],'public/js/user.edit.js');
@@ -339,7 +339,7 @@ elixir(function(mix) {
         'public.nav.left.css',
         'user.mid.css',
         'user.profile.css',
-        'cropper.min.css'
+        '../lib/cropper/cropper.css'
     ],'public/css/user.profile.css');
 
     //用户个人资料JS
