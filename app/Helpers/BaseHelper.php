@@ -284,3 +284,18 @@ if (! function_exists('site_home')) {
     }
 
 }
+if (! function_exists('get_base64_image_name')) {
+    /**
+     * 获得Base64图片附带扩展名随机名称
+     * @param  string $base64_image
+     * @param  string $default_type
+     * @return string $type
+     */
+    function  get_base64_image_name($base64image,$defult = 'png'){
+        $str    = substr($base64image,0,24);
+        $array  = explode("/",substr($str, 5, strpos($str, ';')-5));
+        $time   = microtime();
+        $random = time().substr(md5($time.rand(1,999)), 8, 16);
+        return isset($array[1]) ? $random.'.'.$array[1] : $random.'.'.$defult;
+    }
+}

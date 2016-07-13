@@ -28,12 +28,12 @@ class QiniuModel
     | 上传base64图片
     |--------------------------------------------------------------------------
     */
-    public static function upload_base64_image($image){
+    public static function upload_base64_image($image,$name){
         $headers = [];
         $headers[] = 'Content-Type:application/octet-stream';
         $headers[] = 'Authorization:UpToken '.self::get_upload_token();
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,'http://upload.qiniu.com/putb64/-1');
+        curl_setopt($ch, CURLOPT_URL,'http://upload.qiniu.com/putb64/-1/key/'.base64_encode($name));
         curl_setopt($ch, CURLOPT_HTTPHEADER ,$headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $image);

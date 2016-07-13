@@ -22,8 +22,9 @@ class ArticleBaseModel
                 $m = [];
                 $u = [];
                 foreach ($match[0] as  $v){
-                    $src = explode("\"",$v)[0];
-                    $url = QiniuModel::upload_base64_image(substr(strstr($src,","),1));
+                    $name   = get_base64_image_name($v);
+                    $src    = explode("\"",$v)[0];
+                    $url    = QiniuModel::upload_base64_image(substr(strstr($src,","),1),$name);
                     if(!empty($url)){
                         $m[] = $src;
                         $u[] = $url;
