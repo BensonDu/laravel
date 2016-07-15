@@ -1,0 +1,610 @@
+.index-header {
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    padding-left: 60px;
+    left: 0;
+    top: 0;
+    z-index: 9;
+    transition: padding-left .4s;
+    -moz-transition:  padding-left .4s; /* Firefox 4 */
+    -webkit-transition:  padding-left .4s; /* Safari 和 Chrome */
+}
+.index-header .wrap {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.12);
+    overflow: hidden;
+}
+.index-header .logo {
+    width: 250px;
+    height: 100%;
+    padding: 14px 20px 6px;
+    float: left;
+}
+.index-header .logo a {
+    display: inline-block;
+    width: 36%;
+    float: left;
+}
+.index-header .logo a img {
+    width: 66px;
+    height: 36px;
+}
+.index-header .logo p {
+    display: inline-block;
+    width: 50%;
+    text-align: left;
+    font-size: 12px;
+    color: #aaa;
+    vertical-align: top;
+    margin-top: 18px;
+}
+
+.index-header .search {
+    height: 100%;
+    max-width: 350px;
+    min-width: 250px;
+    width: 30%;
+    padding: 16px 30px 10px 0;
+    margin-left: 30px;
+    float: left;
+}
+.index-header .search div {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background: #fafafa;
+    border-radius: 3px;
+    padding: 2px 0 2px 10px;
+}
+.index-header .search div i {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url(http://qiniu.cdn-chuang.com/search.png) no-repeat center;
+    background-size: 18px;
+    margin-top: 2px;
+    opacity: .6;
+}
+.index-header .search div input {
+    display: inline-block;
+    line-height: 28px;
+    height: 30px;
+    vertical-align: top;
+    font-size: 14px;
+    font-weight: 200;
+    margin-left: 10px;
+    width: 80%;
+    background: rgba(0,0,0,0);
+    border: none;
+}
+.index-header .search div em {
+    position: absolute;
+    display: inline-block;
+    visibility: hidden;
+    right: 12px;
+    width: 25px;
+    height: 25px;
+    background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Fenter-key.png) no-repeat center;
+    background-size: 16px 18px;
+    margin-top: 2px;
+    opacity: .6;
+}
+.index-header .search div input:focus {
+    outline: none;
+}
+.index-header .search div input:focus+em {
+    visibility: visible;
+}
+
+.index-header .about{
+    display: inline-block;
+    height: 100%;
+    padding: 10px 15px;
+    cursor: pointer;
+    float: right;
+    opacity: .8;
+}
+.index-header .about i{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: url(http://qiniu.cdn-chuang.com/platform-about.png) no-repeat center;
+    background-size: 30px;
+}
+.index-header .about p{
+    display: inline-block;
+    line-height: 50px;
+    font-size: 14px;
+    font-weight: 900;
+    color: #999;
+    vertical-align: top;
+}
+.index-header .about:hover{
+    opacity: 1;
+}
+
+.content-container {
+    position: fixed;
+    padding: 60px 0 0 60px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    transition: padding-left .4s;
+    -moz-transition:  padding-left .4s; /* Firefox 4 */
+    -webkit-transition:  padding-left .4s; /* Safari 和 Chrome */
+}
+.content-container .wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.content-container .wrap .slide {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    padding: 0 20px;
+    background: #fafafa;
+    z-index: 8;
+}
+.content-container .wrap .slide .filter{
+    width: 100%;
+    padding: 30px 0;
+}
+.content-container .wrap .slide .filter .item-container{
+    position: relative;
+    width: 100%;
+}
+.content-container .wrap .slide .filter .item-container.hot .selector{
+    top:0;
+}
+.content-container .wrap .slide .filter .item-container.new .selector{
+    top:60px;
+}
+.content-container .wrap .slide .filter .item-container .selector{
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 20px;
+    width: 110px;
+    height: 60px;
+    padding: 10px 0;
+    transition: top .2s ease-out;
+    -moz-transition: top .2s ease-out; /* Firefox 4 */
+    -webkit-transition: top .2s ease-out; /* Safari 和 Chrome */
+}
+.content-container .wrap .slide .filter .item-container .selector em{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background: #fff;
+}
+.content-container .wrap .slide .filter .item-container .item{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 60px;
+    padding: 5px 0 5px 22px;
+    text-align: left;
+    z-index: 10;
+}
+.content-container .wrap .slide .filter .item-container .item .btn {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+}
+.content-container .wrap .slide .filter .item-container .item .btn i {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+.content-container .wrap .slide .filter .item-container .item.hot:hover~.selector{
+    top:0;
+}
+.content-container .wrap .slide .filter .item-container .item.new:hover~.selector{
+    top:60px;
+}
+.content-container .wrap .slide .filter .item-container .item.hot .btn i{
+    background: url(http://qiniu.cdn-chuang.com/platform-hot.png) no-repeat center;
+    background-size: 24px;
+}
+.content-container .wrap .slide .filter .item-container .item.new .btn i{
+    background: url(http://qiniu.cdn-chuang.com/platform-new.png) no-repeat center;
+    background-size: 30px;
+}
+.content-container .wrap .slide .filter .item-container .item .btn p {
+    display: inline-block;
+    height: 100%;
+    line-height: 50px;
+    font-size: 14px;
+    font-weight: 900;
+    text-align: left;
+    float: left;
+}
+.content-container .wrap .slide .site-nav{
+    width: 100%;
+    border-top: 1px solid #f0f0f0;
+}
+.content-container .wrap .slide .site-nav .head{
+    width: 100%;
+    text-align: left;
+    white-space: nowrap;
+}
+.content-container .wrap .slide .site-nav .head p{
+    display: inline-block;
+    line-height: 30px;
+    font-size: 12px;
+    color: #ccc;
+    vertical-align: top;
+}
+.content-container .wrap .slide .site-nav .site-list{
+    width: 100%;
+    padding: 16px 0;
+    text-align: center;
+}
+.content-container .wrap .slide .site-nav .site-list a{
+    position: relative;
+    display: inline-block;
+    height: 40px;
+    width: 180px;
+    padding: 8px 20px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: margin .3s ease-out;
+    -moz-transition: margin .3s ease-out; /* Firefox 4 */
+    -webkit-transition: margin .3s ease-out; /* Safari 和 Chrome */
+}
+.content-container .wrap .slide .site-nav .site-list a:hover{
+    margin-left: 12px;
+}
+.content-container .wrap .slide .site-nav .site-list a .logo{
+    width: 24px;
+    height: 24px;
+    float: left;
+}
+.content-container .wrap .slide .site-nav .site-list a .logo img{
+    width: 100%;
+    height: 100%;
+}
+.content-container .wrap .slide .site-nav .site-list a .name{
+    height: 24px;
+    margin-left: 16px;
+    float: left;
+}
+.content-container .wrap .slide .site-nav .site-list a .name p{
+    display: inline-block;
+    vertical-align: top;
+    line-height: 24px;
+    font-size: 12px;
+    color: #999;
+}
+
+.content-container .wrap .site-body{
+    position: absolute;
+    width: 100%;
+    min-width: 1000px;
+    max-width: 1900px;
+    padding-left: 250px;
+    height: 100%;
+    z-index: 7;
+}
+.content-container .wrap .site-body .site-wrap{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0 22% 0 0;
+    overflow: auto;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap{
+    position: relative;
+    width: 100%;
+    padding-right: 3%;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container{
+    width: 100%;
+    padding: 20px;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .syn-wrap{
+    width: 100%;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .syn-wrap.hide{
+    display: none;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article{
+    position: relative;
+    width: 100%;
+    padding: 0 0 0 220px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    animation: fadeIn .7s linear 0s normal forwards;
+    -webkit-animation: fadeIn .7s linear 0s normal forwards;
+    -moz-animation: fadeIn .7s linear 0s normal forwards;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .image{
+    position: absolute;
+    width: 192px;
+    height: 108px;
+    left: 0;
+    top: 8px;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .image img{
+    width: 100%;
+    height: 100%;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info{
+    width: 100%;
+    height: 100%;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .top{
+    width: 100%;
+    min-height: 100px;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .top a{
+    line-height: 24px;
+    font-size: 16px;
+    white-space: normal;
+    font-weight: 600;
+    color: #424242;
+    cursor: pointer;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .top a:hover{
+    color: #999;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .top p{
+    line-height: 24px;
+    margin-top: 10px;
+    min-height: 50px;
+    font-size: 13px;
+    white-space: normal;
+    color: #666;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom{
+    width: 100%;
+    height: 40px;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .author{
+    display: inline-block;
+    height: 100%;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .author img{
+    width: 26px;
+    height: 26px;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .author span{
+    display: inline-block;
+    height: 100%;
+    line-height: 40px;
+    vertical-align: top;
+    font-size: 12px;
+    font-weight: 100;
+    color: #999;
+    margin-left: 5px;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .author:hover span{
+    color: #666;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .time{
+    display: inline-block;
+    line-height: 40px;
+    font-size: 12px;
+    color: #999;
+    margin-left: 5px;
+    vertical-align: top;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .site{
+    display: inline-block;
+    line-height: 40px;
+    font-size: 12px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .site a{
+    font-size: 12px;
+    margin-left: 5px;
+    color: #999;
+    cursor: pointer;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .site a:hover{
+    color: #666;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .site span{
+    font-size: 12px;
+    color: #999;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .hot{
+    height: 40px;
+    float: right;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .hot span{
+    display: inline-block;
+    font-size: 12px;
+    color: #999;
+    line-height: 40px;
+}
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .bottom .hot .heat-container{
+    display: inline-block;
+    vertical-align: top;
+    height: 25px;
+    width: 40px;
+    margin-left: 4px;
+}
+.content-container .wrap .site-body .site-wrap .right-slide{
+    position: absolute;
+    width: 22%;
+    right: 0;
+    top: 0;
+    padding: 20px 20px 0 0;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .ad{
+    width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .ad a{
+    display: block;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .ad a img{
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .partner{
+    width: 100%;
+    padding: 14px 3%;
+    margin-bottom: 20px;
+    background: #fafafa;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .partner .title{
+    width: 100%;
+    text-align: center;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .partner .title h3{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    line-height: 28px;
+    border-bottom: 1px solid #333;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .partner .partner-list{
+    width: 100%;
+    padding: 30px 10px;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .partner .partner-list a{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .partner .partner-list a .logo{
+    display: inline-block;
+    width: 30%;
+    max-width: 75px;
+    padding: 6%;
+    height: auto;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .partner .partner-list a .logo img{
+    width: 100%;
+    height: 100%;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .partner .partner-list a .info{
+    display: inline-block;
+    width: 70%;
+    margin-top: 6%;
+    text-align: left;
+    white-space: normal;
+    vertical-align: top;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .partner .partner-list a .info h3{
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #666;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .partner .partner-list a .info p{
+    display: inline-block;
+    width: 100%;
+    white-space: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #999;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .aboutus{
+    width: 100%;
+    padding: 14px 3%;
+    background: #fafafa;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .aboutus .title{
+    width: 100%;
+    text-align: center;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .aboutus .title h3{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    line-height: 28px;
+    border-bottom: 1px solid #333;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .aboutus .item-list{
+    width: 100%;
+    padding: 30px 10% 10px;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .aboutus .item-list .item{
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 24px;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .aboutus .item-list .item h3{
+    display: inline-block;
+    width: 100%;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .aboutus .item-list .item span{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 14px;
+    vertical-align: top;
+    letter-spacing: 1px;
+    color: #333;
+    border-left: 2px solid #2dc19d;
+    padding-left: 6px;
+}
+.content-container .wrap .site-body .site-wrap .right-slide .aboutus .item-list .item a{
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+    margin-top: 6px;
+    color: #999;
+}
+
+.heat{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.heat li{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 12%;
+    background: #ccc;
+}
+.heat li:nth-child(1){
+    left: 0;
+    height: 20%;
+    background: #2dc19d;
+}
+.heat li:nth-child(2){
+    left: 20%;
+    height: 38%;
+}
+.heat li:nth-child(3){
+    left: 40%;
+    height: 58%;
+}
+.heat li:nth-child(4){
+    left: 60%;
+    height: 80%;
+}
+.heat.weak li:nth-child(2),
+.heat.mid li:nth-child(2),
+.heat.mid li:nth-child(3),
+.heat.strong li:nth-child(2),
+.heat.strong li:nth-child(3),
+.heat.strong li:nth-child(4){
+    background: #2dc19d;
+}

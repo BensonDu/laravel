@@ -36,8 +36,8 @@
     <div class="menu-top"></div>
     <div class="menu entry top-entry">
         <div class="item-top"></div>
-        <a href="/" title="首页">
-            <i class="home"></i><span>站点首页</span>
+        <a href="{{$nav['home']}}" title="首页">
+            <i class="home"></i><span>平台首页</span>
         </a>
         <div class="item-top"></div>
         <a href="{{$nav['edit']}}" title="文章管理">

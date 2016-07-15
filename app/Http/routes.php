@@ -166,6 +166,8 @@ if(!($host == $base || $host == 'm.'.$base)) {
 else{
     //平台首页
     Route::get('/','Platform\IndexController@index' );
+    //获取文章列表
+    Route::get('/index/list','Platform\IndexController@articles' );
     //点赞收藏
     Route::get('/social/like', 'Common\SocialController@like');
     Route::get('/social/favorite', 'Common\SocialController@favorite');

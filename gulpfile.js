@@ -12,9 +12,8 @@ elixir.config.sourcemaps = false;
  | file for our application, as well as publishing vendor resources.
  |
  */
-
 elixir(function(mix) {
-    
+
     //基础JS 包含 jQuery VUE Base
     mix.scripts([
         '../lib/jquery/jquery-2.1.4.min.js', 
@@ -437,6 +436,19 @@ elixir(function(mix) {
         '../mobile/css/site.special.css'
     ],'public/mobile/css/site.special.css');
 
+    //创之首页 CSS
+    mix.styles([
+        'public.base.css',
+        'public.nav.left.css',
+        'platform.index.css'
+    ],'public/css/platform.index.css');
+
+    //创之首页 J
+    mix.scripts([
+        'platform.index.js',
+        '../lib/imagelazyload/imagelazyload.js'
+    ], 'public/js/platform.index.js');
+
     //版本控制
     mix.version([
         'public/css/site.index.css',
@@ -461,6 +473,7 @@ elixir(function(mix) {
         'public/mobile/css/site.index.css',
         'public/mobile/css/site.detail.css',
         'public/mobile/css/site.special.css',
+        'public/css/platform.index.css',
 
         'public/js/base.js',
         'public/js/site.index.js',
@@ -491,7 +504,8 @@ elixir(function(mix) {
         'public/mobile/js/account.regist.js',
         'public/mobile/js/account.find.js',
         'public/mobile/js/site.detail.js',
-        'public/mobile/js/site.index.js'
+        'public/mobile/js/site.index.js',
+        'public/js/platform.index.js'
     ]);
     
 });

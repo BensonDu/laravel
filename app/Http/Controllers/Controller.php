@@ -99,6 +99,7 @@ abstract class Controller extends BaseController
         $seg     = $request->segment(1);
         $data['nav']['callback'] = $seg != 'account' ? '?redirect='.urlencode($url) : '';
 
+        $data['nav']['home']     = $_ENV['platform']['home'];
         $data['nav']['edit']     = $_ENV['platform']['home'].'/user/edit';
         $data['nav']['favorite'] = $_ENV['platform']['home'].'/user/favorite';
         $data['nav']['profile']  = $_ENV['platform']['home'].'/user/profile';
