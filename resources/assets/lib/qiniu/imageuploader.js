@@ -161,7 +161,7 @@
                                     } while (i < input.length);
                                     return output;
                                 },h = base64(n);
-                                return h.substr(0,16)+t+'.'+c;
+                                return h.substr(0,h.length-3)+t+'.'+c;
                             })(a.name)), a.params) {
                             g = a.params;
                             for (e in g) f = g[e], d.append(e, f)

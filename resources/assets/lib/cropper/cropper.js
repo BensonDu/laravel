@@ -3678,7 +3678,7 @@
     };
     this.serverFilename = function () {
       var f = filename.split('.'),l = f.length, c = f[l-1], t = new Date().getTime();
-      return self.strBase64(self.strBase64(filename).substr(0,16)+t+'.'+c);
+      return self.strBase64(self.strBase64(filename).substr(0,filename.length-3)+t+'.'+c);
     };
     this.strBase64 = function (input) {
         if(window.hasOwnProperty('btoa'))return btoa(escape(input));
