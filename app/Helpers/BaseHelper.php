@@ -4,11 +4,11 @@ if (! function_exists('avatar')) {
      * 获取头像URL
      *
      * @param  string
-     * @return saved avatar | default avatar
+     * @return string avatar | default avatar
      */
     function avatar($url, $width = 100){
         $ret = $url;
-        if(strripos($url,".qbox.me")){
+        if(strripos($url,".cdn-chuang.com") || strripos($url,".qbox.me")){
             $base = explode("?" ,$url)[0];
             $ret = $base.'?imageView2/2/w/'.$width;
         }
@@ -19,8 +19,8 @@ if (! function_exists('now')) {
     /**
      * 获取 标准格式当前时间
      *
-     * @param $datatime 是否为数据库储存字段
-     * @return data time $ Y-m-d H:i:s
+     * @param $datatime //是否为数据库储存字段
+     * @return string time $ Y-m-d H:i:s
      */
     function now($db = true){
         return $db ? date('Y-m-d H:i:s') : date('Y年m月d日 H:i:s');
@@ -226,7 +226,7 @@ if (! function_exists('image_crop')) {
      */
     function image_crop($url,$width = 500){
         $ret = $url;
-        if(strripos($url,".qbox.me")){
+        if(strripos($url,".cdn-chuang.com") || strripos($url,".qbox.me")){
             $base = explode("?" ,$url)[0];
             $ret = trim($base).'?imageView2/2/w/'.$width;
         }
@@ -242,7 +242,7 @@ if (! function_exists('image_crop_custom')) {
      */
     function image_crop_custom($url,$string = ''){
         $ret = $url;
-        if(strripos($url,".qbox.me")){
+        if(strripos($url,".cdn-chuang.com") || strripos($url,".qbox.me")){
             $base = explode("?" ,$url)[0];
             $ret = trim($base).$string;
         }
@@ -258,7 +258,7 @@ if (! function_exists('content_image_crop')) {
      * @return string $url
      */
     function content_image_crop($content,$width = 500){
-        preg_match_all("/(?<=src=\")(http:\/\/|\/\/)dn-noman\.qbox\.me\/.*?(?=\")/",$content,$match);
+        preg_match_all("/(?<=src=\")(http:\/\/|\/\/)(dn-noman\.qbox\.me|qiniu\.cdn-chuang\.com)\/.*?(?=\")/",$content,$match);
         if(!empty($match[0])){
             $m = [];
             $c = [];
