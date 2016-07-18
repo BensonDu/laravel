@@ -23,6 +23,7 @@ class CacheModel
             SiteCacheModel::m_article_view_clear($site_id,$article_id);
             SiteCacheModel::aritcle_del($site_id,$article_id);
             StaticWebModel::clear($site_id,$article_id);
+            PlatformIndexCacheModel::index_list_clear();
         }
     }
 

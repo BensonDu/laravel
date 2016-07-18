@@ -113,9 +113,11 @@ return [
                 'site' => 'platform:timing:article:site'
             ]
         ],
-        //文章浏览计数
         'article' => [
-            'view' => 'platform:article:view'
+            //文章浏览计数
+            'view' => 'platform:article:view',
+            //平台主页文章列表缓存
+            'index'=> 'platform:article:index:skip:order'
         ],
         //平台总访问量
         'view' => [
