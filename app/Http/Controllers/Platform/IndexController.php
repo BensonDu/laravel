@@ -87,7 +87,8 @@ class IndexController extends PlatformController
                     'name'   => $v['nickname']
                 ],
                 'time'      => time_down(strtotime($v['post_time'])),
-                'rank'      => $v['rank']
+                'rank'      => $v['rank'],
+                'score'     => $v['score']
             ];
         }
         return $ret;
