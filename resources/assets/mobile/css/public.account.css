@@ -78,7 +78,7 @@
     background-size: 18px;
 }
 .content .container .wrap .account .input{
-    width: 220px;
+    width: 135px;
     height: 100%;
     margin-left: 3px;
     float: left;
@@ -151,12 +151,12 @@
     padding:  0 0 0 5px;
 }
 .content .container .wrap .input-phone .input{
-    width: 220px;
+    width: 135px;
 }
 .content .container .wrap .input-phone .send{
     width: 102px;
     height: 100%;
-    float: left;
+    float: right;
 }
 .content .container .wrap .input-phone .send a{
     display: inline-block;
