@@ -18,9 +18,9 @@ elixir(function(mix) {
     mix.scripts([
         '../lib/jquery/jquery-2.1.4.min.js', 
         '../lib/vue/vue.min.js',
-        'base.js',
-        'platform.nav.left.js',
-        'baidu.js'
+        'base/base.js',
+        'base/left.js',
+        'base/baidu.js'
     ], 'public/js/base.js');
     
     //站点首页CSS
@@ -365,6 +365,20 @@ elixir(function(mix) {
         'user/social.js'
     ], 'public/js/user.social.js');
 
+    //平台管理 站点CSS
+    mix.styles([
+        'public.base.css',
+        'public.nav.left.css',
+        'admin.base.css',
+        'platform.admin.site.css'
+    ],'public/css/platform.admin.site.css');
+
+    //平台管理 站点JS
+    mix.scripts([
+        'platform/admin/base.js',
+        'platform/admin/site.js'
+    ], 'public/js/platform/admin.site.js');
+
     //渠道小知CSS
     mix.styles([
         'feed.xiaozhi.css'
@@ -375,7 +389,7 @@ elixir(function(mix) {
         '../lib/jquery/jquery-2.1.4.min.js',
         '../lib/vue/vue.min.js',
         '../mobile/js/base.js',
-        'baidu.js'
+        'base/baidu.js'
     ], 'public/mobile/js/base.js');
 
     //M 平台账户 CSS
@@ -445,7 +459,7 @@ elixir(function(mix) {
 
     //创之首页 J
     mix.scripts([
-        'platform.index.js',
+        'platform/index.js',
         '../lib/imagelazyload/imagelazyload.js'
     ], 'public/js/platform.index.js');
 
@@ -474,6 +488,7 @@ elixir(function(mix) {
         'public/mobile/css/site.detail.css',
         'public/mobile/css/site.special.css',
         'public/css/platform.index.css',
+        'public/css/platform.admin.site.css',
 
         'public/js/base.js',
         'public/js/site.index.js',
@@ -505,7 +520,9 @@ elixir(function(mix) {
         'public/mobile/js/account.find.js',
         'public/mobile/js/site.detail.js',
         'public/mobile/js/site.index.js',
-        'public/js/platform.index.js'
+        'public/js/platform.index.js',
+        'public/js/platform/admin.site.js'
+
     ]);
     
 });

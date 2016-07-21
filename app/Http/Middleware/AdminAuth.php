@@ -30,6 +30,13 @@ class AdminAuth
         if(empty($_ENV['admin']['role']))abort(403);
 
         $role = $_ENV['admin']['role'];
+
+        //平台不做路径权限判断
+        if(isset($_ENV['site_id']) && $_ENV['site_id'] == '0'){
+            if($role == '3')return true;
+            abort(403);
+        }
+
         $path = explode('/', $request->path());
 
         //最高权限

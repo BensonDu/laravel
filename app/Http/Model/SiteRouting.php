@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SiteRouting extends Model
 {
-    protected $table = 'site_routing';
+    protected $table = 'site_info';
     private static
                     //是否已经初始化
                     $init = false,
@@ -58,9 +58,9 @@ class SiteRouting extends Model
         }
     }
     //从数据库获取路由信息
-    private static function GetAllDomainsFromDB()
+    private static function GetAllDomains()
     {
-        return SiteRouting::all(['site_id','custom_domain','platform_domain','mobile_domain']);
+        return SiteRouting::where('valid','1')->where('deleted','0')->get(['id','custom_domain','platform_domain','mobile_domain']);
     }
     //创建平台路由表
     private static function CreatePlatformRules()
@@ -89,25 +89,20 @@ class SiteRouting extends Model
     {
 
         $rules = [];
-        $all = self::GetAllDomainsFromDB();
-        if(count($all) > 0 ){
-            foreach($all as $v){
-                $m = !is_null($v['mobile_domain']) ? $v['mobile_domain'] : null;
-                $p = !is_null($v['custom_domain']) ? $v['custom_domain'] : null;
-                if(!!$m){
-                    $rules[] = self::CreateRouteRuleItem($m,$v['site_id'],TRUE,$p,$m);
-                }
-                if(!!$p){
-                    $rules[] = self::CreateRouteRuleItem($p,$v['site_id'],FALSE,$p,$m);
-                }
-                if(!is_null($v['platform_domain'])){
-                    $plat_m = self::CreatePlatformSubdomain('m.'.$v['platform_domain']);
-                    $plat_p = self::CreatePlatformSubdomain($v['platform_domain']);
-                    $rules[] = self::CreateRouteRuleItem($plat_m,$v['site_id'],TRUE,$plat_p,$plat_m);
-                    $rules[] = self::CreateRouteRuleItem($plat_p,$v['site_id'],FALSE,$plat_p,$plat_m);
-                }
-            }
+        $all = self::GetAllDomains();
+
+        foreach($all as $v){
+            //M 域名
+            $mobile = !empty($v['mobile_domain']) ? $v['mobile_domain'] : self::CreatePlatformSubdomain('m.'.$v['platform_domain']);
+            //PC 域名
+            $pc     = !empty($v['custom_domain']) ? $v['custom_domain'] : self::CreatePlatformSubdomain($v['platform_domain']);
+            //M 路由规则
+            $rules[] = self::CreateRouteRuleItem($mobile,$v['id'],TRUE,$pc,$mobile);
+            //PC 路由规则
+            $rules[] = self::CreateRouteRuleItem($pc,$v['id'],FALSE,$pc,$mobile);
+
         }
+
         return $rules;
 
     }

@@ -201,6 +201,15 @@ else{
     //发送验证码
     Route::post('/account/captcha', 'Account\AccountController@captcha');
 
+    Route::group(['middleware' => 'AdminAuth'], function () {
+        //平台管理
+        Route::get('/admin', 'Platform\Admin\SiteController@index');
+        Route::get('/admin/site', 'Platform\Admin\SiteController@index');
+        Route::get('/admin/site/list', 'Platform\Admin\SiteController@sites');
+        Route::get('/admin/site/open', 'Platform\Admin\SiteController@open');
+        Route::post('/admin/site/add', 'Platform\Admin\SiteController@add');
+    });
+
     // 用户
     Route::group(['middleware' => 'User'], function () {
         //个人主页

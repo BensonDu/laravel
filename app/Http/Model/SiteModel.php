@@ -46,7 +46,7 @@ class SiteModel extends Model
         $cache = SiteCacheModel::site_info_get($id);
         if(!empty($cache)) return $cache;
         //数据库查询
-        $info = SiteModel::leftJoin('site_routing','site_info.id', '=', 'site_routing.site_id')->where('site_info.id',$id)->first();
+        $info = SiteModel::where('id',$id)->first();
         //设置缓存
         if(isset($info->id)) SiteCacheModel::site_info_set($id,$info);
 
@@ -61,13 +61,12 @@ class SiteModel extends Model
      | @return array
      |
      */
-    public static function get_site_info_list($ids,$select = ['site_info.id','site_info.name','site_routing.custom_domain','site_routing.platform_domain']){
-        $query =  SiteModel::leftJoin('site_routing','site_info.id', '=', 'site_routing.site_id');
+    public static function get_site_info_list($ids,$select = ['id','name','custom_domain','platform_domain']){
         if(is_array($ids)){
-            return $query->whereIn('site_info.id',$ids)->get($select);
+            return SiteModel::whereIn('site_info.id',$ids)->get($select);
         }
         else{
-            return $query->where('site_info.id',$ids)->first($select);
+            return SiteModel::where('site_info.id',$ids)->first($select);
         }
     }
     /*
@@ -77,7 +76,9 @@ class SiteModel extends Model
      */
     public static function update_site_info($id,$update){
         SiteModel::where('id',$id)->update($update);
-        return SiteCacheModel::site_info_clear($id);
+        SiteCacheModel::site_info_clear($id);
+        SiteCacheModel::site_nav_clear($id);
+        return true;
     }
     /*
      |--------------------------------------------------------------------------
@@ -160,7 +161,9 @@ class SiteModel extends Model
             'link'      => $link,
             'display'   => $display
         ]);
-        return SiteCacheModel::site_nav_clear($site_id);
+        SiteCacheModel::site_info_clear($site_id);
+        SiteCacheModel::site_nav_clear($site_id);
+        return true;
     }
     /*
      |--------------------------------------------------------------------------
@@ -187,19 +190,87 @@ class SiteModel extends Model
     }
     /*
      |--------------------------------------------------------------------------
-     | 获取站点列表
+     | 用户端->获取站点列表
      |--------------------------------------------------------------------------
      |
      | @param  array $keyword
      | @return array
      |
      */
-    public static function get_site_list($skip = 0, $take = 10,$keyword = null,$except = [],$select = ['site_info.id','site_info.name','site_routing.custom_domain','site_routing.platform_domain']){
-        $query =  DB::table('site_info')->leftJoin('site_routing','site_routing.site_id','=','site_info.id')->whereNotIn('site_info.id',$except);
+    public static function get_site_list($skip = 0, $take = 10,$keyword = null,$except = [],$select = ['id','name','custom_domain','platform_domain']){
+        $query =  DB::table('site_info')->whereNotIn('id',$except)->where('valid','1');
         if(!is_null($keyword)){
-            $query->where('site_info.name', 'LIKE', '%'.$keyword.'%');
+            $query->where('name', 'LIKE', '%'.$keyword.'%');
         }
         return $query->take($take)->skip($skip)->get($select);
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 站点管理->获取站点列表
+     |--------------------------------------------------------------------------
+     |
+     */
+    public static function admin_get_site_list($skip = 0, $take = 10,$keyword = null,$order = 'asc',$select = ['id','name','custom_domain','platform_domain','create_time','valid']){
+        $query =  DB::table('site_info');
+        if(!is_null($keyword)){
+            $query->where('name', 'LIKE', '%'.$keyword.'%');
+        }
+        return $query->orderBy('id',$order)->take($take)->skip($skip)->get($select);
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 站点管理->获取站点总数
+     |--------------------------------------------------------------------------
+     |
+     */
+    public static function admin_get_site_count($keyword = null){
+        $query =  DB::table('site_info');
+        if(!is_null($keyword)){
+            $query->where('name', 'LIKE', '%'.$keyword.'%');
+        }
+        return $query->count();
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 站点管理->添加站点
+     |--------------------------------------------------------------------------
+     |
+     */
+    public static function admin_add_site($platform,$domain,$name,$icp){
+        $query = SiteModel::where('name',$name);
+        if($platform){
+            $query->orWhere('platform_domain',$domain);
+        }
+        else{
+            $query->orWhere('custom_domain',$domain);
+        }
+        $exist = $query->count();
+        if(!empty($exist))return false;
+        $now = now();
+        $insert = [
+            'name'              => $name,
+            'icp'               => $icp,
+            'description'       => '创之媒体平台旗下子站点，创之媒体平台，发现垂直媒体的价值',
+            'keywords'          => '创之;创见;创之新媒体平台;TECH2IPO;',
+            'logo'              => 'http://qiniu.cdn-chuang.com/chuang-logo-circle.png',
+            'slogan'            => '用心创作快乐',
+            'update_time'       => $now,
+            'create_time'       => $now,
+            'favicon'           => 'http://qiniu.cdn-chuang.com/chuang.png',
+            'mobile_logo'       => 'http://qiniu.cdn-chuang.com/platform-logo-m.png',
+            'thirdparty_logo'   => 'http://qiniu.cdn-chuang.com/platform-logo-thirdparty.png'
+        ];
+
+        if($platform){
+            $insert['platform_domain'] = $domain;
+        }
+        else{
+            $insert['custom_domain']    =  $domain;
+            $insert['mobile_domain']    =  'm.'.$domain;
+        }
+        SiteModel::insert($insert);
+        SiteCacheModel::site_route_clear();
+        return true;
     }
     /*
      |--------------------------------------------------------------------------

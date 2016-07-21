@@ -26,9 +26,8 @@ class UserModel extends Model
     | @return number
     |
     */
-    public static function get_user_role($site_id,$uid){
-        $ret = DB::table('site_auth_map')->where('site_id',$site_id)->where('user_id',$uid)->where('deleted',0)->first();
-        return isset($ret->role) ? $ret->role : null;
+    public static function get_user_role($uid){
+        return DB::table('site_auth_map')->where('user_id',$uid)->where('deleted',0)->get(['site_id','role']);
     }
     /*
     |--------------------------------------------------------------------------

@@ -103,8 +103,8 @@ class ArticleUserModel extends Model
     public static function article_site_info($id){
         $select = [
             'site_info.name',
-            'site_routing.custom_domain',
-            'site_routing.platform_domain',
+            'site_info.custom_domain',
+            'site_info.platform_domain',
             'articles_site.id',
             'articles_site.site_id',
             'articles_site.post_status',
@@ -118,7 +118,6 @@ class ArticleUserModel extends Model
         ];
         return DB::table('articles_site')
             ->leftJoin('site_info', 'site_info.id', '=', 'articles_site.site_id')
-            ->leftJoin('site_routing', 'site_routing.site_id', '=', 'site_info.id')
             ->where('articles_site.source_id',$id)
             ->get($select);
     }
@@ -139,8 +138,8 @@ class ArticleUserModel extends Model
         articles_site.post_time,
         articles_site.favorites,
         articles_site.likes,
-        site_routing.custom_domain,
-        site_routing.platform_domain
+        site_info.custom_domain,
+        site_info.platform_domain
         ';
 
         $list = DB::table('articles_site')
@@ -164,7 +163,7 @@ class ArticleUserModel extends Model
         }
         //文章详情
         $article = DB::table('articles_site')
-            ->leftJoin('site_routing','articles_site.site_id','=','site_routing.site_id')
+            ->leftJoin('site_info','articles_site.site_id','=','site_info.id')
             ->select(DB::raw($select))
             ->whereIn('articles_site.id',$ids)
             ->get();
@@ -202,15 +201,15 @@ class ArticleUserModel extends Model
         articles_site.image,
         user_favorite.type,
         user_favorite.create_time,
-        site_routing.custom_domain AS jump
+        site_info.custom_domain AS jump
         ';
         $site_list = DB::table('user_favorite')
             ->select(DB::raw($select_site))
             ->leftJoin('articles_site', function($join){
                 $join->on('articles_site.id', '=', 'user_favorite.article_id');
             })
-            ->leftJoin('site_routing', function($join){
-                $join->on('articles_site.site_id', '=', 'site_routing.site_id');
+            ->leftJoin('site_info', function($join){
+                $join->on('articles_site.site_id', '=', 'site_info.id');
             })
             ->where('user_favorite.valid', 1)
             ->where('user_favorite.type', 1)

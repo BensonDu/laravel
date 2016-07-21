@@ -36,11 +36,10 @@ class CommentModel extends Model
             'comment_hide.valid AS hide',
             'comment_like.valid AS like',
             'site_info.name',
-            'site_routing.custom_domain',
-            'site_routing.platform_domain'
+            'site_info.custom_domain',
+            'site_info.platform_domain'
         ];
         return CommentModel::leftJoin('site_info','site_info.id','=','comment.site_id')
-            ->leftJoin('site_routing','site_routing.site_id','=','comment.site_id')
             ->leftJoin('comment_hide', function($join) use ($site_id){
                 $join->on('comment_hide.comment_id', '=', 'comment.id');
                 $join->on('comment_hide.site_id', '=', DB::raw($site_id));
@@ -66,12 +65,12 @@ class CommentModel extends Model
             'comment.time',
             'articles_site.id AS article_id',
             'users.nickname',
-            'site_routing.custom_domain',
-            'site_routing.platform_domain',
+            'site_info.custom_domain',
+            'site_info.platform_domain',
         ];
 
         $query = CommentModel::leftJoin('users','comment.user_id','=','users.id')
-            ->leftJoin('site_routing','site_routing.site_id','=','comment.site_id');
+            ->leftJoin('site_info','site_info.id','=','comment.site_id');
 
         //站内评论限定site_id即可
         if($inside){
@@ -124,7 +123,7 @@ class CommentModel extends Model
     public static function getCommentsCount($site_id, $inside = true){
 
         $query = CommentModel::leftJoin('users','comment.user_id','=','users.id')
-            ->leftJoin('site_routing','site_routing.site_id','=','comment.site_id');
+            ->leftJoin('site_info','site_info.id','=','comment.site_id');
 
         //站内评论限定site_id即可
         if($inside){

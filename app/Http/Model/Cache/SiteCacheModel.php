@@ -223,4 +223,20 @@ class SiteCacheModel extends RedisModel
     public static function site_nav_key($site_id){
         return config('cache.prefix').':'.config('cache.site.nav').':'.$site_id;
     }
+    /*
+    |--------------------------------------------------------------------------
+    | 站点路由缓存 清除
+    |--------------------------------------------------------------------------
+    */
+    public static function site_route_clear(){
+        return self::del(self::site_route_key());
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 站点路由缓存 KEY
+    |--------------------------------------------------------------------------
+    */
+    private static function site_route_key(){
+        return config('site.platform_redis_prefix').':platform:'.config('site.platform_redis_routingtable_key');
+    }
 }

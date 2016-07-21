@@ -35,9 +35,16 @@ class Init
      |--------------------------------------------------------------------------
      */
     private function set_env_admin(){
-        if(isset($_ENV['uid']) && !empty($_ENV['site_id'])){
-            $role = UserModel::get_user_role($_ENV['site_id'],$_ENV['uid']);
-            $_ENV['admin']['role'] = !empty($role) ? intval($role) : null;
+        if(isset($_ENV['uid']) && isset($_ENV['site_id'])){
+            $roles = UserModel::get_user_role($_ENV['uid']);
+            $role  = 0;
+            foreach ($roles as $v){
+                if($v->site_id == $_ENV['site_id']){
+                    $role = intval($v->role);
+                    break;
+                }
+            }
+            $_ENV['admin']['role'] = $role;
         }
     }
     /*
