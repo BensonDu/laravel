@@ -17,11 +17,7 @@
             <div class="margin-top"></div>
             <a href="/admin/site" ><span>站点管理</span></a>
             <div class="margin-top"></div>
-            <a href="/admin/site" ><span>导航管理</span></a>
-            <div class="margin-top"></div>
-            <a href="/admin/site" ><span>渠道管理</span></a>
-            <div class="margin-top"></div>
-            <a href="/admin/site" ><span>系统维护</span></a>
+            <a href="/admin/user" ><span>权限管理</span></a>
         </div>
     </div>
     <div class="bottom">

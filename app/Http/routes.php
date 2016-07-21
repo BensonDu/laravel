@@ -202,12 +202,20 @@ else{
     Route::post('/account/captcha', 'Account\AccountController@captcha');
 
     Route::group(['middleware' => 'AdminAuth'], function () {
-        //平台管理
+        //平台管理->站点管理
         Route::get('/admin', 'Platform\Admin\SiteController@index');
         Route::get('/admin/site', 'Platform\Admin\SiteController@index');
         Route::get('/admin/site/list', 'Platform\Admin\SiteController@sites');
         Route::get('/admin/site/open', 'Platform\Admin\SiteController@open');
         Route::post('/admin/site/add', 'Platform\Admin\SiteController@add');
+        //平台管理->用户管理
+        Route::get('/admin/user', 'Platform\Admin\UserController@index');
+        Route::get('/admin/user/users', 'Platform\Admin\UserController@users');
+        Route::get('/admin/user/delete', 'Platform\Admin\UserController@delete');
+        Route::get('/admin/user/info', 'Platform\Admin\UserController@info');
+        Route::get('/admin/user/search', 'Platform\Admin\UserController@search');
+        Route::get('/admin/user/add', 'Platform\Admin\UserController@add');
+        Route::get('/admin/user/update', 'Admin\UserController@update');
     });
 
     // 用户
