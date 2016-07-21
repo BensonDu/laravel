@@ -48,13 +48,17 @@
 .admin-mid .mid{
     margin-top: 40px;
     padding: 0 70px;
+    height: 55%;
 }
 .admin-mid .mid .container{
     width: 100%;
+    height: 100%;
     border-top: 1px solid #f0f0f0;
-    border-bottom: 1px solid #f0f0f0;
     padding: 20px 0;
     overflow: visible;
+}
+.admin-mid .mid .container .margin-top{
+    height: 4%;
 }
 .admin-mid .mid .container a{
     position: relative;
@@ -63,13 +67,13 @@
     white-space: nowrap;
     text-align: center;
     font-size: 14px;
-    line-height: 45px;
     font-weight: 800;
     overflow: visible;
 }
 .admin-mid .mid .container a span{
     display: inline-block;
     line-height: 22px;
+    border-bottom: 1px dotted transparent;
 }
 .admin-mid .mid .container a.active span{
     border-bottom: 1px dotted #999;

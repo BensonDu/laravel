@@ -8,15 +8,19 @@
 <!--管理中栏start-->
 <div id="mid" class="admin-mid">
     <div class="top">
-        <div class="logo"><img src="http://qiniu.cdn-chuang.com/chuang-logo-circle.png"></div>
+        <a class="logo" href="/"><img src="http://qiniu.cdn-chuang.com/chuang-logo-circle.png"></a>
         <h2>创之群媒体平台</h2>
         <h3>[ 用心创作快乐 ]</h3>
     </div>
     <div class="mid">
         <div class="container">
+            <div class="margin-top"></div>
             <a href="/admin/site" ><span>站点管理</span></a>
+            <div class="margin-top"></div>
             <a href="/admin/site" ><span>导航管理</span></a>
+            <div class="margin-top"></div>
             <a href="/admin/site" ><span>渠道管理</span></a>
+            <div class="margin-top"></div>
             <a href="/admin/site" ><span>系统维护</span></a>
         </div>
     </div>

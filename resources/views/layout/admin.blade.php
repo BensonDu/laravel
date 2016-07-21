@@ -15,17 +15,25 @@
     <div class="mid">
         <div class="container">
 @if(isset($_ENV['admin']['role']))
+            <div class="margin-top"></div>
             <a href="/admin/" ><span>文章管理</span><em>{{$uncontribute_article_num}}</em></a>
 @endif
 @if(isset($_ENV['admin']['role']) && ($_ENV['admin']['role'] > 1))
+            <div class="margin-top"></div>
             <a href="/admin/special"><span>专题管理</span></a>
+            <div class="margin-top"></div>
             <a href="/admin/star" ><span>精选管理</span></a>
+            <div class="margin-top"></div>
             <a href="/admin/category" ><span>分类管理</span></a>
-        <a href="/admin/comment" ><span>评论管理</span></a>
+            <div class="margin-top"></div>
+            <a href="/admin/comment" ><span>评论管理</span></a>
 @endif
 @if(isset($_ENV['admin']['role']) && ($_ENV['admin']['role'] > 2))
+            <div class="margin-top"></div>
             <a href="/admin/ad" ><span>广告管理</span></a>
+            <div class="margin-top"></div>
             <a href="/admin/user" ><span>用户管理</span></a>
+            <div class="margin-top"></div>
             <a href="/admin/site" ><span>站点管理</span></a>
 @endif
         </div>
