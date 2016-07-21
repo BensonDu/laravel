@@ -44,6 +44,17 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
+    //PC自动跳转
+    (function () {
+        var w = window,
+                d = document,
+                e = d.documentElement,
+                g = d.getElementsByTagName('body')[0];
+        window.onresize = function () {
+            var x = w.innerWidth || e.clientWidth || g.clientWidth;
+            if(x > 1000)return location.href = location.href.split('feed/')[0]+location.href.match(/\d{1,12}/)[0];
+        }
+    })();
 </script>
 </body>
 </html>
