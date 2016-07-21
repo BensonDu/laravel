@@ -40,8 +40,8 @@
                 e = d.documentElement,
                 g = d.getElementsByTagName('body')[0];
         function judgement() {
-            var x = w.innerWidth || e.clientWidth || g.clientWidth;
-            if(x > 1000)return location.href = location.href.split('feed/')[0]+location.href.match(/\d{1,12}/)[0];
+            var x = w.innerWidth || e.clientWidth || g.clientWidth,l = location.href.split('feed/');
+            if(x > 1000 && l.length > 1)return location.href = l[0]+l[1].match(/\d{1,12}/)[0];
         }
         window.onresize = judgement;
         judgement();
