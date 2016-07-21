@@ -72,6 +72,8 @@ if(!($host == $base || $host == 'm.'.$base)) {
     Route::get('/feed/xiaozhi', 'Feed\XiaozhiController@index');
     Route::get('/feed/xiaozhi/{id}', 'Feed\XiaozhiController@detail');
     Route::get('/feed/flipboard', 'Feed\FlipboardController@index');
+    Route::get('/feed/uc', 'Feed\UcController@index');
+    Route::get('/feed/uc/{id}', 'Feed\UcController@detail');
 
     //站点管理
     Route::group(['middleware' => 'AdminAuth'], function () {

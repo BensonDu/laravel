@@ -54,6 +54,18 @@ class StaticWebModel
     }
     /*
     |--------------------------------------------------------------------------
+    | 生成UC文章静态文件
+    |--------------------------------------------------------------------------
+    */
+    public static function create_uc($site_id,$article_id,$html){
+        $domains = self::get_site_domains($site_id);
+        foreach ($domains as  $v){
+            Storage::disk('static-web')->put($v."/feed/uc/".$article_id, $html);
+        }
+        return true;
+    }
+    /*
+    |--------------------------------------------------------------------------
     | 清除文章静态文件
     |--------------------------------------------------------------------------
     */
@@ -65,6 +77,9 @@ class StaticWebModel
             }
             if(Storage::disk('static-web')->exists($v."/feed/xiaozhi/".$article_id)){
                 Storage::disk('static-web')->delete($v."/feed/xiaozhi/".$article_id);
+            }
+            if(Storage::disk('static-web')->exists($v."/feed/uc/".$article_id)){
+                Storage::disk('static-web')->delete($v."/feed/uc/".$article_id);
             }
         }
         return true;
