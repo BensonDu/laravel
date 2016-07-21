@@ -384,7 +384,7 @@ elixir(function(mix) {
         'public.base.css',
         'public.nav.left.css',
         'admin.base.css',
-        'admin.user.css'
+        'platform.admin.user.css'
     ],'public/css/platform.admin.user.css');
 
     //平台管理 用户管理JS
