@@ -19,7 +19,7 @@
     margin-top: 50px;
 }
 .admin-mid .top .logo{
-    display: inline-block;
+    display: block;
     text-align: center;
 }
 .admin-mid .top .logo img{

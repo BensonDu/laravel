@@ -78,6 +78,7 @@ class SiteModel extends Model
         SiteModel::where('id',$id)->update($update);
         SiteCacheModel::site_info_clear($id);
         SiteCacheModel::site_nav_clear($id);
+        SiteCacheModel::site_route_clear();
         return true;
     }
     /*

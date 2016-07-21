@@ -8,7 +8,7 @@
 <!--管理中栏start-->
 <div id="mid" class="admin-mid">
     <div class="top">
-        <div class="logo"><img src="{{$site['logo']}}"></div>
+        <a class="logo" href="/"><img src="{{$site['logo']}}"></a>
         <h2>{{$site['name']}}</h2>
         <h3>{{$site['slogan']}}</h3>
     </div>

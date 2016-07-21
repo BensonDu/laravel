@@ -21,7 +21,7 @@
             <thead>
             <tr>
                 <th><span>站点名称</span></th>
-                <th><span>启用</span><em></em></th>
+                <th><span>允许访问</span><em></em></th>
                 <th class="orderable" v-bind:class="order" v-on:click="_order()"><span>添加时间</span><em></em></th>
                 <th><span>操作</span></th>
             </tr>
