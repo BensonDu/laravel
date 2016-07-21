@@ -39,7 +39,8 @@ class Init
             $roles = UserModel::get_user_role($_ENV['uid']);
             $role  = 0;
             foreach ($roles as $v){
-                if($v->site_id == $_ENV['site_id']){
+                //平台管理员默认拥有所有子站权限
+                if($v->site_id == $_ENV['site_id'] || $v->site_id == '0'){
                     $role = intval($v->role);
                     break;
                 }
