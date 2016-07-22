@@ -86,4 +86,5 @@
 
     }).call(define('data'));
 </script>
+<script src="{{ $_ENV['platform']['cdn'].elixir("mobile/js/site.special.js")}}"></script>
 @stop

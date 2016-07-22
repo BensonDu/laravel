@@ -464,6 +464,11 @@ elixir(function(mix) {
         '../mobile/css/site.special.css'
     ],'public/mobile/css/site.special.css');
 
+    //M 专题JS
+    mix.scripts([
+        '../mobile/js/site.base.js'
+    ], 'public/mobile/js/site.special.js');
+
     //创之首页 CSS
     mix.styles([
         'public.base.css',
@@ -535,6 +540,7 @@ elixir(function(mix) {
         'public/mobile/js/account.find.js',
         'public/mobile/js/site.detail.js',
         'public/mobile/js/site.index.js',
+        'public/mobile/js/site.special.js',
         'public/js/platform.index.js',
         'public/js/platform/admin.site.js',
         'public/js/platform/admin.user.js'

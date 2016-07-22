@@ -56,5 +56,6 @@
   "mobile/js/account.regist.js": "mobile/js/account.regist-bee590d11d.js",
   "mobile/js/base.js": "mobile/js/base-9d5c50e73d.js",
   "mobile/js/site.detail.js": "mobile/js/site.detail-6aa403672c.js",
-  "mobile/js/site.index.js": "mobile/js/site.index-363ebb8eda.js"
+  "mobile/js/site.index.js": "mobile/js/site.index-363ebb8eda.js",
+  "mobile/js/site.special.js": "mobile/js/site.special-1835c608d5.js"
 }
