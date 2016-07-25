@@ -199,7 +199,7 @@ class SiteModel extends Model
      |
      */
     public static function get_site_list($skip = 0, $take = 10,$keyword = null,$except = [],$select = ['id','name','custom_domain','platform_domain']){
-        $query =  DB::table('site_info')->whereNotIn('id',$except)->where('valid','1');
+        $query =  DB::table('site_info')->whereNotIn('id',$except);
         if(!is_null($keyword)){
             $query->where('name', 'LIKE', '%'.$keyword.'%');
         }
