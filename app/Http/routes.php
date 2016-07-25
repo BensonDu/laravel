@@ -17,7 +17,11 @@ $host = request()->server('HTTP_HOST');
 //平台HOST
 $base = config('site.platform_base');
 
-//子站路由
+/*
+ |--------------------------------------------------------------------------
+ | 子站路由
+ |--------------------------------------------------------------------------
+ */
 if(!($host == $base || $host == 'm.'.$base)) {
     //设备跳转
     Route::group(['middleware' => 'Device'], function () {
@@ -55,9 +59,6 @@ if(!($host == $base || $host == 'm.'.$base)) {
     Route::get('/tag/{tag}/list', 'Site\TagController@tags');
     //注销
     Route::get('/account/logout', 'Account\AccountController@logout');
-    //点赞收藏
-    Route::get('/social/like', 'Common\SocialController@like');
-    Route::get('/social/favorite', 'Common\SocialController@favorite');
     //评论
     Route::get('/comment/comments', 'Comment\CommentController@comments');
     Route::get('/comment/like', 'Comment\CommentController@like');
@@ -164,17 +165,16 @@ if(!($host == $base || $host == 'm.'.$base)) {
         Route::post('/admin/site/others', 'Admin\SiteController@otherssave');
     });
 }
-//平台部分
+/*
+ |--------------------------------------------------------------------------
+ | 平台路由
+ |--------------------------------------------------------------------------
+ */
 else{
     //平台首页
     Route::get('/','Platform\IndexController@index' );
     //获取文章列表
     Route::get('/index/list','Platform\IndexController@articles' );
-    //点赞收藏
-    Route::get('/social/like', 'Common\SocialController@like');
-    Route::get('/social/favorite', 'Common\SocialController@favorite');
-    //站点分类列表
-    Route::get('/site/category', 'Common\SiteController@category');
     //设备跳转
     Route::group(['middleware' => 'Device'], function () {
         //登录、注册、找回密码
@@ -218,8 +218,12 @@ else{
         Route::get('/admin/user/search', 'Platform\Admin\UserController@search');
         Route::get('/admin/user/add', 'Platform\Admin\UserController@add');
         Route::get('/admin/user/update', 'Admin\UserController@update');
+        //平台管理->平台设置
+        Route::get('/admin/option', 'Platform\Admin\NavController@index');
+        Route::get('/admin/option/nav', 'Platform\Admin\NavController@index');
+        Route::get('/admin/option/nav/list', 'Platform\Admin\NavController@navlist');
+        Route::post('/admin/option/nav/save', 'Platform\Admin\NavController@save');
     });
-
     // 用户
     Route::group(['middleware' => 'User'], function () {
         //个人主页
@@ -272,6 +276,18 @@ else{
     //用户首页文章列表
     Route::get('/user/index/list', 'User\IndexController@articles');
 }
+/*
+ |--------------------------------------------------------------------------
+ | 公共路由
+ |--------------------------------------------------------------------------
+ */
+//点赞收藏
+Route::get('/social/like', 'Common\SocialController@like');
+Route::get('/social/favorite', 'Common\SocialController@favorite');
+//站点分类列表
+Route::get('/site/category', 'Common\SiteController@category');
+//站点列表
+Route::get('/site/list', 'Common\SiteController@site');
 //极验验证码
 Route::get('/geetest/start', 'Common\GeetestController@start');
 Route::post('/geetest/verify', 'Common\GeetestController@verify');

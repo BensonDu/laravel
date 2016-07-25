@@ -1,0 +1,354 @@
+.list-header{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #eee;
+}
+.list-header .nav{
+    height: 100%;
+    float: left;
+}
+.list-header .nav a{
+    display: inline-block;
+    height: 100%;
+    margin-right: 28px;
+    line-height: 50px;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+}
+.list-header .nav a.active{
+    font-weight: 900;
+    border-bottom: 2px solid #6e8cfb;
+}
+.list-header .nav a:hover{
+    color: #999;
+}
+.list-header .add{
+    height: 100%;
+    padding: 14px 0 0;
+    float: right;
+}
+.list-header .add a{
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0 14px;
+    transition: background .4s;
+    -moz-transition: background .4s;
+    -webkit-transition: background .4s;
+}
+.list-header .add a span{
+    line-height: 34px;
+    font-size: 14px;
+    color: inherit;
+    vertical-align: top;
+    margin-left: 4px;
+}
+.list-header .add a em{
+    line-height: 14px;
+    font-size: 20px;
+    color: inherit;
+}
+.list-header .add a:hover{
+    opacity: .7;
+}
+
+/*导航管理start*/
+.admin-nav{
+    width: 400px;
+    padding: 30px 0;
+    overflow: visible;
+}
+.admin-nav .wrap{
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    border: 1px solid #eee;
+}
+.admin-nav .wrap .header{
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    padding-left: 50px;
+    background: #eee;
+}
+.admin-nav .wrap .header li{
+    display: inline-block;
+    height: 100%;
+}
+.admin-nav .wrap .header li.site{
+    width: 70%;
+}
+.admin-nav .wrap .header li.handle{
+    width: 30%;
+}
+.admin-nav .wrap .header li p{
+    display: inline-block;
+    width: 100%;
+    color: #666;
+    line-height: 40px;
+}
+.admin-nav .wrap .header li.handle p{
+    text-align: center;
+}
+.admin-nav .wrap .site-list{
+    width: 100%;
+}
+.admin-nav .wrap .site-list .item{
+    width: 100%;
+    height: 40px;
+    padding-left: 40px;
+    overflow: hidden;
+    margin-top: 2px;
+    background: #f9f9f9;
+    cursor: pointer;
+}
+.admin-nav .wrap .site-list .item .info{
+    width: 70%;
+    height: 100%;
+    float: left;
+}
+.admin-nav .wrap .site-list .item .info .logo{
+    height: 40px;
+    width: 40px;
+    padding: 8px;
+    float: left;
+}
+.admin-nav .wrap .site-list .item .info .logo img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.admin-nav .wrap .site-list .item .info .name{
+    float: left;
+    height: 100%;
+    margin-left: 5px;
+}
+.admin-nav .wrap .site-list .item .info .name h3{
+    color: #666;
+    line-height: 42px;
+    font-size: 12px;
+}
+.admin-nav .wrap .site-list .item  .handle{
+    width: 30%;
+    float: left;
+}
+.admin-nav .wrap .site-list .item .handle a{
+    display: inline-block;
+    width: 100%;
+    line-height: 40px;
+    font-size: 18px;
+    text-align: center;
+    color: #999;
+}
+.admin-nav .wrap .site-list .item .handle a:hover{
+    color: #000;
+}
+.admin-nav .wrap .add{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    border: 1px dashed #999;
+    text-align: center;
+}
+.admin-nav .wrap .add p{
+    display: inline-block;
+    width: 100px;
+    line-height: 46px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 900;
+    color: #999;
+    cursor: pointer;
+}
+.admin-nav .wrap .add p:hover{
+    color: #000;
+}
+
+.nav-pop-container{
+    position: fixed;
+    top: 0;
+    padding-top: 40px;
+    right: -100%;
+    height: 100%;
+    z-index: 10;
+    white-space: nowrap;
+    box-shadow: -4px 43px 10px rgba(0,0,0,.07);
+    -webkit-transition: right 0.4s ease-out;
+    -moz-transition: right 0.4s ease-out;
+    transition: right 0.4s ease-out;
+}
+.nav-pop-container.add{
+    right: 0;
+}
+.nav-pop-container.add .add{
+    display: inline-block;
+}
+.nav-pop-container .header{
+    position: absolute;
+    left: 0;
+    top: 40px;
+    width: 100%;
+    height: 50px;
+    padding: 20px 34px 0;
+    z-index: 5;
+}
+.nav-pop-container .header h3{
+    display: inline-block;
+    line-height: 30px;
+    font-size: 16px;
+    height: 30px;
+    float: left;
+}
+.nav-pop-container .header h3 em{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+    font-size: 16px;
+}
+.nav-pop-container .header h3 span{
+    vertical-align: top;
+    line-height: inherit;
+    font-size: inherit;
+}
+.nav-pop-container .header a{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+    -webkit-transition: transform 0.1s ease-in;
+    -moz-transition: transform 0.1s ease-in;
+    transition: transform 0.1s ease-in;
+}
+.nav-pop-container .header a:hover{
+    transform: rotate(75deg);
+    -ms-transform: rotate(75deg);		/* IE 9 */
+    -webkit-transform: rotate(75deg);	/* Safari and Chrome */
+    -moz-transform: rotate(75deg);		/* Firefox */
+}
+.nav-pop-container .add{
+    display: none;
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+    padding: 50px 10px 20px 40px;
+    overflow: auto;
+    overflow-x: hidden;
+    background: #fff;
+}
+.nav-pop-container .add .keyword{
+    width: 350px;
+    margin-top: 60px;
+    overflow: hidden;
+}
+.nav-pop-container .add .keyword input{
+    display: inline-block;
+    height: 34px;
+    width: 240px;
+    font-size: 12px;
+    color: #999;
+    padding: 0 10px;
+    vertical-align: bottom;
+    border: 1px solid #eee;
+    background: rgba(0,0,0,0);
+    float: left;
+}
+.nav-pop-container .add .keyword input:focus{
+    outline: none;
+}
+.nav-pop-container .add .keyword a{
+    display: inline-block;
+    height: 34px;
+    width: 60px;
+    line-height: 34px;
+    font-size: 12px;
+    background: #999;
+    color: #fff;
+    vertical-align: bottom;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: background 0.3s ease-in;
+    -moz-transition: background 0.3s ease-in;
+    transition: background 0.3s ease-in;
+}
+.nav-pop-container .add .keyword a:hover{
+    background: #333;
+}
+.nav-pop-container .add .result{
+    width: 300px;
+    height: 40px;
+    padding: 0 10px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.nav-pop-container .add .result b,
+.nav-pop-container .add .result span{
+    display: inline-block;
+    line-height: 40px;
+    font-size: 12px;
+    color: #aaa;
+    float: left;
+}
+.nav-pop-container .add .result b{
+    color: #333;
+    padding: 0 3px;
+}
+.nav-pop-container .add .item{
+    display: block;
+    width: 350px;
+    margin-top: 20px;
+    overflow: hidden;
+    white-space: normal;
+}
+.nav-pop-container .add .item li{
+    display: inline-block;
+    height: 46px;
+    width: 300px;
+    padding: 14px 10px;
+    border-bottom: 1px solid #eee;
+}
+.nav-pop-container .add .item li a{
+    display: inline-block;
+    width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #888;
+    float: left;
+}
+.nav-pop-container .add .item li span{
+    display: inline-block;
+    width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #ccc;
+    margin-top: 8px;
+    float: left;
+}
+.nav-pop-container .add .item li em{
+    display: inline-block;
+    height: 100%;
+    width: 30px;
+    line-height: 16px;
+    font-weight: 900;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+    color: #999;
+}
+.nav-pop-container .add .item li em:hover{
+    color: #333;
+}
+/*导航管理end*/

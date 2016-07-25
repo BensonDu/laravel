@@ -50,34 +50,12 @@
             <div class="site-nav">
                 <div class="head"><p>导航</p></div>
                 <div class="site-list">
-                    <a href="http://tech2ipo.com" class="site">
-                        <div class="logo"><img src="http://static.chuang.pro/Tech2ipo-logo-new.png"></div>
-                        <div class="name"><p>TECH2IPO/创见</p></div>
+@foreach($sites as $v)
+                    <a href="{{$v['link']}}" class="site">
+                        <div class="logo"><img src="{{$v['logo']}}"></div>
+                        <div class="name"><p>{{$v['name']}}</p></div>
                     </a>
-                    <a href="http://vr.chuang.pro/" class="site">
-                        <div class="logo"><img src="http://static.chuang.pro/vr-logo-new.png"></div>
-                        <div class="name"><p>VR人</p></div>
-                    </a>
-                    <a href="http://mmx.chuang.pro/" class="site">
-                        <div class="logo"><img src="http://dn-noman.qbox.me/FiBhxvDALGKQy5ksm5S00eK9amrf"></div>
-                        <div class="name"><p>萌码象</p></div>
-                    </a>
-                    <a href="http://xyl.chuang.pro/" class="site">
-                        <div class="logo"><img src="http://dn-noman.qbox.me/FlSx6M3VZp87zKqN0TdU-UBtX8oK"></div>
-                        <div class="name"><p>烯引力</p></div>
-                    </a>
-                    <a href="http://xiangsu.chuang.pro/" class="site">
-                        <div class="logo"><img src="http://dn-noman.qbox.me/FuGgcv10T7My5J0-jgpqy1U-lkRP"></div>
-                        <div class="name"><p>无效像素</p></div>
-                    </a>
-                    <a href="http://energy.chuang.pro/" class="site">
-                        <div class="logo"><img src="http://dn-noman.qbox.me/Fmn7ntFeOFJVsvbwIFSDOEnrhZT2"></div>
-                        <div class="name"><p>第四能源</p></div>
-                    </a>
-                    <a href="http://50si.chuang.pro" class="site">
-                        <div class="logo"><img src="http://dn-noman.qbox.me/Fhke2WGA8ZGxGeeQ2Ot2QStD1tay"></div>
-                        <div class="name"><p>五十度硅</p></div>
-                    </a>
+@endforeach
                 </div>
             </div>
         </div>

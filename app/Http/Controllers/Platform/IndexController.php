@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Platform;
 
 use App\Http\Model\ArticleSiteModel;
 use App\Http\Model\Cache\PlatformIndexCacheModel;
+use App\Http\Model\Option\PlatformModel;
 use App\Http\Model\SiteModel;
 
 class IndexController extends PlatformController
@@ -26,6 +27,9 @@ class IndexController extends PlatformController
 
         //文章列表
         $data['articles']  = self::get_articles();
+        //站点列表
+        $data['sites']     = PlatformModel::get_nav_site_list();
+
         return self::view('platform.index',$data);
     }
     /*

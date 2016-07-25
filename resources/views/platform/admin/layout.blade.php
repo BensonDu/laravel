@@ -18,6 +18,8 @@
             <a href="/admin/site" ><span>站点管理</span></a>
             <div class="margin-top"></div>
             <a href="/admin/user" ><span>权限管理</span></a>
+            <div class="margin-top"></div>
+            <a href="/admin/option" ><span>平台设置</span></a>
         </div>
     </div>
     <div class="bottom">

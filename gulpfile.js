@@ -393,6 +393,21 @@ elixir(function(mix) {
         'platform/admin/user.js'
     ], 'public/js/platform/admin.user.js');
 
+    //平台管理 设置CSS
+    mix.styles([
+        'public.base.css',
+        'public.nav.left.css',
+        'admin.base.css',
+        'platform.admin.option.css'
+    ],'public/css/platform.admin.option.css');
+
+    //平台管理 站点JS
+    mix.scripts([
+        'platform/admin/base.js',
+        '../lib/sortable/Sortable.min.js',
+        'platform/admin/nav.js'
+    ], 'public/js/platform/admin.nav.js');
+
     //渠道小知CSS
     mix.styles([
         'feed.xiaozhi.css'
@@ -509,6 +524,7 @@ elixir(function(mix) {
         'public/css/platform.index.css',
         'public/css/platform.admin.site.css',
         'public/css/platform.admin.user.css',
+        'public/css/platform.admin.option.css',
 
         'public/js/base.js',
         'public/js/site.index.js',
@@ -543,7 +559,8 @@ elixir(function(mix) {
         'public/mobile/js/site.special.js',
         'public/js/platform.index.js',
         'public/js/platform/admin.site.js',
-        'public/js/platform/admin.user.js'
+        'public/js/platform/admin.user.js',
+        'public/js/platform/admin.nav.js'
 
     ]);
     
