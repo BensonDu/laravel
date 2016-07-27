@@ -190,6 +190,7 @@
         request.get('/index/list',function(ret){
                 if(ret.hasOwnProperty('code') && ret.code ==0){
                     total = ret.data.total;
+                    index++;
                     setTimeout(function(){
                         self.btn_sta();
                         call(ret.data.list);
@@ -198,19 +199,18 @@
             },
             {
                 category: self.category,
-                index : i
+                index : i+1
             });
     };
     //获取更多
     this.get_list = function(){
-        index++;
         self.get_data(index,function(list){
             self.insert_list(list);
         });
     };
     //获取分类
     this.get_category_list = function(category_id){
-        index = 0;
+        index = -1;
         self.category = category_id;
         self.get_data(index,function(list){
             self.swith_list(list);
