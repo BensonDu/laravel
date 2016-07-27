@@ -1,21 +1,6 @@
 /**
  * Created by Benson on 16/7/15.
  */
-
-(function(){
-    var self = this;
-
-    //重写Nav.left fold,unfold 方法
-    window.view_nav_left.fold = function(){
-        return jQuery('#content-container').css('padding-left',60), jQuery('#nav-container').css('padding-left',60);
-    };
-
-    window.view_nav_left.unfold = function(){
-        return jQuery('#content-container').css('padding-left',140),jQuery('#nav-container').css('padding-left',140);
-    };
-
-}).call(define('view_page_response'));
-
 (function () {
     var self = this,
         total = 200,
@@ -102,7 +87,7 @@
         },
         methods : {
             _search : function () {
-                window.open('http://tech2ipo.com/search/'+encodeURIComponent(self.vue.keyword), '_blank');
+                window.open('/search?keyword='+encodeURIComponent(self.vue.keyword), '_blank');
             }
         }
     });

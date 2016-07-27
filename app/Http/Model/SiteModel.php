@@ -66,7 +66,13 @@ class SiteModel extends Model
             return SiteModel::whereIn('site_info.id',$ids)->get($select);
         }
         else{
-            return SiteModel::where('site_info.id',$ids)->first($select);
+            if(is_null($ids)){
+                return SiteModel::get($select);
+            }
+            else{
+                return SiteModel::where('site_info.id',$ids)->first($select);
+            }
+
         }
     }
     /*

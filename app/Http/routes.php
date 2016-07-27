@@ -50,13 +50,6 @@ if(!($host == $base || $host == 'm.'.$base)) {
             Route::get('/special/{id}', 'Site\SpecialController@mobiledetail');
         }
     });
-    //搜索
-    Route::get('/search', 'Site\SearchController@index');
-    Route::get('/search/{keyword}', 'Site\SearchController@index');
-    Route::get('/search/{keyword}/list', 'Site\SearchController@results');
-    //标签
-    Route::get('/tag/{tag}', 'Site\TagController@index');
-    Route::get('/tag/{tag}/list', 'Site\TagController@tags');
     //注销
     Route::get('/account/logout', 'Account\AccountController@logout');
     //评论
@@ -202,6 +195,13 @@ else{
     Route::post('/account/exist', 'Account\AccountController@exist');
     //发送验证码
     Route::post('/account/captcha', 'Account\AccountController@captcha');
+
+    //搜索
+    Route::get('/search', 'Platform\SearchController@index');
+    Route::get('/search/results', 'Platform\SearchController@results');
+    //标签
+    Route::get('/tag/{tag}', 'Platform\TagController@index');
+    Route::get('/tag/{tag}/list', 'Platform\TagController@tags');
 
     Route::group(['middleware' => 'AdminAuth'], function () {
         //平台管理->站点管理

@@ -58,34 +58,6 @@ elixir(function(mix) {
         'site.detail.js'
     ], 'public/js/site.detail.js');
 
-    //站点搜索CSS
-    mix.styles([
-        'public.base.css',
-        'public.nav.left.css',
-        'site.mid.css',
-        'site.search.css'
-    ],'public/css/site.search.css');
-
-    //站点搜索JS
-    mix.scripts([
-        'site.base.js',
-        'site.search.js'
-    ], 'public/js/site.search.js');
-
-    //站点标签CSS
-    mix.styles([
-        'public.base.css',
-        'public.nav.left.css',
-        'site.mid.css',
-        'site.tag.css'
-    ],'public/css/site.tag.css');
-
-    //站点标签JS
-    mix.scripts([
-        'site.base.js',
-        'site.tag.js'
-    ], 'public/js/site.tag.js');
-
     //站点专题CSS
     mix.styles([
         'public.base.css',
@@ -488,21 +460,49 @@ elixir(function(mix) {
     mix.styles([
         'public.base.css',
         'public.nav.left.css',
+        'platform.base.css',
         'platform.index.css'
     ],'public/css/platform.index.css');
 
     //创之首页 J
     mix.scripts([
+        'platform/base.js',
         'platform/index.js',
         '../lib/imagelazyload/imagelazyload.js'
     ], 'public/js/platform.index.js');
+
+    //创之搜索CSS
+    mix.styles([
+        'public.base.css',
+        'public.nav.left.css',
+        'platform.base.css',
+        'platform.search.css'
+    ],'public/css/platform.search.css');
+
+    //创之搜索JS
+    mix.scripts([
+        'platform/base.js',
+        'platform/search.js'
+    ], 'public/js/platform.search.js');
+
+    //创之标签CSS
+    mix.styles([
+        'public.base.css',
+        'public.nav.left.css',
+        'platform.base.css',
+        'platform.tag.css'
+    ],'public/css/platform.tag.css');
+
+    //创之标签JS
+    mix.scripts([
+        'platform/base.js',
+        'platform/tag.js'
+    ], 'public/js/platform.tag.js');
 
     //版本控制
     mix.version([
         'public/css/site.index.css',
         'public/css/site.detail.css',
-        'public/css/site.search.css',
-        'public/css/site.tag.css',
         'public/css/site.special.css',
         'public/css/admin.article.css',
         'public/css/admin.category.css',
@@ -522,6 +522,8 @@ elixir(function(mix) {
         'public/mobile/css/site.detail.css',
         'public/mobile/css/site.special.css',
         'public/css/platform.index.css',
+        'public/css/platform.search.css',
+        'public/css/platform.tag.css',
         'public/css/platform.admin.site.css',
         'public/css/platform.admin.user.css',
         'public/css/platform.admin.option.css',
@@ -529,8 +531,6 @@ elixir(function(mix) {
         'public/js/base.js',
         'public/js/site.index.js',
         'public/js/site.detail.js',
-        'public/js/site.search.js',
-        'public/js/site.tag.js',
         'public/js/site.special.js',
         'public/js/site.special.detail.js',
         'public/js/admin.article.js',
@@ -558,6 +558,8 @@ elixir(function(mix) {
         'public/mobile/js/site.index.js',
         'public/mobile/js/site.special.js',
         'public/js/platform.index.js',
+        'public/js/platform.search.js',
+        'public/js/platform.tag.js',
         'public/js/platform/admin.site.js',
         'public/js/platform/admin.user.js',
         'public/js/platform/admin.nav.js'

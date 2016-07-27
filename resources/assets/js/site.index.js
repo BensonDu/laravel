@@ -119,7 +119,7 @@
                 controller_list.get_category_list(id);
             },
             search : function(){
-                window.open('/search/'+encodeURIComponent(self.model.data.keyword), '_blank');
+                window.open(global.platform.home+'/search?keyword='+encodeURIComponent(self.model.data.keyword), '_blank');
             }
         }
     };

@@ -26,6 +26,7 @@ class OptionModel extends Model
         ];
         $ret = OptionModel::where('option_name',$name)->update($data);
         if(!$ret)OptionModel::insert($data);
+        return true;
     }
     /*
      |--------------------------------------------------------------------------

@@ -22,7 +22,7 @@
                 <div class="info">
                     <div class="tags">
 @foreach ($article->tags as $tag)
-                        <a href="{{$article->domain}}/tag/{{$tag['item']}}" target="_blank" style="color: {{$tag['color']}}">{{$tag['item']}}</a>
+                        <a href="/tag/{{$tag['item']}}" target="_blank" style="color: {{$tag['color']}}">{{$tag['item']}}</a>
 @endforeach
                     </div>
                     <div class="title">
@@ -52,7 +52,7 @@
             <div class="list" v-bind:class="visible" v-for="article in list">
                 <div class="info">
                     <div class="tags">
-                        <a target="_blank"  v-for="tag in article.tags" v-bind:href="article.domain+'/tag/'+tag.item" v-bind:style="'color:'+tag.color" v-text="tag.item"></a>
+                        <a target="_blank"  v-for="tag in article.tags" v-bind:href="'/tag/'+tag.item" v-bind:style="'color:'+tag.color" v-text="tag.item"></a>
                     </div>
                     <div class="title">
                         <a target="_blank" v-bind:href="article.domain+'/'+article.id" v-text="article.title"></a>

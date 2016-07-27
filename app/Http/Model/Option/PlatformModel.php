@@ -24,7 +24,7 @@ class PlatformModel extends OptionModel
      |--------------------------------------------------------------------------
      */
     public static function get_nav_site_list(){
-        $list   = self::get_option(self::$name['site_list']);
+        $list   = self::get_nav_site_id_list();
         $sites  = SiteModel::get_site_info_list($list,['id','name','logo','custom_domain','platform_domain']);
         $ret    = [];
         foreach ($list as $v){
@@ -40,6 +40,14 @@ class PlatformModel extends OptionModel
             }
         }
         return $ret;
+    }
+    /*
+     |--------------------------------------------------------------------------
+     | 平台首页获得左导航站点ID列表
+     |--------------------------------------------------------------------------
+     */
+    public static function get_nav_site_id_list(){
+        return self::get_option(self::$name['site_list']);
     }
     /*
      |--------------------------------------------------------------------------
