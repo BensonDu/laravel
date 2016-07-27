@@ -132,4 +132,9 @@
     };
     //加载更多按钮应有状态
     self.btn_sta();
+    //默认筛选站点
+    (function () {
+        var site = input.get('site');
+        if(site)self.vue._selected(site);
+    })();
 }).call(define('controller_search'));

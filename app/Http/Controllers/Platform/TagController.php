@@ -21,13 +21,15 @@ class TagController extends PlatformController
     |
     */
     public function index($tag = null){
+        //默认站点
+        $default = request('site');
         //站点列表
         $data['filter']['sites']= self::hotsites();
         //视图数据
         $data = [
             'tag'       => $tag,
-            'list'      => !empty($tag) ? self::getlist($tag) : [],
-            'total'     => !empty($tag) ? ArticleSiteModel::tag_article_count($tag) : 0
+            'list'      => (!empty($tag) && empty($default)) ? self::getlist($tag) : [],
+            'total'     => (!empty($tag) && empty($default)) ? ArticleSiteModel::tag_article_count($tag) : 0
         ];
         //站点列表
         $data['filter']['sites']= self::hotsites();

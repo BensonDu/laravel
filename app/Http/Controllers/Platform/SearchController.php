@@ -29,11 +29,13 @@ class SearchController extends PlatformController
         $data['base']['title'] = '搜索-'.$keyword;
         //站点列表
         $data['filter']['sites']= self::hotsites();
+        //默认站点
+        $default = request('site');
         //视图数据
         $data['search'] = [
             'keyword'   => $keyword,
-            'list'      => !empty($like) ? $this->getlist($like,0,$keyword) : [],
-            'total'     => !empty($like) ? ArticleSiteModel::search_article_count($like) : 0
+            'list'      => (!empty($like) && empty($default)) ? $this->getlist($like,0,$keyword) : [],
+            'total'     => (!empty($like) && empty($default)) ? ArticleSiteModel::search_article_count($like) : 0
         ];
         return self::view('platform.search',$data);
     }

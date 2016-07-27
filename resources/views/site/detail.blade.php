@@ -51,7 +51,7 @@
                 <div class="tag">
                     <em>标签:</em>
                     @foreach ($article['tags'] as $tag)
-                        <a href="/tag/{{$tag}}">{{$tag}}</a>
+                        <a target="_blank" href="{{$_ENV['platform']['home']}}/tag/{{$tag}}?site={{$_ENV['site_id']}}">{{$tag}}</a>
                     @endforeach
                 </div>
 
