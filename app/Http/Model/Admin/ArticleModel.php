@@ -49,6 +49,7 @@ class ArticleModel extends Model
                 ->leftJoin('site_auth_map', function($join){
                     $join->on('site_auth_map.site_id', '=', 'articles_site.site_id');
                     $join->on('site_auth_map.user_id', '=', 'articles_site.author_id');
+                    $join->on('site_auth_map.deleted', '=', DB::raw('0'));
                 });
 
        if(empty($keyword)){

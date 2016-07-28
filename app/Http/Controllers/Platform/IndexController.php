@@ -86,7 +86,7 @@ class IndexController extends PlatformController
                 'image'     => image_crop($v['image'],200),
                 'site'      => $site_info_map[$v['site_id']],
                 'user'      => [
-                    'avatar' => image_crop($v['avatar'],50),
+                    'avatar' => avatar($v['avatar']),
                     'link'   => $_ENV['platform']['home'].'/user/'.$v['user_id'],
                     'name'   => $v['nickname']
                 ],
