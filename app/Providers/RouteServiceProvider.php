@@ -38,7 +38,20 @@ class RouteServiceProvider extends ServiceProvider
     public function map(Router $router)
     {
         $router->group(['namespace' => $this->namespace], function ($router) {
-            require app_path('Http/routes.php');
+            //请求 HOST
+            $host       = request()->server('HTTP_HOST');
+            //平台 HOST
+            $base       = config('site.platform_base');
+            //请求 是否为移动设备
+            $_ENV['request_is_mobile'] = is_mobile();
+            //路由目录
+            $path       = ($host == $base || $host == 'm.'.$base) ? 'Platform' : 'Site';
+            //文件名
+            $name       = $_ENV['request_is_mobile'] ? 'M' : 'PC';
+            //加载文件
+            require app_path('Http/Route/Base.php');
+            require app_path('Http/Route/'.$path.'/Base.php');
+            require app_path('Http/Route/'.$path.'/'.$name.'.php');
         });
     }
 }
