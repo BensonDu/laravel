@@ -19,6 +19,8 @@
             <p><span v-text="current"></span>/<span v-text="total"></span></p>
         </div>
     </div>
+@else
+    <div class="star-occupy"></div>
 @endif
 
     <div id="list-container" class="list-container">
