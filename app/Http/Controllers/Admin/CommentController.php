@@ -52,13 +52,13 @@ class CommentController extends AdminController
     |--------------------------------------------------------------------------
     */
     private static function get_list($skip,$take,$order = 'desc',$inside = true){
-        $list = CommentModel::getComments($_ENV['site_id'],$skip,$take,$order,$inside);
+        $list = CommentModel::getComments($_ENV['domain']['id'],$skip,$take,$order,$inside);
         foreach ($list as $k => $v){
             $list[$k]->link = !empty($v->custom_domain) ? 'http://'.$v->custom_domain.'/'.$v->article_id : 'http://'.$v->platform_domain.'.'.$_ENV['platform']['domain'].'/'.$v->article_id;
         }
         return  [
             'list' => $list,
-            'total'=> CommentModel::getCommentsCount($_ENV['site_id'],$inside)
+            'total'=> CommentModel::getCommentsCount($_ENV['domain']['id'],$inside)
         ];
     }
 }

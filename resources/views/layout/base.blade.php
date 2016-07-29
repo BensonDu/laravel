@@ -88,7 +88,7 @@
         this.platform = {
             home : '{{$_ENV['platform']['home']}}'
         };
-        this.site_id = '{{$_ENV['site_id']}}';
+        this.site_id = '{{$_ENV['domain']['id']}}';
         this.user = {
             id : '{{$_ENV['uid']}}',
             name : '{{$nickname}}',

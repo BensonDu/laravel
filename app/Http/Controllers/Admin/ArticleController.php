@@ -30,7 +30,7 @@ class ArticleController extends AdminController
     public function unpub(){
         $data['sub_active'] = 'unpub';
         $data['articles']   = $this->get_unpub_list(0,10);
-        $data['categories'] = CategoryModel::get_categories($_ENV['site_id']);
+        $data['categories'] = CategoryModel::get_categories($_ENV['domain']['id']);
         $data['base']['title'] = '文章管理-未发表';
         return self::view('admin.article.unpub',$data);
     }
@@ -42,7 +42,7 @@ class ArticleController extends AdminController
     public function pub(){
         $data['sub_active'] = 'pub';
         $data['articles']   = $this->get_pub_list(0,10);
-        $data['categories'] = CategoryModel::get_categories($_ENV['site_id']);
+        $data['categories'] = CategoryModel::get_categories($_ENV['domain']['id']);
         $data['base']['title'] = '文章管理-已发表';
         return self::view('admin.article.pub',$data);
     }
@@ -54,7 +54,7 @@ class ArticleController extends AdminController
     public function mine(){
         $data['sub_active'] = 'mine';
         $data['articles']   = $this->get_mine_list(0,10);
-        $data['categories'] = CategoryModel::get_categories($_ENV['site_id']);
+        $data['categories'] = CategoryModel::get_categories($_ENV['domain']['id']);
         $data['base']['title'] = '文章管理-我的文章';
         return self::view('admin.article.mine',$data);
     }
@@ -66,7 +66,7 @@ class ArticleController extends AdminController
     public function recycle(){
         $data['sub_active'] = 'recycle';
         $data['articles']   = $this->get_recycle_list(0,10);
-        $data['categories'] = CategoryModel::get_categories($_ENV['site_id']);
+        $data['categories'] = CategoryModel::get_categories($_ENV['domain']['id']);
         $data['base']['title'] = '文章管理-回收站';
         return self::view('admin.article.recycle',$data);
     }
@@ -142,7 +142,7 @@ class ArticleController extends AdminController
      */
     public function delete(){
         $request = request();
-        $site_id    = $_ENV['site_id'];
+        $site_id    = $_ENV['domain']['id'];
         $article_id = $request->input('id');
         $info = $this->check_article_auth($article_id, null, 'array');
         if(empty($article_id) || empty($info)){
@@ -162,7 +162,7 @@ class ArticleController extends AdminController
      */
     public function recovery(){
         $request = request();
-        $site_id    = $_ENV['site_id'];
+        $site_id    = $_ENV['domain']['id'];
         $article_id = $request->input('id');
         $info = $this->check_article_auth($article_id, null, 'array');
         if(empty($article_id) || empty($info)){
@@ -182,7 +182,7 @@ class ArticleController extends AdminController
      */
     public function destroy(){
         $request = request();
-        $site_id    = $_ENV['site_id'];
+        $site_id    = $_ENV['domain']['id'];
         $article_id = $request->input('id');
         $info = $this->check_article_auth($article_id, null, 'array');
         if(empty($article_id) || empty($info)){
@@ -219,7 +219,7 @@ class ArticleController extends AdminController
             return self::ApiOut(40001,'请求错误');
         }
 
-        $ret = ArticleModel::update_article($_ENV['site_id'],$article_id,compact('title', 'summary', 'content', 'image', 'tags'));
+        $ret = ArticleModel::update_article($_ENV['domain']['id'],$article_id,compact('title', 'summary', 'content', 'image', 'tags'));
 
         if($ret){
             return self::ApiOut(0,'保存成功');
@@ -238,7 +238,7 @@ class ArticleController extends AdminController
      */
     public function info(){
         $article_id = request()->input('id');
-        $site_id = $_ENV['site_id'];
+        $site_id = $_ENV['domain']['id'];
         $info = $this->check_article_auth($article_id, null, 'array');
         if(empty($article_id) || empty($site_id) || empty($info)){
             return self::ApiOut(40001,'请求错误');
@@ -270,7 +270,7 @@ class ArticleController extends AdminController
      */
     public function postsave(){
         $request = request();
-        $site_id    = $_ENV['site_id'];
+        $site_id    = $_ENV['domain']['id'];
         $article_id = $request->input('id');
         $category   = intval($request->input('category'));
         $type       = $request->input('type');
@@ -306,7 +306,7 @@ class ArticleController extends AdminController
     */
     public function filter($id){
         if(empty($id))return self::ApiOut(40001,'Bad Request');
-        $info = ArticleModel::get_artcile_brief_info($_ENV['site_id'],$id);
+        $info = ArticleModel::get_artcile_brief_info($_ENV['domain']['id'],$id);
         if(!isset($info->id))return self::ApiOut(40001,'Bad Request');
         $article_id = $info->id;
         $title      = $info->title;
@@ -314,7 +314,7 @@ class ArticleController extends AdminController
         $content    = $info->content;
         $image      = $info->image;
         $tags       = $info->tags;
-        $ret = ArticleModel::update_article($_ENV['site_id'],$article_id,compact('title', 'summary', 'content', 'image', 'tags'));
+        $ret = ArticleModel::update_article($_ENV['domain']['id'],$article_id,compact('title', 'summary', 'content', 'image', 'tags'));
         if($ret){
             return self::ApiOut(0,'保存成功');
         }
@@ -337,7 +337,7 @@ class ArticleController extends AdminController
         $aid  = null;
         $info = null;
         if($ret_type == 'array' || is_null($author_id)){
-            $info = ArticleModel::get_artcile_brief_info($_ENV['site_id'],$article_id);
+            $info = ArticleModel::get_artcile_brief_info($_ENV['domain']['id'],$article_id);
         }
         if(is_null($author_id)){
             $aid = isset($info->author_id) ? $info->author_id : null;
@@ -358,8 +358,8 @@ class ArticleController extends AdminController
      */
     private function get_pub_list($skip,$take,$order = 'desc' ,$keyword = null){
         return [
-            'total' => ArticleModel::get_articles_count($_ENV['site_id'],$keyword,1),
-            'list'  =>  $this->format(ArticleModel::get_articles($_ENV['site_id'], $skip,$take,$order,$keyword,1,'post_time'))
+            'total' => ArticleModel::get_articles_count($_ENV['domain']['id'],$keyword,1),
+            'list'  =>  $this->format(ArticleModel::get_articles($_ENV['domain']['id'], $skip,$take,$order,$keyword,1,'post_time'))
         ];
     }
     /*
@@ -369,8 +369,8 @@ class ArticleController extends AdminController
      */
     private function get_unpub_list($skip,$take,$order = 'desc' ,$keyword = null){
         return [
-            'total' => ArticleModel::get_articles_count($_ENV['site_id'],$keyword),
-            'list'  =>  $this->format(ArticleModel::get_articles($_ENV['site_id'], $skip,$take,$order,$keyword))
+            'total' => ArticleModel::get_articles_count($_ENV['domain']['id'],$keyword),
+            'list'  =>  $this->format(ArticleModel::get_articles($_ENV['domain']['id'], $skip,$take,$order,$keyword))
         ];
     }
     /*
@@ -381,8 +381,8 @@ class ArticleController extends AdminController
     private function get_mine_list($skip,$take, $order = 'desc' ,$keyword = null, $orderby = 'create_time'){
         $uid = $_ENV['uid'];
         return [
-            'total' => ArticleModel::get_articles_count($_ENV['site_id'],$keyword,null,$uid),
-            'list'  =>  $this->format(ArticleModel::get_articles($_ENV['site_id'], $skip,$take,$order,$keyword,null,$orderby,$uid))
+            'total' => ArticleModel::get_articles_count($_ENV['domain']['id'],$keyword,null,$uid),
+            'list'  =>  $this->format(ArticleModel::get_articles($_ENV['domain']['id'], $skip,$take,$order,$keyword,null,$orderby,$uid))
         ];
     }
     /*
@@ -392,8 +392,8 @@ class ArticleController extends AdminController
      */
     private function get_recycle_list($skip,$take, $order = 'desc' ,$keyword = null){
         return [
-            'total' => ArticleModel::get_articles_count($_ENV['site_id'],$keyword,null,null,1),
-            'list'  =>  $this->format(ArticleModel::get_articles($_ENV['site_id'], $skip,$take,$order,$keyword,null,'create_time',null,1))
+            'total' => ArticleModel::get_articles_count($_ENV['domain']['id'],$keyword,null,null,1),
+            'list'  =>  $this->format(ArticleModel::get_articles($_ENV['domain']['id'], $skip,$take,$order,$keyword,null,'create_time',null,1))
         ];
     }
     /*

@@ -44,7 +44,7 @@ class CategoryController extends AdminController
     |--------------------------------------------------------------------------
     */
     private static function format(){
-        $list = CategoryModel::get_category_list($_ENV['site_id']);
+        $list = CategoryModel::get_category_list($_ENV['domain']['id']);
         $default    = [];
         $custom     = [];
         foreach($list as $v){
@@ -69,7 +69,7 @@ class CategoryController extends AdminController
         $id =  request()->input('id');
         $deleted = request()->input('deleted') == '1' ? 1 : 0;
         if(empty($id))return $this->ApiOut(40001,'请求错误');
-        CategoryModel::del_category($_ENV['site_id'],$id,$deleted);
+        CategoryModel::del_category($_ENV['domain']['id'],$id,$deleted);
         return $this->ApiOut(0,'操作成功');
     }
     /*
@@ -81,7 +81,7 @@ class CategoryController extends AdminController
         $order =  request()->input('order');
         $order = !!$order ? $order : [];
         if((count($order))>5)return $this->ApiOut(40001,'请求错误');
-        CategoryModel::order_save($_ENV['site_id'],$order);
+        CategoryModel::order_save($_ENV['domain']['id'],$order);
         return $this->ApiOut(0,'保存成功');
     }
     /*
@@ -93,16 +93,16 @@ class CategoryController extends AdminController
         $id     =  intval(request()->input('id'));
         $move   =  intval(request()->input('move'));
 
-        if(($id == 0 && !CategoryModel::category_owner($_ENV['site_id'],$move)) || ($move != 0 && !CategoryModel::category_owner($_ENV['site_id'],$move)))return $this->ApiOut(40001,'请求错误');
+        if(($id == 0 && !CategoryModel::category_owner($_ENV['domain']['id'],$move)) || ($move != 0 && !CategoryModel::category_owner($_ENV['domain']['id'],$move)))return $this->ApiOut(40001,'请求错误');
 
         //默认分类转移
         if($id == 0){
-            CategoryModel::article_transfer($_ENV['site_id'],$id,$move);
+            CategoryModel::article_transfer($_ENV['domain']['id'],$id,$move);
         }
         //常规分类删除
         else{
-            CategoryModel::article_transfer($_ENV['site_id'],$id,$move);
-            CategoryModel::del_category($_ENV['site_id'],$id);
+            CategoryModel::article_transfer($_ENV['domain']['id'],$id,$move);
+            CategoryModel::del_category($_ENV['domain']['id'],$id);
         }
         
         return $this->ApiOut(0,'删除成功');
@@ -117,8 +117,8 @@ class CategoryController extends AdminController
         $id         = $request->input('id');
         $name       = trim($request->input('name'));
         if(!$id || !$name)return $this->ApiOut(40001,'名称为空');
-        if(CategoryModel::category_exist($_ENV['site_id'],$name))return $this->ApiOut(40001,'分类已存在');
-        CategoryModel::edit_category($_ENV['site_id'], $id, compact("name"));
+        if(CategoryModel::category_exist($_ENV['domain']['id'],$name))return $this->ApiOut(40001,'分类已存在');
+        CategoryModel::edit_category($_ENV['domain']['id'], $id, compact("name"));
         return $this->ApiOut(0,'保存成功');
     }
     /*
@@ -131,13 +131,13 @@ class CategoryController extends AdminController
         $name       = trim($request->input('name'));
 
         if(!$name)return $this->ApiOut(40001,'名称为空');
-        if(CategoryModel::category_exist($_ENV['site_id'],$name))return $this->ApiOut(40001,'分类已存在');
+        if(CategoryModel::category_exist($_ENV['domain']['id'],$name))return $this->ApiOut(40001,'分类已存在');
 
-        $max_order = CategoryModel::max_order($_ENV['site_id']);
+        $max_order = CategoryModel::max_order($_ENV['domain']['id']);
         $max = isset($max_order->order) ? $max_order->order : 0;
-        $count = CategoryModel::category_count($_ENV['site_id']);
+        $count = CategoryModel::category_count($_ENV['domain']['id']);
         if($count >= 5)return $this->ApiOut(40001,'最多5个待选分类');
-        CategoryModel::add_category($_ENV['site_id'],compact("name"),$max);
+        CategoryModel::add_category($_ENV['domain']['id'],compact("name"),$max);
         return $this->ApiOut(0,'保存成功');
     }
 

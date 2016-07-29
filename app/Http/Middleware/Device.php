@@ -19,14 +19,14 @@ class Device
     */
     public function handle($request, Closure $next)
     {
-        if($_ENV['site_is_mobile'] != $_ENV['request_is_mobile']){
+        if($_ENV['domain']['mobile'] != $_ENV['request']['mobile']){
             //子站
-            if($_ENV['site_id'] != '0'){
-                $base = $_ENV['site_is_mobile'] ? $_ENV['site_pc_domain'] : $_ENV['site_m_domain'];
+            if($_ENV['domain']['id'] != '0'){
+                $base = $_ENV['domain']['mobile'] ? $_ENV['domain']['pc'] : $_ENV['domain']['m'];
             }
             //平台
             else{
-                $base = $_ENV['site_is_mobile'] ? $_ENV['platform']['domain'] : 'm.'.$_ENV['platform']['domain'];
+                $base = $_ENV['domain']['mobile'] ? $_ENV['platform']['domain'] : 'm.'.$_ENV['platform']['domain'];
             }
             //保留回调链接
             $redirect = $request->input('redirect');

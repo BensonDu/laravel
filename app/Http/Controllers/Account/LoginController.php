@@ -56,7 +56,7 @@ class LoginController extends AccountController
         //无回调返回首页
         if(empty($redirect))return redirect('/');
         //平台自跳转
-        if(get_domain($redirect) == $_ENV['SITE_PLATFORM_BASE']){
+        if(get_domain($redirect) == $_ENV['platform']['home']){
             return redirect(urldecode($redirect));
         }
         //跳转子站
@@ -76,7 +76,7 @@ class LoginController extends AccountController
 
         if($data){
             //是否为子站跳转
-            $site = !stristr($redirect, $_ENV['SITE_PLATFORM_BASE']);
+            $site = !stristr($redirect, $_ENV['platform']['home']);
             $sid = session()->getId();
             $this->login($data->id);
             return self::ApiOut(0,['session'=>$sid,'site'=>$site]);

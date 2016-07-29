@@ -27,7 +27,7 @@ class FeedController extends Controller
     |--------------------------------------------------------------------------
     */
     private function site_info(){
-        $this->info = SiteModel::get_site_info($_ENV['site_id']);
+        $this->info = SiteModel::get_site_info($_ENV['domain']['id']);
     }
 
     /*
@@ -36,7 +36,7 @@ class FeedController extends Controller
     |--------------------------------------------------------------------------
     */
     protected function site_articles(){
-        return ArticleSiteModel::get_rss_article_list($_ENV['site_id']);
+        return ArticleSiteModel::get_rss_article_list($_ENV['domain']['id']);
     }
     /*
     |--------------------------------------------------------------------------

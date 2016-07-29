@@ -50,7 +50,7 @@
                     <div class="info">
                         <div class="tags">
 @foreach ($article->tags as $tag)
-                            <a target="_blank" href="{{$_ENV['platform']['home']}}/tag/{{$tag['item']}}?site={{$_ENV['site_id']}}" style="color: {{$tag['color']}}">{{$tag['item']}}</a>
+                            <a target="_blank" href="{{$_ENV['platform']['home']}}/tag/{{$tag['item']}}?site={{$_ENV['domain']['id']}}" style="color: {{$tag['color']}}">{{$tag['item']}}</a>
 @endforeach
                         </div>
                         <a class="title" target="_blank" href="/{{$article->article_id}}">{{$article->title}}</a>
@@ -76,7 +76,7 @@
                 <div class="wrap">
                     <div class="info">
                         <div class="tags">
-                            <a  target="_blank" v-for="tag in article.tags" v-bind:href="'{{$_ENV['platform']['home']}}/tag/'+tag.item?site={{$_ENV['site_id']}}" v-bind:style="'color:'+tag.color" v-text="tag.item"></a>
+                            <a  target="_blank" v-for="tag in article.tags" v-bind:href="'{{$_ENV['platform']['home']}}/tag/'+tag.item?site={{$_ENV['domain']['id']}}" v-bind:style="'color:'+tag.color" v-text="tag.item"></a>
                         </div>
                         <a class="title" target="_blank" v-bind:href="'/'+article.article_id" v-text="article.title"></a>
                         <h5 class="summary" v-text="article.summary"></h5>

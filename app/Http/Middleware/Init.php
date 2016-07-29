@@ -35,12 +35,12 @@ class Init
      |--------------------------------------------------------------------------
      */
     private function set_env_admin(){
-        if(isset($_ENV['uid']) && isset($_ENV['site_id'])){
+        if(isset($_ENV['uid']) && isset($_ENV['domain']['id'])){
             $roles = UserModel::get_user_role($_ENV['uid']);
             $role  = 0;
             foreach ($roles as $v){
                 //平台管理员默认拥有所有子站权限
-                if($v->site_id == $_ENV['site_id'] || $v->site_id == '0'){
+                if($v->site_id == $_ENV['domain']['id'] || $v->site_id == '0'){
                     $role = intval($v->role);
                     break;
                 }

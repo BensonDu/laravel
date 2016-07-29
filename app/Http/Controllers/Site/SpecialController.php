@@ -24,9 +24,9 @@ class SpecialController extends SiteController
      |--------------------------------------------------------------------------
      */
     public function index(){
-        $list = SiteSpecialModel::get_special_all($_ENV['site_id']);
+        $list = SiteSpecialModel::get_special_all($_ENV['domain']['id']);
         if(empty($list))abort(404);
-        $info = SiteModel::get_site_info($_ENV['site_id']);
+        $info = SiteModel::get_site_info($_ENV['domain']['id']);
         $data['special'] = isset($info->special) ? $info->special : '';
         $data['list']   = $list;
         $data['active'] = 'special';
@@ -40,13 +40,13 @@ class SpecialController extends SiteController
      */
     public function detail($id){
         //获取专题信息
-        $data['info'] = SiteSpecialModel::get_special_brief_info($_ENV['site_id'],$id,['id','title','summary','image','bg_image','list']);
+        $data['info'] = SiteSpecialModel::get_special_brief_info($_ENV['domain']['id'],$id,['id','title','summary','image','bg_image','list']);
         if(empty($data['info']))abort(404);
         //导航Active
         $data['active'] = 'special';
         //获取专题文章列表
         $ids = explode(' ',$data['info']->list);
-        $list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$ids);
+        $list = ArticleSiteModel::get_article_list_by_ids($_ENV['domain']['id'],$ids);
         $data['list'] = $list;
         //专题页标题
         $data['base']['title'] = $data['info']->title;
@@ -58,9 +58,9 @@ class SpecialController extends SiteController
      |--------------------------------------------------------------------------
      */
     public function mobileindex(){
-        $list = SiteSpecialModel::get_special_all($_ENV['site_id']);
+        $list = SiteSpecialModel::get_special_all($_ENV['domain']['id']);
         if(empty($list))abort(404);
-        $info = SiteModel::get_site_info($_ENV['site_id']);
+        $info = SiteModel::get_site_info($_ENV['domain']['id']);
         $data['special'] = isset($info->special) ? $info->special : '';
         $data['list']   = $list;
         $data['active'] = 'special';
@@ -74,13 +74,13 @@ class SpecialController extends SiteController
      */
     public function mobiledetail($id){
         //获取专题信息
-        $data['info'] = SiteSpecialModel::get_special_brief_info($_ENV['site_id'],$id,['id','title','summary','image','bg_image','list']);
+        $data['info'] = SiteSpecialModel::get_special_brief_info($_ENV['domain']['id'],$id,['id','title','summary','image','bg_image','list']);
         if(empty($data['info']))abort(404);
         //导航Active
         $data['active'] = 'special';
         //获取专题文章列表
         $ids = explode(' ',$data['info']->list);
-        $list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$ids);
+        $list = ArticleSiteModel::get_article_list_by_ids($_ENV['domain']['id'],$ids);
         $data['list'] = $list;
         //专题页标题
         $data['base']['title'] = $data['info']->title;

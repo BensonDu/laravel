@@ -87,7 +87,7 @@ class UserController extends AdminController
      */
     public function info(){
         $request = request();
-        $site_id    = $_ENV['site_id'];
+        $site_id    = $_ENV['domain']['id'];
         $user_id = $request->input('id');
         if(empty($user_id)){
             return $this->ApiOut(40001,'请求错误');
@@ -103,7 +103,7 @@ class UserController extends AdminController
      */
     public function delete(){
         $request = request();
-        $site_id    = $_ENV['site_id'];
+        $site_id    = $_ENV['domain']['id'];
         $user_id = $request->input('id');
         if(empty($user_id)){
             return $this->ApiOut(40001,'请求错误');
@@ -118,7 +118,7 @@ class UserController extends AdminController
      */
     public function blacklistdel(){
         $request = request();
-        $site_id    = $_ENV['site_id'];
+        $site_id    = $_ENV['domain']['id'];
         $user_id = $request->input('id');
         if(empty($user_id)){
             return $this->ApiOut(40001,'请求错误');
@@ -134,7 +134,7 @@ class UserController extends AdminController
      */
     public function blacklistadd(){
         $request    = request();
-        $site_id    = $_ENV['site_id'];
+        $site_id    = $_ENV['domain']['id'];
         $user_id    = $request->input('id');
         if(empty($user_id)){
             return $this->ApiOut(40001,'请求错误');
@@ -168,7 +168,7 @@ class UserController extends AdminController
      */
     public function add(){
         $request = request();
-        $site_id    = $_ENV['site_id'];
+        $site_id    = $_ENV['domain']['id'];
         $role = $request->input('role');
         $user_id   = $request->input('id');
         if(empty($user_id) || empty($role)){
@@ -184,7 +184,7 @@ class UserController extends AdminController
      */
     public function update(){
         $request = request();
-        $site_id = $_ENV['site_id'];
+        $site_id = $_ENV['domain']['id'];
         $user_id = $request->input('id');
         $role    = $request->input('role');
         if(empty($user_id) || empty($role)){
@@ -200,8 +200,8 @@ class UserController extends AdminController
      */
     private function get_blacklist($skip,$take, $order = 'desc' ,$keyword = null, $orderby = 'time'){
         return [
-            'total' => BlacklistModel::get_site_blacklist_count($_ENV['site_id'],$keyword),
-            'list'  => BlacklistModel::get_site_blacklist($_ENV['site_id'], $skip,$take,$order,$keyword,$orderby)
+            'total' => BlacklistModel::get_site_blacklist_count($_ENV['domain']['id'],$keyword),
+            'list'  => BlacklistModel::get_site_blacklist($_ENV['domain']['id'], $skip,$take,$order,$keyword,$orderby)
         ];
     }
     /*
@@ -211,8 +211,8 @@ class UserController extends AdminController
      */
     private function get_list($skip,$take, $order = 'desc' ,$keyword = null, $orderby = 'create_time'){
         return [
-            'total' => UserModel::get_site_users_count($_ENV['site_id'],$keyword),
-            'list'  =>  $this->format(UserModel::get_site_users($_ENV['site_id'], $skip,$take,$order,$keyword,$orderby))
+            'total' => UserModel::get_site_users_count($_ENV['domain']['id'],$keyword),
+            'list'  =>  $this->format(UserModel::get_site_users($_ENV['domain']['id'], $skip,$take,$order,$keyword,$orderby))
         ];
     }
     /*

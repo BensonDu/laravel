@@ -46,7 +46,7 @@ class SiteController extends AdminController
         $keywords   = $request->input('keywords');
         $description= $request->input('description');
         if(empty($name) || empty($slogan) || empty($keywords) || empty($description))return self::ApiOut(40001,'请求错误');
-        SiteModel::update_site_info($_ENV['site_id'],compact("name","slogan","keywords","description"));
+        SiteModel::update_site_info($_ENV['domain']['id'],compact("name","slogan","keywords","description"));
         return self::ApiOut(0,'更新成功');
     }
     /*
@@ -73,7 +73,7 @@ class SiteController extends AdminController
         $thirdparty_logo= $request->input('thirdparty_logo');
         $favicon        = $request->input('favicon');
         if(empty($logo) || empty($mobile_logo) || empty($thirdparty_logo) || empty($favicon))return self::ApiOut(40001,'请求错误');
-        SiteModel::update_site_info($_ENV['site_id'],compact("logo","mobile_logo","thirdparty_logo","favicon"));
+        SiteModel::update_site_info($_ENV['domain']['id'],compact("logo","mobile_logo","thirdparty_logo","favicon"));
         return self::ApiOut(0,'更新成功');
     }
     /*
@@ -102,7 +102,7 @@ class SiteController extends AdminController
         $weixin    = $request->input('weixin');
         $email     = $request->input('email');
         if(empty($email) || empty($weixin ) || empty($weibo))return self::ApiOut(40001,'请求错误');
-        SiteModel::update_site_info($_ENV['site_id'],compact("weibo","weixin","email"));
+        SiteModel::update_site_info($_ENV['domain']['id'],compact("weibo","weixin","email"));
         return self::ApiOut(0,'更新成功');
     }
     /*
@@ -138,9 +138,9 @@ class SiteController extends AdminController
         //检查表单
         if(empty($name) || empty($link))  return self::ApiOut(40001,'请求错误');
         //自定义导航个数
-        if(SiteModel::get_site_nav_count($_ENV['site_id']) >= 4) return self::ApiOut(40002,'总数限制');
+        if(SiteModel::get_site_nav_count($_ENV['domain']['id']) >= 4) return self::ApiOut(40002,'总数限制');
         //添加导航
-        SiteModel::add_site_nav($_ENV['site_id'], $name, $link, $display);
+        SiteModel::add_site_nav($_ENV['domain']['id'], $name, $link, $display);
 
         return self::ApiOut(0,'添加成功');
     }
@@ -167,12 +167,12 @@ class SiteController extends AdminController
                     break;
                 default:
             }
-            SiteModel::update_site_info($_ENV['site_id'], $update);
+            SiteModel::update_site_info($_ENV['domain']['id'], $update);
         }
         //自定义导航更新
         else{
             if(empty($id) || empty($name) || empty($link)) return self::ApiOut(40001,'请求错误');
-            SiteModel::update_site_nav($_ENV['site_id'], $id, [
+            SiteModel::update_site_nav($_ENV['domain']['id'], $id, [
                 'display'   => $display,
                 'name'      => $name,
                 'link'      => $link
@@ -187,7 +187,7 @@ class SiteController extends AdminController
     */
     public function navdel(){
         $id = request('id');
-        SiteModel::update_site_nav($_ENV['site_id'], $id, ['deleted' => 1]);
+        SiteModel::update_site_nav($_ENV['domain']['id'], $id, ['deleted' => 1]);
         return self::ApiOut(0,'删除成功');
     }
     /*
@@ -211,7 +211,7 @@ class SiteController extends AdminController
         $comment    = request()->input('comment') == 'true' ? 1 : 0;
         $comment_ex = request()->input('comment_ex') == 'true' ? 1 : 0;
         if(!$comment)$comment_ex = 0;
-        SiteModel::update_site_info($_ENV['site_id'],[
+        SiteModel::update_site_info($_ENV['domain']['id'],[
             'contribute'=>$contribute,
             'comment'   =>$comment,
             'comment_ex'=>$comment_ex
@@ -235,17 +235,17 @@ class SiteController extends AdminController
                 'type'      => 1,
                 'display'   => 1,
                 'name'      => $info->home,
-                'link'      => 'http://'.$_ENV['site_pc_domain'].'/'
+                'link'      => 'http://'.$_ENV['domain']['pc'].'/'
             ],
             [
                 'id'        => 'special',
                 'type'      => 1,
-                'display'   => !!SiteSpecialModel::get_special_count($_ENV['site_id'],0,1),
+                'display'   => !!SiteSpecialModel::get_special_count($_ENV['domain']['id'],0,1),
                 'name'      => $info->special,
-                'link'      => 'http://'.$_ENV['site_pc_domain'].'/special'
+                'link'      => 'http://'.$_ENV['domain']['pc'].'/special'
             ]
         ];
-        $custom = SiteModel::get_site_nav($_ENV['site_id'],null);
+        $custom = SiteModel::get_site_nav($_ENV['domain']['id'],null);
         if(!empty($custom)){
             foreach ($custom as $v){
                 $nav[] = [
@@ -265,7 +265,7 @@ class SiteController extends AdminController
     |--------------------------------------------------------------------------
     */
     private static function info(){
-        $info = SiteModel::get_site_info($_ENV['site_id']);
+        $info = SiteModel::get_site_info($_ENV['domain']['id']);
         $info->domain = empty($info->custom_domain) ? $info->platform_domain.'.'.$_ENV['platform']['domain'] : $info->custom_domain;
         return $info;
     }

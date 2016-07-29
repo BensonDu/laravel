@@ -60,7 +60,7 @@ class RegistController extends AccountController
         $info = AccountModel::regist($username,$phone,$password);
         if(isset($info->id))$this->login($info->id);
 
-        $site = !stristr($redirect, $_ENV['SITE_PLATFORM_BASE']);
+        $site = !stristr($redirect, $_ENV['platform']['home']);
         $sid = session()->getId();
 
         return self::ApiOut(0,['session'=>$sid,'site'=>$site]);

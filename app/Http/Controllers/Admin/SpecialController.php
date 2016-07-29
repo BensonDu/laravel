@@ -55,7 +55,7 @@ class SpecialController extends AdminController
         if(empty($id)){
             return $this->ApiOut(40001,'请求错误');
         }
-        SiteSpecialModel::special_delete($_ENV['site_id'],$id);
+        SiteSpecialModel::special_delete($_ENV['domain']['id'],$id);
         return $this->ApiOut(0,'删除成功');
     }
     /*
@@ -70,7 +70,7 @@ class SpecialController extends AdminController
         if(empty($id)){
             return $this->ApiOut(40001,'请求错误');
         }
-        SiteSpecialModel::special_update($_ENV['site_id'],$id,compact("post_status"));
+        SiteSpecialModel::special_update($_ENV['domain']['id'],$id,compact("post_status"));
         return $this->ApiOut(0,'更改发布状态成功');
     }
     /*
@@ -89,7 +89,7 @@ class SpecialController extends AdminController
         $list       = $request->input('list');
         if(empty($id) || empty($title) || empty($bg_image) || empty($image) || empty($list)) return $this->ApiOut(40001,'请求错误');
         $list   = trim(implode(' ',array_unique($list)));
-        SiteSpecialModel::special_update($_ENV['site_id'],$id,compact("title","summary","image","bg_image","update_time","list"));
+        SiteSpecialModel::special_update($_ENV['domain']['id'],$id,compact("title","summary","image","bg_image","update_time","list"));
         return $this->ApiOut(0,'更新成功');
     }
     /*
@@ -106,7 +106,7 @@ class SpecialController extends AdminController
         $list       = $request->input('list');
         if( empty($title) || empty($bg_image) || empty($image) || empty($list)) return $this->ApiOut(40001,'请求错误');
         $list   =trim(implode(' ', array_unique($list)));
-        SiteSpecialModel::special_add($_ENV['site_id'],compact("title","summary","image","bg_image","list"));
+        SiteSpecialModel::special_add($_ENV['domain']['id'],compact("title","summary","image","bg_image","list"));
         return $this->ApiOut(0,'添加成功');
     }
     /*
@@ -117,10 +117,10 @@ class SpecialController extends AdminController
     public function info(){
         $id =  request()->input('id');
         if(empty($id))return $this->ApiOut(40001,'请求错误');
-        $info = SiteSpecialModel::get_special_brief_info($_ENV['site_id'],$id,['id','title','summary','image','bg_image','list'],null);
+        $info = SiteSpecialModel::get_special_brief_info($_ENV['domain']['id'],$id,['id','title','summary','image','bg_image','list'],null);
         if(!isset($info->id))return $this->ApiOut(40001,'请求错误');
         $list =explode(' ',$info->list);
-        $info->list = ArticleSiteModel::get_article_list_by_ids($_ENV['site_id'],$list,['id','title','post_time AS time','summary']);
+        $info->list = ArticleSiteModel::get_article_list_by_ids($_ENV['domain']['id'],$list,['id','title','post_time AS time','summary']);
         return $this->ApiOut(0,$info);
     }
     /*
@@ -130,7 +130,7 @@ class SpecialController extends AdminController
     */
     public function articles(){
         $keyword =  request()->input('keyword');
-        $list = ArticleModel::get_articles($_ENV['site_id'],0,8,'desc',$keyword,1);
+        $list = ArticleModel::get_articles($_ENV['domain']['id'],0,8,'desc',$keyword,1);
         $ret = [];
         foreach($list as $k => $v){
             $ret[$k]['title'] = $v->title;
@@ -146,7 +146,7 @@ class SpecialController extends AdminController
     |--------------------------------------------------------------------------
     */
     private function getlist($skip,$take,$keyword = null,$orderby='update_time',$order='desc'){
-        $list = SiteSpecialModel::get_special_list($_ENV['site_id'],$skip,$take,$keyword,null,0,$orderby,$order);
+        $list = SiteSpecialModel::get_special_list($_ENV['domain']['id'],$skip,$take,$keyword,null,0,$orderby,$order);
         $ret = [];
         foreach($list as $k => $v){
             $ret[$k]['title'] = $v->title;
@@ -156,7 +156,7 @@ class SpecialController extends AdminController
         }
         return [
             'list'  => $ret,
-            'total' => SiteSpecialModel::get_special_count($_ENV['site_id'])
+            'total' => SiteSpecialModel::get_special_count($_ENV['domain']['id'])
         ];
     }
 

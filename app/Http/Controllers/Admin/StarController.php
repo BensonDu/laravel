@@ -30,7 +30,7 @@ class StarController extends AdminController
     */
     public function index(){
         $data['base']['title'] = '精选管理';
-        $data['list'] = StarModel::get_star_list($_ENV['site_id']);
+        $data['list'] = StarModel::get_star_list($_ENV['domain']['id']);
         return self::view('admin.star.index',$data);
     }
     /*
@@ -39,7 +39,7 @@ class StarController extends AdminController
     |--------------------------------------------------------------------------
     */
     public function starlist(){
-        $list = StarModel::get_star_list($_ENV['site_id']);
+        $list = StarModel::get_star_list($_ENV['domain']['id']);
         return $this->ApiOut(0,$list);
     }
     /*
@@ -49,9 +49,9 @@ class StarController extends AdminController
     */
     public function ordersave(){
         $order =  request()->input('order');
-        $site_id = $_ENV['site_id'];
+        $site_id = $_ENV['domain']['id'];
         if(empty($order) || !is_array($order) || !StarModel::check_star_auth($site_id,$order))return $this->ApiOut(40001,'请求错误');
-        StarModel::order_save($_ENV['site_id'],$order);
+        StarModel::order_save($_ENV['domain']['id'],$order);
         return $this->ApiOut(0,'保存成功');
     }
     /*
@@ -62,7 +62,7 @@ class StarController extends AdminController
     public function del(){
         $id =  request()->input('id');
         if(empty($id))return $this->ApiOut(40001,'请求错误');
-        StarModel::del_star($_ENV['site_id'],$id);
+        StarModel::del_star($_ENV['domain']['id'],$id);
         return $this->ApiOut(0,'删除成功');
     }
     /*
@@ -83,7 +83,7 @@ class StarController extends AdminController
         }
         $update_time= now();
         if(!$id || !$title || !$category || !$image || !$this->check_jump($type,$jump_info))return $this->ApiOut(40001,'请求错误');
-        StarModel::save_star($_ENV['site_id'], $id, compact("title","category","image","type","jump_info","update_time"));
+        StarModel::save_star($_ENV['domain']['id'], $id, compact("title","category","image","type","jump_info","update_time"));
         return $this->ApiOut(0,'保存成功');
     }
     /*
@@ -102,11 +102,11 @@ class StarController extends AdminController
             $jump_info = url_fix($jump_info);
         }
         if(!$title || !$category || !$image || !$this->check_jump($type,$jump_info))return $this->ApiOut(40001,'请求错误');
-        $max_order = StarModel::max_order($_ENV['site_id']);
+        $max_order = StarModel::max_order($_ENV['domain']['id']);
         $max = isset($max_order->order) ? $max_order->order : 0;
-        $count = StarModel::star_count($_ENV['site_id']);
+        $count = StarModel::star_count($_ENV['domain']['id']);
         if($count >= 8)return $this->ApiOut(40001,'超过最大精选数');
-        StarModel::add_star($_ENV['site_id'], compact("title","category","image","type","jump_info"),$max);
+        StarModel::add_star($_ENV['domain']['id'], compact("title","category","image","type","jump_info"),$max);
         return $this->ApiOut(0,'保存成功');
     }
     /*
@@ -116,7 +116,7 @@ class StarController extends AdminController
     */
     public function info(){
         $id =  request()->input('id');
-        $site_id = $_ENV['site_id'];
+        $site_id = $_ENV['domain']['id'];
         if(empty($id))return $this->ApiOut(40001,'请求错误');
         $info = StarModel::get_star_info($site_id,$id);
         if(isset($info->type)){
@@ -139,7 +139,7 @@ class StarController extends AdminController
     */
     public function articles(){
         $keyword =  request()->input('keyword');
-        $list = ArticleModel::get_articles($_ENV['site_id'],0,8,'desc',$keyword,1);
+        $list = ArticleModel::get_articles($_ENV['domain']['id'],0,8,'desc',$keyword,1);
         $ret = [];
         foreach($list as $k => $v){
             $ret[$k]['title'] = $v->title;
@@ -158,7 +158,7 @@ class StarController extends AdminController
     */
     public function specials(){
         $keyword =  request()->input('keyword');
-        $list = SiteSpecialModel::get_special_list($_ENV['site_id'],0,7,$keyword);
+        $list = SiteSpecialModel::get_special_list($_ENV['domain']['id'],0,7,$keyword);
         $ret = [];
         foreach($list as $k => $v){
             $ret[$k]['title'] = $v->title;
@@ -175,7 +175,7 @@ class StarController extends AdminController
     |--------------------------------------------------------------------------
     */
     private function check_jump($type,$info){
-        $site_id = $_ENV['site_id'];
+        $site_id = $_ENV['domain']['id'];
         $ret = false;
         switch ($type){
             case 'link':

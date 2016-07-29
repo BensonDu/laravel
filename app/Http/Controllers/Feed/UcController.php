@@ -23,7 +23,7 @@ class UcController extends FeedController
     }
     public function index(){
         $info = $this->info;
-        $base_url = 'http://'.$_ENV['site_pc_domain'];
+        $base_url = 'http://'.$_ENV['domain']['pc'];
         $base_article_url = $base_url.'/feed/uc/';
         $feed = new \App\Libs\rss\Feed();
         $channel = new \App\Libs\rss\Channel();
@@ -54,7 +54,7 @@ class UcController extends FeedController
     public function detail($id){
         if(empty($id)) abort(404);
         $data['site']   = $this->info;
-        $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
+        $data['article'] = ArticleSiteModel::get_artilce_detail($_ENV['domain']['id'],$id);
         if(!isset($data['article']->content)) abort(404);
         //查找替换文章中图片 添加裁剪参数
         $data['article']->content   = content_image_crop($data['article']->content);
@@ -64,7 +64,7 @@ class UcController extends FeedController
         $view = View::make('feed.uc', $data);
         $ret = $view->render();
 
-        StaticWebModel::create_uc($_ENV['site_id'],$id,$ret);
+        StaticWebModel::create_uc($_ENV['domain']['id'],$id,$ret);
 
         return $ret;
     }

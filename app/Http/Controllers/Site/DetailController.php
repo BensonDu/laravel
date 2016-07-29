@@ -23,7 +23,7 @@ class DetailController extends SiteController
     }
 
     public function index($id){
-        $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
+        $info = ArticleSiteModel::get_artilce_detail($_ENV['domain']['id'],$id);
 
         if(empty($info))abort(404);
         $tag = tag($info->tags);
@@ -36,7 +36,7 @@ class DetailController extends SiteController
         ];
 
         //广告
-        $data['ad'] = AdModel::get_article_ad($_ENV['site_id']);
+        $data['ad'] = AdModel::get_article_ad($_ENV['domain']['id']);
 
         $data['article'] = [
             'id'        => $info->article_id,
@@ -55,18 +55,18 @@ class DetailController extends SiteController
         ];
 
         //站点设置 是否开启评论
-        $site = SiteModel::get_site_info($_ENV['site_id']);
+        $site = SiteModel::get_site_info($_ENV['domain']['id']);
         $data['comment'] = empty($site->comment) ? false : true;
         //子站文章浏览总量+1
-        PlatformCacheModel::site_article_view_increase($_ENV['site_id']);
+        PlatformCacheModel::site_article_view_increase($_ENV['domain']['id']);
         return self::view('site.detail',$data);
     }
     public function mobile($id){
         //调取缓存
-        $cache = SiteCacheModel::m_article_view($_ENV['site_id'],$id);
+        $cache = SiteCacheModel::m_article_view($_ENV['domain']['id'],$id);
         if(!empty($cache) && 0)return $cache;
 
-        $info = ArticleSiteModel::get_artilce_detail($_ENV['site_id'],$id);
+        $info = ArticleSiteModel::get_artilce_detail($_ENV['domain']['id'],$id);
 
         if(empty($info))abort(404);
         $tag = tag($info->tags);
@@ -97,11 +97,11 @@ class DetailController extends SiteController
             'weixin'    => image_crop_custom($info->image,'?imageMogr2/thumbnail/x300/gravity/Center/crop/300x300/')
         ];
         //站点设置 是否开启评论
-        $site = SiteModel::get_site_info($_ENV['site_id']);
+        $site = SiteModel::get_site_info($_ENV['domain']['id']);
         $data['comment'] = empty($site->comment) ? false : true;
 
         $view = self::make('mobile.site.detail',$data);
-        SiteCacheModel::m_article_view_set($_ENV['site_id'],$id,$view);
+        SiteCacheModel::m_article_view_set($_ENV['domain']['id'],$id,$view);
 
         return $view;
     }

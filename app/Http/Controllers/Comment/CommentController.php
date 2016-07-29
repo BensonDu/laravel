@@ -28,7 +28,7 @@ class CommentController extends Controller{
         $orderby    = 'new' == $orderby ? 'new' : 'hot';
         $order      = 'asc' == request()->input('order') ? 'asc' : 'desc';
         $root       = !empty($root) ? $root : 0;
-        $list = self::format(CommentModel::getArticleComments($_ENV['site_id'],intval($_ENV['uid']),$article_id,$order),$root,$orderby);
+        $list = self::format(CommentModel::getArticleComments($_ENV['domain']['id'],intval($_ENV['uid']),$article_id,$order),$root,$orderby);
         return self::ApiOut(0,$list);
     }
     /*
@@ -69,7 +69,7 @@ class CommentController extends Controller{
     public static function hide(){
         $id = request()->input('id');
         if(empty($id) || !isset($_ENV['admin']['role']) || $_ENV['admin']['role'] <= 1)return self::ApiOut(40001,'请求错误');
-        CommentModel::hideComment($_ENV['site_id'],$id);
+        CommentModel::hideComment($_ENV['domain']['id'],$id);
         return self::ApiOut(0,'操作成功');
     }
     /*
@@ -80,7 +80,7 @@ class CommentController extends Controller{
     public static function submit(){
         $request    = request();
         $uid        = $_ENV['uid'];
-        $site_id    = $_ENV['site_id'];
+        $site_id    = $_ENV['domain']['id'];
         $article_id = $request->input('id');
         $content    = htmlspecialchars($request->input('content'));
         $parent         = $request->input('parent');
@@ -91,7 +91,7 @@ class CommentController extends Controller{
          *  过滤重复评论内容
          *  连续评论超过3条 需通过验证码
          */
-        $comments =  CommentModel::getUserLatestComment($_ENV['site_id'],$_ENV['uid']);
+        $comments =  CommentModel::getUserLatestComment($_ENV['domain']['id'],$_ENV['uid']);
         $count = count($comments);
         //重复评论
         if($count>0 && $comments[0]->article_id == $article_id &&$comments[0]->content == $content) return self::ApiOut(40001,'禁止评论重复内容');
@@ -108,7 +108,7 @@ class CommentController extends Controller{
      */
     private static function format($list,$root,$orderby = 'hot'){
 
-        $site = SiteModel::get_site_info($_ENV['site_id']);
+        $site = SiteModel::get_site_info($_ENV['domain']['id']);
 
         //站点开启评论
         if(empty($site->comment))return [];
@@ -194,7 +194,7 @@ class CommentController extends Controller{
                 $comment['replied_home'] = $_ENV['platform']['home'].'/user/'.$user_map[$id_user_map[$v->parent]]['id'];
             };
             //评论已删除 或 被站点管理员隐藏 或关闭站外评论
-            if(!empty($v->hide) || !empty($v->deleted) || (!$ex && $v->site_id != $_ENV['site_id'])){
+            if(!empty($v->hide) || !empty($v->deleted) || (!$ex && $v->site_id != $_ENV['domain']['id'])){
                 $comment['hide']     = 1;
                 $comment['content']  = '评论已被删除';
                 $comment['nickname'] = '用户信息已隐藏';

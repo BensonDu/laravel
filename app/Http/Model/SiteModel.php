@@ -108,7 +108,7 @@ class SiteModel extends Model
             ]
         ];
         //站点是否拥有专题
-        if(!!SiteSpecialModel::get_special_count($_ENV['site_id'],0,1)){
+        if(!!SiteSpecialModel::get_special_count($_ENV['domain']['id'],0,1)){
             $nav[] = [
                 'id'   => 'special',
                 'link' => '/special',

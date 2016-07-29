@@ -24,7 +24,7 @@ class IndexController extends SiteController
 
     public function index(){
 
-        $id = $_ENV['site_id'];
+        $id = $_ENV['domain']['id'];
         $data['active'] = 'home';
 
         //首页精选
@@ -41,7 +41,7 @@ class IndexController extends SiteController
         //广告
         $data['ad'] = AdModel::get_home_ad($id);
         //浏览总量+1
-        PlatformCacheModel::site_home_view_increase($_ENV['site_id']);
+        PlatformCacheModel::site_home_view_increase($_ENV['domain']['id']);
         return self::view('/site/index',$data);
     }
     /*
@@ -51,7 +51,7 @@ class IndexController extends SiteController
      */
     public function mobile(){
 
-        $id = $_ENV['site_id'];
+        $id = $_ENV['domain']['id'];
         $data['active'] = 'home';
 
         //首页精选
@@ -72,7 +72,7 @@ class IndexController extends SiteController
      |--------------------------------------------------------------------------
      */
     public function mobilearticles(){
-        $id = $_ENV['site_id'];
+        $id = $_ENV['domain']['id'];
         $index      = request()->input('index');
         $category   = request()->input('category');
         $skip =intval($index)*15;
@@ -87,7 +87,7 @@ class IndexController extends SiteController
      |--------------------------------------------------------------------------
      */
     public function articles(){
-        $id = $_ENV['site_id'];
+        $id = $_ENV['domain']['id'];
         $index      = request()->input('index');
         $category   = request()->input('category');
         $skip =intval($index)*15;
@@ -102,7 +102,7 @@ class IndexController extends SiteController
      |--------------------------------------------------------------------------
      */
     private function get_categories(){
-        return CategoryModel::get_categories($_ENV['site_id'],'全部');
+        return CategoryModel::get_categories($_ENV['domain']['id'],'全部');
     }
     private function get_articles($id, $skip = 0, $category = 0){
         $list = ArticleSiteModel::get_home_article_list($id, $skip,$category);
@@ -114,7 +114,7 @@ class IndexController extends SiteController
             if(!in_array($v->article_id,[])) $ids[] = $v->article_id;
         }
 
-        $comments = ArticleSiteModel::get_articles_comment_count($_ENV['site_id'],$ids);
+        $comments = ArticleSiteModel::get_articles_comment_count($_ENV['domain']['id'],$ids);
 
         foreach($list as $k =>$v){
             $tags = [];

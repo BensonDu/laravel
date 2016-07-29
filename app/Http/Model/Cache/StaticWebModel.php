@@ -96,7 +96,7 @@ class StaticWebModel
         $domains = [];
         $info = SiteModel::get_site_info($site_id);
         if(!empty($info->custom_domain))$domains[] = $info->custom_domain;
-        if(!empty($info->platform_domain))$domains[] = $info->platform_domain.'.'.$_ENV['SITE_PLATFORM_BASE'];
+        if(!empty($info->platform_domain))$domains[] = $info->platform_domain.'.'.$_ENV['platform']['home'];
         return $domains;
     }
 }
