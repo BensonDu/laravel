@@ -52,3 +52,15 @@
        }
     });
 }).call(define('c_menu'));
+
+/*与平台同步登录信息*/
+(function(){
+    var self = this;
+    if(!!global && global.hasOwnProperty('uid') && global.uid == ''){
+        request.jsonp(global.platform.home+'/account/status',function(ret){
+            if(ret.data && ret.data.login){
+                location.href = global.platform.home+'/account/login?redirect='+encodeURIComponent(location.href);
+            }
+        })
+    }
+}).call(define('c_login_syn'));
