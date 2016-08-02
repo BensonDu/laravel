@@ -17,6 +17,10 @@
             !!el.removeAttribute && el.removeAttribute(attrName);
             fn ? fn() : null;
         };
+        img.onerror = function () {
+            !!el.removeAttribute && el.removeAttribute(attrName);
+            fn ? fn() : null;
+        };
         img.src = src;
     }
 

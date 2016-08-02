@@ -256,10 +256,29 @@ body{
     animation: fadeIn 0.3s linear 0s normal forwards;
     -webkit-animation: fadeIn 0.3s linear 0s normal forwards;
 }
+.site-head .nav .back-platform{
+    float: left;
+}
+.site-head .nav .back-platform a{
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px 18px 0 3%;
+}
+.site-head .nav .back-platform a em{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 25px;
+    background: url(http://qiniu.cdn-chuang.com/navleft-new-0.png) center no-repeat;
+    background-size: 130px;
+    background-position: 0 -30px;
+}
 .site-head .nav .account{
-    width: 100%;
+    width: auto;
     height: 40px;
     padding-top: 2px;
+    float: left;
 }
 .site-head .nav .account a,
 .site-head .nav .account span{
@@ -270,7 +289,7 @@ body{
     float: left;
 }
 .site-head .nav .account a{
-    line-height: 40px;
+    line-height: 42px;
 }
 .site-head .nav .account span{
     height: 18px;

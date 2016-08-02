@@ -65,10 +65,11 @@ class IndexController extends PlatformController
      |--------------------------------------------------------------------------
      */
     private static function get_articles($skip = 0,$orderby = 'hot'){
-        $ret = PlatformIndexCacheModel::index_list_get($skip,$orderby);
+        $width = $_ENV['request']['mobile'] ? 500 : 200;
+        $ret = PlatformIndexCacheModel::index_list_get($skip,$orderby,$width);
         if(empty($ret)){
-            $ret =  self::format(ArticleSiteModel::get_platform_home_article_list($skip,$orderby));
-            PlatformIndexCacheModel::index_list_set($skip,$orderby,$ret);
+            $ret =  self::format(ArticleSiteModel::get_platform_home_article_list($skip,$orderby),$width);
+            PlatformIndexCacheModel::index_list_set($skip,$orderby,$width,$ret);
         };
         return  $ret;
 
@@ -78,7 +79,7 @@ class IndexController extends PlatformController
      | 列表格式化
      |--------------------------------------------------------------------------
      */
-    private static function format($list){
+    private static function format($list,$width = 200){
         $site_ids = [];
         foreach ($list as $v){
             if(!in_array($v['site_id'],$site_ids))$site_ids[] = $v['site_id'];
@@ -98,7 +99,7 @@ class IndexController extends PlatformController
                 'id'        => $v['id'],
                 'title'     => $v['title'],
                 'summary'   => $v['summary'],
-                'image'     => image_crop($v['image'],200),
+                'image'     => image_crop($v['image'],$width),
                 'site'      => $site_info_map[$v['site_id']],
                 'user'      => [
                     'avatar' => avatar($v['avatar']),

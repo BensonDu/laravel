@@ -15,6 +15,7 @@
     <meta name="format-detection" content="email=no" />
     <meta name="format-detection" content="telephone=yes" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="wap-font-scale" content="no">
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="pragma" content="no-cache" />

@@ -15,6 +15,9 @@
         </a>
         <div id="site-head-nav" class="nav">
             <div class="nav-container">
+                <div class="back-platform">
+                    <a href="{{$_ENV['platform']['home']}}"><em></em></a>
+                </div>
                 <div class="account">
 @if(!empty($_ENV['uid']))
                     <a>{{$nickname}}</a><span></span><a href="{{$_ENV['platform']['home'].'/account/logout'}}">退出登录</a>

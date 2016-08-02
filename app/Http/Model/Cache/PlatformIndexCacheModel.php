@@ -16,16 +16,16 @@ class PlatformIndexCacheModel extends RedisModel
     | 首页文章列表缓存
     |--------------------------------------------------------------------------
     */
-    public static function index_list_get($skip,$orderby){
-        return self::hget(self::index_list_key(),self::index_list_field($skip,$orderby));
+    public static function index_list_get($skip,$orderby,$width){
+        return self::hget(self::index_list_key(),self::index_list_field($skip,$orderby,$width));
     }
     /*
     |--------------------------------------------------------------------------
     | 设置首页文章列表缓存
     |--------------------------------------------------------------------------
     */
-    public static function index_list_set($skip,$orderby,$data){
-        return self::hset(self::index_list_key(),self::index_list_field($skip,$orderby),$data,600);
+    public static function index_list_set($skip,$orderby,$width,$data){
+        return self::hset(self::index_list_key(),self::index_list_field($skip,$orderby,$width),$data,600);
     }
     /*
     |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ class PlatformIndexCacheModel extends RedisModel
     | 获取首页文章列表 field
     |--------------------------------------------------------------------------
     */
-    private static function index_list_field($skip,$orderby){
-        return $skip.':'.$orderby;
+    private static function index_list_field($skip,$orderby,$width){
+        return $skip.':'.$orderby.':'.$width;
     }
 }
