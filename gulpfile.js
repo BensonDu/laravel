@@ -499,6 +499,18 @@ elixir(function(mix) {
         'platform/tag.js'
     ], 'public/js/platform.tag.js');
 
+    //M 创之首页 CSS
+    mix.styles([
+        '../mobile/css/public.base.css',
+        '../mobile/css/platform.index.css'
+    ],'public/mobile/css/platform.index.css');
+
+    //M 创之首页JS
+    mix.scripts([
+        '../mobile/js/platform.index.js',
+        '../lib/imagelazyload/imagelazyload.js'
+    ], 'public/mobile/js/platform.index.js');
+
     //版本控制
     mix.version([
         'public/css/site.index.css',
@@ -527,6 +539,7 @@ elixir(function(mix) {
         'public/css/platform.admin.site.css',
         'public/css/platform.admin.user.css',
         'public/css/platform.admin.option.css',
+        'public/mobile/css/platform.index.css',
 
         'public/js/base.js',
         'public/js/site.index.js',
@@ -562,7 +575,8 @@ elixir(function(mix) {
         'public/js/platform.tag.js',
         'public/js/platform/admin.site.js',
         'public/js/platform/admin.user.js',
-        'public/js/platform/admin.nav.js'
+        'public/js/platform/admin.nav.js',
+        'public/mobile/js/platform.index.js'
 
     ]);
     

@@ -179,7 +179,7 @@
     };
     //加载按钮应有状态,以及是否显示暂无内容
     this.btn_sta = function(){
-        return self.list_is_empty(!total),total==0 ? self.vue.load = '' :((self.has_more() ? self.vue.load = 'more' : self.vue.load = 'end'));
+        return self.list_is_empty(!total),total==0 ? self.vue.load = '' :((self.has_more() ? self.vue.load = 'More' : self.vue.load = 'End'));
     };
     //无内容
     this.list_is_empty = function(i){

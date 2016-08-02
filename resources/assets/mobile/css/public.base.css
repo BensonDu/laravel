@@ -79,9 +79,11 @@ body{
 /*加载更多按钮*/
 .load-more{
     display: none;
+    margin: 60px 0;
+    width: 100%;
+    height: 40px;
     text-align: center;
-    padding-bottom: 20px;
-    background: #f5f5f5;
+    overflow: visible;
 }
 .load-more p{
     display: inline-block;
@@ -96,13 +98,9 @@ body{
     -webkit-transition: background-color .3s;
 }
 .load-more p span{
-    display: inline-block;
     color: #999;
     line-height: 40px;
-    width: 40px;
-    text-align: center;
     font-size: 12px;
-    letter-spacing: 2px;
     transition: color .9s;
     -moz-transition: color .9s;
     -webkit-transition: color .9s;
@@ -114,20 +112,19 @@ body{
     background: url(http://dn-t2ipo.qbox.me/v3%2Fpublic%2Floading-dots.gif) no-repeat center;
     background-size: 28px;
 }
-.load-more.more p span:before{
-    content: '•••';
+.load-more.More p:hover{
+    background: #999;
+}
+.load-more.More p:hover span{
+    color: #fff;
 }
 .load-more.loading,
-.load-more.end,
-.load-more.more{
+.load-more.End,
+.load-more.More{
     display: block;
 }
-.load-more.end p{
+.load-more.End p{
     cursor: default;
-}
-.load-more.end p span:before{
-    content: ' End';
-    letter-spacing: 0;
 }
 .load-more.loading p span{
     display: none;

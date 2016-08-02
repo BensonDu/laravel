@@ -73,7 +73,7 @@
         </div>
         <div class="load-more" v-bind:class="load">
             <p id="load-more">
-                <span></span><em></em>
+                <span v-text="load"></span><em></em>
             </p>
         </div>
     </div>

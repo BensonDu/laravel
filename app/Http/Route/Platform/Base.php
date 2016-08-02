@@ -5,9 +5,6 @@
  | 平台路由
  |--------------------------------------------------------------------------
  */
-
-//平台首页
-Route::get('/','Platform\IndexController@index' );
 //获取文章列表
 Route::get('/index/list','Platform\IndexController@articles' );
 //登录表单
