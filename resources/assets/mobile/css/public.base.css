@@ -79,7 +79,7 @@ body{
 /*加载更多按钮*/
 .load-more{
     display: none;
-    margin: 60px 0;
+    margin: 30px 0 60px;
     width: 100%;
     height: 40px;
     text-align: center;
@@ -262,7 +262,7 @@ body{
 .site-head .nav .back-platform a{
     display: inline-block;
     vertical-align: top;
-    padding: 10px 18px 0 3%;
+    padding: 10px 14px 0 3%;
 }
 .site-head .nav .back-platform a em{
     display: inline-block;

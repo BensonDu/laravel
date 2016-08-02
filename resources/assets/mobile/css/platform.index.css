@@ -34,7 +34,7 @@
     font-size: 12px;
     font-weight: 100;
     vertical-align: top;
-    color: #ccc;
+    color: #aaa;
 }
 .platform-header .nav{
     width: 100%;
@@ -70,7 +70,7 @@
     text-overflow: ellipsis;
     text-align: center;
     font-size: 12px;
-    color: #ccc;
+    color: #aaa;
 }
 
 .list-container{
@@ -94,7 +94,7 @@
 }
 .list-container .category a span{
     display: inline-block;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 32px;
     margin-top: 4px;
     font-weight: 900;
@@ -172,7 +172,7 @@
 .list-container .list .item .image .info .time .heat-container{
     width: 40px;
     height: 20px;
-    margin-top: -4px;
+    margin-top: -5px;
 }
 .list-container .list .item .summary{
     width: 100%;
