@@ -25,7 +25,7 @@
             <td v-text="a.time"></td>
             <td class="handle">
                 <div>
-                    <a class="preview" v-bind:href="a.link" target="_blank"><em></em><span>查看</span></a>
+                    <a class="preview" v-bind:href="a.link+'#?comment='+a.id" target="_blank"><em></em><span>查看</span></a>
                     <a class="hide" v-if="site != 'insite'" v-on:click="_hide(a.id)"><em></em><span>隐藏</span></a>
                     <a class="del" v-if="site == 'insite'" v-on:click="_del(a.id)"><em></em><span>删除</span></a>
                 </div>

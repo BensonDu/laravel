@@ -119,7 +119,7 @@
                     else{
                         self.vue.list[index].replies[deep].like = valid;
                     }
-                    
+
                 });
             },
             _del : function (id,deep) {
@@ -220,15 +220,15 @@
                 this.list[index].reply_fold = 0;
                 if(self.vue.list[index].comment_fold && !force)return self.vue.list[index].comment_fold = 0;
                 request.get('/comment/comments',function (ret) {
-                    if (ret.hasOwnProperty('code') && ret.code == '0'){
-                        list = ret.data;
-                        if(list.length > 0){
-                            self.vue.list[index].replies = list;
-                            self.vue.list[index].comment_fold = 1;
-                        }
+                        if (ret.hasOwnProperty('code') && ret.code == '0'){
+                            list = ret.data;
+                            if(list.length > 0){
+                                self.vue.list[index].replies = list;
+                                self.vue.list[index].comment_fold = 1;
+                            }
 
-                    }
-                },
+                        }
+                    },
                     {
                         id :  data.article.source,
                         root : info.id,
@@ -244,12 +244,13 @@
         }
     });
     //刷新文章评论列表
-    this.update_comment = function () {
+    this.update_comment = function (call) {
         request.get('/comment/comments',function (ret) {
                 if(ret.hasOwnProperty('code') && ret.code == '0'){
                     self.vue.list= self.save = ret.data;
+                    !!call && call();
                 }
-        },
+            },
             {
                 id : data.article.source,
                 orderby : self.vue.orderby
@@ -292,10 +293,10 @@
             },'取消');
         }
         request.get('/comment/like',function (ret) {
-            if(ret.hasOwnProperty('code') && ret.code == '0'){
-                fun();
-            }
-        },
+                if(ret.hasOwnProperty('code') && ret.code == '0'){
+                    fun();
+                }
+            },
             {
                 id:id,
                 valid:valid ? 1 : 0
@@ -315,40 +316,92 @@
         lock = true;
         submit = function(){
             request.get('/comment/submit',function (ret) {
-                lock = false;
-                if(!ret.hasOwnProperty('code')) return pop.error('评论失败,请重试','确定').one();
-                if(ret.code == '0'){
-                    fun();
+                    lock = false;
+                    if(!ret.hasOwnProperty('code')) return pop.error('评论失败,请重试','确定').one();
+                    if(ret.code == '0'){
+                        fun();
+                    }
+                    else if(ret.code == '40003'){
+                        libGeetest.start(submit);
+                    }
+                    else{
+                        pop.error(ret.msg || '评论失败,请重试','确定').one();
+                    }
+                },
+                {
+                    id:data.article.source,
+                    content:content,
+                    parent : parent
                 }
-                else if(ret.code == '40003'){
-                    libGeetest.start(submit);
-                }
-                else{
-                    pop.error(ret.msg || '评论失败,请重试','确定').one();
-                }
-            },
-            {
-                id:data.article.source,
-                content:content,
-                parent : parent
-            }
             )
         };
         //提交回复
         submit();
     };
-    //滚动到文章底部加载评论内容
-    this.timer = setInterval(function () {
-        var dom = document.getElementById('comment-container'),rect;
-        if(dom.getBoundingClientRect){
-            rect = dom.getBoundingClientRect();
-            if(rect.top-300 > (window.innerHeight || document.documentElement.clientHeight)){
-                return false;
-            }
+
+    //自执行
+    (function () {
+        var id = input.get('comment');
+        //默认到达评论锚点,所以默认加载全部评论,加载完成之后,跳转到锚点;
+        if(id){
+            self.update_comment(function () {
+                comment_anchor.init(id);
+            });
         }
-        //初始评论加载
-        self.update_comment();
-        clearInterval(self.timer);
-    },300);
+        //滚动到文章底部加载评论内容
+        else{
+            this.timer = setInterval(function () {
+                var dom = document.getElementById('comment-container'),rect;
+                if(dom.getBoundingClientRect){
+                    rect = dom.getBoundingClientRect();
+                    if(rect.top-300 > (window.innerHeight || document.documentElement.clientHeight)){
+                        return false;
+                    }
+                }
+                //初始评论加载
+                self.update_comment();
+                clearInterval(self.timer);
+            },300);
+        }
+    }).call(self);
 
 }).call(define('comment'));
+
+(function () {
+    var self        = this,
+        highLight   = 0;
+
+    //初始评论锚点
+    this.init        = function (id) {
+        var ele,
+            top;
+        highLight = 0;
+        setTimeout(function () {
+            ele= jQuery("#comment-"+id);
+            if(id && ele.length){
+                top = ele.offset().top;
+                document.body.scrollTop = top-100;
+                self.highLight(ele);
+            }
+        },500);
+    };
+
+    //高亮评论
+    this.highLight = function (ele) {
+
+        //高亮闪烁次数
+        if(highLight >= 3)return false;
+
+        ele.addClass('breathing');
+
+        setTimeout(function () {
+            ele.removeClass('breathing');
+            highLight++;
+            setTimeout(function () {
+                self.highLight(ele);
+            },800);
+        },800);
+
+    }
+
+}).call(define('comment_anchor'));

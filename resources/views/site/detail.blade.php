@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="comment-list">
-                    <div class="comment-item" v-for="c in list">
+                    <div class="comment-item" v-for="c in list"  v-bind:id="'comment-'+c.id">
                         <div class="avatar">
                             <img v-bind:src="c.avatar">
                         </div>
@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                                 <div class="sub-comment-container" v-bind:class="{'active':c.comment_fold,'alone':c.hide == 1}">
-                                    <div class="comment-item" v-for="r in c.replies">
+                                    <div class="comment-item" v-for="r in c.replies" v-bind:id="'comment-'+r.id">
                                         <div class="avatar">
                                             <img v-bind:src="r.avatar">
                                         </div>

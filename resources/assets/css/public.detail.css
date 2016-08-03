@@ -580,9 +580,16 @@
     margin-bottom: 20px;
     border-bottom: 1px solid #fff;
     padding-bottom: 10px;
+    -webkit-transition: box-shadow .4s ease-in;
+    -moz-transition: box-shadow .4s ease-in;
+    -o-transition: box-shadow .4s ease-in;
+    transition: box-shadow .4s ease-in;
     animation: fadeIn 0.7s linear 0s normal forwards;
     -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
     -moz-animation: fadeIn 0.7s linear 0s normal forwards;
+}
+.comment .comment-list .comment-item.breathing{
+    box-shadow: 0 0 4px 0 #f06292;
 }
 .comment .comment-list .comment-item .avatar{
     position: absolute;
