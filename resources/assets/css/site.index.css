@@ -315,6 +315,7 @@
     font-weight: 600;
     color: #424242;
 }
+.site-content .news .list-container .list .info .title:visited,
 .site-content .news .list-container .list .info .title:hover{
     color: #999;
 }

@@ -127,6 +127,7 @@
     font-weight: 600;
     color: #424242;
 }
+.user-content .container .list-container .list .info .title a:visited,
 .user-content .container .list-container .list .info .title a:hover{
     color: #999;
 }

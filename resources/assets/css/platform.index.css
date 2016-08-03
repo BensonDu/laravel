@@ -228,6 +228,7 @@
     color: #424242;
     cursor: pointer;
 }
+.content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .top a:visited,
 .content-container .wrap .site-body .site-wrap .list-wrap .list-container .article .info .top a:hover{
     color: #999;
 }
