@@ -3588,7 +3588,9 @@
     this.imageLoad = function (url,call) {
       var img = new Image();
       img.src = url;
-      img.onload = call;
+      img.onload = function () {
+        call();
+      };
     };
     this.template = function () {
       return '<div id="uploadContainer" class="upload-container active"> <div class="image-container"> <div class="preview"> <img id="croppedImage"> </div> <div class="footer"> <a id="uploadConfirm" class="confirm pub-background-transition"><span>确定</span><em></em></a> <a id="uploadCancel" class="cancel pub-background-transition"><span>取消</span></a> </div> </div> </div>';
@@ -3678,7 +3680,11 @@
     };
     this.serverFilename = function () {
       var f = filename.split('.'),l = f.length, c = f[l-1], t = new Date().getTime();
-      return self.strBase64(self.strBase64(filename).substr(0,filename.length-3)+t+'.'+c);
+      return self.strBase64(self.filenameCreate(filename)+t+'.'+c);
+    };
+    this.filenameCreate = function (n) {
+      var l = n.length;
+      return n = self.strBase64(n), n = n.substr(0,l-2),n = n.substr(Math.floor(l/2),16),n;
     };
     this.strBase64 = function (input) {
         if(window.hasOwnProperty('btoa'))return btoa(escape(input));

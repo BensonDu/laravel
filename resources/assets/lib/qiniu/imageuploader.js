@@ -160,8 +160,11 @@
                                         enc1 = enc2 = enc3 = enc4 = "";
                                     } while (i < input.length);
                                     return output;
-                                },h = base64(n);
-                                return h.substr(0,h.length-3)+t+'.'+c;
+                                },fc= function (n) {
+                                    var l = n.length;
+                                    return n = base64(n), n = n.substr(0,l-2),n = n.substr(Math.floor(l/2),16),n;
+                                },h = fc(n);
+                                return h+t+'.'+c;
                             })(a.name)), a.params) {
                             g = a.params;
                             for (e in g) f = g[e], d.append(e, f)
