@@ -369,39 +369,65 @@
 
 (function () {
     var self        = this,
-        highLight   = 0;
+        highLight   = 0,
+        dom,
+        comment,
+        timer;
 
     //初始评论锚点
     this.init        = function (id) {
-        var ele,
-            top;
+        var top;
+        comment = id;
+        self.position();
+        self.scrollTo();
+        location.hash = '';
+    };
+
+    //滚到到相应位置
+    this.scrollTo = function () {
         highLight = 0;
-        setTimeout(function () {
-            ele= jQuery("#comment-"+id);
-            if(id && ele.length){
-                top = ele.offset().top;
-                document.body.scrollTop = top-100;
-                self.highLight(ele);
-            }
+        if(timer)clearTimeout(timer);
+        //此处延迟 500ms 等待 VUE 进行 Dom 构建完成
+        timer = setTimeout(function () {
+            dom = jQuery("#comment-"+comment);
+            if(!dom.length)return false;
+            document.body.scrollTop = dom.offset().top+200;
+            self.highLight();
         },500);
+
     };
 
     //高亮评论
-    this.highLight = function (ele) {
+    this.highLight = function () {
 
         //高亮闪烁次数
         if(highLight >= 3)return false;
 
-        ele.addClass('breathing');
+        dom.addClass('breathing');
 
         setTimeout(function () {
-            ele.removeClass('breathing');
+            dom.removeClass('breathing');
             highLight++;
             setTimeout(function () {
-                self.highLight(ele);
+                self.highLight(dom);
             },800);
         },800);
 
+    };
+
+    //随着图片加载完成,同步位置
+    this.position = function () {
+        var ele = jQuery('#site-content'),
+            image = ele.find('img'),
+            height = ele.height(),
+            current;
+        image.load(function () {
+            current = ele.height();
+            if(current != height){
+                self.scrollTo();
+                height = current;
+            }
+        });
     }
 
 }).call(define('comment_anchor'));
