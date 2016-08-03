@@ -391,7 +391,7 @@
         timer = setTimeout(function () {
             dom = jQuery("#comment-"+comment);
             if(!dom.length)return false;
-            document.body.scrollTop = dom.offset().top+200;
+            document.body.scrollTop = dom.offset().top-100;
             self.highLight();
         },500);
 
