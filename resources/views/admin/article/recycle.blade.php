@@ -17,7 +17,7 @@
             <td v-text="a.role"></td>
             <td v-text="a.create_time"></td>
             <td class="handle">
-                <div v-bind:class="!a.article_id ? 'hide' : ''">
+                <div>
                     <a class="recovery" v-on:click="_recovery(a.article_id)"><em></em><span>还原</span></a>
                     <a class="del" v-on:click="_del(a.article_id)"><em></em><span>删除</span></a>
                 </div>

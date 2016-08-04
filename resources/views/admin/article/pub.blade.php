@@ -13,13 +13,13 @@
         </thead>
         <tbody>
             <tr v-for="a in list">
-                <td class="title" v-bind:class="{ 'new': a.new, 'active': !!a.article_id }" v-on:click="_edit(a.article_id)"><a v-text="a.title"></a></td>
+                <td class="title active" v-bind:class="{ 'new': a.new }" v-on:click="_edit(a.article_id)"><a v-text="a.title"></a></td>
                 <td v-text="a.nickname"></td>
                 <td v-text="a.role"></td>
                 <td class="publish" v-bind:class="a.post_status"><em></em></td>
                 <td v-text="a.post_time"></td>
                 <td class="handle">
-                    <div v-bind:class="!a.article_id ? 'hide' : ''">
+                    <div>
                         <a class="preview" v-bind:href="'/'+a.article_id" target="_blank"><em></em><span>查看</span></a>
                         <a class="post" v-on:click="_post(a.article_id)"><em></em><span>发布状态</span></a>
                         <a class="edit" v-on:click="_edit(a.article_id)"><em></em><span>编辑</span></a>

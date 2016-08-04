@@ -46,7 +46,6 @@ Route::group(['middleware' => 'AdminAuth'], function () {
     Route::get('/admin/article/recycles', 'Admin\ArticleController@recycles');
     Route::get('/admin/article/info', 'Admin\ArticleController@info');
     Route::post('/admin/article/save', 'Admin\ArticleController@save');
-    Route::get('/admin/article/filter/{id}', 'Admin\ArticleController@filter');
     //用户管理 成员管理
     Route::get('/admin/user', 'Admin\UserController@index');
     Route::get('/admin/user/users', 'Admin\UserController@users');

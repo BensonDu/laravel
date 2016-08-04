@@ -6,9 +6,8 @@
  * Time: 上午12:00
  */
 
-namespace app\Http\Middleware;
+namespace App\Http\Middleware;
 
-use App\Http\Model\Admin\UserModel;
 use Closure;
 
 class AdminAuth
@@ -31,6 +30,11 @@ class AdminAuth
 
         $role = $_ENV['admin']['role'];
 
+        //认证撰稿人不再拥有后台管理权限
+        if($role == 1 ){
+            abort(403);
+        }
+
         //平台不做路径权限判断
         if(isset($_ENV['domain']['id']) && $_ENV['domain']['id'] == '0'){
             if($role == '3')return true;
@@ -45,10 +49,6 @@ class AdminAuth
         //编辑
         if($role == 2){
             if(isset($path[1]) && ($path[1] == 'user' || $path[1] == 'ad' || $path[1] == 'site'))abort(403);
-        }
-        //认证撰稿人
-        if($role == 1 ){
-            if(isset($path[1]) && $path[1] != 'article')abort(403);
         }
 
     }

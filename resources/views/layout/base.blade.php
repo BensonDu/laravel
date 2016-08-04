@@ -58,7 +58,7 @@
     </div>
     <div class="bottom ">
         <div class="entry">
-@if(isset($_ENV['admin']['role']) && $_ENV['admin']['role'] > 0)
+@if(isset($_ENV['admin']['role']) && $_ENV['admin']['role'] >= 2)
             <a class="admin" href="/admin" title="站点管理">
                 <i class="web"></i><span>站点管理</span>
             </a>

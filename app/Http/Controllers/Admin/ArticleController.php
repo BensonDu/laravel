@@ -144,14 +144,7 @@ class ArticleController extends AdminController
         $request = request();
         $site_id    = $_ENV['domain']['id'];
         $article_id = $request->input('id');
-        $info = $this->check_article_auth($article_id, null, 'array');
-        if(empty($article_id) || empty($info)){
-            return $this->ApiOut(40003,'权限不足');
-        }
-        //TODO 处理通知
-        if($info->contribute_status == 0){
-
-        }
+        if(empty($article_id)) return $this->ApiOut(40001,'请求错误');
         ArticleModel::delete_article($site_id,$article_id);
         return $this->ApiOut(0,'删除成功');
     }
@@ -164,14 +157,7 @@ class ArticleController extends AdminController
         $request = request();
         $site_id    = $_ENV['domain']['id'];
         $article_id = $request->input('id');
-        $info = $this->check_article_auth($article_id, null, 'array');
-        if(empty($article_id) || empty($info)){
-            return $this->ApiOut(40003,'权限不足');
-        }
-        //TODO 处理通知
-        if($info->contribute_status == 0){
-
-        }
+        if(empty($article_id)) return $this->ApiOut(40001,'请求错误');
         ArticleModel::delete_article($site_id,$article_id,0);
         return $this->ApiOut(0,'还原成功');
     }
@@ -184,14 +170,7 @@ class ArticleController extends AdminController
         $request = request();
         $site_id    = $_ENV['domain']['id'];
         $article_id = $request->input('id');
-        $info = $this->check_article_auth($article_id, null, 'array');
-        if(empty($article_id) || empty($info)){
-            return $this->ApiOut(40003,'权限不足');
-        }
-        //TODO 处理通知
-        if($info->contribute_status == 0){
-
-        }
+        if(empty($article_id)) return $this->ApiOut(40001,'请求错误');
         ArticleModel::delete_article($site_id,$article_id, 2);
         return $this->ApiOut(0,'删除成功');
     }
@@ -215,9 +194,7 @@ class ArticleController extends AdminController
         $image      = $request->input('image');
         $tags       = tag(json_decode($request->input('tags'),1));
 
-        if(empty($article_id) ||empty($title) || !$this->check_article_auth($article_id)){
-            return self::ApiOut(40001,'请求错误');
-        }
+        if(empty($article_id) ||empty($title)) return self::ApiOut(40001,'请求错误');
 
         $ret = ArticleModel::update_article($_ENV['domain']['id'],$article_id,compact('title', 'summary', 'content', 'image', 'tags'));
 
@@ -239,14 +216,8 @@ class ArticleController extends AdminController
     public function info(){
         $article_id = request()->input('id');
         $site_id = $_ENV['domain']['id'];
-        $info = $this->check_article_auth($article_id, null, 'array');
-        if(empty($article_id) || empty($site_id) || empty($info)){
-            return self::ApiOut(40001,'请求错误');
-        }
-        //TODO 处理通知
-        if($info->contribute_status == 0){
-
-        }
+        $info = ArticleModel::get_artcile_brief_info($_ENV['domain']['id'],$article_id);
+        if(empty($article_id) || empty($site_id) || empty($info)) return self::ApiOut(40001,'请求错误');
 
         if(isset($info->id)){
 
@@ -276,10 +247,8 @@ class ArticleController extends AdminController
         $type       = $request->input('type');
         $time       = $request->input('time');
 
-        $info = $this->check_article_auth($article_id, null, 'array');
-        if(empty($article_id) || empty($type) || empty($info)){
-            return $this->ApiOut(40003,'权限不足');
-        }
+        if(empty($article_id) || empty($type))return $this->ApiOut(40001,'请求错误');
+
         $post_status = $type == 'cancel' ? 0 : (time()+60 > strtotime($time) ? 1 : 2);
 
         ArticlePostModel::sitepost($article_id,$site_id,$category,$post_status,$time);
@@ -292,64 +261,12 @@ class ArticleController extends AdminController
      */
     public function postinfo(){
         $article_id = request()->input('id');
-        $info = $this->check_article_auth($article_id,null,'array');
-        if(empty($info))return $this->ApiOut(40003,'No permission');
+        $info = ArticleModel::get_artcile_brief_info($_ENV['domain']['id'],$article_id);
+        if(empty($info))return $this->ApiOut(40001,'请求错误');
         $ret['category'] = $info->category;
         $ret['type'] = $info->post_status == 1 ? 'now' : ($info->post_status == 2 ? 'time' : 'cancel');
         $ret['time'] = ($ret['type'] == 'time' || $ret['type'] == 'now')  ? date('Y-m-d H:i',strtotime($info->post_time)) : null;
         return $this->ApiOut(0,$ret);
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 过滤文章中Base64图片
-    |--------------------------------------------------------------------------
-    */
-    public function filter($id){
-        if(empty($id))return self::ApiOut(40001,'Bad Request');
-        $info = ArticleModel::get_artcile_brief_info($_ENV['domain']['id'],$id);
-        if(!isset($info->id))return self::ApiOut(40001,'Bad Request');
-        $article_id = $info->id;
-        $title      = $info->title;
-        $summary    = $info->summary;
-        $content    = $info->content;
-        $image      = $info->image;
-        $tags       = $info->tags;
-        $ret = ArticleModel::update_article($_ENV['domain']['id'],$article_id,compact('title', 'summary', 'content', 'image', 'tags'));
-        if($ret){
-            return self::ApiOut(0,'保存成功');
-        }
-        else{
-            return self::ApiOut(10001,'保存失败');
-        }
-    }
-    /*
-     |--------------------------------------------------------------------------
-     | 检查是否有权限处理该文章
-     |--------------------------------------------------------------------------
-     | $param $article_id 文章 ID
-     | $param $author_id  用户 ID   Default null
-     | $param $ret_type   所需返回类型 Default bool Optional array
-     | TODO 应该检查文章是否在当前站点下
-     |
-     */
-    private function check_article_auth($article_id = null,$author_id = null,$ret_type = 'bool'){
-        $ret  = null;
-        $aid  = null;
-        $info = null;
-        if($ret_type == 'array' || is_null($author_id)){
-            $info = ArticleModel::get_artcile_brief_info($_ENV['domain']['id'],$article_id);
-        }
-        if(is_null($author_id)){
-            $aid = isset($info->author_id) ? $info->author_id : null;
-        }
-        else{
-            $aid = $author_id;
-        }
-        if($_ENV['admin']['role'] > 1 || ($_ENV['admin']['role'] == 1 && $aid == $_ENV['uid'])){
-            $ret = $ret_type == 'bool' ? true : $info;
-        }
-
-        return $ret;
     }
     /*
      |--------------------------------------------------------------------------
@@ -402,13 +319,12 @@ class ArticleController extends AdminController
      |--------------------------------------------------------------------------
      */
     private function format($list){
-        //TODO 最后权限判断获取角色ID
         $ret = [];
         if(!empty($list)){
             foreach($list as $k => $v){
                 $ret[$k]['create_time'] = $v->create_time;
                 $ret[$k]['post_time']   = $v->post_time;
-                $ret[$k]['article_id']  = $this->check_article_auth($v->article_id,$v->user_id) ? $v->article_id : null;
+                $ret[$k]['article_id']  = $v->article_id;
                 $ret[$k]['title']       = $v->title;
                 $ret[$k]['nickname']    = $v->nickname;
                 $ret[$k]['post_status'] = ($v->post_status == 1) ? 'now' : ($v->post_status == 2 ? 'time' : 'cancel');
