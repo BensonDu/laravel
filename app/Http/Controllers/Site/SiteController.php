@@ -21,6 +21,11 @@ class SiteController extends Controller
         parent::__construct();
         $this->request = request();
     }
+    /*
+     |--------------------------------------------------------------------------
+     | 公共 View 方法
+     |--------------------------------------------------------------------------
+     */
     public static function view($path, $data = [])
     {
         $site = SiteModel::get_site_info($_ENV['domain']['id']);
@@ -33,6 +38,11 @@ class SiteController extends Controller
         $data['site']['nav']         = SiteModel::site_nav_list($_ENV['domain']['id']);
         return parent::view($path, $data);
     }
+    /*
+     |--------------------------------------------------------------------------
+     | 公共 Make 方法
+     |--------------------------------------------------------------------------
+     */
     public static function make($path, $data = []){
         $site = SiteModel::get_site_info($_ENV['domain']['id']);
         $data['site']                = $site;

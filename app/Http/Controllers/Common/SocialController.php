@@ -13,6 +13,11 @@ use App\Http\Model\ArticleSocialModel;
 
 class SocialController extends Controller
 {
+    /*
+     |--------------------------------------------------------------------------
+     | 点赞
+     |--------------------------------------------------------------------------
+     */
     public function like(){
         $id = request()->input('id');
         if(empty($_ENV['uid']))return $this->ApiOut(40003,'请先登录');
@@ -20,6 +25,11 @@ class SocialController extends Controller
         return $this->ApiOut(0,$ret);
 
     }
+    /*
+     |--------------------------------------------------------------------------
+     | 收藏
+     |--------------------------------------------------------------------------
+     */
     public function favorite(){
         $id = request()->input('id');
         if(empty($_ENV['uid']))return $this->ApiOut(40003,'请先登录');

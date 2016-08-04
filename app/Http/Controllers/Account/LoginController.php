@@ -65,7 +65,11 @@ class LoginController extends AccountController
             return redirect('http://'.$host.'/sso/?session='.$sid.'&redirect='.urlencode($redirect));
         }
     }
-
+    /*
+     |--------------------------------------------------------------------------
+     | 登录表单
+     |--------------------------------------------------------------------------
+     */
     public function post()
     {
         $username = $this->request->input('username');

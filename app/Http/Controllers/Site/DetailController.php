@@ -22,6 +22,11 @@ class DetailController extends SiteController
         parent::__construct();
     }
 
+    /*
+     |--------------------------------------------------------------------------
+     | 文章详情页
+     |--------------------------------------------------------------------------
+     */
     public function index($id){
         $info = ArticleSiteModel::get_artilce_detail($_ENV['domain']['id'],$id);
 
@@ -61,6 +66,11 @@ class DetailController extends SiteController
         PlatformCacheModel::site_article_view_increase($_ENV['domain']['id']);
         return self::view('site.detail',$data);
     }
+    /*
+     |--------------------------------------------------------------------------
+     | M 文章详情
+     |--------------------------------------------------------------------------
+     */
     public function mobile($id){
         //调取缓存
         $cache = SiteCacheModel::m_article_view($_ENV['domain']['id'],$id);

@@ -52,20 +52,4 @@ class AdminAuth
         }
 
     }
-    /*
-    |--------------------------------------------------------------------------
-    | TODO 根据权限返回相应菜单 暂时未启用
-    |--------------------------------------------------------------------------
-    */
-    private  static function nav(){
-        $nav = config('admin.nav');
-        $role= $_ENV['admin']['role'];
-        $view = [];
-        foreach($nav as $v){
-            if(in_array($role,$v['auth'])){
-                $view[] = $v;
-            }
-        }
-        view()->share('nav',$view);
-    }
 }

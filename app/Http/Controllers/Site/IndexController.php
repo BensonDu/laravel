@@ -22,6 +22,11 @@ class IndexController extends SiteController
         parent::__construct();
     }
 
+    /*
+     |--------------------------------------------------------------------------
+     | 站点首页
+     |--------------------------------------------------------------------------
+     */
     public function index(){
 
         $id = $_ENV['domain']['id'];

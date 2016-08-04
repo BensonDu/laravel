@@ -14,7 +14,5 @@ Route::get('/site/list', 'Common\SiteController@site');
 //极验验证码
 Route::get('/geetest/start', 'Common\GeetestController@start');
 Route::post('/geetest/verify', 'Common\GeetestController@verify');
-//临时 && 测试
-Route::get('/temp/device', 'Temp\TempController@device');
 //七牛上传
 Route::get('/qiniu/upload/token', 'Qiniu\UploadController@token');

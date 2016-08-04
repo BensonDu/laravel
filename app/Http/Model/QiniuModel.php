@@ -12,14 +12,16 @@ use Qiniu\Auth;
 
 class QiniuModel
 {
-    private static $base    = 'http://qiniu.cdn-chuang.com/';
-    private static $bucket  = 'noman';
+    private static $base;
+    private static $bucket;
     /*
     |--------------------------------------------------------------------------
     | 获得上传 Token
     |--------------------------------------------------------------------------
     */
     public static function get_upload_token(){
+        self::$base     = config('qiniu.base');
+        self::$bucket   = config('qiniu.bucket');
         $auth = new Auth(config('qiniu.accesskey'), config('qiniu.secretkey'));
         return $auth->uploadToken(self::$bucket);
     }

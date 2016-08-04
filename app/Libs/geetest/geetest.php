@@ -8,8 +8,8 @@ namespace App\Libs\geetest;
 class geetest {
     const GT_SDK_VERSION = 'php_3.2.0';
 
-    public static $connectTimeout = 10;
-    public static $socketTimeout  = 10;
+    public static $connectTimeout = 20;
+    public static $socketTimeout  = 20;
 
     private $response;
 
