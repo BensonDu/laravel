@@ -61,7 +61,7 @@
                     error(e);
                 }
                 else{
-                    pop.error('服务器错误','确定').one();
+                    pop.error('网络错误','确定').one();
                 }
             }
         };

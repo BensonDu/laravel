@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
 | 在 Nginx root/$host/ 下生成静态文件
 | 优先级高于Laravel响应http请求
 |
-| 声明周期 例:
+| 生命周期 例:
 | 1 访问 /feed/toutiao/123456 文章
 | 2 静态资源目录下无该文章静态 内部重定向到 laravel
 | 3 laravel 头条详情生成在静态资源目录下生成文件静态 返回文章
@@ -96,7 +96,7 @@ class StaticWebModel
         $domains = [];
         $info = SiteModel::get_site_info($site_id);
         if(!empty($info->custom_domain))$domains[] = $info->custom_domain;
-        if(!empty($info->platform_domain))$domains[] = $info->platform_domain.'.'.$_ENV['platform']['home'];
+        if(!empty($info->platform_domain))$domains[] = $info->platform_domain.'.'.config('site.platform_base');
         return $domains;
     }
 }
