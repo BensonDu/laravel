@@ -30,6 +30,7 @@ class UserController extends AdminController
             'name' => '用户管理',
             'class'=> 'user'
         ];
+        $data['sub_active'] = 'user';
         return self::view('admin.user.index',$data);
     }
     /*
@@ -44,6 +45,7 @@ class UserController extends AdminController
             'name' => '用户管理',
             'class'=> 'user'
         ];
+        $data['sub_active'] = 'black';
         return self::view('admin.user.blacklist',$data);
     }
     /*

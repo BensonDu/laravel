@@ -1,4 +1,4 @@
-@extends('layout.site')
+@extends('site.layout')
 @section('style')<link href="{{ $_ENV['platform']['cdn'].elixir("css/site.index.css") }}" rel="stylesheet">
 @stop
 @section('body')

@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('admin.layout')
 @section('style')<link href="{{ $_ENV['platform']['cdn'].elixir("css/admin.star.css") }}" rel="stylesheet">
 @stop
 @section('area')

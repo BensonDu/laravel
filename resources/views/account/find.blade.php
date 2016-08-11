@@ -1,4 +1,4 @@
-@extends('layout.account')
+@extends('account.layout')
 @section('body')
 @parent
 <div class="content">
