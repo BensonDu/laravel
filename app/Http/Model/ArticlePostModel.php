@@ -9,7 +9,7 @@
 namespace App\Http\Model;
 
 
-use App\Http\Model\Cache\CacheModel;
+use App\Http\Model\Cache\ClearModel;
 use App\Http\Model\Cache\StartCacheModel;
 use App\Http\Model\Cache\TimingCacheModel;
 use Illuminate\Database\Eloquent\Model;
@@ -278,7 +278,7 @@ class ArticlePostModel extends Model
             TimingCacheModel::clear($new_id);
         }
         //清除缓存
-        CacheModel::clear_article_cache($site_id);
+        ClearModel::clear_article_cache($site_id);
         return true;
     }
     /*
@@ -319,7 +319,7 @@ class ArticlePostModel extends Model
             TimingCacheModel::clear($site_article_id);
         }
         //清楚文章缓存
-        CacheModel::clear_article_cache($site_id,$site_article_id);
+        ClearModel::clear_article_cache($site_id,$site_article_id);
         return DB::table('articles_site')->where('site_id',$site_id)->where('id',$site_article_id)->update($update);
     }
     /*

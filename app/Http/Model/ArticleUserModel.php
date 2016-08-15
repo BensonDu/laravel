@@ -7,7 +7,7 @@
  */
 namespace App\Http\Model;
 
-use App\Http\Model\Cache\CacheModel;
+use App\Http\Model\Cache\ClearModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -286,7 +286,7 @@ class ArticleUserModel extends Model
 
         if(!isset($site->id) || ($site->site_lock) || $site->hash == $info->hash)return false;
         //清除缓存
-        CacheModel::clear_article_cache($site_id,$site->id);
+        ClearModel::clear_article_cache($site_id,$site->id);
         $now = now();
 
         return DB::table('articles_site')->where('id',$site->id)->update(

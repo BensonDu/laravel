@@ -8,7 +8,7 @@
 
 namespace App\Http\Model\Cache;
 
-class CacheModel
+class ClearModel
 {
     /*
     |--------------------------------------------------------------------------

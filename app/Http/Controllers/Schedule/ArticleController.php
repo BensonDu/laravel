@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Schedule;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\ArticlePostModel;
-use App\Http\Model\Cache\CacheModel;
+use App\Http\Model\Cache\ClearModel;
 use App\Http\Model\Cache\PlatformCacheModel;
 use App\Http\Model\Cache\StartCacheModel;
 use App\Http\Model\Cache\TimingCacheModel;
@@ -29,7 +29,7 @@ class ArticleController extends Controller
         //清除缓存
         if(!empty($list)){
             foreach ($list as $v){
-                CacheModel::clear_article_cache($v['site'],$v['id']);
+                ClearModel::clear_article_cache($v['site'],$v['id']);
                 ArticlePostModel::timepost($v['id']);
             }
         }

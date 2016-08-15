@@ -3,7 +3,7 @@
 namespace App\Http\Model\Admin;
 
 use App\Http\Model\ArticleBaseModel;
-use App\Http\Model\Cache\CacheModel;
+use App\Http\Model\Cache\ClearModel;
 use App\Http\Model\Cache\StartCacheModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -210,7 +210,7 @@ class ArticleModel extends Model
     |
     */
     public static function update_article($site_id, $article_id, $data){
-        CacheModel::clear_article_cache($site_id,$article_id);
+        ClearModel::clear_article_cache($site_id,$article_id);
         $info = [
             'title'     => $data['title'],
             'summary'   => $data['summary'],
@@ -233,7 +233,7 @@ class ArticleModel extends Model
     |
     */
     public static function delete_article($site_id, $article_id, $deleted = 1){
-        CacheModel::clear_article_cache($site_id,$article_id);
+        ClearModel::clear_article_cache($site_id,$article_id);
         //文章删除 如果文章未被首发 清除首发保鲜期过后缓冲队列延时执行任务队列
         if($deleted == '1'){
             $info = DB::table('articles_site')->where('site_id',$site_id)->where('id',$article_id)->first(['source_id','start','start_time']);

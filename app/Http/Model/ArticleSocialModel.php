@@ -8,7 +8,7 @@
 
 namespace App\Http\Model;
 
-use App\Http\Model\Cache\CacheModel;
+use App\Http\Model\Cache\ClearModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -92,7 +92,7 @@ class ArticleSocialModel extends Model
         DB::table('articles_site')->where('id' ,$article_id)->update([
             'favorites' => $count
         ]);
-        CacheModel::clear_article_cache($_ENV['domain']['id'],$article_id);
+        ClearModel::clear_article_cache($_ENV['domain']['id'],$article_id);
         return [
             'valid' => $valid ? 'FAV' : 'DISFAV',
             'count' => $count
@@ -135,7 +135,7 @@ class ArticleSocialModel extends Model
         DB::table('articles_site')->where('id' ,$article_id)->update([
             'likes' => $count
         ]);
-        CacheModel::clear_article_cache($_ENV['domain']['id'],$article_id);
+        ClearModel::clear_article_cache($_ENV['domain']['id'],$article_id);
         return [
             'valid' => $valid ? 'LIKE' : 'DISLIKE',
             'count' => $count
