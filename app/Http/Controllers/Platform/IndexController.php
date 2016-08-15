@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Platform;
 
 
 use App\Http\Model\ArticleSiteModel;
-use App\Http\Model\Cache\PlatformIndexCacheModel;
+use App\Http\Model\Cache\PlatformCacheModel;
 use App\Http\Model\Option\PlatformModel;
 use App\Http\Model\SiteModel;
 
@@ -66,10 +66,10 @@ class IndexController extends PlatformController
      */
     private static function get_articles($skip = 0,$orderby = 'hot'){
         $width = $_ENV['request']['mobile'] ? 500 : 200;
-        $ret = PlatformIndexCacheModel::index_list_get($skip,$orderby,$width);
+        $ret = PlatformCacheModel::index_list_get($skip,$orderby,$width);
         if(empty($ret)){
             $ret =  self::format(ArticleSiteModel::get_platform_home_article_list($skip,$orderby),$width);
-            PlatformIndexCacheModel::index_list_set($skip,$orderby,$width,$ret);
+            PlatformCacheModel::index_list_set($skip,$orderby,$width,$ret);
         };
         return  $ret;
 

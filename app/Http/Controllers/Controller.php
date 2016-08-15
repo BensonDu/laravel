@@ -63,7 +63,7 @@ abstract class Controller extends BaseController
     public static function make($path,$data = []){
         self::get_user_info();
         self::get_nav_url();
-        return View::make($path,$data);
+        return (string) View::make($path,$data);
     }
     /*
     |--------------------------------------------------------------------------

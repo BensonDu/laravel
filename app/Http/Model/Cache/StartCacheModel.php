@@ -10,7 +10,7 @@ namespace App\Http\Model\Cache;
 
 use PRedis;
 
-class StartCacheModel extends RedisModel
+class StartCacheModel extends BaseModel
 {
 
     /*
@@ -20,10 +20,10 @@ class StartCacheModel extends RedisModel
     */
     public static function get_queue_list($article_id){
         $key = self::queue_key($article_id);
-        $all = PRedis::hgetall($key);
+        $all = self::hgetall($key);
         if(!empty($all) && is_array($all)){
             $all = array_map(function($v){
-                return json_decode($v,1);
+                return unserialize($v);
             },$all);
         }
         return $all;
@@ -44,7 +44,7 @@ class StartCacheModel extends RedisModel
     */
     public static function get_queue_info($article_id,$site_id){
         $key = self::queue_key($article_id);
-        return json_decode(PRedis::hget($key,$site_id),1);
+        return self::hget($key,$site_id,true);
     }
     /*
     |--------------------------------------------------------------------------
@@ -62,14 +62,12 @@ class StartCacheModel extends RedisModel
     */
     public static function set_queue_list($article_id,$site_id,$post_status = 0,$post_time = 0,$category = null){
         $key = self::queue_key($article_id);
-        PRedis::hset($key,$site_id,json_encode([
+        self::hset($key,$site_id,[
             'contribute'    => is_null($category),
             'category'      => is_null($category) ? 0 : $category,
             'post_status'   => $post_status,
             'post_time'     => $post_time
-        ]));
-        //总首发时长不超过一周,防止垃圾数据生成;
-        PRedis::expire($key,60*60*24*7);
+        ],60*60*24*7);
     }
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +76,7 @@ class StartCacheModel extends RedisModel
     */
     public static function get_excute_delay(){
         $key = self::excute_key();
-        $all = PRedis::hgetall($key);
+        $all = self::hgetall($key);
         $ret = [];
         $now = time();
         if(!empty($all)){
@@ -98,7 +96,7 @@ class StartCacheModel extends RedisModel
     */
     public static function set_excute_delay($article_id,$time){
         $key = self::excute_key();
-        return PRedis::hset($key,$article_id,$time);
+        return self::hset($key,$article_id,$time);
     }
     /*
     |--------------------------------------------------------------------------

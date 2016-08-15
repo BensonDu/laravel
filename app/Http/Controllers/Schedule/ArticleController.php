@@ -14,6 +14,7 @@ use App\Http\Model\ArticlePostModel;
 use App\Http\Model\Cache\CacheModel;
 use App\Http\Model\Cache\PlatformCacheModel;
 use App\Http\Model\Cache\StartCacheModel;
+use App\Http\Model\Cache\TimingCacheModel;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
@@ -24,7 +25,7 @@ class ArticleController extends Controller
      |--------------------------------------------------------------------------
      */
     public static function PostArticle(){
-        $list = PlatformCacheModel::timed_article();
+        $list = TimingCacheModel::articles();
         //清除缓存
         if(!empty($list)){
             foreach ($list as $v){

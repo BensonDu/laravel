@@ -10,46 +10,34 @@ namespace App\Http\Model\Cache;
 
 use PRedis;
 
-
-class RedisModel
+/*
+|--------------------------------------------------------------------------
+| 缓存操作基础模块
+|--------------------------------------------------------------------------
+*/
+class BaseModel
 {
     /*
     |--------------------------------------------------------------------------
-    | 获取String缓存
+    | 获取缓存
     |--------------------------------------------------------------------------
     */
-    public static function get($key){
-        $ret = null;
-        if(self::exists($key))$ret = unserialize(PRedis::get($key));
-        return $ret;
+    public static function get($key,$array = false){
+        $ret = PRedis::get($key);
+        return $array ? unserialize($ret) : $ret;
     }
     /*
     |--------------------------------------------------------------------------
-    | 设置String缓存
+    | 设置缓存
     |--------------------------------------------------------------------------
     */
-    public static function set($key,$data = [],$ttl = 300){
-        return !empty($ttl) ? PRedis::setex($key,$ttl,serialize($data)) : PRedis::set($key,serialize($data));
+    public static function set($key,$value = '',$ttl = 300){
+        $data = is_string($value) ? $value : serialize($value);
+        return !empty($ttl) ? PRedis::setex($key,$ttl,$data) : PRedis::set($key,$data);
     }
     /*
     |--------------------------------------------------------------------------
-    | 获取String缓存 非序列化
-    |--------------------------------------------------------------------------
-    */
-    public static function pget($key){
-        return PRedis::get($key);
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 设置String缓存 非序列化
-    |--------------------------------------------------------------------------
-    */
-    public static function pset($key,$value = '',$ttl = 300){
-        return !empty($ttl) ? PRedis::setex($key,$ttl,$value) : PRedis::set($key,$value);
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 设置String 增加
+    | 设置缓存递增
     |--------------------------------------------------------------------------
     */
     public static function incrby($key,$number = 1){
@@ -89,11 +77,21 @@ class RedisModel
     }
     /*
     |--------------------------------------------------------------------------
+    | 获取Hash缓存
+    |--------------------------------------------------------------------------
+    */
+    public static function hget($key,$field,$array = false){
+        $ret = PRedis::hget($key,$field);
+        return $array ? unserialize($ret) : $ret;
+    }
+    /*
+    |--------------------------------------------------------------------------
     | 设置Hash缓存
     |--------------------------------------------------------------------------
     */
     public static function hset($key,$field,$val,$ttl = null){
-        PRedis::hset($key,$field,serialize($val));
+        $data = is_string($val) ? $val : serialize($val);
+        PRedis::hset($key,$field,$data);
         if(!is_null($ttl))self::expire($key,$ttl);
         return true;
     }
@@ -123,14 +121,6 @@ class RedisModel
     }
     /*
     |--------------------------------------------------------------------------
-    | 获取Hash缓存
-    |--------------------------------------------------------------------------
-    */
-    public static function hget($key,$field){
-        return unserialize(PRedis::hget($key,$field));
-    }
-    /*
-    |--------------------------------------------------------------------------
     | Hash缓存是否存在
     |--------------------------------------------------------------------------
     */
@@ -139,7 +129,7 @@ class RedisModel
     }
     /*
     |--------------------------------------------------------------------------
-    | HASH 删除域
+    | Hash删除域
     |--------------------------------------------------------------------------
     */
     public static function hdel($key,$field){

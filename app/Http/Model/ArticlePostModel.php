@@ -10,8 +10,8 @@ namespace App\Http\Model;
 
 
 use App\Http\Model\Cache\CacheModel;
-use App\Http\Model\Cache\PlatformCacheModel;
 use App\Http\Model\Cache\StartCacheModel;
+use App\Http\Model\Cache\TimingCacheModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -271,11 +271,11 @@ class ArticlePostModel extends Model
         }
         //定时发布设置定时器
         if($post_status == 2){
-            PlatformCacheModel::timing_article($site_id,$new_id,$post_time);
+            TimingCacheModel::add($site_id,$new_id,$post_time);
         }
         //如果非定时发布 清除定时发布
         else{
-            PlatformCacheModel::timing_clear($new_id);
+            TimingCacheModel::clear($new_id);
         }
         //清除缓存
         CacheModel::clear_article_cache($site_id);
@@ -312,11 +312,11 @@ class ArticlePostModel extends Model
         }
         //如果定时发布 推到 任务
         if($post_status == 2){
-            PlatformCacheModel::timing_article($site_id,$site_article_id,$post_time);
+            TimingCacheModel::add($site_id,$site_article_id,$post_time);
         }
         //如果非定时发布 清除定时发布
         else{
-            PlatformCacheModel::timing_clear($site_article_id);
+            TimingCacheModel::clear($site_article_id);
         }
         //清楚文章缓存
         CacheModel::clear_article_cache($site_id,$site_article_id);

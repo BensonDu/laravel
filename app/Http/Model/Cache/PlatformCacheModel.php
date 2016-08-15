@@ -8,81 +8,17 @@
 
 namespace App\Http\Model\Cache;
 
-use PRedis;
-
-class PlatformCacheModel extends RedisModel
+/*
+|--------------------------------------------------------------------------
+| 平台缓存模块
+|--------------------------------------------------------------------------
+*/
+class PlatformCacheModel extends BaseModel
 {
+
     /*
     |--------------------------------------------------------------------------
-    | 添加文章定时发布到队列
-    |--------------------------------------------------------------------------
-    | 文章ID  string     $id
-    | 发布时间 timestamp $time
-    */
-    public static function timing_article($site_id,$id,$time){
-        $list =  self::get(self::timing_article_key());
-        $list = (!empty($list) && is_array($list)) ? $list : [];
-        $list[$id] = [
-            'site' => $site_id,
-            'time' => $time
-        ];
-        return self::set(self::timing_article_key(),$list,null);
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 清除文章定时发布
-    |--------------------------------------------------------------------------
-    | 文章ID  string     $id
-    | 发布时间 timestamp $time
-    */
-    public static function timing_clear($id){
-        $list =  self::get(self::timing_article_key());
-        if(is_array($list) && isset($list[$id])){
-            $new = [];
-            foreach ($list as $k => $v){
-                if( $k != $id )$new[$k] = $v;
-            }
-            self::set(self::timing_article_key(),$new,null);
-        }
-        return true;
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 获得到期 待发布 文章列表
-    |--------------------------------------------------------------------------
-    */
-    public static function timed_article(){
-        $list =  self::get(self::timing_article_key());
-        $ret = [];
-        $new = [];
-        $now = time();
-        if(!empty($list) && is_array($list)){
-            foreach ($list as $k => $v){
-                if(strtotime($v['time']) <= $now){
-                    $ret[]   = [
-                        'site' => $v['site'],
-                        'id'   => $k,
-                    ];
-                }
-                else{
-                    $new[$k] = $v;
-                }
-            }
-            if(!empty($ret)) self::set(self::timing_article_key(),$new,null);
-        }
-        return $ret;
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 获得文章定时发布队列KEY
-    |--------------------------------------------------------------------------
-    */
-    public static function timing_article_key(){
-        return config('cache.prefix').':'. config('cache.platform.timing.article.site');
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | 文章浏览次数 +1
+    | 文章浏览次数 +1  对于各个文章的访问计数 实时缓存 计划任务写入数据库
     |--------------------------------------------------------------------------
     */
     public static function article_view_increase($id){
@@ -113,9 +49,12 @@ class PlatformCacheModel extends RedisModel
     public static function article_view_count_key(){
         return config('cache.prefix').':'.config('cache.platform.article.view');
     }
+
+
+
     /*
     |--------------------------------------------------------------------------
-    | 子站首页浏览总量 +1
+    | 子站首页浏览总量 +1  对于各个站点首页访问量的统计
     |--------------------------------------------------------------------------
     */
     public static function site_home_view_increase($id){
@@ -127,7 +66,7 @@ class PlatformCacheModel extends RedisModel
     |--------------------------------------------------------------------------
     */
     public static function site_home_view($id){
-        return PRedis::get(self::site_home_view_count_key($id));
+        return self::get(self::site_home_view_count_key($id));
     }
     /*
     |--------------------------------------------------------------------------
@@ -137,9 +76,12 @@ class PlatformCacheModel extends RedisModel
     public static function site_home_view_count_key($site_id){
         return config('cache.prefix').':'.config('cache.platform.view.home').':'.$site_id;
     }
+
+
+
     /*
     |--------------------------------------------------------------------------
-    | 子站文章浏览总量 +1
+    | 子站文章浏览总量 +1 对于各个站点所有文章访问量总和的统计
     |--------------------------------------------------------------------------
     */
     public static function site_article_view_increase($id){
@@ -151,7 +93,7 @@ class PlatformCacheModel extends RedisModel
     |--------------------------------------------------------------------------
     */
     public static function site_article_view($id){
-        return PRedis::get(self::site_article_view_count_key($id));
+        return self::get(self::site_article_view_count_key($id));
     }
     /*
     |--------------------------------------------------------------------------
@@ -161,4 +103,48 @@ class PlatformCacheModel extends RedisModel
     public static function site_article_view_count_key($site_id){
         return config('cache.prefix').':'.config('cache.platform.view.article').':'.$site_id;
     }
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | 首页文章列表缓存
+    |--------------------------------------------------------------------------
+    */
+    public static function index_list_get($skip,$orderby,$width){
+        return self::hget(self::index_list_key(),self::index_list_field($skip,$orderby,$width),true);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 设置首页文章列表缓存
+    |--------------------------------------------------------------------------
+    */
+    public static function index_list_set($skip,$orderby,$width,$data){
+        return self::hset(self::index_list_key(),self::index_list_field($skip,$orderby,$width),$data,600);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取首页文章列表 缓存清除
+    |--------------------------------------------------------------------------
+    */
+    public static function index_list_clear(){
+        return self::del(self::index_list_key());
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取首页文章列表 key
+    |--------------------------------------------------------------------------
+    */
+    private static function index_list_key(){
+        return config('cache.prefix').':'. config('cache.platform.article.index');
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 获取首页文章列表 field
+    |--------------------------------------------------------------------------
+    */
+    private static function index_list_field($skip,$orderby,$width){
+        return $skip.':'.$orderby.':'.$width;
+    }
+
 }

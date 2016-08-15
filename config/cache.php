@@ -117,7 +117,7 @@ return [
             //文章浏览计数
             'view' => 'platform:article:view',
             //平台主页文章列表缓存
-            'index'=> 'platform:article:index:skip:order'
+            'index'=> 'platform:article:index'
         ],
         //平台总访问量
         'view' => [
