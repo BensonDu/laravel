@@ -154,7 +154,7 @@ if (! function_exists('rss_safe')) {
      * @return string $s safely
      */
     function rss_safe($s){
-        return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', '',  $s);
+        return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', '',  htmlspecialchars_decode($s));
     }
 }
 if (! function_exists('utf8_safe')) {
