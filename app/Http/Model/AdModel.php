@@ -142,7 +142,7 @@ class AdModel extends Model
                 $offset = $current%$weight;
                 foreach ($ad as $v){
                     $start+=$v->weight;
-                    if ($offset <= $start){
+                    if ($offset < $start){
                         if($v->type == 2){
                             $v->text = self::article_ad_text_highlight($v->text,$v->link);
                         }
@@ -173,7 +173,7 @@ class AdModel extends Model
                 $offset = $current%$weight;
                 foreach ($ad as $v){
                     $start+=$v->weight;
-                    if ($offset <= $start)return $v;
+                    if ($offset < $start)return $v;
                 }
             }
         }
