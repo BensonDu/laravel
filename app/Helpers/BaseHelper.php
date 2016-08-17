@@ -144,7 +144,17 @@ if (! function_exists('cdata')) {
      * @return string $CDATA[$s]
      */
     function cdata($s){
-        return '<![CDATA['.$s.']]>';
+        return '<![CDATA[ '.$s.' ]]>';
+    }
+}
+if (! function_exists('rss_safe')) {
+    /**
+     * RSS 安全输出
+     * @param  string $s
+     * @return string $s safely
+     */
+    function rss_safe($s){
+        return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x80-\x9F]/u', '',  $s);
     }
 }
 if (! function_exists('utf8_safe')) {

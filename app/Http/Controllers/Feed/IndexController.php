@@ -43,6 +43,7 @@ class IndexController extends FeedController
                 ->category(cdata($v->category_name))
                 ->source(cdata($info->name))
                 ->pubDate(strtotime($v->post_time))
+                ->guid($base_article_url.$v->article_id,true)
                 ->appendTo($channel);
         }
         return self::rss_out($feed);
