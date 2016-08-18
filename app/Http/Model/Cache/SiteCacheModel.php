@@ -28,7 +28,9 @@ class SiteCacheModel extends BaseModel
     |--------------------------------------------------------------------------
     */
     public static function aritcle_set($site_id,$id,$data){
-        return self::hset(self::key($site_id),$id,$data,600);
+        $key = self::key($site_id);
+        $ttl = self::exists($key) ? null : 600;
+        return self::hset(self::key($site_id),$id,$data,$ttl);
     }
     /*
     |--------------------------------------------------------------------------
@@ -72,6 +74,14 @@ class SiteCacheModel extends BaseModel
     */
     public static function hot_set($site_id,$data){
         return self::set(self::hot_key($site_id),$data,300);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 清除热榜缓存
+    |--------------------------------------------------------------------------
+    */
+    public static function hot_del($site_id){
+        return self::del(self::hot_key($site_id));
     }
     /*
     |--------------------------------------------------------------------------
@@ -139,15 +149,25 @@ class SiteCacheModel extends BaseModel
     |--------------------------------------------------------------------------
     */
     public static function m_article_view_set($site_id,$article_id,$view){
-        return self::hset(self::m_article_view_key($site_id),$article_id,$view,300);
+        $key = self::m_article_view_key($site_id);
+        $ttl = self::exists($key) ? null : 600;
+        return self::hset($key,$article_id,$view,$ttl);
     }
     /*
     |--------------------------------------------------------------------------
     | 子站M站文章视图缓存 删除
     |--------------------------------------------------------------------------
     */
-    public static function m_article_view_clear($site_id,$article_id){
+    public static function m_article_view_del($site_id,$article_id){
         return self::hdel(self::m_article_view_key($site_id),$article_id);
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | 子站M站文章视图缓存 清除
+    |--------------------------------------------------------------------------
+    */
+    public static function m_article_view_clear($site_id){
+        return self::del(self::m_article_view_key($site_id));
     }
     /*
     |--------------------------------------------------------------------------

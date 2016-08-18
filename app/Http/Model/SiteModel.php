@@ -8,6 +8,7 @@
 
 namespace App\Http\Model;
 
+use App\Http\Model\Cache\ClearModel;
 use App\Http\Model\Cache\SiteCacheModel;
 use Illuminate\Database\Eloquent\Model;
 use PRedis;
@@ -82,9 +83,7 @@ class SiteModel extends Model
      */
     public static function update_site_info($id,$update){
         SiteModel::where('id',$id)->update($update);
-        SiteCacheModel::site_info_clear($id);
-        SiteCacheModel::site_nav_clear($id);
-        SiteCacheModel::site_route_clear();
+        ClearModel::clear_site_cache($id);
         return true;
     }
     /*
