@@ -12,8 +12,8 @@ return [
   |--------------------------------------------------------------------------
   */
   'captcha' => [
-      'account'     => 'aaf98f8947a0321a0147a95cc0a503c9',
-      'token' => '9857971450334348b8205784997d2819',
+      'account'     => env('SMS_ACCOUNT'),
+      'token' => env('SMS_TOKEN'),
       'template_id' => '86335',
       'app_id'      => 'aaf98f8953841df5015387707f430427',
       'server_ip'   => 'sandboxapp.cloopen.com',

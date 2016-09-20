@@ -6,7 +6,7 @@
  */
 return [
     //CAPTCHA_ID
-    'id' => '565da844998e9118456f56157478b4d4',
+    'id' => env('GEETEST_ID'),
     //PRIVATE_KEY
-    'key' => '5c32dfd219981bb420e1ebd16ee21031'
+    'key' => env('GEETEST_KEY')
 ];
